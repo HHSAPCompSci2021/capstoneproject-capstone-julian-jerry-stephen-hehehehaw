@@ -1,5 +1,6 @@
 package Weapons;
 
-public class Weapon {
+public abstract class Weapon {
 
+	public abstract void shoot(int x, int y);
 }
