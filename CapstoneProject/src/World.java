@@ -31,6 +31,7 @@ public class World extends PApplet{
 	// execute once when the program begins
 	public void setup() {
 		
+
 		playerImage[0] = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
 		playerImage[1] = loadImage("Assets"  + fileSeparator + "kingcrying.jpg");
 		player =  new Player(this, playerImage);
@@ -43,6 +44,7 @@ public class World extends PApplet{
 //		player.avatar.right1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
 //		player.avatar.right2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
 		
+
 
 	}
 	

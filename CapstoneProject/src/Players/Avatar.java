@@ -1,9 +1,4 @@
 package Players;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -83,5 +78,6 @@ public class Avatar {
 		
 		p.image(image, x, y);
 	}
+	
 	
 }
