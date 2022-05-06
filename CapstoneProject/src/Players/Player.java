@@ -1,3 +1,4 @@
+package Players;
 import Weapons.Weapon;
 import processing.core.PApplet;
 
@@ -16,7 +17,7 @@ public class Player {
 	boolean west;
 	boolean east;
 	
-	public Player(PApplet pa,Weapon w, double vision, double speed, double health, World world)
+	public Player(PApplet pa,Weapon w, double vision, double speed, double health)
 	{
 		p = pa;
 		weapon = w;

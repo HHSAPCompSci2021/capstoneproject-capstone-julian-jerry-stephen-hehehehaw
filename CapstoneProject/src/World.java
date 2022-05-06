@@ -1,3 +1,4 @@
+import Players.Player;
 import processing.core.PApplet;
 
 public class World extends PApplet{
