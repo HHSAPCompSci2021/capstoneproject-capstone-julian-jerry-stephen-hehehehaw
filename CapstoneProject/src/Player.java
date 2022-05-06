@@ -39,7 +39,7 @@ public class Player {
 		p.rect(x, y, 100, 100);
 		avatar.draw(p, x, y);
 		avatar.spriteCounter++;
-		if (avatar.spriteCounter > 10) {
+		if (avatar.spriteCounter > 13) {
 			if (avatar.spriteNum == 1)
 				avatar.spriteNum = 2;
 			else if (avatar.spriteNum == 2) {
