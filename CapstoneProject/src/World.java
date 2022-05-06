@@ -11,12 +11,7 @@ public class World extends PApplet{
 	public int screenWidth = maxScreenCol * tileSize;
 	public int screenHeight = maxScreenRow * tileSize;
 	
-	float x, y;
-	boolean north;
-	boolean south;
-	boolean west;
-	boolean east;
-	
+	Player player = new Player(this);
 	public World() {
 		
 	}
@@ -24,6 +19,16 @@ public class World extends PApplet{
 	// The statements in the setup() function 
 	// execute once when the program begins
 	public void setup() {
+		
+		player.avatar.up1 = loadImage("/Assets/heeheeheehaw.png");
+		player.avatar.up2 = loadImage("/Assets/heeheeheehaw.png");
+		player.avatar.down1 = loadImage("/Assets/heeheeheehaw.png");
+		player.avatar.down2 = loadImage("/Assets/heeheeheehaw.png");
+		player.avatar.left1 = loadImage("/Assets/heeheeheehaw.png");
+		player.avatar.left2 = loadImage("/Assets/heeheeheehaw.png");
+		player.avatar.right1 = loadImage("/Assets/heeheeheehaw.png");
+		player.avatar.right2 = loadImage("/Assets/heeheeheehaw.png");
+		
 
 	}
 	
@@ -32,39 +37,19 @@ public class World extends PApplet{
 		background(255);  
 		fill(255);
 		textAlign(CENTER);
-			 
-		moveObject();
-			//  confineToEdges();
-		fill(0);
-		rect(x, y, 100, 100);
+		player.draw();
 	}
 			 
 	public	void keyPressed() {
 			  final int k = keyCode;
-			  setDirection(k, true);
+			  player.setDirection(k, true);
 			}
 			 
 	public void keyReleased() {
-			  setDirection(keyCode, false);
+			  player.setDirection(keyCode, false);
 			}
-			 
-	public void setDirection(int k, boolean decision) {
-			  if      (k == 'w'    || k == 'W')   north = decision;
-			  else if (k == 's'  || k == 'S')   south = decision;
-			  else if (k == 'a'  || k == 'A')   west  = decision;
-			  else if (k == 'd' || k == 'D')   east  = decision;
-			}
-			 
-	public void moveObject() {
-			  x += (east?  20 : 0) - (west?  20 : 0); //ternary condition, if east is true add 20, if east is false add 0
-			  y += (south? 20 : 0) - (north? 20 : 0);
-			}
-//			 
-//			static final void confineToEdges() {
-//			  x = constrain(x, ww, gw);
-//			  y = constrain(y, hh, gh);
-//			}
-	
+
+
 		
 
 		
