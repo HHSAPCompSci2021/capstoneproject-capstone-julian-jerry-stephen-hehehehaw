@@ -4,6 +4,6 @@ import processing.core.PImage;
 
 public class Tile {
 
-	public PImage image;
-	public boolean collision = false;
+	protected PImage image;
+	protected boolean collision = false;
 }

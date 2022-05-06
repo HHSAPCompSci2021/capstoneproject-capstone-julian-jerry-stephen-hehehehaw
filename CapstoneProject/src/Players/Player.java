@@ -1,4 +1,5 @@
 package Players;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import Weapons.Weapon;
@@ -6,12 +7,12 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Player {
-	PApplet p;
 	private Weapon weapon;
 	private Avatar avatar;
 	private double vision;
 	private double speed;
 	private double health; 
+	private Rectangle dimensions;
 	
 	
 	private float x, y;
@@ -22,21 +23,20 @@ public class Player {
 	
 	public Player(PApplet pa,Weapon w, double vision, double speed, double health, PImage[] images)
 	{
-		p = pa;
 		weapon = w;
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
 		this.vision = vision;
 		this.speed = speed;
 		this.health = health;
+		dimensions = new Rectangle((int)x+20, (int)y, 90, 95);
 	}
 	public Player(PApplet pa, PImage[] images) {
-		p = pa;
 		speed = 5;
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
-	
+		dimensions = new Rectangle((int)x+20, (int)y, 90, 95);
 	}
 	
-	public void draw() {
+	public void draw(PApplet p) {
 
 		moveObject();
 		p.fill(0);
@@ -50,8 +50,17 @@ public class Player {
 			}
 			avatar.spriteCounter = 0;
 		}
+		
+		dimensions.x = (int)x;
+		dimensions.y = (int)y;
+
 
 		
+	}
+	
+	public Rectangle getRectangle()
+	{
+		return dimensions;
 	}
 	
 	public void shoot(int x, int y) {

@@ -61,11 +61,14 @@ public class World extends PApplet{
 	
 	public void draw() { 
 		background(255);  
-		fill(255);
+//		fill(255);
 		textAlign(CENTER);
 		
 		tM.draw(this);
-		player.draw();
+		player.draw(this);
+		
+//		noFill();
+//		rect(player.getRectangle().x, player.getRectangle().y, player.getRectangle().width, player.getRectangle().height);
 	}
 			 
 	public	void keyPressed() {
