@@ -8,31 +8,31 @@ import processing.core.PImage;
 public class Player {
 	PApplet p;
 	private Weapon weapon;
-	public Avatar avatar;
+	private Avatar avatar;
 	private double vision;
 	private double speed;
 	private double health; 
 	
 	
-	float x, y;
-	boolean north;
-	boolean south;
-	boolean west;
-	boolean east;
+	private float x, y;
+	private boolean north;
+	private boolean south;
+	private boolean west;
+	private boolean east;
 	
 	public Player(PApplet pa,Weapon w, double vision, double speed, double health, PImage[] images)
 	{
 		p = pa;
 		weapon = w;
-		avatar = new Avatar("down", images[0], images[1], images[0], images[1], images[0], images[1], images[0], images[1]);
+		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
 		this.vision = vision;
 		this.speed = speed;
 		this.health = health;
 	}
 	public Player(PApplet pa, PImage[] images) {
 		p = pa;
-		speed = 20;
-		avatar = new Avatar("down", images[0], images[1], images[0], images[1], images[0], images[1], images[0], images[1]);
+		speed = 5;
+		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
 	
 	}
 	
@@ -40,7 +40,6 @@ public class Player {
 
 		moveObject();
 		p.fill(0);
-		p.rect(x, y, 100, 100);
 		avatar.draw(p, x, y);
 		avatar.spriteCounter++;
 		if (avatar.spriteCounter > 13) {

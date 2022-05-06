@@ -19,11 +19,11 @@ public class World extends PApplet{
 	public int screenWidth = maxScreenCol * tileSize;
 	public int screenHeight = maxScreenRow * tileSize;
 	
-	private PImage[] playerImage = new PImage[2];
+	private PImage[] playerImage = new PImage[8];
 	
 	
 	Player player;
-	TileManager tM = new TileManager(this);
+	TileManager tM = new TileManager();
 	
 	public World() {
 		
@@ -32,10 +32,16 @@ public class World extends PApplet{
 	// The statements in the setup() function 
 	// execute once when the program begins
 	public void setup() {
-		
 
-		playerImage[0] = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-		playerImage[1] = loadImage("Assets"  + fileSeparator + "kingcrying.jpg");
+		playerImage[0] = loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "Forward1.png");
+		playerImage[1] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Backwards1.png");
+		playerImage[2] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Forward2.png");
+		playerImage[3] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Backwards2.png");
+		playerImage[4] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left1.png");
+		playerImage[5] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right1.png");
+		playerImage[6] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left2.png");
+		playerImage[7] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
+
 		player =  new Player(this, playerImage);
 //		player.avatar.up1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
 //		player.avatar.up2 = loadImage("Assets"  + fileSeparator + "kingcrying.jpg");
@@ -48,7 +54,7 @@ public class World extends PApplet{
 		
 
 
-		tM.floorTile = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
+		tM.setImage(loadImage("Assets" + fileSeparator + "heeheeheehaw.png"));
 		
 	}
 	
@@ -58,7 +64,7 @@ public class World extends PApplet{
 		fill(255);
 		textAlign(CENTER);
 		
-		tM.draw();
+		tM.draw(this);
 		player.draw();
 	}
 			 

@@ -5,14 +5,17 @@ import processing.core.PImage;
 
 public class TileManager {
 	
-	PApplet p;
-	public Tile[] tiles;
-	public int[][] tileDesignator;
-	public PImage floorTile, wallTile, spikeTile, tarPitTile, gasTile;
+	private Tile[] tiles;
+	private int[][] tileDesignator;
+	private PImage floorTile, wallTile, spikeTile, tarPitTile, gasTile;
 
 	
-	public TileManager(PApplet pa) {
-		p = pa;
+	public void setImage(PImage i)
+	{
+		floorTile = i;
+	}
+	
+	public TileManager() {
 		tileDesignator = new int[9][16]; //y, x
 		
 		
@@ -34,7 +37,7 @@ public class TileManager {
 //		tiles[4].image = gasTile;
 	}
 	
-	public void draw() {
+	public void draw(PApplet p) {
 		p.image(floorTile, 0, 0);
 		
 	}
