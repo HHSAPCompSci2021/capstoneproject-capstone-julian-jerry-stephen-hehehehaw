@@ -10,10 +10,9 @@ public class World extends PApplet{
 	int maxScreenRow = 9;
 	public int screenWidth = maxScreenCol * tileSize;
 	public int screenHeight = maxScreenRow * tileSize;
-	float x, y;
 	
-
-    boolean north;
+	float x, y;
+	boolean north;
 	boolean south;
 	boolean west;
 	boolean east;
@@ -34,10 +33,10 @@ public class World extends PApplet{
 		fill(255);
 		textAlign(CENTER);
 			 
-			  moveObject();
+		moveObject();
 			//  confineToEdges();
-			  fill(0);
-			  rect(x, y, 100, 100);
+		fill(0);
+		rect(x, y, 100, 100);
 	}
 			 
 	public	void keyPressed() {
@@ -57,7 +56,7 @@ public class World extends PApplet{
 			}
 			 
 	public void moveObject() {
-			  x += (east?  20 : 0) - (west?  20 : 0);
+			  x += (east?  20 : 0) - (west?  20 : 0); //ternary condition, if east is true add 20, if east is false add 0
 			  y += (south? 20 : 0) - (north? 20 : 0);
 			}
 //			 
