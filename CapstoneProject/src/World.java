@@ -1,5 +1,8 @@
+import java.util.ArrayList;
+
 import Players.Player;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class World extends PApplet{
 	
@@ -15,7 +18,11 @@ public class World extends PApplet{
 	public int screenWidth = maxScreenCol * tileSize;
 	public int screenHeight = maxScreenRow * tileSize;
 	
-	Player player = new Player(this);
+	private PImage[] playerImage = new PImage[2];
+	
+	
+	Player player;
+	
 	public World() {
 		
 	}
@@ -24,14 +31,17 @@ public class World extends PApplet{
 	// execute once when the program begins
 	public void setup() {
 		
-		player.avatar.up1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-		player.avatar.up2 = loadImage("Assets"  + fileSeparator + "kingcrying.jpg");
-		player.avatar.down1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-		player.avatar.down2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
-		player.avatar.left1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-		player.avatar.left2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
-		player.avatar.right1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-		player.avatar.right2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
+		playerImage[0] = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
+		playerImage[1] = loadImage("Assets"  + fileSeparator + "kingcrying.jpg");
+		player =  new Player(this, playerImage);
+//		player.avatar.up1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
+//		player.avatar.up2 = loadImage("Assets"  + fileSeparator + "kingcrying.jpg");
+//		player.avatar.down1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
+//		player.avatar.down2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
+//		player.avatar.left1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
+//		player.avatar.left2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
+//		player.avatar.right1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
+//		player.avatar.right2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
 		
 
 	}

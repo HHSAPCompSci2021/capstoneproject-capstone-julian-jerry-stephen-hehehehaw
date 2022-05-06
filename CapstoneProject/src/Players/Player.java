@@ -1,6 +1,9 @@
 package Players;
+import java.util.ArrayList;
+
 import Weapons.Weapon;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Player {
 	PApplet p;
@@ -17,19 +20,19 @@ public class Player {
 	boolean west;
 	boolean east;
 	
-	public Player(PApplet pa,Weapon w, double vision, double speed, double health)
+	public Player(PApplet pa,Weapon w, double vision, double speed, double health, PImage[] images)
 	{
 		p = pa;
 		weapon = w;
-		avatar = new Avatar(p);
+		avatar = new Avatar("down", images[0], images[1], images[0], images[1], images[0], images[1], images[0], images[1]);
 		this.vision = vision;
 		this.speed = speed;
 		this.health = health;
 	}
-	public Player(PApplet pa) {
+	public Player(PApplet pa, PImage[] images) {
 		p = pa;
 		speed = 20;
-		avatar = new Avatar(p);
+		avatar = new Avatar("down", images[0], images[1], images[0], images[1], images[0], images[1], images[0], images[1]);
 	
 	}
 	
@@ -80,19 +83,19 @@ public class Player {
 	public void setDirection(int k, boolean decision) {
 	 if      (k == 'w'    || k == 'W')   {
 		 north = decision;
-		 avatar.direction = "up";
+		 avatar.setDir("up");
 	 }
 	 else if (k == 's'  || k == 'S')   {
 		 south = decision;
-		 avatar.direction = "down";
+		 avatar.setDir("down");
 	 }
 		 else if (k == 'a'  || k == 'A')   {
 		 west  = decision;
-		 avatar.direction = "left";
+		 avatar.setDir("left");
 		 }
 	 else if (k == 'd' || k == 'D')   {
 	 	east  = decision;
-		 avatar.direction = "right";
+		 avatar.setDir("right");
 	 }
 	}
 	
