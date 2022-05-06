@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import Players.Player;
+import Tiles.TileManager;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -22,6 +23,7 @@ public class World extends PApplet{
 	
 	
 	Player player;
+	TileManager tM = new TileManager(this);
 	
 	public World() {
 		
@@ -46,6 +48,8 @@ public class World extends PApplet{
 		
 
 
+		tM.floorTile = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
+		
 	}
 	
 	
@@ -53,6 +57,8 @@ public class World extends PApplet{
 		background(255);  
 		fill(255);
 		textAlign(CENTER);
+		
+		tM.draw();
 		player.draw();
 	}
 			 
