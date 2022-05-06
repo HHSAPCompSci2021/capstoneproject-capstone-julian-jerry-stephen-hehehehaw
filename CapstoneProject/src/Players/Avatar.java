@@ -1,9 +1,4 @@
 package Players;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -23,29 +18,7 @@ public class Avatar {
 	public void draw(PApplet p, float x, float y) {
 		
 		PImage image = null;
-		switch(direction) {
-		case "up":
-			if (spriteNum == 1) {
-
-				image = up1;
-			}
-
-			if (spriteNum == 2) {
-
-				image = up2;
-			}
-			break;			
-		case "down":
-			if (spriteNum == 1) {
-
-				image = down1;
-			}
-
-			if (spriteNum == 2) {
-
-				image = down2;
-			}
-			break;
+		switch(direction) {		
 		case "left":
 			if (spriteNum == 1) {
 
@@ -68,6 +41,29 @@ public class Avatar {
 				image = right2;
 			}
 			break;
+		case "up":
+			if (spriteNum == 1) {
+
+				image = up1;
+			}
+
+			if (spriteNum == 2) {
+
+				image = up2;
+			}
+			break;			
+		case "down":
+			if (spriteNum == 1) {
+
+				image = down1;
+			}
+
+			if (spriteNum == 2) {
+
+				image = down2;
+			}
+			break;
+
 		}
 		
 		p.image(image, x, y);
