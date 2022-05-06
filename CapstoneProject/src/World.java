@@ -24,14 +24,14 @@ public class World extends PApplet{
 	// execute once when the program begins
 	public void setup() {
 		
-		player.avatar.up1 = loadImage("Assets/heeheeheehaw.png");
-		player.avatar.up2 = loadImage("Assets/kingcrying.jpg");
-		player.avatar.down1 = loadImage("Assets/heeheeheehaw.png");
-		player.avatar.down2 = loadImage("Assets/kingcrying.jpg");
-		player.avatar.left1 = loadImage("Assets/heeheeheehaw.png");
-		player.avatar.left2 = loadImage("Assets/kingcrying.jpg");
-		player.avatar.right1 = loadImage("Assets/heeheeheehaw.png");
-		player.avatar.right2 = loadImage("Assets/kingcrying.jpg");
+		player.avatar.up1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
+		player.avatar.up2 = loadImage("Assets"  + fileSeparator + "kingcrying.jpg");
+		player.avatar.down1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
+		player.avatar.down2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
+		player.avatar.left1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
+		player.avatar.left2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
+		player.avatar.right1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
+		player.avatar.right2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
 		
 
 	}
