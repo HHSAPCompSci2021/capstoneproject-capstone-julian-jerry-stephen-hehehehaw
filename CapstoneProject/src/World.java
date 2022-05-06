@@ -2,6 +2,9 @@ import processing.core.PApplet;
 
 public class World extends PApplet{
 	
+	public final static String fileSeparator = System.getProperty("file.separator");
+	public final static String lineSeparator = System.getProperty("line.separator");
+	public final static String userDir = System.getProperty("user.dir");
 	private final int originalTileSize = 16;
 	private final int scale = 5;
 	int tileSize = scale * originalTileSize;
@@ -20,14 +23,14 @@ public class World extends PApplet{
 	// execute once when the program begins
 	public void setup() {
 		
-		player.avatar.up1 = loadImage("/Assets/heeheeheehaw.png");
-		player.avatar.up2 = loadImage("/Assets/kingcrying.jpg");
-		player.avatar.down1 = loadImage("/Assets/heeheeheehaw.png");
-		player.avatar.down2 = loadImage("/Assets/kingcrying.jpg");
-		player.avatar.left1 = loadImage("/Assets/heeheeheehaw.png");
-		player.avatar.left2 = loadImage("/Assets/kingcrying.jpg");
-		player.avatar.right1 = loadImage("/Assets/heeheeheehaw.png");
-		player.avatar.right2 = loadImage("/Assets/kingcrying.jpg");
+		player.avatar.up1 = loadImage("Assets/heeheeheehaw.png");
+		player.avatar.up2 = loadImage("Assets/kingcrying.jpg");
+		player.avatar.down1 = loadImage("Assets/heeheeheehaw.png");
+		player.avatar.down2 = loadImage("Assets/kingcrying.jpg");
+		player.avatar.left1 = loadImage("Assets/heeheeheehaw.png");
+		player.avatar.left2 = loadImage("Assets/kingcrying.jpg");
+		player.avatar.right1 = loadImage("Assets/heeheeheehaw.png");
+		player.avatar.right2 = loadImage("Assets/kingcrying.jpg");
 		
 
 	}
