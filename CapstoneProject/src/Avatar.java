@@ -16,21 +16,56 @@ public class Avatar {
 		p = pa;
 		}
 	
+	public int spriteCounter = 0;
+	public int spriteNum = 1;
+	
 	public void draw(PApplet p, float x, float y) {
 		
 		PImage image = null;
 		switch(direction) {
 		case "up":
-			image = up1;
+			if (spriteNum == 1) {
+
+				image = up1;
+			}
+
+			if (spriteNum == 2) {
+
+				image = up2;
+			}
 			break;			
 		case "down":
-			image = down1;
+			if (spriteNum == 1) {
+
+				image = down1;
+			}
+
+			if (spriteNum == 2) {
+
+				image = down2;
+			}
 			break;
 		case "left":
-			image = left1;
+			if (spriteNum == 1) {
+
+				image = left1;
+			}
+
+			if (spriteNum == 2) {
+
+				image = left2;
+			}
 			break;
 		case "right":
-			image = right1;
+			if (spriteNum == 1) {
+
+				image = right1;
+			}
+
+			if (spriteNum == 2) {
+
+				image = right2;
+			}
 			break;
 		}
 		

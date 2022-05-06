@@ -38,6 +38,15 @@ public class Player {
 		p.fill(0);
 		p.rect(x, y, 100, 100);
 		avatar.draw(p, x, y);
+		avatar.spriteCounter++;
+		if (avatar.spriteCounter > 10) {
+			if (avatar.spriteNum == 1)
+				avatar.spriteNum = 2;
+			else if (avatar.spriteNum == 2) {
+				avatar.spriteNum = 1;
+			}
+			avatar.spriteCounter = 0;
+		}
 
 		
 	}
