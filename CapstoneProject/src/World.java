@@ -25,14 +25,13 @@ public class World extends PApplet{
 	public void setup() {
 		
 		player.avatar.up1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-		player.avatar.up2 = loadImage("Assets"  + fileSeparator + "kingcrying.jpg");
-		player.avatar.down1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-		player.avatar.down2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
-		player.avatar.left1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-		player.avatar.left2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
-		player.avatar.right1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-		player.avatar.right2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
-
+		player.avatar.up2 = loadImage("Assets"  + fileSeparator + "heeheeheehaw.png");
+		player.avatar.down1 = loadImage("Assets" + fileSeparator + "heeheeheehaw rotated down.png");
+		player.avatar.down2 = loadImage("Assets" + fileSeparator + "heeheeheehaw rotated down.png");
+		player.avatar.left1 = loadImage("Assets" + fileSeparator + "heeheeheehaw rotated left.png");
+		player.avatar.left2 = loadImage("Assets" + fileSeparator + "heeheeheehaw rotated left.png");
+		player.avatar.right1 = loadImage("Assets" + fileSeparator + "heeheeheehaw rotated right.png");
+		player.avatar.right2 = loadImage("Assets" + fileSeparator + "heeheeheehaw rotated right.png");
 
 	}
 	

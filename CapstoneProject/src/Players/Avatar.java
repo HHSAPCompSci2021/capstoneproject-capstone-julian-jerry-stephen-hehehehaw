@@ -18,29 +18,7 @@ public class Avatar {
 	public void draw(PApplet p, float x, float y) {
 		
 		PImage image = null;
-		switch(direction) {		
-		case "left":
-			if (spriteNum == 1) {
-
-				image = left1;
-			}
-
-			if (spriteNum == 2) {
-
-				image = left2;
-			}
-			break;
-		case "right":
-			if (spriteNum == 1) {
-
-				image = right1;
-			}
-
-			if (spriteNum == 2) {
-
-				image = right2;
-			}
-			break;
+		switch(direction) {
 		case "up":
 			if (spriteNum == 1) {
 
@@ -63,10 +41,32 @@ public class Avatar {
 				image = down2;
 			}
 			break;
+		case "left":
+			if (spriteNum == 1) {
 
+				image = left1;
+			}
+
+			if (spriteNum == 2) {
+
+				image = left2;
+			}
+			break;
+		case "right":
+			if (spriteNum == 1) {
+
+				image = right1;
+			}
+
+			if (spriteNum == 2) {
+
+				image = right2;
+			}
+			break;
 		}
 		
 		p.image(image, x, y);
 	}
+	
 	
 }
