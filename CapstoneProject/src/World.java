@@ -32,7 +32,7 @@ public class World extends PApplet{
 		player.avatar.left2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
 		player.avatar.right1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
 		player.avatar.right2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
-		
+
 
 	}
 	
