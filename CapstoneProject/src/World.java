@@ -10,20 +10,36 @@ public class World extends PApplet{
 	public final static String fileSeparator = System.getProperty("file.separator");
 	public final static String lineSeparator = System.getProperty("line.separator");
 	public final static String userDir = System.getProperty("user.dir");
-	private final int originalTileSize = 16;
-	private final int scale = 5;
-	int tileSize = scale * originalTileSize;
+
+	private int tileGrid[][] = { 
+			// 0 means no tile, reference tileManager class for other tiles
+			
+			//tiles must be distributed evenly throughout the map, cannot be completely enveloped
+			//in tiles or processing cant handle it and runs at 0 fps
+			//lwk java.awt might have been the play here
+		    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+		};
 	
+	TileManager tM = new TileManager(16, 5, tileGrid);
+	
+
 	int maxScreenCol = 16;
 	int maxScreenRow = 9;
-	public int screenWidth = maxScreenCol * tileSize;
-	public int screenHeight = maxScreenRow * tileSize;
+	public int screenWidth = maxScreenCol * tM.tileSize;
+	public int screenHeight = maxScreenRow * tM.tileSize;
 	
 	private PImage[] playerImage = new PImage[8];
 	
 	
 	Player player;
-	TileManager tM = new TileManager();
 	
 	public World() {
 		
@@ -32,6 +48,8 @@ public class World extends PApplet{
 	// The statements in the setup() function 
 	// execute once when the program begins
 	public void setup() {
+		
+		frameRate(999);
 
 		playerImage[0] = loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "Backwards1.png");
 		playerImage[1] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Forward1.png");
@@ -60,6 +78,7 @@ public class World extends PApplet{
 	
 	
 	public void draw() { 
+		System.out.println(frameRate);
 		background(255);  
 //		fill(255);
 		textAlign(CENTER);
