@@ -31,6 +31,22 @@ public class Avatar {
 		direction = dir;
 	}
 	
+	
+	public void setDirection(int k, boolean decision) {
+	 if      (k == 'w'    || k == 'W')   {
+		 setDir("up");
+	 }
+	 else if (k == 's'  || k == 'S')   {
+		 setDir("down");
+	 }
+		 else if (k == 'a'  || k == 'A')   {
+		 setDir("left");
+		 }
+	 else if (k == 'd' || k == 'D')   {
+		 setDir("right");
+	 }
+	}
+	
 	public void draw(PApplet p, float x, float y) {
 		
 		PImage image = null;

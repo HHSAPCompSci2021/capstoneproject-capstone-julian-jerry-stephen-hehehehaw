@@ -8,7 +8,7 @@ import processing.core.PImage;
 
 public class Player {
 	private Weapon weapon;
-	private Avatar avatar;
+	public Avatar avatar;
 	private double vision;
 	private double speed;
 	private double health; 
@@ -91,19 +91,19 @@ public class Player {
 	public void setDirection(int k, boolean decision) {
 	 if      (k == 'w'    || k == 'W')   {
 		 north = decision;
-		 avatar.setDir("up");
+//		 avatar.setDir("up");
 	 }
 	 else if (k == 's'  || k == 'S')   {
 		 south = decision;
-		 avatar.setDir("down");
+	//	 avatar.setDir("down");
 	 }
 		 else if (k == 'a'  || k == 'A')   {
 		 west  = decision;
-		 avatar.setDir("left");
+		// avatar.setDir("left");
 		 }
 	 else if (k == 'd' || k == 'D')   {
 	 	east  = decision;
-		 avatar.setDir("right");
+		 //avatar.setDir("right");
 	 }
 	}
 	

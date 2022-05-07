@@ -33,10 +33,10 @@ public class World extends PApplet{
 	// execute once when the program begins
 	public void setup() {
 
-		playerImage[0] = loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "Forward1.png");
-		playerImage[1] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Backwards1.png");
-		playerImage[2] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Forward2.png");
-		playerImage[3] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Backwards2.png");
+		playerImage[0] = loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "Backwards1.png");
+		playerImage[1] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Forward1.png");
+		playerImage[2] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Backwards2.png");
+		playerImage[3] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Forward2.png");
 		playerImage[4] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left1.png");
 		playerImage[5] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right1.png");
 		playerImage[6] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left2.png");
@@ -74,6 +74,7 @@ public class World extends PApplet{
 	public	void keyPressed() {
 			  final int k = keyCode;
 			  player.setDirection(k, true);
+			  player.avatar.setDirection(k, true);
 			}
 			 
 	public void keyReleased() {
