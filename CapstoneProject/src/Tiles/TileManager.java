@@ -48,9 +48,9 @@ public class TileManager {
 				case 4:
 					p.image(gasTile, x * tileSize, y * tileSize, tileSize, tileSize);
 					break;
-				case 5:
-					p.image(floorTile, x * tileSize, y * tileSize, tileSize, tileSize);
-					break;
+//				case 5:
+//					p.image(floorTile, x * tileSize, y * tileSize, tileSize, tileSize);
+//					break;
 				
 				}
 				
