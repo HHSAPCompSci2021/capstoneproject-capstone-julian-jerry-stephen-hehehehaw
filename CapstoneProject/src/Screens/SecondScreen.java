@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Instructions.*;
 
-// arena
+// "Start" option
 public class SecondScreen extends Screen {
 	
 	private MainMenu surface;
@@ -47,7 +47,7 @@ public class SecondScreen extends Screen {
 		
 		surface.background(0,255,255);   
 
-		System.out.println("You are on the 2nd Screen");
+		System.out.println("You are on the gameplay Screen");
 
 	}
 
