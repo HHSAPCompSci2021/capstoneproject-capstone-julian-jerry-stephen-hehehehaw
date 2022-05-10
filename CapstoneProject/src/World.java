@@ -29,7 +29,7 @@ public class World extends PApplet{
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 		};
 	
-	TileManager tM = new TileManager(20, 3, tileGrid);
+	TileManager tM = new TileManager(16, 5, tileGrid);
 	
 
 	int maxScreenCol = 16;
@@ -73,7 +73,7 @@ public class World extends PApplet{
 		
 
 
-		tM.setImage(loadImage("Assets" + fileSeparator + "grass.png"));
+		tM.setTiles(loadImage("Assets" + fileSeparator + "Tile.png"));
 		
 	}
 	

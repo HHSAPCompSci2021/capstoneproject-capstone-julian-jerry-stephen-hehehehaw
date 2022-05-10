@@ -21,7 +21,7 @@ public class Player {
 	private boolean west;
 	private boolean east;
 	
-	public Player(PApplet pa,Weapon w, double vision, double speed, double health, PImage[] images)
+	public Player(PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images)
 	{
 		weapon = w;
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
@@ -56,6 +56,16 @@ public class Player {
 
 
 		
+	}
+	
+	public double getX()
+	{
+		return x;
+	}
+	
+	public double getY()
+	{
+		return y;
 	}
 	
 	public Rectangle getRectangle()

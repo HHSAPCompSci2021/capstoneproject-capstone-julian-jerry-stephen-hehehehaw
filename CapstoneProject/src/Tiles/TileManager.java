@@ -13,10 +13,15 @@ public class TileManager {
 	public int tileSize;
 
 	
-	public void setImage(PImage i)
+	public void setTiles(PImage floorTile)//, PImage wallTile, PImage spikeTile, PImage tarPitTile, PImage gasTile)
 	{
-		wallTile = i;
+		this.floorTile = floorTile;
+//		this.wallTile = wallTile;
+//		this.spikeTile = spikeTile;
+//		this.tarPitTile = tarPitTile;
+//		this.gasTile = gasTile;
 	}
+		
 	
 	public TileManager(int ogTileSize, int scale, int[][] tileGrid) {
 		this.scale = scale;
@@ -34,9 +39,10 @@ public class TileManager {
 			for (int x = 0; x < tileDesignator[y].length; x++) {
 				switch (tileDesignator[y][x]) {
 				
-				case 1:
-					break;
 				case 0:
+					p.image(floorTile, x * tileSize, y * tileSize);//, tileSize, tileSize);
+					break;
+				case 1:
 					p.image(wallTile, x * tileSize, y * tileSize, tileSize, tileSize);
 					break;
 				case 2:
@@ -49,7 +55,7 @@ public class TileManager {
 					p.image(gasTile, x * tileSize, y * tileSize, tileSize, tileSize);
 					break;
 //				case 5:
-//					p.image(floorTile, x * tileSize, y * tileSize, tileSize, tileSize);
+//					
 //					break;
 				
 				}
