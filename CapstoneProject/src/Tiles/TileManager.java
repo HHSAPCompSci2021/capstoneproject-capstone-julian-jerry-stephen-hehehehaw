@@ -15,7 +15,7 @@ public class TileManager {
 	
 	public void setImage(PImage i)
 	{
-		floorTile = i;
+		wallTile = i;
 	}
 	
 	public TileManager(int ogTileSize, int scale, int[][] tileGrid) {
@@ -34,9 +34,9 @@ public class TileManager {
 			for (int x = 0; x < tileDesignator[y].length; x++) {
 				switch (tileDesignator[y][x]) {
 				
-				case 0:
-					break;
 				case 1:
+					break;
+				case 0:
 					p.image(wallTile, x * tileSize, y * tileSize, tileSize, tileSize);
 					break;
 				case 2:
