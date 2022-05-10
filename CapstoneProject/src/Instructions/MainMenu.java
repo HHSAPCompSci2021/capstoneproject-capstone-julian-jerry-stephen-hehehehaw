@@ -1,8 +1,12 @@
 package Instructions;
 
+import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
+import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import Screens.FirstScreen;
 import Screens.Screen;
@@ -25,7 +29,6 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 		keys = new ArrayList<Integer>();
 		
-		
 		FirstScreen screen1 = new FirstScreen(this);
 		screens.add(screen1);
 		
@@ -33,6 +36,26 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		screens.add(screen2);
 		
 		activeScreen = screens.get(0);
+	}
+	
+	/* TEMPORARY MAIN METHOD */
+	public static void main(String args[]) {
+
+		MainMenu drawing = new MainMenu();
+		PApplet.runSketch(new String[]{""}, drawing);
+		PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
+		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
+		JFrame window = (JFrame)canvas.getFrame();
+
+		window.setSize(800, 600);
+		window.setMinimumSize(new Dimension(100,100));
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setResizable(true);
+
+		window.setVisible(true);
+		
+		
+		canvas.requestFocus();
 	}
 	
 	public void setup() {
