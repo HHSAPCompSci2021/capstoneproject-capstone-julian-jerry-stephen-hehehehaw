@@ -1,5 +1,9 @@
 package Weapons;
 
+import java.util.ArrayList;
+
+import Players.Player;
+
 public class Sniper extends Weapon{
 
 	public Sniper() {
@@ -8,8 +12,16 @@ public class Sniper extends Weapon{
 	}
 
 	@Override
-	public void shoot(int x, int y) {
-		// TODO Auto-generated method stub
+	public ArrayList<Bullet> shoot(int x, int y, Player p) {
+			
+		Bullet bullet = new Bullet(x, y, 0, 0, 50, 1);
+		bullet.setVelocity(x - p.getX(), y - p.getY());
+		
+		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+		
+		bullets.add(bullet);
+		
+		return bullets;
 		
 	}
 
