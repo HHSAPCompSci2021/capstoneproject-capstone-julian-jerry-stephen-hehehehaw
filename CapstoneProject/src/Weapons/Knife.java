@@ -1,5 +1,9 @@
 package Weapons;
 
+import java.util.ArrayList;
+
+import Players.Player;
+
 public class Knife extends Weapon{
 
 	public Knife() {
@@ -7,16 +11,17 @@ public class Knife extends Weapon{
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void shoot(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void reload() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public ArrayList<Bullet> shoot(int x, int y, Player p) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,5 +1,9 @@
 package Weapons;
 
+import java.util.ArrayList;
+
+import Players.Player;
+
 public abstract class Weapon {
 	protected double magazineSize;
 	protected double reloadTime;
@@ -15,7 +19,7 @@ public abstract class Weapon {
 		
 	}
 	
-	public abstract void shoot(int x, int y);
+	public abstract ArrayList<Bullet> shoot(int x, int y, Player p);
 	
 	
 	public abstract void reload();
