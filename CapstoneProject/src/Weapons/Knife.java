@@ -24,4 +24,11 @@ public class Knife extends Weapon{
 		return null;
 	}
 
+
+	@Override
+	public double getAmmo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

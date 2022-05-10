@@ -50,7 +50,7 @@ public class World extends PApplet{
 	// execute once when the program begins
 	public void setup() {
 		
-		frameRate(999);
+//		frameRate(999);
 
 		playerImage[0] = loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "Backwards1.png");
 		playerImage[1] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Forward1.png");
@@ -84,14 +84,24 @@ public class World extends PApplet{
 		background(255);  
 //		fill(255);
 		textAlign(CENTER);
-		
 		tM.draw(this);
-		player.draw(this);
 		
+		push();
 		for(Bullet b : bullets)
 		{
+			fill(0, 255, 0);
 			b.draw(this);
 		}
+		pop();
+		
+
+		player.draw(this);
+		if(player.getWeapon().getAmmo() == 0)
+		{
+			player.getWeapon().reload();
+		}
+		
+		
 		
 //		noFill();
 //		rect(player.getRectangle().x, player.getRectangle().y, player.getRectangle().width, player.getRectangle().height);

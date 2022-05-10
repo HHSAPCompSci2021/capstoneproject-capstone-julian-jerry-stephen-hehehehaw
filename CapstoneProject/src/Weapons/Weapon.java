@@ -24,4 +24,7 @@ public abstract class Weapon {
 	
 	public abstract void reload();
 	
+	public abstract double getAmmo();
+
+	
 }

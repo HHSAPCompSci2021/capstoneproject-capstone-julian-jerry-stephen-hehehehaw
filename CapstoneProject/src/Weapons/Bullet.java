@@ -7,7 +7,7 @@ import Tiles.Tile;
 import processing.core.PApplet;
 
 public class Bullet {
-    private final double DEFAULT_SPEED = 1; 
+    private final double DEFAULT_SPEED = 10; 
 	private double vx, vy, x, y, damage, health; 
 	private int width, height; 
 	private Rectangle dimensions;

@@ -59,6 +59,11 @@ public class Player {
 		
 	}
 	
+	public Weapon getWeapon()
+	{
+		return weapon;
+	}
+	
 	public void setWeapon(Weapon w)
 	{
 		weapon = w;
@@ -72,6 +77,16 @@ public class Player {
 	public double getY()
 	{
 		return y;
+	}
+	
+	public double getWidth()
+	{
+		return dimensions.width/2;
+	}
+	
+	public double getHeight()
+	{
+		return dimensions.height/2;
 	}
 	
 	public Rectangle getRectangle()
