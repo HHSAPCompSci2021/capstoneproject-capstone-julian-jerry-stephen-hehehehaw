@@ -2,6 +2,7 @@ package Players;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import Weapons.Bullet;
 import Weapons.Weapon;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -58,6 +59,11 @@ public class Player {
 		
 	}
 	
+	public void setWeapon(Weapon w)
+	{
+		weapon = w;
+	}
+	
 	public double getX()
 	{
 		return x;
@@ -73,8 +79,8 @@ public class Player {
 		return dimensions;
 	}
 	
-	public void shoot(int x, int y) {
-		weapon.shoot(x,y); 
+	public ArrayList<Bullet> shoot(int x, int y) {
+		return weapon.shoot(x,y, this); 
 	}
 	
 	public double getVision()

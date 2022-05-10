@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 import Players.Player;
 import Tiles.TileManager;
+import Weapons.Bullet;
+import Weapons.Sniper;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -28,6 +30,8 @@ public class World extends PApplet{
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 		};
+	
+	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	
 	TileManager tM = new TileManager(16, 5, tileGrid);
 	
@@ -62,6 +66,7 @@ public class World extends PApplet{
 		playerImage[7] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
 
 		player =  new Player(this, playerImage);
+		player.setWeapon(new Sniper());
 //		player.avatar.up1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
 //		player.avatar.up2 = loadImage("Assets"  + fileSeparator + "kingcrying.jpg");
 //		player.avatar.down1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
@@ -87,6 +92,11 @@ public class World extends PApplet{
 		tM.draw(this);
 		player.draw(this);
 		
+		for(Bullet b : bullets)
+		{
+			b.draw(this);
+		}
+		
 //		noFill();
 //		rect(player.getRectangle().x, player.getRectangle().y, player.getRectangle().width, player.getRectangle().height);
 	}
@@ -103,13 +113,13 @@ public class World extends PApplet{
 
 
 		
-
-		
-	
-	
-	
 	public void mousePressed() {
 		
+		
+		for(Bullet b : player.shoot(mouseX, mouseY))
+		{
+			bullets.add(b);
+		}
 	}
 
 	

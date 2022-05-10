@@ -14,7 +14,7 @@ public class Sniper extends Weapon{
 	@Override
 	public ArrayList<Bullet> shoot(int x, int y, Player p) {
 			
-		Bullet bullet = new Bullet(x, y, 0, 0, 50, 1);
+		Bullet bullet = new Bullet(p.getX(), p.getY(), 0, 0, 50, 1);
 		bullet.setVelocity(x - p.getX(), y - p.getY());
 		
 		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
