@@ -1,10 +1,8 @@
 package Screens;
 
-
-
 import java.awt.Point;
 import java.awt.Rectangle;
-
+import Instructions.*;
 
 public class FirstScreen extends Screen {
 
@@ -21,8 +19,8 @@ public class FirstScreen extends Screen {
 
 
 	public void draw() {
-
-		surface.background(255,255,255);
+		
+		surface.background(0);
 		
 		surface.rect(button.x, button.y, button.width, button.height, 10, 10, 10, 10);
 		surface.fill(0);
@@ -30,6 +28,7 @@ public class FirstScreen extends Screen {
 		float w = surface.textWidth(str);
 		surface.text(str, button.x+button.width/2-w/2, button.y+button.height/2);
 		
+		System.out.println("You are on the 1st Screen");
 	}
 
 

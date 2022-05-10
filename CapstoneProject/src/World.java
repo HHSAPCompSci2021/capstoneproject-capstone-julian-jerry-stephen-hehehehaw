@@ -15,11 +15,7 @@ public class World extends PApplet{
 	public final static String userDir = System.getProperty("user.dir");
 
 	private int tileGrid[][] = { 
-			// 0 means no tile, reference tileManager class for other tiles
-			
-			//tiles must be distributed evenly throughout the map, cannot be completely enveloped
-			//in tiles or processing cant handle it and runs at 0 fps
-			//lwk java.awt might have been the play here
+
 		    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 			{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -78,7 +74,7 @@ public class World extends PApplet{
 		
 
 
-		tM.setImage(loadImage("Assets" + fileSeparator + "grass.png"));
+		tM.setTiles(loadImage("Assets" + fileSeparator + "Tile.png"));
 		
 	}
 	
