@@ -73,7 +73,7 @@ public class World extends PApplet{
 		
 
 
-		tM.setTiles(loadImage("Assets" + fileSeparator + "grass.png"));
+		tM.setTiles(loadImage("Assets" + fileSeparator + "Tile.png"));
 		
 	}
 	
