@@ -23,6 +23,7 @@ public class Player {
 	private boolean west;
 	private boolean east;
 	
+	
 	public Player(float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images)
 	{
 		worldX = x;
@@ -155,6 +156,8 @@ public class Player {
 		 //avatar.setDir("right");
 	 }
 	}
+	
+
 	
 	
 }
