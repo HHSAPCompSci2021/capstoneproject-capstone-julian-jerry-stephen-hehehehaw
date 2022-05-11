@@ -7,6 +7,8 @@ import Players.Player;
 public class Sniper extends Weapon{
 	private int reloadCounter = 0;
 	private double ammo = magazineSize;
+	private boolean justShot = false;
+	private double coolDown = 0;
 	
 	public Sniper() {
 		super(5, 4, 20);
@@ -16,7 +18,7 @@ public class Sniper extends Weapon{
 	@Override
 	public ArrayList<Bullet> shoot(int x, int y, Player p) {
 			
-		if(ammo >= 1)
+		if(ammo >= 1 && justShot == false)
 		{
 			ammo--;
 			
@@ -27,8 +29,18 @@ public class Sniper extends Weapon{
 			
 			bullets.add(bullet);
 			
-			
+			justShot = true;
 			return bullets;
+		}
+		else if(ammo >= 1 && justShot == true)
+		{
+			coolDown++;
+			
+			if(coolDown == 5)
+			{
+				justShot = false;
+				coolDown = 0;
+			}
 		}
 	
 		return new ArrayList<Bullet>();
