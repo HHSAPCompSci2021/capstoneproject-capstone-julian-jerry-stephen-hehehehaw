@@ -9,7 +9,7 @@ import java.util.List;
 import Instructions.*;
 
 // "Start" option
-public class SecondScreen extends Screen {
+public class GameScreen extends Screen {
 	
 	private MainMenu surface;
 	
@@ -18,7 +18,7 @@ public class SecondScreen extends Screen {
 //	private Mario mario;
 //	private List<Sprite> obstacles;
 
-	public SecondScreen(MainMenu surface) {
+	public GameScreen(MainMenu surface) {
 		super(800,600);
 		this.surface = surface;
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
