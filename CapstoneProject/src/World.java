@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import Players.Player;
 import Tiles.TileManager;
 import Weapons.Bullet;
+import Weapons.Shotgun;
 import Weapons.Sniper;
+import Weapons.Submachine;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -362,6 +364,7 @@ public class World extends PApplet{
 		tileImage[2] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick3.png");
 		tileImage[3] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick4.png");
 		tileImage[4] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick5.png");
+		player.setWeapon(new Shotgun());
 		
 		tileImage[5] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrickwall1.png");
 		tileImage[6] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrickwall1.png");

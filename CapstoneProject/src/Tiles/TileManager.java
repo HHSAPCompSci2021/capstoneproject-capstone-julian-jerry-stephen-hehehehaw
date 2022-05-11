@@ -70,9 +70,47 @@ public class TileManager {
 				switch (tileDesignator[worldCol][worldRow]) {
 				
 					case 0:
-						p.image(floorTile, screenX, screenY);//, tileSize, tileSize);
+						p.image(redBrick1, screenX, screenY);//, tileSize, tileSize);
 						break;//need like 20 cases for different types of floor tiles
-						
+					case 1:
+						p.image(redBrick2, screenX, screenY);
+						break;
+					case 2:
+						p.image(redBrick3, screenX, screenY);
+						break;
+					case 3:
+						p.image(redBrick4, screenX, screenY);
+						break;
+					case 4:
+						p.image(redBrick5, screenX, screenY);
+						break;
+					case 5:
+						p.image(redBrickWall1, screenX, screenY);
+						break;
+					case 6:
+						p.image(stoneWall1, screenX, screenY);
+						break;
+					case 7:
+						p.image(stoneWall2, screenX, screenY);
+						break;
+					case 8:
+						p.image(stoneBrick1, screenX, screenY);
+						break;
+					case 9:
+						p.image(stoneBrick2, screenX, screenY);
+						break;
+					case 10:
+						p.image(stoneBrick3, screenX, screenY);
+						break;
+					case 11:
+						p.image(stoneBrick4, screenX, screenY);
+						break;
+					case 12:
+						p.image(stoneBrick5, screenX, screenY);
+						break;
+					case 13:
+						p.image(stoneBrick6, screenX, screenY);
+						break;
 						
 //					case 1:
 //						p.image(wallTile, screenX, screenY);
