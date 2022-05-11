@@ -9,9 +9,7 @@ import javax.swing.JFrame;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import Screens.FirstScreen;
-import Screens.Screen;
-import Screens.ScreenSwitcher;
-import Screens.SecondScreen;
+import Screens.*;
 
 public class MainMenu extends PApplet implements ScreenSwitcher {
 
@@ -34,6 +32,9 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 		SecondScreen screen2 = new SecondScreen(this);
 		screens.add(screen2);
+		
+		Instructions iScreen = new Instructions(this);
+		screens.add(iScreen);
 		
 		activeScreen = screens.get(0);
 	}
