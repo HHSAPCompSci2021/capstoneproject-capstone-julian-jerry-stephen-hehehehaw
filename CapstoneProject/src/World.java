@@ -66,11 +66,14 @@ public class World extends PApplet{
 
 	int maxScreenCol = 16;
 	int maxScreenRow = 9;
-	public int screenWidth = maxScreenCol * tM.tileSize;
-	public int screenHeight = maxScreenRow * tM.tileSize;
+	public int screenWidth = maxScreenCol * tM.getTileSize();
+	public int screenHeight = maxScreenRow * tM.getTileSize();
 	
 	private PImage[] playerImage = new PImage[8];
-	
+	private final int maxWorldCol = 40;
+	private final int maxWorldRow = 40;
+	private final int worldWidth = maxWorldCol * tM.getTileSize();
+	private final int worldHeight = maxWorldRow * tM.getTileSize();
 	
 	Player player;
 	
@@ -93,7 +96,7 @@ public class World extends PApplet{
 		playerImage[6] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left2.png");
 		playerImage[7] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
 
-		player =  new Player(this, playerImage);
+		player =  new Player(screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, this, playerImage);
 		player.setWeapon(new Sniper());
 //		player.avatar.up1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
 //		player.avatar.up2 = loadImage("Assets"  + fileSeparator + "kingcrying.jpg");
@@ -116,7 +119,10 @@ public class World extends PApplet{
 		background(255);  
 //		fill(255);
 		textAlign(CENTER);
-		tM.draw(this);
+
+		
+		tM.draw(this, player);
+		player.draw(this);
 		
 		push();
 		for(Bullet b : bullets)

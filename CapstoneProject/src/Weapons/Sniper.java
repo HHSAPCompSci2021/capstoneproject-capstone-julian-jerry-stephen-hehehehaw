@@ -20,8 +20,8 @@ public class Sniper extends Weapon{
 		{
 			ammo--;
 			
-			Bullet bullet = new Bullet(p.getX() + p.getWidth(), p.getY() + p.getHeight(), 0, 0, 50, 1);
-			bullet.setVelocity(x - p.getX(), y - p.getY());
+			Bullet bullet = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1);
+			bullet.setVelocity(x - p.getWorldX(), y - p.getWorldY());
 			
 			ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 			
@@ -32,6 +32,7 @@ public class Sniper extends Weapon{
 		}
 	
 		return new ArrayList<Bullet>();
+
 		
 	}
 

@@ -15,33 +15,42 @@ public class Player {
 	private double health; 
 	private Rectangle dimensions;
 	
+	private float screenX, screenY;
+	private float worldX, worldY;
 	
-	private float x, y;
 	private boolean north;
 	private boolean south;
 	private boolean west;
 	private boolean east;
 	
-	public Player(PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images)
+	public Player(float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images)
 	{
+		worldX = x;
+		worldY = y;
 		weapon = w;
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
 		this.vision = vision;
 		this.speed = speed;
 		this.health = health;
-		dimensions = new Rectangle((int)x+20, (int)y, 90, 95);
+		dimensions = new Rectangle((int)worldX+20, (int)worldY, 90, 95);
 	}
-	public Player(PApplet pa, PImage[] images) {
+	public Player(float xS, float yS, float xW, float yW, PApplet pa, PImage[] images) { //placeholder for testing purposes
+		worldX = xW;
+		worldY = yW;
+		
+		screenX = xS;
+		screenY = yS;
+		
 		speed = 5;
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
-		dimensions = new Rectangle((int)x+20, (int)y, 90, 95);
+		dimensions = new Rectangle((int)worldX+20, (int)worldY, 90, 95); //notsure if this should be worldX or screenX
 	}
 	
 	public void draw(PApplet p) {
-
+//need to implement smth to contain it within the bounds
 		moveObject();
 		p.fill(0);
-		avatar.draw(p, x, y);
+		avatar.draw(p, screenX, screenY);
 		avatar.spriteCounter++;
 		if (avatar.spriteCounter > 13) {
 			if (avatar.spriteNum == 1)
@@ -51,9 +60,9 @@ public class Player {
 			}
 			avatar.spriteCounter = 0;
 		}
-		
-		dimensions.x = (int)x;
-		dimensions.y = (int)y;
+		//not sure if this should be worldX or screenX yet
+		dimensions.x = (int)worldX;
+		dimensions.y = (int)worldY;
 
 
 		
@@ -69,14 +78,23 @@ public class Player {
 		weapon = w;
 	}
 	
-	public double getX()
+	public float getWorldX()
 	{
-		return x;
+		return worldX;
 	}
 	
-	public double getY()
+	public float getWorldY()
 	{
-		return y;
+		return worldY;
+	}
+	public float getScreenX()
+	{
+		return screenX;
+	}
+	
+	public float getScreenY()
+	{
+		return screenY;
 	}
 	
 	public double getWidth()
@@ -115,8 +133,8 @@ public class Player {
 	
 
 	public void moveObject() {
-	  x += (east?  speed : 0) - (west?  speed : 0); //ternary condition, if east is true add 20, if east is false add 0
-	  y += (south? speed : 0) - (north? speed : 0);
+	  worldX += (east?  speed : 0) - (west?  speed : 0); //ternary condition, if east is true add 20, if east is false add 0
+	  worldY += (south? speed : 0) - (north? speed : 0);
 	}
 	
 	public void setDirection(int k, boolean decision) {

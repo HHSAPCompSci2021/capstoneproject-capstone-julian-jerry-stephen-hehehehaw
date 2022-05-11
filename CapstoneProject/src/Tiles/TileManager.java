@@ -1,5 +1,6 @@
 package Tiles;
 
+import Players.Player;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -10,7 +11,7 @@ public class TileManager {
 	private PImage floorTile, wallTile, spikeTile, tarPitTile, gasTile;
 	private final int originalTileSize;
 	private final int scale;
-	public int tileSize;
+	private final int tileSize;
 
 	
 	public void setTiles(PImage floorTile)//, PImage wallTile, PImage spikeTile, PImage tarPitTile, PImage gasTile)
@@ -26,37 +27,49 @@ public class TileManager {
 	public TileManager(int ogTileSize, int scale, int[][] tileGrid) {
 		this.scale = scale;
 		originalTileSize = ogTileSize;
-		tileDesignator = new int[9][16]; //y, x
+		tileDesignator = tileGrid;
 		tileSize = this.scale * originalTileSize;
 		
-		tileDesignator = tileGrid;
-		
+		 		
 	
 	}
+	public int getTileSize() {
+		return tileSize;
+	}
 	
-	public void draw(PApplet p) {
-		for (int y = 0; y < tileDesignator.length; y++) {
-			for (int x = 0; x < tileDesignator[y].length; x++) {
-				switch (tileDesignator[y][x]) {
+	public void draw(PApplet p, Player player) {
+		for (int worldCol 	 = 0; worldCol < tileDesignator.length; worldCol++) {
+			for (int worldRow = 0; worldRow < tileDesignator[worldCol].length; worldRow++) {
 				
-				case 0:
-					p.image(floorTile, x * tileSize, y * tileSize);//, tileSize, tileSize);
-					break;
-				case 1:
-					p.image(wallTile, x * tileSize, y * tileSize, tileSize, tileSize);
-					break;
-				case 2:
-					p.image(spikeTile, x * tileSize, y * tileSize, tileSize, tileSize);
-					break;
-				case 3:
-					p.image(tarPitTile, x * tileSize, y * tileSize, tileSize, tileSize);
-					break;
-				case 4:
-					p.image(gasTile, x * tileSize, y * tileSize, tileSize, tileSize);
-					break;
-//				case 5:
+				int worldX = worldCol * tileSize;
+				int worldY = worldRow * tileSize;
+				float screenX = worldX - player.getWorldX() + player.getScreenX();
+				float screenY = worldY - player.getWorldY() + player.getScreenY();
+				
+				if (worldX + tileSize> player.getWorldX() - player.getScreenX() 
+						&& worldX - tileSize < player.getWorldX() + player.getScreenX() 
+						&& worldY + tileSize > player.getWorldY() - player.getScreenY() 
+						&& worldY - tileSize < player.getWorldY() + player.getScreenY() )
+				switch (tileDesignator[worldCol][worldRow]) {
+				
+					case 0:
+						p.image(floorTile, screenX, screenY);//, tileSize, tileSize);
+						break;
+					case 1:
+						p.image(wallTile, screenX, screenY);
+						break;
+					case 2:
+						p.image(spikeTile, screenX, screenY);
+						break;
+					case 3:
+						p.image(tarPitTile, screenX, screenY);
+						break;
+					case 4:
+						p.image(gasTile, screenX, screenY);
+						break;
+	//				case 5:
 //					
-//					break;
+//						break;
 				
 				}
 				
