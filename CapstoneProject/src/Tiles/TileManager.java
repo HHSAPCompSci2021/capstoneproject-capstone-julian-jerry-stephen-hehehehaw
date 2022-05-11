@@ -54,7 +54,7 @@ public class TileManager {
 				
 					case 0:
 						p.image(floorTile, screenX, screenY);//, tileSize, tileSize);
-						break;
+						break;//need like 20 cases for different types of floor tiles
 					case 1:
 						p.image(wallTile, screenX, screenY);
 						break;
