@@ -327,6 +327,7 @@ public class World extends PApplet{
 	public int screenHeight = maxScreenRow * tM.getTileSize();
 	
 	private PImage[] playerImage = new PImage[8];
+	private PImage[] tileImage = new PImage[14]; //should be 17 once the remaining tile sprites for traps are made
 	private final int maxWorldCol = 100;
 	private final int maxWorldRow = 100;
 	private final int worldWidth = maxWorldCol * tM.getTileSize();
@@ -355,18 +356,27 @@ public class World extends PApplet{
 
 		player =  new Player(screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, this, playerImage);
 		player.setWeapon(new Sniper());
-//		player.avatar.up1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-//		player.avatar.up2 = loadImage("Assets"  + fileSeparator + "kingcrying.jpg");
-//		player.avatar.down1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-//		player.avatar.down2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
-//		player.avatar.left1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-//		player.avatar.left2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
-//		player.avatar.right1 = loadImage("Assets" + fileSeparator + "heeheeheehaw.png");
-//		player.avatar.right2 = loadImage("Assets" + fileSeparator + "kingcrying.jpg");
+
+		tileImage[0] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick1.png");
+		tileImage[1] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick2.png");
+		tileImage[2] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick3.png");
+		tileImage[3] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick4.png");
+		tileImage[4] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick5.png");
 		
-
-
-		tM.setTiles(loadImage("Assets" + fileSeparator + "Tile.png"));
+		tileImage[5] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrickwall1.png");
+		tileImage[6] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrickwall1.png");
+		tileImage[7] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrickwall2.png");
+	
+		tileImage[8] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrick1.png");
+		tileImage[9] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrick2.png");
+		tileImage[10] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrick3.png");
+		tileImage[11] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrick4.png");
+		tileImage[12] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrick5.png");
+		tileImage[13] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrick6.png");
+			
+		
+		
+		tM.setTiles(tileImage);
 		
 	}
 	
