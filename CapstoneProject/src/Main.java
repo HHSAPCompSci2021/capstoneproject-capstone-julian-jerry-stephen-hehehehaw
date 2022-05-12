@@ -14,7 +14,7 @@ public class Main {
 
 		window.setSize(drawing.screenWidth, drawing.screenHeight);
 		window.setMinimumSize(new Dimension(drawing.screenWidth, drawing.screenHeight));
-		window.setMaximumSize(new Dimension(drawing.screenWidth, drawing.screenHeight));
+		window.setMaximumSize(new Dimension(drawing.screenWidth + 1, drawing.screenHeight + 1));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(true);
 		

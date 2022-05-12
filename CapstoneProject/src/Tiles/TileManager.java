@@ -85,31 +85,31 @@ public class TileManager {
 						p.image(redBrick5, screenX, screenY);
 						break;
 					case 5:
-						p.image(redBrickWall1, screenX, screenY);
-						break;
-					case 6:
-						p.image(stoneWall1, screenX, screenY);
-						break;
-					case 7:
-						p.image(stoneWall2, screenX, screenY);
-						break;
-					case 8:
 						p.image(stoneBrick1, screenX, screenY);
 						break;
-					case 9:
+					case 6:
 						p.image(stoneBrick2, screenX, screenY);
 						break;
-					case 10:
+					case 7:
 						p.image(stoneBrick3, screenX, screenY);
 						break;
-					case 11:
+					case 8:
 						p.image(stoneBrick4, screenX, screenY);
 						break;
-					case 12:
+					case 9:
 						p.image(stoneBrick5, screenX, screenY);
 						break;
-					case 13:
+					case 10:
 						p.image(stoneBrick6, screenX, screenY);
+						break;
+					case 11:
+						p.image(redBrickWall1, screenX, screenY);
+						break;
+					case 12:
+						p.image(stoneWall1, screenX, screenY);
+						break;
+					case 13:
+						p.image(stoneWall2, screenX, screenY);
 						break;
 						
 //					case 1:
