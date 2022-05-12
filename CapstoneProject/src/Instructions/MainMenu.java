@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
-import Screens.FirstScreen;
+import Screens.MenuScreen;
 import Screens.*;
 
 public class MainMenu extends PApplet implements ScreenSwitcher {
@@ -27,10 +27,10 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 		keys = new ArrayList<Integer>();
 		
-		FirstScreen screen1 = new FirstScreen(this);
+		MenuScreen screen1 = new MenuScreen(this);
 		screens.add(screen1);
 		
-		SecondScreen screen2 = new SecondScreen(this);
+		GameScreen screen2 = new GameScreen(this);
 		screens.add(screen2);
 		
 		Instructions iScreen = new Instructions(this);
@@ -50,6 +50,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 
 		window.setSize(800, 600);
 		window.setMinimumSize(new Dimension(100,100));
+		
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(true);
 

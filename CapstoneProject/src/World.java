@@ -2,6 +2,7 @@
 import java.util.ArrayList;
 
 import Players.Player;
+import Players.PlayerHUD;
 import Tiles.TileManager;
 import Weapons.Bullet;
 import Weapons.Shotgun;
@@ -321,7 +322,7 @@ public class World extends PApplet{
 };
 	
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-	
+	private PlayerHUD hud = new PlayerHUD();
 	TileManager tM = new TileManager(16, 5, tileGrid);
 	
 
@@ -412,6 +413,10 @@ public class World extends PApplet{
 			player.getWeapon().reload();
 		}
 		
+		
+	
+		hud.draw(this, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 3*screenHeight/4 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, this, playerImage));
+	
 		
 		
 //		noFill();

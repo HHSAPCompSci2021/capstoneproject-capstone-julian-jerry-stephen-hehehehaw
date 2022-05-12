@@ -5,14 +5,14 @@ import java.awt.Rectangle;
 import Instructions.*;
 
 // 
-public class FirstScreen extends Screen {
+public class MenuScreen extends Screen {
 
 	private MainMenu surface;
 	
 	private Rectangle startButton;
 	private Rectangle instButton;
 	
-	public FirstScreen(MainMenu surface) {
+	public MenuScreen(MainMenu surface) {
 		super(800,600);
 		this.surface = surface;
 
@@ -31,20 +31,16 @@ public class FirstScreen extends Screen {
 		
 		surface.rect(startButton.x, startButton.y, startButton.width, startButton.height, 10, 10, 10, 10);
 		String str = "Start!";
-		float w = surface.textWidth(str);
-		surface.text(str, startButton.x+startButton.width/2-w/2, startButton.y+startButton.height/2);
+		float w = surface.textWidth(str);		
 		
-		
-		// instructions button
-		
+		// instructions button		
 		surface.rect(instButton.x, instButton.y, instButton.width, instButton.height, 10, 10, 10, 10);
 		String str2 = "Instructions";
 		float w2 = surface.textWidth(str);
+		surface.fill(0);
+		surface.text(str, startButton.x+startButton.width/2-w/2, startButton.y+startButton.height/2);
 		surface.text(str2, instButton.x+instButton.width/2-w2/2, instButton.y+instButton.height/2);
 	}
-
-
-
 	
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
