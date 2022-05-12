@@ -1,8 +1,9 @@
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import Players.Player;
-import Players.PlayerHUD;
+//import Players.PlayerHUD;
 import Tiles.TileManager;
 import Weapons.Bullet;
 import Weapons.Shotgun;
@@ -16,7 +17,7 @@ public class World extends PApplet{
 	public final static String fileSeparator = System.getProperty("file.separator");
 	public final static String lineSeparator = System.getProperty("line.separator");
 	public final static String userDir = System.getProperty("user.dir");
-
+//put walls around the map to add borders
 	private int tileGrid[][] = {{1, 2, 4, 4, 3, 2, 0, 4, 0, 3, 1, 1, 2, 3, 4, 0, 2, 1, 4, 0, 4, 3, 1, 1, 0, 0, 0, 3, 0, 2, 0, 4, 3, 2, 4, 2, 0, 1, 1, 3, 3, 0, 0, 1, 3, 2, 1, 0, 0, 2, 5, 7, 10, 9, 8, 8, 10, 10, 7, 9, 9, 8, 10, 8, 8, 9, 8, 7, 10, 5, 5, 6, 7, 5, 10, 5, 8, 8, 9, 5, 8, 7, 10, 9, 9, 7, 7, 10, 6, 8, 9, 7, 6, 5, 5, 10, 10, 8, 9, 6},
 
 
@@ -322,7 +323,7 @@ public class World extends PApplet{
 };
 	
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-	private PlayerHUD hud = new PlayerHUD();
+//	private PlayerHUD hud = new PlayerHUD();
 	TileManager tM = new TileManager(16, 5, tileGrid);
 	
 
@@ -359,7 +360,7 @@ public class World extends PApplet{
 		playerImage[6] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left2.png");
 		playerImage[7] = loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
 
-		player =  new Player(screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, this, playerImage);
+		player =  new Player(screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 20, tM.getTileSize() *2, this, playerImage);
 		player.setWeapon(new Sniper());
 		player.setWeapon(new Shotgun());
 
@@ -370,9 +371,9 @@ public class World extends PApplet{
 		tileImage[4] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick5.png");
 		
 		
-		tileImage[5] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrickwall1.png");
-		tileImage[6] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrickwall1.png");
-		tileImage[7] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrickwall2.png");
+		tileImage[5] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrickwall.png");
+		tileImage[6] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonewall1.png");
+		tileImage[7] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonewall2.png");
 	
 		tileImage[8] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrick1.png");
 		tileImage[9] = loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrick2.png");
@@ -390,7 +391,9 @@ public class World extends PApplet{
 	
 	public void draw() { 
 		System.out.println(frameRate);
-		background(255);  
+		
+		
+		background(220,220,220);  
 //		fill(255);
 		textAlign(CENTER);
 
@@ -415,7 +418,7 @@ public class World extends PApplet{
 		
 		
 	
-		hud.draw(this, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 3*screenHeight/4 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, this, playerImage));
+//		hud.draw(this, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 3*screenHeight/4 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, this, playerImage));
 	
 		
 		

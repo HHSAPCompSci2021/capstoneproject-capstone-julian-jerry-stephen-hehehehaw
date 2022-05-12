@@ -67,7 +67,7 @@ public class TileManager {
 						&& worldX - tileSize < player.getWorldX() + player.getScreenX() 
 						&& worldY + tileSize > player.getWorldY() - player.getScreenY() 
 						&& worldY - tileSize < player.getWorldY() + player.getScreenY() )
-				switch (tileDesignator[worldCol][worldRow]) {
+					switch (tileDesignator[worldCol][worldRow]) {
 				
 					case 0:
 						p.image(redBrick1, screenX, screenY);//, tileSize, tileSize);
