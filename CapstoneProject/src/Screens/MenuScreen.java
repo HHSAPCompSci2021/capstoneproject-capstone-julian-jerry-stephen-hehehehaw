@@ -12,15 +12,16 @@ public class MenuScreen implements Screen {
 	private Rectangle startButton;
 	private Rectangle instButton;
 	private final int DRAWING_WIDTH, DRAWING_HEIGHT;
+	private final float BUTTON_WIDTH = 0.2f;
+	private final float BUTTON_HEIGHT = 0.1f;
 	
 	public MenuScreen(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
 		this.surface = surface;
-
 //		button = new Rectangle(800/2-100,600/2-50,200,100);
-		startButton = new Rectangle(800/2-100,600/3,200,100);
-		instButton = new Rectangle(800/2-100, 600/3*2,200,100);
+		startButton = new Rectangle((int)(DRAWING_WIDTH*(1-BUTTON_WIDTH)/2), (int)(DRAWING_HEIGHT*(1-3*BUTTON_HEIGHT)/2), (int)(width*BUTTON_WIDTH), (int)(height*BUTTON_HEIGHT));
+		instButton = new Rectangle((int)(DRAWING_WIDTH*(1-BUTTON_WIDTH)/2), (int)(DRAWING_HEIGHT*(1+BUTTON_HEIGHT)/2), (int)(width*BUTTON_WIDTH), (int)(height*BUTTON_HEIGHT));
 	}
 	
 	public void setup() {

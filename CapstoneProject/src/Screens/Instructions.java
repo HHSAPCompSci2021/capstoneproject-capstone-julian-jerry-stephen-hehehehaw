@@ -15,22 +15,12 @@ public class Instructions implements Screen {
 	private Rectangle screenRect;
 	private final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	
-//	private Mario mario;
-//	private List<Sprite> obstacles;
-
 	public Instructions(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
 		this.surface = surface;
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
-//		obstacles = new ArrayList<Sprite>();
-//		obstacles.add(new Sprite(0,250,100,50));
 	}
-
-
-//	public void spawnNewMario() {
-//		mario = new Mario(surface.loadImage("img/mario.png"), DRAWING_WIDTH/2-Mario.MARIO_WIDTH/2,50);
-//	}
 
 	// The statements in the setup() function 
 	// execute once when the program begins
@@ -43,12 +33,16 @@ public class Instructions implements Screen {
 	// sequence and after the last line is read, the first 
 	// line is executed again.
 	public void draw() {
-		
-		// drawing stuff
-		
 		surface.background(255,0,0);
-		surface.text("TEXT TEXT TEXT TEXT TEXT ", DRAWING_WIDTH, DRAWING_HEIGHT);
+		surface.fill(0);
+		surface.text("", DRAWING_WIDTH, DRAWING_HEIGHT);
 		System.out.println("You are on the instructions Screen");
+		
+		String str = "Instructions: \nUse the WASD keys to move the sprite, \nand click to shoot";
+		float w = surface.textWidth(str);
+		surface.textSize(50);
+		surface.fill(0);
+		surface.text(str, (int)(DRAWING_WIDTH*0.1), (int)(DRAWING_HEIGHT*0.2));
 
 	}
 	
