@@ -5,13 +5,9 @@ import java.util.ArrayList;
 import Players.Player;
 
 public class Shotgun extends Weapon{
-	private int reloadCounter = 0;
-	private double ammo = magazineSize;
-	private boolean justShot = false;
-	private double coolDown = 0;
 	
 	public Shotgun() {
-		super(2, 2, 10);
+		super(2, 200, 10, 0.9);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -20,7 +16,7 @@ public class Shotgun extends Weapon{
 	public void reload() {
 		reloadCounter++;
 		
-		if(reloadCounter == 150)
+		if(reloadCounter == reloadTime)
 		{
 			ammo = magazineSize;
 			reloadCounter = 0;
@@ -33,9 +29,9 @@ public class Shotgun extends Weapon{
 		{
 			ammo--;
 			
-			Bullet bullet = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1);
-			Bullet bullet2 = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1);
-			Bullet bullet3 = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1);
+			Bullet bullet = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1, 15, 15, 8);
+			Bullet bullet2 = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1, 15, 15, 8);
+			Bullet bullet3 = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1, 15 ,15, 8);
 
 			bullet.setVelocity(x - p.getScreenX(), y - p.getScreenY());
 			bullet2.setVelocity(x - p.getScreenX(), y - p.getScreenY() +  (y - p.getScreenY()) * (Math.random()-0.65));

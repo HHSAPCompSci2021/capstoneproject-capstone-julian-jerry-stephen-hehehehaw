@@ -47,7 +47,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		activeScreen = screens.get(0);
 	}
 	
-	/* TEMPORARY MAIN METHOD */
+
 	public static void main(String args[]) {
 		MainMenu m = new MainMenu();
 		
@@ -91,7 +91,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	public void keyPressed() {
 		activeScreen.keyPressed();
 		keys.add(keyCode);
-		if (key == ESC)  // This prevents a processing program from closing on escape key
+		if (key == ESC) 
 			key = 0;
 	}
 
@@ -129,7 +129,6 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		return new Point((int)(actual.getX()/ratioX) , (int)(actual.getY()/ratioY));
 	}
 
-	@Override
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
 	}

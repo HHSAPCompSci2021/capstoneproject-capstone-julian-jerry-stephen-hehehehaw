@@ -23,15 +23,25 @@ public class Avatar {
 		this.right2 = right2;
 	}
 	
+	/**
+	* Tracks the sprite counter
+	*/
 	public int spriteCounter = 0;
+	
+	/**
+	* Tracks the sprite num
+	*/
 	public int spriteNum = 1;
 	
-	public void setDir(String dir)
+	
+	private void setDir(String dir)
 	{
 		direction = dir;
 	}
 	
-	
+	/**
+	* Tracks when the mouse is dragged
+	*/
 	public void setDirection(int k, boolean decision) {
 	 if      (k == 'w'    || k == 'W')   {
 		 setDir("up");
@@ -47,6 +57,14 @@ public class Avatar {
 	 }
 	}
 	
+	/**
+	* Draws the avatar based on the direction and sprite num
+	* 
+	* @param p PApplet the Avatar is going to be drawn on
+	* @param x X location of Avatar
+	* @param y Y location of Avatar
+	* @post Avatar is drawn on the PApplet
+	*/
 	public void draw(PApplet p, float x, float y) {
 		
 		PImage image = null;

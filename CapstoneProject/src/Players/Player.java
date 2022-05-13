@@ -14,6 +14,7 @@ public class Player {
 	private double speed;
 	private double health; 
 	private Rectangle dimensions;
+	private double initHealth;
 	
 	private float screenX, screenY;
 	private float worldX, worldY;
@@ -28,11 +29,16 @@ public class Player {
 	{
 		worldX = x;
 		worldY = y;
+		
+		screenX = xS;
+		screenY = yS;
+		
 		weapon = w;
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
 		this.vision = vision;
-		this.speed = speed;
+		this.speed = speed * w.getSpeed();
 		this.health = health;
+		initHealth = health;
 		dimensions = new Rectangle((int)worldX+20, (int)worldY, 90, 95);
 	}
 	public Player(float xS, float yS, float xW, float yW, PApplet pa, PImage[] images) { //placeholder for testing purposes
@@ -130,6 +136,11 @@ public class Player {
 	public double getHealth()
 	{
 		return health;
+	}
+	
+	public double getInitHealth()
+	{
+		return initHealth;
 	}
 	
 

@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import Players.Player;
 
 public class Sniper extends Weapon{
-	private int reloadCounter = 0;
-	private double ammo = magazineSize;
-	private boolean justShot = false;
-	private double coolDown = 0;
+	
 	
 	public Sniper() {
-		super(5, 4, 20);
+		super(5, 150, 20, 1);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -22,7 +19,7 @@ public class Sniper extends Weapon{
 		{
 			ammo--;
 			
-			Bullet bullet = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1);
+			Bullet bullet = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1, 20, 20, 18);
 			bullet.setVelocity(x - p.getScreenX(), y - p.getScreenY());
 			
 			ArrayList<Bullet> bullets = new ArrayList<Bullet>();
@@ -52,7 +49,7 @@ public class Sniper extends Weapon{
 	public void reload() {
 		reloadCounter++;
 		
-		if(reloadCounter == 150)
+		if(reloadCounter == reloadTime)
 		{
 			ammo = magazineSize;
 			reloadCounter = 0;
