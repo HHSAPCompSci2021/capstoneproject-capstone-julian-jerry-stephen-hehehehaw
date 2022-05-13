@@ -355,6 +355,7 @@ public class World implements Screen {
 	public int screenHeight = maxScreenRow * tM.getTileSize();
 	
 	private PImage[] playerImage = new PImage[8];
+	private PImage[] playerImage2 = new PImage[8];
 	private PImage[] tileImage = new PImage[15]; //should be 17 once the remaining tile sprites for traps are made
 	private final int maxWorldCol = 100;
 	private final int maxWorldRow = 100;
@@ -372,7 +373,17 @@ public class World implements Screen {
 	public void setup() {
 		
 //		frameRate(999);
+		
+		playerImage2[0] = p.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
+		playerImage2[1] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
+		playerImage2[2] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
+		playerImage2[3] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
+		playerImage2[4] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
+		playerImage2[5] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
+		playerImage2[6] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
+		playerImage2[7] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
 
+		
 		playerImage[0] = p.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "Backwards1.png");
 		playerImage[1] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Forward1.png");
 		playerImage[2] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Backwards2.png");
@@ -439,7 +450,7 @@ public class World implements Screen {
 			player.getWeapon().reload();
 		}
 		
-		hud.draw(p, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage));
+		hud.draw(p, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2));
 	}
 			 
 	/**
