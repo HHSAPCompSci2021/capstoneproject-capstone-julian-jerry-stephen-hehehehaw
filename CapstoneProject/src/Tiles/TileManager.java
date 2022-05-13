@@ -55,8 +55,8 @@ public class TileManager {
 	}
 	
 	public void draw(PApplet p, Player player) {
-		for (int worldCol 	 = 0; worldCol < tileDesignator.length; worldCol++) {
-			for (int worldRow = 0; worldRow < tileDesignator[worldCol].length; worldRow++) {
+		for (int worldRow = 0; worldRow < tileDesignator.length; worldRow++) {
+			for (int worldCol = 0; worldCol < tileDesignator[worldRow].length; worldCol++) {
 				
 				int worldX = worldCol * tileSize;
 				int worldY = worldRow * tileSize;
