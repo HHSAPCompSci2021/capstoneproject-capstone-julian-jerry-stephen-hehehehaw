@@ -331,12 +331,20 @@ public class World implements Screen {
 	};
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	private PlayerHUD hud = new PlayerHUD();
-	TileManager tM = new TileManager(16, 5, tileGrid);
+	private TileManager tM = new TileManager(16, 5, tileGrid);
 	
 
 	private int maxScreenCol = 16;
 	private int maxScreenRow = 9;
+	
+	/**
+	* Represents the screen's width
+	*/
 	public int screenWidth = maxScreenCol * tM.getTileSize();
+	
+	/**
+	* Represents the screen's height
+	*/
 	public int screenHeight = maxScreenRow * tM.getTileSize();
 	
 	private PImage[] playerImage = new PImage[8];
@@ -397,16 +405,16 @@ public class World implements Screen {
 		
 	}
 	
-	
-	public void draw() { 
-//		System.out.println(p.frameRate);
-		
-		
+	/**
+	* Draws the entire in-game perspective
+	* 
+	* @post Changes background to (220, 220, 220)
+	* @post Changes PApplet's text alignment to Center
+	*/
+	public void draw() { 		
 		p.background(220,220,220);  
-//		fill(255);
 		p.textAlign(p.CENTER);
 
-		
 		tM.draw(p, player);
 		player.draw(p);
 		
@@ -418,53 +426,57 @@ public class World implements Screen {
 		}
 		p.pop();
 		
-
 		player.draw(p);
 		if(player.getWeapon().getAmmo() == 0)
 		{
 			player.getWeapon().reload();
 		}
 		
-		
-	
 		hud.draw(p, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage));
-//	
-		
-		
-//		noFill();
-//		rect(player.getRectangle().x, player.getRectangle().y, player.getRectangle().width, player.getRectangle().height);
 	}
 			 
-	public	void keyPressed() {
+	/**
+	* Tracks the keys pressed that moves the player
+	*/
+	public void keyPressed() {
 			  final int k = p.keyCode;
 			  player.setDirection(k, true);
 			  player.avatar.setDirection(k, true);
 			}
-			 
+			
+	/**
+	* Tracks the keys released
+	*/
 	public void keyReleased() {
 			  player.setDirection(p.keyCode, false);
 			}
 
 
-		
+	/**
+	* Tracks when the mouse is pressed and shoots the player 
+	*/
 	public void mousePressed() {
-		
-		
 		for(Bullet b : player.shoot(p.mouseX, p.mouseY))
 		{
 			bullets.add(b);
 		}
 	}
 
-	
+	/**
+	* Tracks when the mouse is dragged
+	*/
 	public void mouseDragged() {
 		
 	}
-	
+	/**
+	* Tracks when the mouse is released
+	*/
 	public void mouseReleased() {
 		
 	}
-	
+	/**
+	* Tracks when the mouse is moved
+	*/
 	public void mouseMoved() {
 		
 	}

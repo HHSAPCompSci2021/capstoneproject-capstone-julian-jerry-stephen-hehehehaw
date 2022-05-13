@@ -13,13 +13,13 @@ public class PlayerHUD {
 		
 		p.rect((float) (width-width/5.5),(float) (height-height/2.5), width/5, 300);
 		avatar.draw(p);
-		if(avatar.avatar.spriteNum == 1)
-		{
-			avatar.avatar.spriteNum++;
-		}
-		else {
-			avatar.avatar.spriteNum--;
-		}
+//		if(avatar.avatar.spriteNum == 1)
+//		{
+//			avatar.avatar.spriteNum++;
+//		}
+//		else {
+//			avatar.avatar.spriteNum--;
+//		}
 			
 				
 		
