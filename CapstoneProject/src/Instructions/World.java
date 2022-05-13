@@ -12,6 +12,7 @@ import Weapons.Bullet;
 import Weapons.Shotgun;
 import Weapons.Sniper;
 import Weapons.Submachine;
+import Weapons.Weapon;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -328,12 +329,12 @@ public class World implements Screen {
 };
 	
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-//	private PlayerHUD hud = new PlayerHUD();
+	private PlayerHUD hud = new PlayerHUD();
 	TileManager tM = new TileManager(16, 5, tileGrid);
 	
 
-	int maxScreenCol = 16;
-	int maxScreenRow = 9;
+	private int maxScreenCol = 16;
+	private int maxScreenRow = 9;
 	public int screenWidth = maxScreenCol * tM.getTileSize();
 	public int screenHeight = maxScreenRow * tM.getTileSize();
 	
@@ -365,9 +366,11 @@ public class World implements Screen {
 		playerImage[6] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left2.png");
 		playerImage[7] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
 
-		player =  new Player(screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 20, tM.getTileSize() *2, p, playerImage);
+		player =  new Player(screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 20, tM.getTileSize() *2, p, new Sniper(), 5.0, 5.0, 100, playerImage);
 		player.setWeapon(new Sniper());
-		player.setWeapon(new Shotgun());
+//		player.setWeapon(new Shotgun());
+//		player.setWeapon(new Submachine());
+
 
 		tileImage[0] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick1.png");
 		tileImage[1] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick2.png");
@@ -395,7 +398,7 @@ public class World implements Screen {
 	
 	
 	public void draw() { 
-		System.out.println(p.frameRate);
+//		System.out.println(p.frameRate);
 		
 		
 		p.background(220,220,220);  
@@ -423,7 +426,7 @@ public class World implements Screen {
 		
 		
 	
-//		hud.draw(this, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 3*screenHeight/4 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, this, playerImage));
+		hud.draw(p, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage));
 //	
 		
 		

@@ -7,12 +7,12 @@ import Tiles.Tile;
 import processing.core.PApplet;
 
 public class Bullet {
-    private final double DEFAULT_SPEED = 10; 
+    private final double DEFAULT_SPEED; 
 	private double vx, vy, x, y, damage, health; 
 	private int width, height; 
 	private Rectangle dimensions;
 	
-	public Bullet(double x, double y, double vx, double vy, double damage, double health)
+	public Bullet(double x, double y, double vx, double vy, double damage, double health, int width, int height, int speed)
 	{
 		this.x = x;
 		this.y = y; 
@@ -20,8 +20,9 @@ public class Bullet {
 		this.health = health;
 		this.vx = vx;
 		this.vy = vy; 
-		width = 5;
-		height = 5;
+		this.width = width;
+		this.height = height;
+		DEFAULT_SPEED = speed;
 	}
 	
 	public void move()
@@ -33,7 +34,7 @@ public class Bullet {
 	public void draw(PApplet p)
 	{
 		p.rect((float)x, (float)y, (float)width, (float)height);
-		dimensions = new Rectangle((int)x, (int)y, 10, 10);
+		dimensions = new Rectangle((int)x, (int)y, 5, 5);
 		move();
 	}
 
@@ -63,9 +64,9 @@ public class Bullet {
 		this.vy = rise;
 	}
 	
-	public void loseHealth(int health)
-	{
-		
-	}
+//	public void loseHealth(int health)
+//	{
+//		
+//	}
 	
 }
