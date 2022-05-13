@@ -16,7 +16,7 @@ import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
 // "Start" option
-public class PreGameScreen extends Screen {
+public class PreGameScreen implements Screen {
 	
 	private MainMenu surface;
 	
@@ -80,7 +80,8 @@ public class PreGameScreen extends Screen {
 	
 	public void mouseReleased() {}
 	
-	public void keyPressed() {}
-
 	public void keyReleased() {}
+	
+	public void keyPressed() {}
+	
 }

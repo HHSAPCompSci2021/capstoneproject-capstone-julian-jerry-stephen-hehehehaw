@@ -9,7 +9,7 @@ import java.util.List;
 import Instructions.*;
 
 // "Start" option
-public class Instructions extends Screen {
+public class Instructions implements Screen {
 	
 	private MainMenu surface;
 	private Rectangle screenRect;
@@ -60,10 +60,7 @@ public class Instructions extends Screen {
 	
 	public void mouseReleased() {}
 	
-	public void keyPressed() {}
-
 	public void keyReleased() {}
 	
-
-	
+	public void keyPressed() {}
 }

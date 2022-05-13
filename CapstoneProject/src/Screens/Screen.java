@@ -1,6 +1,6 @@
 package Screens;
 
-public abstract class Screen {
+public interface Screen {
 
 //	public final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	
@@ -9,21 +9,19 @@ public abstract class Screen {
 //		this.DRAWING_HEIGHT = height;
 //	}
 	
-	public void setup() {}
+	public void setup();
 	
-	public void draw() {}
+	public void draw();
 	
-	public void keyPressed() {}
+	public void keyPressed();
 	
-	public void keyReleased() {}
+	public void keyReleased();
 	
-	public void mousePressed() {}
+	public void mousePressed();
 	
-	public void mouseMoved() {}
+	public void mouseMoved();
 	
-	public void mouseDragged() {}
+	public void mouseDragged();
 	
-	public void mouseReleased() {}
-	
-	
+	public void mouseReleased();
 }

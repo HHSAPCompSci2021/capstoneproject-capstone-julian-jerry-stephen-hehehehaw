@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import Instructions.*;
 
 // 
-public class MenuScreen extends Screen {
+public class MenuScreen implements Screen {
 
 	private MainMenu surface;
 	
@@ -62,8 +62,9 @@ public class MenuScreen extends Screen {
 	
 	public void mouseReleased() {}
 	
+	public void keyReleased() {}
+	
 	public void keyPressed() {}
 
-	public void keyReleased() {}
 }
 
