@@ -16,7 +16,7 @@ import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
 // "Start" option
-public class PreGameScreen implements Screen {
+public class PreGameScreen extends Screen {
 	
 	private MainMenu surface;
 	

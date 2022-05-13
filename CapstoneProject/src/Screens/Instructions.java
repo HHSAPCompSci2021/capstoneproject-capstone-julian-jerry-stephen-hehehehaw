@@ -9,7 +9,7 @@ import java.util.List;
 import Instructions.*;
 
 // "Start" option
-public class Instructions implements Screen {
+public class Instructions extends Screen {
 	
 	private MainMenu surface;
 	private Rectangle screenRect;

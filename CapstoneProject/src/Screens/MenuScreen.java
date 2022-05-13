@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import Instructions.*;
 
 // 
-public class MenuScreen implements Screen {
+public class MenuScreen extends Screen {
 
 	private MainMenu surface;
 	

@@ -14,7 +14,7 @@ import Weapons.Submachine;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class World implements Screen {
+public class World extends Screen {
 	
 	public final static String fileSeparator = System.getProperty("file.separator");
 	public final static String lineSeparator = System.getProperty("line.separator");
@@ -450,22 +450,6 @@ public class World implements Screen {
 			bullets.add(b);
 		}
 	}
-
 	
-	public void mouseDragged() {
-		
-	}
-	
-	public void mouseReleased() {
-		
-	}
-	
-	public void mouseMoved() {
-		
-	}
-
-	
-	
-
 }
 
