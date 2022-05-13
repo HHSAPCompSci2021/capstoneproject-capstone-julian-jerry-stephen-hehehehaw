@@ -5,22 +5,28 @@ import java.awt.Rectangle;
 import Instructions.*;
 
 // 
-public class MenuScreen extends Screen {
+public class MenuScreen implements Screen {
 
 	private MainMenu surface;
 	
 	private Rectangle startButton;
 	private Rectangle instButton;
+	private final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	
-	public MenuScreen(MainMenu surface) {
-		super(800,600);
+	public MenuScreen(MainMenu surface, int width, int height) {
+		this.DRAWING_WIDTH = width;
+		this.DRAWING_HEIGHT = height;
 		this.surface = surface;
 
 //		button = new Rectangle(800/2-100,600/2-50,200,100);
 		startButton = new Rectangle(800/2-100,600/3,200,100);
 		instButton = new Rectangle(800/2-100, 600/3*2,200,100);
 	}
-
+	
+	public void setup() {
+		
+	}
+	
 	// add one extra button for the Instructions screen
 	// connect the frame size to that in Main and the first button should lead to the World class
 	public void draw() {
@@ -45,11 +51,19 @@ public class MenuScreen extends Screen {
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (startButton.contains(p))
-			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
+			surface.switchScreen(ScreenSwitcher.PRE_GAME_SCREEN);
 		else if (instButton.contains(p))
 			surface.switchScreen(ScreenSwitcher.INSTRUCTION_SCREEN);
 	}
 	
+	public void mouseMoved() {}
+	
+	public void mouseDragged() {}
+	
+	public void mouseReleased() {}
+	
+	public void keyPressed() {}
 
+	public void keyReleased() {}
 }
 

@@ -20,54 +20,78 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	private Screen activeScreen;
 	private ArrayList<Screen> screens;
 
+	private int DRAWING_WIDTH, DRAWING_HEIGHT;
+	
+	private World world;
 	
 	public MainMenu() {
-		
 		screens = new ArrayList<Screen>();
-		
 		keys = new ArrayList<Integer>();
 		
-		MenuScreen screen1 = new MenuScreen(this);
+		MenuScreen screen1 = new MenuScreen(this, DRAWING_WIDTH, DRAWING_HEIGHT);
 		screens.add(screen1);
 		
-		GameScreen screen2 = new GameScreen(this);
+		PreGameScreen screen2 = new PreGameScreen(this, DRAWING_WIDTH, DRAWING_HEIGHT);
 		screens.add(screen2);
 		
-		Instructions iScreen = new Instructions(this);
+		world = new World(this);
+		screens.add(world);
+		
+		Instructions iScreen = new Instructions(this, DRAWING_WIDTH, DRAWING_HEIGHT);
 		screens.add(iScreen);
+		
+		DRAWING_WIDTH = world.maxScreenCol * world.tM.getTileSize();
+		DRAWING_HEIGHT = world.maxScreenRow * world.tM.getTileSize();
 		
 		activeScreen = screens.get(0);
 	}
 	
 	/* TEMPORARY MAIN METHOD */
 	public static void main(String args[]) {
-
-		MainMenu drawing = new MainMenu();
-		PApplet.runSketch(new String[]{""}, drawing);
-		PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
+//		MainMenu drawing = new MainMenu();
+//		PApplet.runSketch(new String[]{""}, drawing);
+//		PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
+//		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
+//		JFrame window = (JFrame)canvas.getFrame();
+//
+//		window.setSize(800, 600);
+//		window.setMinimumSize(new Dimension(100,100));
+//		
+//		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		window.setResizable(true);
+//
+//		window.setVisible(true);
+//		
+//		
+//		canvas.requestFocus();
+		MainMenu m = new MainMenu();
+		
+		World drawing = new World(m);
+		PApplet.runSketch(new String[]{""}, m);
+		PSurfaceAWT surf = (PSurfaceAWT) m.getSurface();
 		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
 		JFrame window = (JFrame)canvas.getFrame();
 
-		window.setSize(800, 600);
-		window.setMinimumSize(new Dimension(100,100));
-		
+		window.setSize(drawing.screenWidth, drawing.screenHeight);
+		window.setMinimumSize(new Dimension(drawing.screenWidth, drawing.screenHeight));
+		window.setMaximumSize(new Dimension(drawing.screenWidth + 1, drawing.screenHeight + 1));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(true);
-
+		
+		window.setLocationRelativeTo(null);
 		window.setVisible(true);
-		
-		
-		canvas.requestFocus();
 	}
 	
 	public void setup() {
-		for (Screen s : screens)
+		
+		for (Screen s : screens) {
 			s.setup();
+		}
 	}
 	
 	public void draw() {
-		ratioX = (float)width/activeScreen.DRAWING_WIDTH;
-		ratioY = (float)height/activeScreen.DRAWING_HEIGHT;
+		ratioX = (float)width/DRAWING_WIDTH;
+		ratioY = (float)height/DRAWING_HEIGHT;
 
 		push();
 		
@@ -79,12 +103,14 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	}
 	
 	public void keyPressed() {
+		activeScreen.keyPressed();
 		keys.add(keyCode);
 		if (key == ESC)  // This prevents a processing program from closing on escape key
 			key = 0;
 	}
 
 	public void keyReleased() {
+		activeScreen.keyReleased();
 		while(keys.contains(keyCode))
 			keys.remove(new Integer(keyCode));
 	}

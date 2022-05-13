@@ -1,28 +1,39 @@
 package Screens;
 
 
+import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JFrame;
+
 import Instructions.*;
+import processing.awt.PSurfaceAWT;
+import processing.core.PApplet;
 
 // "Start" option
-public class Instructions implements Screen {
+public class PreGameScreen implements Screen {
 	
 	private MainMenu surface;
+	
 	private Rectangle screenRect;
+	private Rectangle gameStarter;
 	private final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	
 //	private Mario mario;
 //	private List<Sprite> obstacles;
 
-	public Instructions(MainMenu surface, int width, int height) {
+	public PreGameScreen(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
 		this.surface = surface;
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
+		gameStarter = new Rectangle(800/2-100, 600/2, 200, 100);
+		
 //		obstacles = new ArrayList<Sprite>();
 //		obstacles.add(new Sprite(0,250,100,50));
 	}
@@ -43,16 +54,25 @@ public class Instructions implements Screen {
 	// sequence and after the last line is read, the first 
 	// line is executed again.
 	public void draw() {
+		surface.background(0,255,255);   
 		
-		// drawing stuff
+		surface.rect(gameStarter.x, gameStarter.y, gameStarter.width, gameStarter.height, 10, 10, 10, 10);
+		String str = "Start!";
+		float w = surface.textWidth(str);
+		surface.text(str, gameStarter.x+gameStarter.width/2-w/2, gameStarter.y+gameStarter.height/2);
 		
-		surface.background(255,0,0);
-		surface.text("TEXT TEXT TEXT TEXT TEXT ", DRAWING_WIDTH, DRAWING_HEIGHT);
-		System.out.println("You are on the instructions Screen");
+		System.out.println("You are on the pre-gameplay Screen");
 
 	}
-	
-	public void mousePressed() {}
+
+	public void mousePressed() {
+//		GameScreen g = new GameScreen(surface);
+		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		if (gameStarter.contains(p))
+			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
+//			g.createWorld();
+//			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
+	}
 	
 	public void mouseMoved() {}
 	
@@ -63,7 +83,4 @@ public class Instructions implements Screen {
 	public void keyPressed() {}
 
 	public void keyReleased() {}
-	
-
-	
 }
