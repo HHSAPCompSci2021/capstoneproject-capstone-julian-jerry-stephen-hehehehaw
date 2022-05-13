@@ -80,7 +80,8 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 
 		push();
 		
-		scale(ratioX, ratioY);
+		if (activeScreen != world)
+			scale(ratioX, ratioY);
 		
 		activeScreen.draw();
 		

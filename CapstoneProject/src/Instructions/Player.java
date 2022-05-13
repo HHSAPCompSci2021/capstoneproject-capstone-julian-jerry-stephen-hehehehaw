@@ -53,7 +53,7 @@ public class Player {
 	}
 	
 	public void shoot(int x, int y) {
-		weapon.shoot(x,y); 
+		weapon.shoot(x,y, this); 
 	}
 	
 	public double getVision()
