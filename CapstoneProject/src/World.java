@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import Players.Player;
+import Players.PlayerHUD;
 //import Players.PlayerHUD;
 import Tiles.TileManager;
 import Weapons.Bullet;
@@ -419,7 +420,7 @@ public class World extends PApplet{
 		
 	
 //		hud.draw(this, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 3*screenHeight/4 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, this, playerImage));
-	
+//	
 		
 		
 //		noFill();
