@@ -11,7 +11,7 @@ public class TileManager {
 	private PImage redBrick1, redBrick2, redBrick3, redBrick4, redBrick5, 
 	redBrickWall1, stoneWall1, stoneWall2,
 	stoneBrick1, stoneBrick2, stoneBrick3, stoneBrick4, stoneBrick5, stoneBrick6,
-	spikeTile, tarPitTile, gasTile;
+	spikeTile, tarPitTile, gasTile, arenaTile1;
 	
 	private final int originalTileSize;
 	private final int scale;
@@ -34,6 +34,8 @@ public class TileManager {
 		stoneBrick4 = tiles[11];
 		stoneBrick5 = tiles[12];
 		stoneBrick6 = tiles[13];
+		arenaTile1 = tiles[14];
+		
 //		spikeTile = tiles[14];
 //		tarPitTile = tiles[15];
 //		gasTile = tiles[16];
@@ -111,6 +113,8 @@ public class TileManager {
 					case 13:
 						p.image(stoneWall2, screenX, screenY);
 						break;
+					case 14:
+						p.image(arenaTile1, screenX, screenY);
 						
 //					case 1:
 //						p.image(wallTile, screenX, screenY);
