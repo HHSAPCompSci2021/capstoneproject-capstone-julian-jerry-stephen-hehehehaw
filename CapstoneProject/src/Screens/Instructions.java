@@ -47,7 +47,7 @@ public class Instructions implements Screen {
 		surface.text("", DRAWING_WIDTH, DRAWING_HEIGHT);
 //		System.out.println("You are on the instructions Screen");
 		
-		String str = "Instructions: \nUse the WASD keys to move the sprite, \nand click to shoot";
+		String str = "Instructions: \nUse the WASD keys to move the sprite, \nand click to shoot. \nIt is recommended you do not resize \nthe screen for optimal gameplay. ";
 		float w = surface.textWidth(str);
 		surface.textSize(50);
 		surface.fill(0);
