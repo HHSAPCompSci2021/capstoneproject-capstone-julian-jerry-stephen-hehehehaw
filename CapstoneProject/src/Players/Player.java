@@ -22,11 +22,16 @@ public class Player {
 	private boolean north;
 	private boolean south;
 	private boolean west;
+//	private int area;
 	private boolean east;
 	
+	private boolean collisionOn = false;
+	private Collider c;
 	
-	public Player(float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images)
+	
+	public Player(Collider cl, float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images, int tileSize)
 	{
+		c = cl;
 		worldX = x;
 		worldY = y;
 		
@@ -39,26 +44,57 @@ public class Player {
 		this.speed = speed * w.getSpeed();
 		this.health = health;
 		initHealth = health;
-		dimensions = new Rectangle((int)worldX+20, (int)worldY, 90, 95);
+		dimensions = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.35), (int)(tileSize * 0.6), (int)(tileSize * 0.55));
+		
+		
 	}
-	public Player(float xS, float yS, float xW, float yW, PApplet pa, PImage[] images) { //placeholder for testing purposes
+	public Player(float xS, float yS, float xW, float yW, PApplet pa, PImage[] images, int tileSize) { //placeholder for testing purposes
+		
 		worldX = xW;
 		worldY = yW;
 		
 		screenX = xS;
 		screenY = yS;
 		
+		
 		speed = 5;
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
-		dimensions = new Rectangle((int)worldX+20, (int)worldY, 90, 95); //notsure if this should be worldX or screenX
+		//dimensions = new Rectangle(0, 0, (int)(tileSize * 2), (int)(tileSize * 2)); //notsure if this should be worldX or screenX
+		
+	}
+	
+	public boolean getN() {
+		return north;
+	}
+	public boolean getS() {
+		return south;
+	}
+	public boolean getE() {
+		return east;
+	}
+	public boolean getW() {
+		return west;
+	}
+	
+	public void setCollisions(boolean t) {
+		collisionOn = t;
+	}
+	public Rectangle getDimensions() {
+		return dimensions;
 	}
 	
 	public void draw(PApplet p) {
-		moveObject();
+		collisionOn = false;
+		if (c != null) {
+			c.checkTile(this);
+			if (!collisionOn) 
+				moveObject();
+		}else 
+			moveObject();
 		p.fill(0);
 		avatar.draw(p, screenX, screenY);
 		avatar.spriteCounter++;
-		if (avatar.spriteCounter > 13) {
+		if (avatar.spriteCounter > (int)(65 * Math.pow(0.8835, speed + 8))) {
 			if (avatar.spriteNum == 1)
 				avatar.spriteNum = 2;
 			else if (avatar.spriteNum == 2) {
@@ -66,9 +102,9 @@ public class Player {
 			}
 			avatar.spriteCounter = 0;
 		}
-		//not sure if this should be worldX or screenX yet
-		dimensions.x = (int)worldX;
-		dimensions.y = (int)worldY;
+//		//not sure if this should be worldX or screenX yet
+//		dimensions.x = (int)worldX;
+//		dimensions.y = (int)worldY;
 
 
 		
@@ -165,6 +201,10 @@ public class Player {
 	 	east  = decision;
 		 //avatar.setDir("right");
 	 }
+	
+	
+	
+	
 	}
 	
 

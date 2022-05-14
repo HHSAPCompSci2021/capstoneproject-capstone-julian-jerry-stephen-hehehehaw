@@ -34,6 +34,9 @@ public class Avatar {
 	public int spriteNum = 1;
 	
 	
+	public String getDir() {
+		return direction;
+	}
 	private void setDir(String dir)
 	{
 		direction = dir;

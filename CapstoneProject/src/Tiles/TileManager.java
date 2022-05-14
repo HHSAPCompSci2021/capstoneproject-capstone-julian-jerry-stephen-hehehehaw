@@ -1,5 +1,7 @@
 package Tiles;
 
+import java.util.ArrayList;
+
 import Players.Player;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -8,34 +10,73 @@ public class TileManager {
 	
 //	private Tile[] tiles;
 	private int[][] tileDesignator;
-	private PImage redBrick1, redBrick2, redBrick3, redBrick4, redBrick5, 
+	private Tile redBrick1, redBrick2, redBrick3, redBrick4, redBrick5, 
 	redBrickWall1, stoneWall1, stoneWall2,
 	stoneBrick1, stoneBrick2, stoneBrick3, stoneBrick4, stoneBrick5, stoneBrick6,
 	spikeTile, tarPitTile, gasTile, arenaTile1;
+	
+	private ArrayList<Tile> tilesList = new ArrayList<Tile>();
 	
 	private final int originalTileSize;
 	private final int scale;
 	private final int tileSize;
 
+	public ArrayList<Tile> getTilesList() {
+		return tilesList;
+	}
 // tiles length should be 17	
 	public void setTiles(PImage[] tiles)//, PImage wallTile, PImage spikeTile, PImage tarPitTile, PImage gasTile)
 	{
-		redBrick1 = tiles[0];
-		redBrick2 = tiles[1];
-		redBrick3 = tiles[2];
-		redBrick4 = tiles[3];
-		redBrick5 = tiles[4];
-		redBrickWall1 = tiles[5];
-		stoneWall1 = tiles[6];
-		stoneWall2 = tiles[7];
-		stoneBrick1 = tiles[8];
-		stoneBrick2 = tiles[9];
-		stoneBrick3 = tiles[10];
-		stoneBrick4 = tiles[11];
-		stoneBrick5 = tiles[12];
-		stoneBrick6 = tiles[13];
-		arenaTile1 = tiles[14];
+		redBrick1 = new Tile();
+		redBrick2 = new Tile();
+		redBrick3 = new Tile();
+		redBrick4 = new Tile();
+		redBrick5 = new Tile();
+		redBrickWall1 = new Tile();
+		stoneBrick1 = new Tile();
+		stoneBrick2 = new Tile();
+		stoneBrick3 = new Tile();
+		stoneBrick4 = new Tile();
+		stoneBrick5 = new Tile();
+		stoneBrick6 = new Tile();
+		stoneWall1 = new Tile();
+		stoneWall2 = new Tile();
+		arenaTile1 = new Tile();
 		
+		tilesList.add(redBrick1);
+		tilesList.add(redBrick2);
+		tilesList.add(redBrick3);
+		tilesList.add(redBrick4);
+		tilesList.add(redBrick5);
+		tilesList.add(stoneBrick1);
+		tilesList.add(stoneBrick2);
+		tilesList.add(stoneBrick3);
+		tilesList.add(stoneBrick4);
+		tilesList.add(stoneBrick5);
+		tilesList.add(stoneBrick6);
+		tilesList.add(redBrickWall1);
+		tilesList.add(stoneWall1);
+		tilesList.add(stoneWall2);
+		tilesList.add(arenaTile1);
+		
+		redBrick1.setImage(tiles[0]);
+		redBrick2.setImage(tiles[1]);
+		redBrick3.setImage(tiles[2]);
+		redBrick4.setImage(tiles[3]);
+		redBrick5.setImage(tiles[4]);
+		redBrickWall1.setImage(tiles[5]);
+		redBrickWall1.setSolid();
+		stoneWall1.setImage(tiles[6]);
+		stoneWall1.setSolid();
+		stoneWall2.setImage(tiles[7]);
+		stoneWall2.setSolid();
+		stoneBrick1.setImage(tiles[8]);
+		stoneBrick2.setImage(tiles[9]);
+		stoneBrick3.setImage(tiles[10]);
+		stoneBrick4.setImage(tiles[11]);
+		stoneBrick5.setImage(tiles[12]);
+		stoneBrick6.setImage(tiles[13]);
+		arenaTile1.setImage(tiles[14]);
 //		spikeTile = tiles[14];
 //		tarPitTile = tiles[15];
 //		gasTile = tiles[16];
@@ -49,8 +90,13 @@ public class TileManager {
 		tileDesignator = tileGrid;
 		tileSize = this.scale * originalTileSize;
 		
+		
 		 		
 	
+	}
+	
+	public int[][] getMap(){
+		return tileDesignator;
 	}
 	public int getTileSize() {
 		return tileSize;
@@ -69,52 +115,7 @@ public class TileManager {
 						&& worldX - tileSize < player.getWorldX() + player.getScreenX() 
 						&& worldY + tileSize > player.getWorldY() - player.getScreenY() 
 						&& worldY - tileSize < player.getWorldY() + player.getScreenY() )
-					switch (tileDesignator[worldCol][worldRow]) {
-				
-					case 0:
-						p.image(redBrick1, screenX, screenY);//, tileSize, tileSize);
-						break;//need like 20 cases for different types of floor tiles
-					case 1:
-						p.image(redBrick2, screenX, screenY);
-						break;
-					case 2:
-						p.image(redBrick3, screenX, screenY);
-						break;
-					case 3:
-						p.image(redBrick4, screenX, screenY);
-						break;
-					case 4:
-						p.image(redBrick5, screenX, screenY);
-						break;
-					case 5:
-						p.image(stoneBrick1, screenX, screenY);
-						break;
-					case 6:
-						p.image(stoneBrick2, screenX, screenY);
-						break;
-					case 7:
-						p.image(stoneBrick3, screenX, screenY);
-						break;
-					case 8:
-						p.image(stoneBrick4, screenX, screenY);
-						break;
-					case 9:
-						p.image(stoneBrick5, screenX, screenY);
-						break;
-					case 10:
-						p.image(stoneBrick6, screenX, screenY);
-						break;
-					case 11:
-						p.image(redBrickWall1, screenX, screenY);
-						break;
-					case 12:
-						p.image(stoneWall1, screenX, screenY);
-						break;
-					case 13:
-						p.image(stoneWall2, screenX, screenY);
-						break;
-					case 14:
-						p.image(arenaTile1, screenX, screenY);
+						p.image(tilesList.get(tileDesignator[worldCol][worldRow]).getImage(), screenX, screenY);
 						
 //					case 1:
 //						p.image(wallTile, screenX, screenY);
@@ -138,4 +139,3 @@ public class TileManager {
 		}
 		
 	}
-}

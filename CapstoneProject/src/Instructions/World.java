@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import Players.Collider;
 import Players.Player;
 import Players.PlayerHUD;
 //import Players.PlayerHUD;
@@ -31,6 +32,7 @@ public class World implements Screen {
 	
 //put walls around the map to add borders
 	private int tileGrid[][];
+	private Collider cC;
 	
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	private PlayerHUD hud = new PlayerHUD();
@@ -77,13 +79,15 @@ public class World implements Screen {
 		screenWidth = maxScreenCol * tM.getTileSize();
 		screenHeight = maxScreenRow * tM.getTileSize();
 		this.p = p;
+		
+		cC = new Collider(tM.getTileSize(), tM);
 	}
 	
 	// The statements in the setup() function 
 	// execute once when the program begins
 	public void setup() {
 		
-//		frameRate(999);
+		p.frameRate(60);
 		
 		playerImage2[0] = p.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
 		playerImage2[1] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
@@ -104,7 +108,7 @@ public class World implements Screen {
 		playerImage[6] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left2.png");
 		playerImage[7] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
 
-		player =  new Player(screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 5.0, 100, playerImage);
+		player =  new Player(cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 7.5, 100, playerImage, tM.getTileSize());
 		player.setWeapon(new Sniper());
 //		player.setWeapon(new Shotgun());
 //		player.setWeapon(new Submachine());
@@ -134,13 +138,16 @@ public class World implements Screen {
 		
 	}
 	
+
+
 	/**
 	* Draws the entire in-game perspective
 	* 
 	* @post Changes background to (220, 220, 220)
 	* @post Changes PApplet's text alignment to Center
 	*/
-	public void draw() { 		
+	public void draw() { 	
+		//System.out.println(p.frameRate);
 		p.background(220,220,220);  
 		p.textAlign(p.CENTER);
 
@@ -154,14 +161,12 @@ public class World implements Screen {
 			b.draw(p);
 		}
 		p.pop();
-		
-		player.draw(p);
 		if(player.getWeapon().getAmmo() == 0)
 		{
 			player.getWeapon().reload();
 		}
 		
-		hud.draw(p, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2));
+		hud.draw(p, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
 	}
 			 
 	/**
@@ -171,13 +176,16 @@ public class World implements Screen {
 			  final int k = p.keyCode;
 			  player.setDirection(k, true);
 			  player.avatar.setDirection(k, true);
+			  
+			 
 			}
 			
 	/**
 	* Tracks the keys released
 	*/
 	public void keyReleased() {
-			  player.setDirection(p.keyCode, false);
+			  player.setDirection(p.keyCode, false) ;
+			  player.avatar.setDirection(p.keyCode, false) ;
 			}
 
 
