@@ -22,6 +22,8 @@ public class PreGameScreen implements Screen {
 	
 	private Rectangle screenRect;
 	private Rectangle gameStarter;
+	private Rectangle backButton;
+
 	private final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	private final float BUTTON_WIDTH = 0.2f;
 	private final float BUTTON_HEIGHT = 0.1f;
@@ -32,6 +34,7 @@ public class PreGameScreen implements Screen {
 		this.surface = surface;
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
 		gameStarter = new Rectangle((int)(DRAWING_WIDTH*(1-BUTTON_WIDTH)/2), (int)(DRAWING_HEIGHT*(1-3*BUTTON_HEIGHT)/2), (int)(width*BUTTON_WIDTH), (int)(height*BUTTON_HEIGHT));
+		backButton = new Rectangle((int)(DRAWING_WIDTH*0.015), (int)(DRAWING_HEIGHT*0.03), (int)(width*BUTTON_WIDTH/2), (int)(height*BUTTON_HEIGHT/2));
 	}
 
 	// The statements in the setup() function 
@@ -45,7 +48,10 @@ public class PreGameScreen implements Screen {
 	// sequence and after the last line is read, the first 
 	// line is executed again.
 	public void draw() {
-		surface.background(0,255,255);   
+		surface.background(0,255,255);
+		
+		surface.fill(255);
+		surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
 		
 		surface.rect(gameStarter.x, gameStarter.y, gameStarter.width, gameStarter.height, 10, 10, 10, 10);
 		String str = "Confirm Start Game";
@@ -53,14 +59,21 @@ public class PreGameScreen implements Screen {
 		surface.textSize(20);
 		surface.fill(0);
 		surface.text(str, gameStarter.x+gameStarter.width*21/20-w/2, gameStarter.y+gameStarter.height/2);
-
+		
+		String str4 = "Back";
+		float w4 = surface.textWidth(str4);
+		surface.textSize(20);
+		surface.text(str4, backButton.x+backButton.width*4/7-w/2, backButton.y+backButton.height*4/7);
+		
 //		System.out.println("You are on the pre-gameplay Screen");
 
 	}
 
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		if (gameStarter.contains(p))
+		if (backButton.contains(p))
+			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
+		else if (gameStarter.contains(p))
 			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
 	}
 	

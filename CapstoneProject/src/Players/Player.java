@@ -54,7 +54,6 @@ public class Player {
 	}
 	
 	public void draw(PApplet p) {
-//need to implement smth to contain it within the bounds
 		moveObject();
 		p.fill(0);
 		avatar.draw(p, screenX, screenY);
