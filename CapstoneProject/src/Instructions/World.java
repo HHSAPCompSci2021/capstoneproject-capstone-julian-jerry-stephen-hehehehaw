@@ -13,11 +13,7 @@ import Players.Player;
 import Players.PlayerHUD;
 //import Players.PlayerHUD;
 import Screens.*;
-import Weapons.Bullet;
-import Weapons.Shotgun;
-import Weapons.Sniper;
-import Weapons.Submachine;
-import Weapons.Weapon;
+import Weapons.*;
 import processing.core.PApplet;
 import processing.core.PImage;
 import Tiles.*;
@@ -38,7 +34,6 @@ public class World implements Screen {
 	private PlayerHUD hud = new PlayerHUD();
 	private TileManager tM;
 	
-
 	private imageReaderToRGB reader = new imageReaderToRGB();
 	
 	private int maxScreenCol = 16;
@@ -71,6 +66,7 @@ public class World implements Screen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		reader = new imageReaderToRGB();
 		
 		tileGrid = reader.ImageToArr(image);
@@ -81,6 +77,17 @@ public class World implements Screen {
 		this.p = p;
 		
 		cC = new Collider(tM.getTileSize(), tM);
+	}
+	
+	public void changeWeapon(int w) {
+		if(w == 1)
+			player.setWeapon(new Shotgun());
+		else if(w == 2)
+			player.setWeapon(new Sniper());
+		else if(w == 3)
+			player.setWeapon(new Submachine());
+		else if(w == 4)
+			player.setWeapon(new Knife());
 	}
 	
 	// The statements in the setup() function 
@@ -109,7 +116,7 @@ public class World implements Screen {
 		playerImage[7] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
 
 		player =  new Player(cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 7.5, 100, playerImage, tM.getTileSize());
-		player.setWeapon(new Sniper());
+//		player.setWeapon(new Sniper());
 //		player.setWeapon(new Shotgun());
 //		player.setWeapon(new Submachine());
 
@@ -137,8 +144,6 @@ public class World implements Screen {
 		tM.setTiles(tileImage);
 		
 	}
-	
-
 
 	/**
 	* Draws the entire in-game perspective
