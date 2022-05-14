@@ -84,7 +84,7 @@ public class World implements Screen {
 		screenHeight = maxScreenRow * tM.getTileSize();
 		this.p = p;
 		
-		backButton = new Rectangle((int)(screenWidth*0.015), (int)(screenHeight*0.03), (int)(screenWidth*BUTTON_WIDTH/2), (int)(screenHeight*BUTTON_HEIGHT/2));
+		backButton = new Rectangle((int)(screenWidth*0.015), (int)(screenHeight*0.03), (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
 		
 		cC = new Collider(tM.getTileSize(), tM);
 	}
@@ -189,7 +189,7 @@ public class World implements Screen {
 		surface.textSize(20);
 		String str0 = "Back";
 		float w0 = surface.textWidth(str0);
-		surface.text(str0, backButton.x+backButton.width-w0/2, backButton.y+backButton.height/2);
+		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 	}
 			 
 	/**

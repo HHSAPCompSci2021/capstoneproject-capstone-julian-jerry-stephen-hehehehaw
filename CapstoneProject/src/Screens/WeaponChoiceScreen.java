@@ -45,7 +45,7 @@ public class WeaponChoiceScreen implements Screen {
 		weaponChoice = 0;
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
 		gameStarter = new Rectangle((int)(DRAWING_WIDTH*(1-BUTTON_WIDTH*4)/2), (int)(DRAWING_HEIGHT*(1-1.5*BUTTON_HEIGHT)), (int)(width*BUTTON_WIDTH*4), (int)(height*BUTTON_HEIGHT));
-		backButton = new Rectangle((int)(DRAWING_WIDTH*0.015), (int)(DRAWING_HEIGHT*0.03), (int)(width*BUTTON_WIDTH/2), (int)(height*BUTTON_HEIGHT/2));
+		backButton = new Rectangle((int)(DRAWING_WIDTH*0.015), (int)(DRAWING_HEIGHT*0.03), (int)(width*BUTTON_WIDTH), (int)(height*BUTTON_HEIGHT/2));
 		shotgun = new Rectangle((int)(2*DRAWING_WIDTH/15), (int)(DRAWING_HEIGHT*(1-4*BUTTON_HEIGHT)/2), (int)(width*W_BUTTON_WIDTH), (int)(height*W_BUTTON_HEIGHT));
 		sniper = new Rectangle((int)(5*DRAWING_WIDTH/15), (int)(DRAWING_HEIGHT*(1-4*BUTTON_HEIGHT)/2), (int)(width*W_BUTTON_WIDTH), (int)(height*W_BUTTON_HEIGHT));
 		submachine = new Rectangle((int)(8*DRAWING_WIDTH/15), (int)(DRAWING_HEIGHT*(1-4*BUTTON_HEIGHT)/2), (int)(width*W_BUTTON_WIDTH), (int)(height*W_BUTTON_HEIGHT));
@@ -81,10 +81,14 @@ public class WeaponChoiceScreen implements Screen {
 		
 		surface.textAlign(surface.CENTER);
 		
+		surface.fill(0);
+		String title = "<Choose your weapon>";
+		surface.textSize(70);
+		surface.text(title, (int)(DRAWING_WIDTH/2), (int)(shotgun.y-gameStarter.height*1.3));
+		
 		String str = "Confirm Start Game";
 		float w = surface.textWidth(str);
 		surface.textSize(20);
-		surface.fill(0);
 		surface.text(str, gameStarter.x+gameStarter.width-w/2, gameStarter.y+gameStarter.height/2);
 		
 		String g1 = "Shotgun";
@@ -102,7 +106,7 @@ public class WeaponChoiceScreen implements Screen {
 		
 		String str0 = "Back";
 		float w0 = surface.textWidth(str0);
-		surface.text(str0, backButton.x+backButton.width-w0/2, backButton.y+backButton.height/2);
+		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 		
 //		System.out.println("You are on the pre-gameplay Screen");
 	}

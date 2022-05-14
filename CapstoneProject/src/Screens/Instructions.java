@@ -53,10 +53,11 @@ public class Instructions implements Screen {
 		surface.fill(0);
 		surface.text(str, (int)(DRAWING_WIDTH*0.1), (int)(DRAWING_HEIGHT*0.2));
 		
-		String str4 = "Back";
-		float w4 = surface.textWidth(str4);
+		surface.textAlign(surface.CENTER);
 		surface.textSize(20);
-		surface.text(str4, backButton.x+backButton.width*4/7-w/2, backButton.y+backButton.height*4/7);
+		String str0 = "Back";
+		float w0 = surface.textWidth(str0);
+		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 	}
 	
 	public void mousePressed() {
