@@ -23,14 +23,15 @@ public class Submachine extends Weapon{
 		}
 		
 	}
+	
 
 	@Override
 	public ArrayList<Bullet> shoot(int x, int y, Player p) {
-		if(ammo >= 1)
+		if (ammo >= 1)
 		{
 			ammo--;
 			
-			Bullet bullet = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1, 8, 8, 12);
+			Bullet bullet = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1, 8, 8, 20);
 			bullet.setVelocity(x - p.getScreenX(), y - p.getScreenY() +  (y - p.getScreenY()) * (Math.random()-0.65));
 			
 			ArrayList<Bullet> bullets = new ArrayList<Bullet>();

@@ -104,7 +104,7 @@ public class World implements Screen {
 	// execute once when the program beginsas
 	public void setup() {
 		
-		p.frameRate(60);
+		p.frameRate(30);
 		
 		playerImage2[0] = p.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
 		playerImage2[1] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
@@ -222,10 +222,9 @@ public class World implements Screen {
 		if (backButton.contains(point))
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 		
-		
-
-		for(Bullet b : player.shoot(p.mouseX, p.mouseY)) {	
-			bullets.add(b);
+//		if (player.getWeapon().instanceof Submachine)
+			for(Bullet b : player.shoot(p.mouseX, p.mouseY)) {	
+				bullets.add(b);
 		
 		}
 	}

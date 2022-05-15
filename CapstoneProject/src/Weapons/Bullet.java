@@ -46,14 +46,20 @@ public class Bullet {
 		double screenY = worldY - player.getWorldY() + player.getScreenY();
 		
 		p.rect((float)screenX, (float)screenY, (float)width, (float)height);
-		dimensions = new Rectangle((int)screenX, (int)screenY, 5, 5);
+		dimensions = new Rectangle((int)worldX, (int)worldY, 5, 5);
 		move();
 	}
 
 	
-	public boolean intersects(Player p)
+	public boolean intersects(Player player)
 	{
-		Rectangle dimension = p.getRectangle();
+		Rectangle r = player.getRectangle();
+		
+
+		int playerLeftWorldX = (int)(player.getWorldX() + r.x);
+		int playerTopWorldY = (int) (player.getWorldY() + r.y);
+
+		Rectangle dimension = new Rectangle(playerLeftWorldX, playerTopWorldY, r.width, r.height);
 		
 		if(dimensions.intersects(dimension))
 		{

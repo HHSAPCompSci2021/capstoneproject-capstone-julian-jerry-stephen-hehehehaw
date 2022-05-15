@@ -8,7 +8,7 @@ public class Sniper extends Weapon{
 	
 	
 	public Sniper() {
-		super(5, 150, 20, 1);
+		super(5,150, 20, 1);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -19,7 +19,7 @@ public class Sniper extends Weapon{
 		{
 			ammo--;
 			
-			Bullet bullet = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1, 20, 20, 18);
+			Bullet bullet = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1, 20, 20, 50);
 			bullet.setVelocity(x - p.getScreenX(), y - p.getScreenY());
 			
 			ArrayList<Bullet> bullets = new ArrayList<Bullet>();

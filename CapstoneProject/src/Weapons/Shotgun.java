@@ -7,7 +7,7 @@ import Players.Player;
 public class Shotgun extends Weapon{
 	
 	public Shotgun() {
-		super(2, 200, 10, 0.9);
+		super(2, 50, 10, 0.9);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,13 +29,13 @@ public class Shotgun extends Weapon{
 		{
 			ammo--;
 			
-			Bullet bullet = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1, 15, 15, 8);
-			Bullet bullet2 = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1, 15, 15, 8);
-			Bullet bullet3 = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1, 15 ,15, 8);
+			Bullet bullet = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1, 15, 15, 30);
+			Bullet bullet2 = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1, 15, 15, 30);
+			Bullet bullet3 = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1, 15 ,15, 30);
 
 			bullet.setVelocity(x - p.getScreenX(), y - p.getScreenY());
-			bullet2.setVelocity(x - p.getScreenX(), y - p.getScreenY() +  (y - p.getScreenY()) * (Math.random()-0.65));
-			bullet3.setVelocity(x - p.getScreenX(), y - p.getScreenY() +  (y - p.getScreenY()) * (Math.random()+0.65));
+			bullet2.setVelocity(x - p.getScreenX(), y - p.getScreenY() -  25 * (Math.random()));
+			bullet3.setVelocity(x - p.getScreenX(), y - p.getScreenY() +  25 * (Math.random()));
 
 			
 			ArrayList<Bullet> bullets = new ArrayList<Bullet>();
