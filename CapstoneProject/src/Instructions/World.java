@@ -1,6 +1,8 @@
 package Instructions;
 
 import java.awt.Color;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -49,6 +51,11 @@ public class World implements Screen {
 	*/
 	public int screenHeight;
 	
+	private MainMenu surface;
+	private Rectangle backButton;
+	private final float BUTTON_WIDTH = 0.1f;
+	private final float BUTTON_HEIGHT = 0.1f;
+	
 	private PImage[] playerImage = new PImage[8];
 	private PImage[] playerImage2 = new PImage[8];
 	private PImage[] tileImage = new PImage[15]; //should be 17 once the remaining tile sprites for traps are made
@@ -59,7 +66,8 @@ public class World implements Screen {
 	private BufferedImage image;
 	Player player;
 	
-	public World(PApplet p) {
+	public World(MainMenu p) {
+		surface = p;
 		try {
 			image = ImageIO.read(new File("Assets" + fileSeparator + "map.png"));
 		} catch (IOException e) {
@@ -76,6 +84,8 @@ public class World implements Screen {
 		screenHeight = maxScreenRow * tM.getTileSize();
 		this.p = p;
 		
+		backButton = new Rectangle((int)(screenWidth*0.015), (int)(screenHeight*0.03), (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
+		
 		cC = new Collider(tM.getTileSize(), tM);
 	}
 	
@@ -91,7 +101,7 @@ public class World implements Screen {
 	}
 	
 	// The statements in the setup() function 
-	// execute once when the program begins
+	// execute once when the program beginsas
 	public void setup() {
 		
 		p.frameRate(60);
@@ -170,38 +180,49 @@ public class World implements Screen {
 		{
 			player.getWeapon().reload();
 		}
-		
 		hud.draw(p, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
+
+		surface.textAlign(surface.CENTER);
+		surface.fill(255);
+		surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
+		surface.fill(0);
+		surface.textSize(20);
+		String str0 = "Back";
+		float w0 = surface.textWidth(str0);
+		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
+		
+		// check if player has lost all its health
+		if(player.getHealth() == 0)
+			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
 	}
 			 
 	/**
 	* Tracks the keys pressed that moves the player
 	*/
 	public void keyPressed() {
-			  final int k = p.keyCode;
-			  player.setDirection(k, true);
-			  player.avatar.setDirection(k, true);
-			  
-			 
-			}
+		final int k = p.keyCode;
+		player.setDirection(k, true);
+		player.avatar.setDirection(k, true);
+	}
 			
 	/**
 	* Tracks the keys released
 	*/
 	public void keyReleased() {
-			  player.setDirection(p.keyCode, false) ;
-			  player.avatar.setDirection(p.keyCode, false) ;
-			}
+		player.setDirection(p.keyCode, false) ;
+		player.avatar.setDirection(p.keyCode, false) ;
+	}
 
 
 	/**
 	* Tracks when the mouse is pressed and shoots the player 
 	*/
 	public void mousePressed() {
+		Point point = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		if (backButton.contains(point))
+			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 		for(Bullet b : player.shoot(p.mouseX, p.mouseY))
-		{
 			bullets.add(b);
-		}
 	}
 
 	/**
@@ -222,9 +243,5 @@ public class World implements Screen {
 	public void mouseMoved() {
 		
 	}
-
-	
-	
-
 }
 
