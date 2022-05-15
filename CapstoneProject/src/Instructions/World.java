@@ -173,7 +173,7 @@ public class World implements Screen {
 		for(Bullet b : bullets)
 		{
 			p.fill(0, 255, 0);
-			b.draw(p);
+			b.draw(p, player);
 		}
 		p.pop();
 		if(player.getWeapon().getAmmo() == 0)
@@ -221,8 +221,13 @@ public class World implements Screen {
 		Point point = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (backButton.contains(point))
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
-		for(Bullet b : player.shoot(p.mouseX, p.mouseY))
+		
+		
+
+		for(Bullet b : player.shoot(p.mouseX, p.mouseY)) {	
 			bullets.add(b);
+		
+		}
 	}
 
 	/**

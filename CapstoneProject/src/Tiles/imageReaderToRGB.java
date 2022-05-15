@@ -26,7 +26,7 @@ public class imageReaderToRGB {
 	//	    	int green = (color & 0xff00) >> 8;
 		//    	int red = (color & 0xff0000) >> 16;
 
-//		    	System.out.println("blue: " + blue + " green: " + green + " red: " + red);
+//		    	System.out.println("blue: " + blue );//+ " green: " + green + " red: " + red);
 		    	arr[i][j] = blue/10;
 //	    	arr[i][j] = image.getRGB(i, j)/10;	
 //	    	System.out.print(image.getRGB(i, j) + " ");

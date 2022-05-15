@@ -29,9 +29,9 @@ public class Shotgun extends Weapon{
 		{
 			ammo--;
 			
-			Bullet bullet = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1, 15, 15, 8);
-			Bullet bullet2 = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1, 15, 15, 8);
-			Bullet bullet3 = new Bullet(p.getScreenX() + p.getWidth(), p.getScreenY() + p.getHeight(), 0, 0, 50, 1, 15 ,15, 8);
+			Bullet bullet = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1, 15, 15, 8);
+			Bullet bullet2 = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1, 15, 15, 8);
+			Bullet bullet3 = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1, 15 ,15, 8);
 
 			bullet.setVelocity(x - p.getScreenX(), y - p.getScreenY());
 			bullet2.setVelocity(x - p.getScreenX(), y - p.getScreenY() +  (y - p.getScreenY()) * (Math.random()-0.65));

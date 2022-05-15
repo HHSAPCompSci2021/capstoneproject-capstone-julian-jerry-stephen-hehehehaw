@@ -8,14 +8,14 @@ import processing.core.PApplet;
 
 public class Bullet {
     private final double DEFAULT_SPEED; 
-	private double vx, vy, x, y, damage, health; 
+	private double vx, vy, worldX, worldY, damage, health; 
 	private int width, height; 
 	private Rectangle dimensions;
 	
 	public Bullet(double x, double y, double vx, double vy, double damage, double health, int width, int height, int speed)
 	{
-		this.x = x;
-		this.y = y; 
+		this.worldX = x;
+		this.worldY = y; 
 		this.damage = damage;
 		this.health = health;
 		this.vx = vx;
@@ -25,16 +25,28 @@ public class Bullet {
 		DEFAULT_SPEED = speed;
 	}
 	
-	public void move()
-	{
-		this.x += vx;
-		this.y += vy;
+	public double getWorldX() {
+		return worldX;
 	}
 	
-	public void draw(PApplet p)
+	
+	public double getWorldY() {
+		return worldY;
+	}
+	public void move()
 	{
-		p.rect((float)x, (float)y, (float)width, (float)height);
-		dimensions = new Rectangle((int)x, (int)y, 5, 5);
+		this.worldX += vx;
+		this.worldY += vy;
+	}
+	
+	public void draw(PApplet p, Player player)
+	{
+
+		double screenX = worldX - player.getWorldX() + player.getScreenX();
+		double screenY = worldY - player.getWorldY() + player.getScreenY();
+		
+		p.rect((float)screenX, (float)screenY, (float)width, (float)height);
+		dimensions = new Rectangle((int)screenX, (int)screenY, 5, 5);
 		move();
 	}
 
@@ -49,8 +61,7 @@ public class Bullet {
 		}
 		
 		return false;
-	}
-	
+	}	
 	public void setVelocity(double run, double rise) {
 		double currentSpeed = Math.sqrt(Math.pow(rise, 2) + Math.pow(run, 2));
 		if (currentSpeed > DEFAULT_SPEED) {
