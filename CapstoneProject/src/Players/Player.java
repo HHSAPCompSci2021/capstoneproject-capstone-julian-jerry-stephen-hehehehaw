@@ -173,6 +173,11 @@ public class Player {
 		return health;
 	}
 	
+	public void loseHealth(double damage)
+	{
+		health -= damage;
+	}
+	
 	public double getInitHealth()
 	{
 		return initHealth;

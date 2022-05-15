@@ -86,9 +86,12 @@ public class Bullet {
 		return dimensions;
 	}
 	
-//	public void loseHealth(int health)
-//	{
-//		
-//	}
+	public void damagePlayer(Player p)
+	{
+		if(p.getDimensions().intersects(dimensions))
+		{
+			p.loseHealth(damage);
+		}
+	}
 	
 }
