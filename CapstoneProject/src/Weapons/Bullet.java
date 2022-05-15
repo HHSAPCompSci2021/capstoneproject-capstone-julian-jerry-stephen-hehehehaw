@@ -64,6 +64,11 @@ public class Bullet {
 		this.vy = rise;
 	}
 	
+	public Rectangle getDimensions()
+	{
+		return dimensions;
+	}
+	
 //	public void loseHealth(int health)
 //	{
 //		
