@@ -38,7 +38,6 @@ public class WeaponChoiceScreen implements Screen {
 	private final float W_BUTTON_WIDTH = 1.5f*BUTTON_WIDTH;
 	private final float W_BUTTON_HEIGHT = 4.5f*BUTTON_HEIGHT;
 	
-	
 	public WeaponChoiceScreen(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;

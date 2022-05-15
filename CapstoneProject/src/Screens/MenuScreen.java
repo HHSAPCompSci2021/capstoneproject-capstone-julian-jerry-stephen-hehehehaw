@@ -7,8 +7,9 @@ import Instructions.*;
 // 
 public class MenuScreen implements Screen {
 
-	private MainMenu surface;
+	public final static String fileSeparator = System.getProperty("file.separator");
 	
+	private MainMenu surface;
 	private Rectangle startButton;
 	private Rectangle instButton;
 	private final int DRAWING_WIDTH, DRAWING_HEIGHT;
@@ -35,7 +36,6 @@ public class MenuScreen implements Screen {
 		
 		// start button
 		surface.background(0);
-		
 		surface.rect(startButton.x, startButton.y, startButton.width, startButton.height, 10, 10, 10, 10);
 		String str = "Start!";
 		float w = surface.textWidth(str);		
