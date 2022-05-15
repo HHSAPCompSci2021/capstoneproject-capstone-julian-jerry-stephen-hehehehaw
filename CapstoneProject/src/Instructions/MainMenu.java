@@ -47,6 +47,9 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		Instructions iScreen = new Instructions(this, DRAWING_WIDTH, DRAWING_HEIGHT);
 		screens.add(iScreen);
 		
+		DeathScreen screen3 = new DeathScreen(this, DRAWING_WIDTH, DRAWING_HEIGHT);
+		screens.add(screen3);
+		
 		activeScreen = screens.get(0);
 	}
 	
@@ -134,7 +137,9 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
-		world.changeWeapon(screen2.getWeaponChoice());
+		if(i == 2)
+			world.changeWeapon(screen2.getWeaponChoice());
+		
 	}
 
 }

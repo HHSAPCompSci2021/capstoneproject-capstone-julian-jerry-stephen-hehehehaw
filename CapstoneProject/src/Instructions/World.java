@@ -190,26 +190,28 @@ public class World implements Screen {
 		String str0 = "Back";
 		float w0 = surface.textWidth(str0);
 		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
+		
+		// check if player has lost all its health
+		if(player.getHealth() == 0)
+			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
 	}
 			 
 	/**
 	* Tracks the keys pressed that moves the player
 	*/
 	public void keyPressed() {
-			  final int k = p.keyCode;
-			  player.setDirection(k, true);
-			  player.avatar.setDirection(k, true);
-			  
-			 
-			}
+		final int k = p.keyCode;
+		player.setDirection(k, true);
+		player.avatar.setDirection(k, true);
+	}
 			
 	/**
 	* Tracks the keys released
 	*/
 	public void keyReleased() {
-			  player.setDirection(p.keyCode, false) ;
-			  player.avatar.setDirection(p.keyCode, false) ;
-			}
+		player.setDirection(p.keyCode, false) ;
+		player.avatar.setDirection(p.keyCode, false) ;
+	}
 
 
 	/**
@@ -241,9 +243,5 @@ public class World implements Screen {
 	public void mouseMoved() {
 		
 	}
-
-	
-	
-
 }
 

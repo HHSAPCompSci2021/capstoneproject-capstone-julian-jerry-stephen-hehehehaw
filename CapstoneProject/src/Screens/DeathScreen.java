@@ -8,6 +8,7 @@ import java.awt.Shape;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Calendar;
 
 import javax.swing.JFrame;
 
@@ -16,7 +17,7 @@ import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
 // "Start" option
-public class WeaponChoiceScreen implements Screen {
+public class DeathScreen implements Screen {
 	
 	private MainMenu surface;
 	private int weaponChoice;
@@ -34,10 +35,9 @@ public class WeaponChoiceScreen implements Screen {
 	private final float BUTTON_HEIGHT = 0.1f;
 	private final float W_BUTTON_WIDTH = 1.5f*BUTTON_WIDTH;
 	private final float W_BUTTON_HEIGHT = 4.5f*BUTTON_HEIGHT;
+	private long initTime;
 	
-	
-	
-	public WeaponChoiceScreen(MainMenu surface, int width, int height) {
+	public DeathScreen(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
 		this.surface = surface;
@@ -58,7 +58,8 @@ public class WeaponChoiceScreen implements Screen {
 	// The statements in the setup() function 
 	// execute once when the program begins
 	public void setup() {
-		
+		Calendar c = Calendar.getInstance();
+		initTime = c.getTimeInMillis();
 	}
 
 	// The statements in draw() are executed until the 
@@ -66,8 +67,14 @@ public class WeaponChoiceScreen implements Screen {
 	// sequence and after the last line is read, the first 
 	// line is executed again.
 	public void draw() {
-		surface.background(0,200,200);
-
+		Calendar c2 = Calendar.getInstance();
+		if(c2.getTimeInMillis() - initTime > 10000) {
+			weaponChoice = (int)(4*Math.random())+1;
+			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
+		}
+			
+		surface.background(255,0,0);
+		
 		// draw buttons
 		surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
 		surface.rect(gameStarter.x, gameStarter.y, gameStarter.width, gameStarter.height, 10, 10, 10, 10);
@@ -92,7 +99,7 @@ public class WeaponChoiceScreen implements Screen {
 		surface.textAlign(surface.CENTER);
 		
 		surface.fill(0);
-		String title = "<Choose your weapon>";
+		String title = "You Died! Choose a weapon to proceed";
 		surface.textSize(70);
 		surface.text(title, (int)(DRAWING_WIDTH/2), (int)(shotgun.y-gameStarter.height*1.3));
 		
@@ -117,8 +124,6 @@ public class WeaponChoiceScreen implements Screen {
 		String str0 = "Back";
 		float w0 = surface.textWidth(str0);
 		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
-		
-//		System.out.println("You are on the pre-gameplay Screen");
 	}
 
 	public void mousePressed() {

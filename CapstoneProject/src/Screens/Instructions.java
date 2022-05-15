@@ -13,7 +13,6 @@ import Instructions.*;
 public class Instructions implements Screen {
 	
 	private MainMenu surface;
-	private Rectangle screenRect;
 	private Rectangle backButton;
 	private final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	private final float BUTTON_WIDTH = 0.2f;
@@ -23,7 +22,6 @@ public class Instructions implements Screen {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
 		this.surface = surface;
-		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
 		backButton = new Rectangle((int)(DRAWING_WIDTH*0.015), (int)(DRAWING_HEIGHT*0.03), (int)(width*BUTTON_WIDTH/2), (int)(height*BUTTON_HEIGHT/2));
 	}
 
@@ -38,7 +36,7 @@ public class Instructions implements Screen {
 	// sequence and after the last line is read, the first 
 	// line is executed again.
 	public void draw() {
-		surface.background(255,0,0);
+		surface.background(200,0,200);
 		
 		surface.fill(255);
 		surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
