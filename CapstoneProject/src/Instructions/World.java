@@ -41,6 +41,8 @@ public class World implements Screen {
 	private int maxScreenCol = 16;
 	private int maxScreenRow = 9;
 	
+	private boolean playerShoot;
+	
 	/**
 	* Represents the screen's width
 	*/
@@ -87,6 +89,7 @@ public class World implements Screen {
 		backButton = new Rectangle((int)(screenWidth*0.015), (int)(screenHeight*0.03), (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
 		
 		cC = new Collider(tM.getTileSize(), tM);
+		playerShoot = false;
 	}
 	
 	public void changeWeapon(int w) {
@@ -194,6 +197,30 @@ public class World implements Screen {
 		// check if player has lost all its health
 		if(player.getHealth() == 0)
 			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
+		
+		if(playerShoot)
+		{
+			
+			if ((player.getWeapon() instanceof Submachine))
+			{
+				if(player.getWeapon().getAmmo() <= 0)
+				{
+					playerShoot = false;
+				}
+			}	
+			
+			for(Bullet b : player.shoot(p.mouseX, p.mouseY)) {	
+				bullets.add(b);
+			}
+			
+			if (!(player.getWeapon() instanceof Submachine))
+			{
+				playerShoot = false;
+			}
+			
+					
+			
+		}
 	}
 			 
 	/**
@@ -222,11 +249,9 @@ public class World implements Screen {
 		if (backButton.contains(point))
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 		
-//		if (player.getWeapon().instanceof Submachine)
-			for(Bullet b : player.shoot(p.mouseX, p.mouseY)) {	
-				bullets.add(b);
-		
-		}
+
+			
+		playerShoot = true;
 	}
 
 	/**
@@ -239,7 +264,7 @@ public class World implements Screen {
 	* Tracks when the mouse is released
 	*/
 	public void mouseReleased() {
-		
+		playerShoot = false;
 	}
 	/**
 	* Tracks when the mouse is moved
