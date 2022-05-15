@@ -29,6 +29,7 @@ public class WeaponChoiceScreen implements Screen {
 	private Rectangle sniper;
 	private Rectangle submachine;
 	private Rectangle knife;
+	private int shade;
 	
 	private final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	private final float BUTTON_WIDTH = 0.1f;
@@ -43,6 +44,7 @@ public class WeaponChoiceScreen implements Screen {
 		this.DRAWING_HEIGHT = height;
 		this.surface = surface;
 		weaponChoice = 0;
+		shade = 0;
 		screenRect = new Rectangle(0,0,DRAWING_WIDTH,DRAWING_HEIGHT);
 		gameStarter = new Rectangle((int)(DRAWING_WIDTH*(1-BUTTON_WIDTH*4)/2), (int)(DRAWING_HEIGHT*(1-1.5*BUTTON_HEIGHT)), (int)(width*BUTTON_WIDTH*4), (int)(height*BUTTON_HEIGHT));
 		backButton = new Rectangle((int)(DRAWING_WIDTH*0.015), (int)(DRAWING_HEIGHT*0.03), (int)(width*BUTTON_WIDTH), (int)(height*BUTTON_HEIGHT/2));
@@ -68,17 +70,28 @@ public class WeaponChoiceScreen implements Screen {
 	// line is executed again.
 	public void draw() {
 		surface.background(0,255,255);
-		
-		surface.fill(255);
+
+		// draw buttons
 		surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
-		
-		surface.rect(shotgun.x, shotgun.y, shotgun.width, shotgun.height, 10, 10, 10, 10);
-		surface.rect(sniper.x, sniper.y, sniper.width, sniper.height, 10, 10, 10, 10);
-		surface.rect(submachine.x, submachine.y, submachine.width, submachine.height, 10, 10, 10, 10);
-		surface.rect(knife.x, knife.y, knife.width, knife.height, 10, 10, 10, 10);
-		
 		surface.rect(gameStarter.x, gameStarter.y, gameStarter.width, gameStarter.height, 10, 10, 10, 10);
 		
+		if(shade == 1) surface.fill(155);
+		else surface.fill(255);
+		surface.rect(shotgun.x, shotgun.y, shotgun.width, shotgun.height, 10, 10, 10, 10);
+		
+		if(shade == 2) surface.fill(155);
+		else surface.fill(255);
+		surface.rect(sniper.x, sniper.y, sniper.width, sniper.height, 10, 10, 10, 10);
+		
+		if(shade == 3) surface.fill(155);
+		else surface.fill(255);
+		surface.rect(submachine.x, submachine.y, submachine.width, submachine.height, 10, 10, 10, 10);
+		
+		if(shade == 4) surface.fill(155);
+		else surface.fill(255);
+		surface.rect(knife.x, knife.y, knife.width, knife.height, 10, 10, 10, 10);
+		
+		// draw text
 		surface.textAlign(surface.CENTER);
 		
 		surface.fill(0);
@@ -89,7 +102,7 @@ public class WeaponChoiceScreen implements Screen {
 		String str = "Confirm Start Game";
 		float w = surface.textWidth(str);
 		surface.textSize(20);
-		surface.text(str, gameStarter.x+gameStarter.width-w/2, gameStarter.y+gameStarter.height/2);
+		surface.text(str, gameStarter.x+gameStarter.width/2, gameStarter.y+gameStarter.height/2);
 		
 		String g1 = "Shotgun";
 		surface.textSize(20);
@@ -113,18 +126,30 @@ public class WeaponChoiceScreen implements Screen {
 
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		if (backButton.contains(p))
+		if (backButton.contains(p)) {
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
-		else if(shotgun.contains(p))
+			shade = 0;
+		}
+		else if(shotgun.contains(p)) {
 			weaponChoice = 1;
-		else if(sniper.contains(p))
+			shade = 1;
+		}
+		else if(sniper.contains(p)) {
 			weaponChoice = 2;
-		else if(submachine.contains(p))
+			shade = 2;
+		}
+		else if(submachine.contains(p)) {
 			weaponChoice = 3;
-		else if(knife.contains(p))
+			shade = 3;
+		}
+		else if(knife.contains(p)) {
 			weaponChoice = 4;
-		else if(gameStarter.contains(p))
+			shade = 4;
+		}
+		else if(gameStarter.contains(p)) {
 			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
+			shade = 0;
+		}
 	}
 	
 	public void mouseMoved() {}
