@@ -170,7 +170,7 @@ public class World implements Screen {
 		p.textAlign(p.CENTER);
 
 		tM.draw(p, player);
-		player.draw(p);
+		
 		
 		p.push();
 		for(Bullet b : bullets)
@@ -179,6 +179,8 @@ public class World implements Screen {
 			b.draw(p, player);
 		}
 		p.pop();
+		
+		player.draw(p);
 		if(player.getWeapon().getAmmo() == 0)
 		{
 			player.getWeapon().reload();
