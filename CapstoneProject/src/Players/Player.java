@@ -84,6 +84,8 @@ public class Player {
 	}
 	
 	public void draw(PApplet p) {
+		
+		//need to add a cooldown timer to the amount of the player is slowed down by traps, steal julians code for cooldown on sniper
 		collisionOn = false;
 		if (c != null) {
 			c.checkTile(this);
