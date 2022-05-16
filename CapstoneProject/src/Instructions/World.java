@@ -201,7 +201,7 @@ public class World implements Screen {
 		//}
 			
 		p.pop();
-
+		if(player1.getWeapon().getAmmo() == 0)
 		{
 			player1.getWeapon().reload();
 		}
