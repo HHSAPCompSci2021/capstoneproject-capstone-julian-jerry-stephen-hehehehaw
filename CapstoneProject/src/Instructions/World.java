@@ -1,6 +1,8 @@
 package Instructions;
 
 import java.awt.Color;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,11 +15,7 @@ import Players.Player;
 import Players.PlayerHUD;
 //import Players.PlayerHUD;
 import Screens.*;
-import Weapons.Bullet;
-import Weapons.Shotgun;
-import Weapons.Sniper;
-import Weapons.Submachine;
-import Weapons.Weapon;
+import Weapons.*;
 import processing.core.PApplet;
 import processing.core.PImage;
 import Tiles.*;
@@ -38,11 +36,12 @@ public class World implements Screen {
 	private PlayerHUD hud = new PlayerHUD();
 	private TileManager tM;
 	
-
 	private imageReaderToRGB reader = new imageReaderToRGB();
 	
 	private int maxScreenCol = 16;
 	private int maxScreenRow = 9;
+	
+	private boolean playerShoot;
 	
 	/**
 	* Represents the screen's width
@@ -54,6 +53,11 @@ public class World implements Screen {
 	*/
 	public int screenHeight;
 	
+	private MainMenu surface;
+	private Rectangle backButton;
+	private final float BUTTON_WIDTH = 0.1f;
+	private final float BUTTON_HEIGHT = 0.1f;
+	
 	private PImage[] playerImage = new PImage[8];
 	private PImage[] playerImage2 = new PImage[8];
 	private PImage[] tileImage = new PImage[15]; //should be 17 once the remaining tile sprites for traps are made
@@ -62,15 +66,17 @@ public class World implements Screen {
 //	private final int worldWidth = maxWorldCol * tM.getTileSize();
 //	private final int worldHeight = maxWorldRow * tM.getTileSize();
 	private BufferedImage image;
-	Player player;
+	Player player1, player2;
 	
-	public World(PApplet p) {
+	public World(MainMenu p) {
+		surface = p;
 		try {
 			image = ImageIO.read(new File("Assets" + fileSeparator + "map.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		reader = new imageReaderToRGB();
 		
 		tileGrid = reader.ImageToArr(image);
@@ -80,14 +86,28 @@ public class World implements Screen {
 		screenHeight = maxScreenRow * tM.getTileSize();
 		this.p = p;
 		
+		backButton = new Rectangle((int)(screenWidth*0.015), (int)(screenHeight*0.03), (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
+		
 		cC = new Collider(tM.getTileSize(), tM);
+		playerShoot = false;
+	}
+	
+	public void changeWeapon(int w) {
+		if(w == 1)
+			player1.setWeapon(new Shotgun());
+		else if(w == 2)
+			player1.setWeapon(new Sniper());
+		else if(w == 3)
+			player1.setWeapon(new Submachine());
+		else if(w == 4)
+			player1.setWeapon(new Knife());
 	}
 	
 	// The statements in the setup() function 
-	// execute once when the program begins
+	// execute once when the program beginsas
 	public void setup() {
 		
-		p.frameRate(60);
+		p.frameRate(30);
 		
 		playerImage2[0] = p.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
 		playerImage2[1] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
@@ -108,8 +128,8 @@ public class World implements Screen {
 		playerImage[6] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left2.png");
 		playerImage[7] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
 
-		player =  new Player(cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 7.5, 100, playerImage, tM.getTileSize());
-		player.setWeapon(new Sniper());
+		player1 =  new Player(cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 7.5, 100, playerImage, tM.getTileSize());
+//		player.setWeapon(new Sniper());
 //		player.setWeapon(new Shotgun());
 //		player.setWeapon(new Submachine());
 
@@ -137,8 +157,6 @@ public class World implements Screen {
 		tM.setTiles(tileImage);
 		
 	}
-	
-
 
 	/**
 	* Draws the entire in-game perspective
@@ -146,57 +164,96 @@ public class World implements Screen {
 	* @post Changes background to (220, 220, 220)
 	* @post Changes PApplet's text alignment to Center
 	*/
-	public void draw() { 	
+	public void draw() {
+		
 		//System.out.println(p.frameRate);
 		p.background(220,220,220);  
 		p.textAlign(p.CENTER);
 
-		tM.draw(p, player);
-		player.draw(p);
+		tM.draw(p, player1);
+		player1.draw(p);
 		
 		p.push();
 		for(Bullet b : bullets)
 		{
 			p.fill(0, 255, 0);
-			b.draw(p);
+			b.draw(p, player1);
+//			b.damagePlayer(player2);
 		}
 		p.pop();
-		if(player.getWeapon().getAmmo() == 0)
+
 		{
-			player.getWeapon().reload();
+			player1.getWeapon().reload();
 		}
+		hud.draw(p, screenWidth, screenHeight, player1, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
+
+		surface.textAlign(surface.CENTER);
+		surface.fill(255);
+		surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
+		surface.fill(0);
+		surface.textSize(20);
+		String str0 = "Back";
+		float w0 = surface.textWidth(str0);
+		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 		
-		hud.draw(p, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
+		// check if player has lost all its health
+		if(player1.getHealth() == 0)
+			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
+		
+		if(playerShoot)
+		{
+			
+			if ((player1.getWeapon() instanceof Submachine))
+			{
+				if(player1.getWeapon().getAmmo() <= 0)
+				{
+					playerShoot = false;
+				}
+			}	
+			
+			for(Bullet b : player1.shoot(p.mouseX, p.mouseY)) {	
+				bullets.add(b);
+			}
+			
+			if (!(player1.getWeapon() instanceof Submachine))
+			{
+				playerShoot = false;
+			}
+			
+					
+			
+		}
 	}
 			 
 	/**
 	* Tracks the keys pressed that moves the player
 	*/
 	public void keyPressed() {
-			  final int k = p.keyCode;
-			  player.setDirection(k, true);
-			  player.avatar.setDirection(k, true);
-			  
-			 
-			}
+		final int k = p.keyCode;
+		player1.setDirection(k, true);
+		player1.avatar.setDirection(k, true);
+	}
 			
 	/**
 	* Tracks the keys released
 	*/
 	public void keyReleased() {
-			  player.setDirection(p.keyCode, false) ;
-			  player.avatar.setDirection(p.keyCode, false) ;
-			}
+		player1.setDirection(p.keyCode, false) ;
+		player1.avatar.setDirection(p.keyCode, false) ;
+	}
 
 
 	/**
 	* Tracks when the mouse is pressed and shoots the player 
 	*/
 	public void mousePressed() {
-		for(Bullet b : player.shoot(p.mouseX, p.mouseY))
-		{
-			bullets.add(b);
-		}
+		Point point = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
+		if (backButton.contains(point))
+			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
+		
+
+			
+		playerShoot = true;
 	}
 
 	/**
@@ -209,7 +266,7 @@ public class World implements Screen {
 	* Tracks when the mouse is released
 	*/
 	public void mouseReleased() {
-		
+		playerShoot = false;
 	}
 	/**
 	* Tracks when the mouse is moved
@@ -217,9 +274,5 @@ public class World implements Screen {
 	public void mouseMoved() {
 		
 	}
-
-	
-	
-
 }
 
