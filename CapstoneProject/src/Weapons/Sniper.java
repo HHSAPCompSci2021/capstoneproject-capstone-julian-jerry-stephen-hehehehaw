@@ -8,7 +8,7 @@ public class Sniper extends Weapon{
 	
 	
 	public Sniper() {
-		super(5,150, 20, 1);
+		super(5, 70, 20, 1);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -33,7 +33,7 @@ public class Sniper extends Weapon{
 		{
 			coolDown++;
 			
-			if(coolDown == 5)
+			if(coolDown == 4)
 			{
 				justShot = false;
 				coolDown = 0;

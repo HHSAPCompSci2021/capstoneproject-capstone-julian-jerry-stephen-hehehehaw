@@ -66,7 +66,7 @@ public class World implements Screen {
 //	private final int worldWidth = maxWorldCol * tM.getTileSize();
 //	private final int worldHeight = maxWorldRow * tM.getTileSize();
 	private BufferedImage image;
-	Player player;
+	Player player1, player2;
 	
 	public World(MainMenu p) {
 		surface = p;
@@ -94,13 +94,13 @@ public class World implements Screen {
 	
 	public void changeWeapon(int w) {
 		if(w == 1)
-			player.setWeapon(new Shotgun());
+			player1.setWeapon(new Shotgun());
 		else if(w == 2)
-			player.setWeapon(new Sniper());
+			player1.setWeapon(new Sniper());
 		else if(w == 3)
-			player.setWeapon(new Submachine());
+			player1.setWeapon(new Submachine());
 		else if(w == 4)
-			player.setWeapon(new Knife());
+			player1.setWeapon(new Knife());
 	}
 	
 	// The statements in the setup() function 
@@ -128,7 +128,7 @@ public class World implements Screen {
 		playerImage[6] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left2.png");
 		playerImage[7] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
 
-		player =  new Player(cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 7.5, 100, playerImage, tM.getTileSize());
+		player1 =  new Player(cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 7.5, 100, playerImage, tM.getTileSize());
 //		player.setWeapon(new Sniper());
 //		player.setWeapon(new Shotgun());
 //		player.setWeapon(new Submachine());
@@ -164,26 +164,28 @@ public class World implements Screen {
 	* @post Changes background to (220, 220, 220)
 	* @post Changes PApplet's text alignment to Center
 	*/
-	public void draw() { 	
+	public void draw() {
+		
 		//System.out.println(p.frameRate);
 		p.background(220,220,220);  
 		p.textAlign(p.CENTER);
 
-		tM.draw(p, player);
-		player.draw(p);
+		tM.draw(p, player1);
+		player1.draw(p);
 		
 		p.push();
 		for(Bullet b : bullets)
 		{
 			p.fill(0, 255, 0);
-			b.draw(p, player);
+			b.draw(p, player1);
+//			b.damagePlayer(player2);
 		}
 		p.pop();
-		if(player.getWeapon().getAmmo() == 0)
+		if(player1.getWeapon().getAmmo() == 0)
 		{
-			player.getWeapon().reload();
+			player1.getWeapon().reload();
 		}
-		hud.draw(p, screenWidth, screenHeight, player, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
+		hud.draw(p, screenWidth, screenHeight, player1, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
 
 		surface.textAlign(surface.CENTER);
 		surface.fill(255);
@@ -195,25 +197,25 @@ public class World implements Screen {
 		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 		
 		// check if player has lost all its health
-		if(player.getHealth() == 0)
+		if(player1.getHealth() == 0)
 			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
 		
 		if(playerShoot)
 		{
 			
-			if ((player.getWeapon() instanceof Submachine))
+			if ((player1.getWeapon() instanceof Submachine))
 			{
-				if(player.getWeapon().getAmmo() <= 0)
+				if(player1.getWeapon().getAmmo() <= 0)
 				{
 					playerShoot = false;
 				}
 			}	
 			
-			for(Bullet b : player.shoot(p.mouseX, p.mouseY)) {	
+			for(Bullet b : player1.shoot(p.mouseX, p.mouseY)) {	
 				bullets.add(b);
 			}
 			
-			if (!(player.getWeapon() instanceof Submachine))
+			if (!(player1.getWeapon() instanceof Submachine))
 			{
 				playerShoot = false;
 			}
@@ -228,16 +230,16 @@ public class World implements Screen {
 	*/
 	public void keyPressed() {
 		final int k = p.keyCode;
-		player.setDirection(k, true);
-		player.avatar.setDirection(k, true);
+		player1.setDirection(k, true);
+		player1.avatar.setDirection(k, true);
 	}
 			
 	/**
 	* Tracks the keys released
 	*/
 	public void keyReleased() {
-		player.setDirection(p.keyCode, false) ;
-		player.avatar.setDirection(p.keyCode, false) ;
+		player1.setDirection(p.keyCode, false) ;
+		player1.avatar.setDirection(p.keyCode, false) ;
 	}
 
 

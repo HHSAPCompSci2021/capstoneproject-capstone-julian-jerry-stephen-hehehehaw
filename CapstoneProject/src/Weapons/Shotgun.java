@@ -7,7 +7,7 @@ import Players.Player;
 public class Shotgun extends Weapon{
 	
 	public Shotgun() {
-		super(2, 50, 10, 0.9);
+		super(2, 40, 10, 0.9);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -34,8 +34,8 @@ public class Shotgun extends Weapon{
 			Bullet bullet3 = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, 50, 1, 15 ,15, 30);
 
 			bullet.setVelocity(x - p.getScreenX(), y - p.getScreenY());
-			bullet2.setVelocity(x - p.getScreenX(), y - p.getScreenY() -  25 * (Math.random()));
-			bullet3.setVelocity(x - p.getScreenX(), y - p.getScreenY() +  25 * (Math.random()));
+			bullet2.setVelocity(x - p.getScreenX() -  40 * (Math.random()), y - p.getScreenY() -  40 * (Math.random()));
+			bullet3.setVelocity(x - p.getScreenX() +  40 * (Math.random()), y - p.getScreenY() +  40 * (Math.random()));
 
 			
 			ArrayList<Bullet> bullets = new ArrayList<Bullet>();
