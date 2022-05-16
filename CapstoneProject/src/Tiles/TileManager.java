@@ -13,7 +13,7 @@ public class TileManager {
 	private Tile redBrick1, redBrick2, redBrick3, redBrick4, redBrick5, 
 	redBrickWall1, stoneWall1, stoneWall2,
 	stoneBrick1, stoneBrick2, stoneBrick3, stoneBrick4, stoneBrick5, stoneBrick6,
-	spikeTile, tarPitTile, gasTile, arenaTile1;
+	spikeTile, tarPitTile, healthPowerUp, damagePowerUp, ratePowerUp, speedPowerUp, arenaTile1, arenaTile2;
 	
 	private ArrayList<Tile> tilesList = new ArrayList<Tile>();
 	
@@ -27,6 +27,13 @@ public class TileManager {
 // tiles length should be 17	
 	public void setTiles(PImage[] tiles)//, PImage wallTile, PImage spikeTile, PImage tarPitTile, PImage gasTile)
 	{
+		spikeTile = new Tile();
+		tarPitTile = new Tile();
+		healthPowerUp = new Tile();
+		damagePowerUp = new Tile();
+		ratePowerUp = new Tile();
+		speedPowerUp = new Tile();
+		arenaTile2 = new Tile();
 		redBrick1 = new Tile();
 		redBrick2 = new Tile();
 		redBrick3 = new Tile();
@@ -58,7 +65,13 @@ public class TileManager {
 		tilesList.add(stoneWall1);
 		tilesList.add(stoneWall2);
 		tilesList.add(arenaTile1);
-		
+		tilesList.add(arenaTile2);//tile [15]
+		tilesList.add(spikeTile);//16
+		tilesList.add(tarPitTile);//17
+		tilesList.add(healthPowerUp);//18
+		tilesList.add(damagePowerUp);//19
+		tilesList.add(ratePowerUp);//20
+		tilesList.add(speedPowerUp);//21
 		redBrick1.setImage(tiles[0]);
 		redBrick2.setImage(tiles[1]);
 		redBrick3.setImage(tiles[2]);
@@ -77,9 +90,13 @@ public class TileManager {
 		stoneBrick5.setImage(tiles[12]);
 		stoneBrick6.setImage(tiles[13]);
 		arenaTile1.setImage(tiles[14]);
-//		spikeTile = tiles[14];
-//		tarPitTile = tiles[15];
-//		gasTile = tiles[16];
+		arenaTile2.setImage(tiles[15]);
+		spikeTile.setImage(tiles[16]);
+		tarPitTile.setImage(tiles[17]);
+		healthPowerUp.setImage(tiles[18]);
+		damagePowerUp.setImage(tiles[19]);
+		ratePowerUp.setImage(tiles[20]);
+		speedPowerUp.setImage(tiles[21]);
 		
 	}
 		
@@ -116,22 +133,7 @@ public class TileManager {
 						&& worldY + tileSize > player.getWorldY() - player.getScreenY() 
 						&& worldY - tileSize < player.getWorldY() + player.getScreenY() )
 						p.image(tilesList.get(tileDesignator[worldCol][worldRow]).getImage(), screenX, screenY);
-						
-//					case 1:
-//						p.image(wallTile, screenX, screenY);
-//						break;
-//					case 2:
-//						p.image(spikeTile, screenX, screenY);
-//						break;
-//					case 3:
-//						p.image(tarPitTile, screenX, screenY);
-//						break;
-//					case 4:
-//						p.image(gasTile, screenX, screenY);
-//						break;
-//	//				case 5:
-//					
-//						break;
+
 				
 				}
 				

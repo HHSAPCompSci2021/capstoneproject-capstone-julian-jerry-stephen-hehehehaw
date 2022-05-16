@@ -68,4 +68,9 @@ public class Collider {
 				player.setCollisions(true);
 			}
 	}
+	
+	public boolean checkTiles(Bullet b) {
+		//if 
+		return false;
+	}
 }
