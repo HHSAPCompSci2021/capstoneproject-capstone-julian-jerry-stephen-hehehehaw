@@ -91,12 +91,12 @@ public class TileManager {
 		stoneBrick6.setImage(tiles[13]);
 		arenaTile1.setImage(tiles[14]);
 		arenaTile2.setImage(tiles[15]);
-		arenaTile2.setImage(tiles[16]);
-		arenaTile2.setImage(tiles[17]);
-		arenaTile2.setImage(tiles[18]);
-		arenaTile2.setImage(tiles[19]);
-		arenaTile2.setImage(tiles[20]);
-		arenaTile2.setImage(tiles[21]);
+		spikeTile.setImage(tiles[16]);
+		tarPitTile.setImage(tiles[17]);
+		healthPowerUp.setImage(tiles[18]);
+		damagePowerUp.setImage(tiles[19]);
+		ratePowerUp.setImage(tiles[20]);
+		speedPowerUp.setImage(tiles[21]);
 		
 	}
 		

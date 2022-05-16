@@ -152,6 +152,15 @@ public class World implements Screen {
 		tileImage[12] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrick5.png");
 		tileImage[13] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "stonebrick6.png");
 		tileImage[14] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "arenatile1.png");
+		tileImage[15] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "arenatile2.png");
+		tileImage[16] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "spikeTrap.png");
+		tileImage[17] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "slowTrap.png");
+		tileImage[18] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "healthPowerUp.png");
+		tileImage[19] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "damagePowerUp.png");
+		tileImage[20] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "ratePowerUp.png");
+		tileImage[21] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "speedPowerUp.png");
+		
+		
 		
 		
 		tM.setTiles(tileImage);
@@ -165,6 +174,7 @@ public class World implements Screen {
 	* @post Changes PApplet's text alignment to Center
 	*/
 	public void draw() {
+		//add code to remove bullets from screen if they collide with a wall or 
 		
 		//System.out.println(p.frameRate);
 		p.background(220,220,220);  
@@ -178,8 +188,18 @@ public class World implements Screen {
 		{
 			p.fill(0, 255, 0);
 			b.draw(p, player1);
-//			b.damagePlayer(player2);
 		}
+		
+		for (int i = 0; i < bullets.size(); i++) {
+			if (bullets.get(i).damagePlayer(player2)) {
+				bullets.remove(i);
+				i--;
+			}
+			
+			//checkTiles(bullets.get(i));
+				
+		}
+			
 		p.pop();
 
 		{
