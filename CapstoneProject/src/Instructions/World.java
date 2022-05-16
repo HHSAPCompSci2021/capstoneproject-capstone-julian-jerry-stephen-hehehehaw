@@ -190,15 +190,15 @@ public class World implements Screen {
 			b.draw(p, player1);
 		}
 		
-		for (int i = 0; i < bullets.size(); i++) {
-			if (bullets.get(i).damagePlayer(player2)) {
-				bullets.remove(i);
-				i--;
-			}
+//		for (int i = 0; i < bullets.size(); i++) {
+//			if (bullets.get(i).damagePlayer(player2)) {
+//				bullets.remove(i);
+//				i--;
+//			}
 			
 			//checkTiles(bullets.get(i));
 				
-		}
+		//}
 			
 		p.pop();
 
