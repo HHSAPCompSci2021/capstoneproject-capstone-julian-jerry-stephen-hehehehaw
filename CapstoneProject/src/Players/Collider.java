@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import Instructions.World;
 import Tiles.Tile;
 import Tiles.TileManager;
+import Weapons.Bullet;
 
 public class Collider {
 	int tileSize;
