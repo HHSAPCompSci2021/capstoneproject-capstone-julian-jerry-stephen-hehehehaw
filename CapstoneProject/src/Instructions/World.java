@@ -60,7 +60,7 @@ public class World implements Screen {
 	
 	private PImage[] playerImage = new PImage[8];
 	private PImage[] playerImage2 = new PImage[8];
-	private PImage[] tileImage = new PImage[15]; //should be 17 once the remaining tile sprites for traps are made
+	private PImage[] tileImage = new PImage[22]; 
 //	private final int maxWorldCol = 100;
 //	private final int maxWorldRow = 100;
 //	private final int worldWidth = maxWorldCol * tM.getTileSize();
@@ -128,7 +128,7 @@ public class World implements Screen {
 		playerImage[6] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left2.png");
 		playerImage[7] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
 
-		player1 =  new Player(cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 7.5, 100, playerImage, tM.getTileSize());
+		player1 =  new Player(cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
 //		player.setWeapon(new Sniper());
 //		player.setWeapon(new Shotgun());
 //		player.setWeapon(new Submachine());
