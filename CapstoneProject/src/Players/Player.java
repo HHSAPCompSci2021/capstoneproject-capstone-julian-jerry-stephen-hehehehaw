@@ -285,6 +285,7 @@ public class Player {
 	}
 	
 	public ArrayList<Bullet> shoot(int x, int y) {
+		
 		return weapon.shoot(x,y, this); 
 	}
 	
