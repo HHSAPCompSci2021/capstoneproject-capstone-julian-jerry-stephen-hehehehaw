@@ -2,6 +2,7 @@ package Screens;
 
 
 import java.awt.Dimension;
+
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -16,7 +17,7 @@ import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
 // "Start" option
-public class WeaponChoiceScreen implements Screen {
+public class WeaponSelectionScreen implements Screen {
 	
 	private MainMenu surface;
 	private int weaponChoice;
@@ -37,7 +38,7 @@ public class WeaponChoiceScreen implements Screen {
 	
 	
 	
-	public WeaponChoiceScreen(MainMenu surface, int width, int height) {
+	public WeaponSelectionScreen(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
 		this.surface = surface;
@@ -124,7 +125,7 @@ public class WeaponChoiceScreen implements Screen {
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (backButton.contains(p)) {
-			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
+			surface.switchScreen(ScreenSwitcher.GAMEMODE_SELECTION_SCREEN);
 			shade = 0;
 		}
 		else if(shotgun.contains(p)) {

@@ -105,11 +105,10 @@ public class DeathScreen implements Screen {
 			// draw text
 			surface.fill(0);
 			String title = "You Died! Choose a weapon to proceed";
-			surface.textSize(70);
-			surface.text(title, (int)(DRAWING_WIDTH/2), (int)(shotgun.y-gameStarter.height*1.3));
+			surface.textSize(60);
+			surface.text(title, (int)(DRAWING_WIDTH/2), (int)(shotgun.y-gameStarter.height));
 			
-			String str = "Confirm Start Game";
-			float w = surface.textWidth(str);
+			String str = "Continue";
 			surface.textSize(20);
 			surface.text(str, gameStarter.x+gameStarter.width/2, gameStarter.y+gameStarter.height/2);
 			

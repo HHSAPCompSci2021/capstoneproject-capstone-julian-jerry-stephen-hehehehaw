@@ -11,7 +11,6 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.sound.Sound;
 import processing.sound.SoundFile;
-import Screens.MenuScreen;
 import Screens.*;
 
 public class MainMenu extends PApplet implements ScreenSwitcher {
@@ -29,29 +28,29 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	private static boolean isFirst;
 	
 	private World world;
-	WeaponChoiceScreen screen2;
+	GamemodeSelectionScreen screen1;
+	WeaponSelectionScreen screen2;
 	DeathScreen screen3;
 	
 	private SoundFile mainMenuSound;
 	private SoundFile inGameSound;
 
-	
-	
 	public MainMenu() {
 		world = new World(this);
-		
+		isFirst = true;
 		DRAWING_WIDTH = world.screenWidth;
 		DRAWING_HEIGHT = world.screenHeight;
-		
-		isFirst = true;
 		
 		screens = new ArrayList<Screen>();
 		keys = new ArrayList<Integer>();
 		
-		MenuScreen screen1 = new MenuScreen(this, DRAWING_WIDTH, DRAWING_HEIGHT);
+		MenuScreen screen0 = new MenuScreen(this, DRAWING_WIDTH, DRAWING_HEIGHT);
+		screens.add(screen0);
+		
+		screen1 = new GamemodeSelectionScreen(this, DRAWING_WIDTH, DRAWING_HEIGHT);
 		screens.add(screen1);
 		
-		screen2 = new WeaponChoiceScreen(this, DRAWING_WIDTH, DRAWING_HEIGHT);
+		screen2 = new WeaponSelectionScreen(this, DRAWING_WIDTH, DRAWING_HEIGHT);
 		screens.add(screen2);		
 		
 		screens.add(world);
@@ -98,7 +97,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	public void draw() {
 		ratioX = (float)width/DRAWING_WIDTH;
 		ratioY = (float)height/DRAWING_HEIGHT;
-
+		
 		push();
 		
 		if (activeScreen != world)
@@ -111,7 +110,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 			
 		} else if(activeScreen instanceof MenuScreen) {
 			mainMenuSound.loop();
-		} else if(activeScreen instanceof WeaponChoiceScreen) {
+		} else if(activeScreen instanceof WeaponSelectionScreen) {
 			
 		} else if(activeScreen instanceof Instructions) {
 			
@@ -167,9 +166,9 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
-		if(i == 1)
+		if(i <= 2)
 			isFirst = true;
-		if(i == 2) {
+		if(i == 3) {
 			if(isFirst) {
 				world.changeWeapon(screen2.getWeaponChoice());
 				isFirst = false;
@@ -182,6 +181,8 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 				}
 			}
 		}
+		
+		System.out.println(screen1.getChosenGamemode());
 	}
 
 }

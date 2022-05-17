@@ -239,7 +239,7 @@ public class World implements Screen {
 		surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
 		surface.fill(0);
 		surface.textSize(20);
-		String str0 = "Back";
+		String str0 = "Quit";
 		float w0 = surface.textWidth(str0);
 		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 

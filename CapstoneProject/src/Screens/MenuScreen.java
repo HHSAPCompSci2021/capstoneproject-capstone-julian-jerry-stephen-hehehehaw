@@ -21,8 +21,8 @@ public class MenuScreen implements Screen {
 		this.DRAWING_HEIGHT = height;
 		this.surface = surface;
 //		button = new Rectangle(800/2-100,600/2-50,200,100);
-		startButton = new Rectangle((int)(DRAWING_WIDTH*(1-BUTTON_WIDTH)/2), (int)(DRAWING_HEIGHT*(1-3*BUTTON_HEIGHT)/2), (int)(width*BUTTON_WIDTH), (int)(height*BUTTON_HEIGHT));
-		instButton = new Rectangle((int)(DRAWING_WIDTH*(1-BUTTON_WIDTH)/2), (int)(DRAWING_HEIGHT*(1+BUTTON_HEIGHT)/2), (int)(width*BUTTON_WIDTH), (int)(height*BUTTON_HEIGHT));
+		startButton = new Rectangle((int)(DRAWING_WIDTH*(1-BUTTON_WIDTH*1.5)/2), (int)(DRAWING_HEIGHT*(1-2.5*BUTTON_HEIGHT)/2), (int)(width*BUTTON_WIDTH*1.5), (int)(height*BUTTON_HEIGHT*1.5));
+		instButton = new Rectangle((int)(DRAWING_WIDTH*(1-BUTTON_WIDTH*1.5)/2), (int)(DRAWING_HEIGHT*(1+2.5*BUTTON_HEIGHT)/2), (int)(width*BUTTON_WIDTH*1.5), (int)(height*BUTTON_HEIGHT*1.5));
 	}
 	
 	public void setup() {
@@ -38,7 +38,7 @@ public class MenuScreen implements Screen {
 		surface.background(0);
 		surface.rect(startButton.x, startButton.y, startButton.width, startButton.height, 10, 10, 10, 10);
 		String str = "Start!";
-		float w = surface.textWidth(str);		
+		float w = surface.textWidth(str);
 		
 		// instructions button		
 		surface.rect(instButton.x, instButton.y, instButton.width, instButton.height, 10, 10, 10, 10);
@@ -50,7 +50,6 @@ public class MenuScreen implements Screen {
 		surface.text(str2, instButton.x+instButton.width*3/7-w2/2, instButton.y+instButton.height*4/7);
 		
 		String str3 = "<HEEHEEHEEHAW>";
-		float w3 = surface.textWidth(str3);
 		surface.textSize(50);
 		surface.fill(255);
 		surface.text(str3, (int)(DRAWING_WIDTH*0.33), (int)(DRAWING_HEIGHT*0.2));
@@ -59,7 +58,7 @@ public class MenuScreen implements Screen {
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (startButton.contains(p))
-			surface.switchScreen(ScreenSwitcher.PRE_GAME_SCREEN);
+			surface.switchScreen(ScreenSwitcher.GAMEMODE_SELECTION_SCREEN);
 		else if (instButton.contains(p))
 			surface.switchScreen(ScreenSwitcher.INSTRUCTION_SCREEN);
 	}
