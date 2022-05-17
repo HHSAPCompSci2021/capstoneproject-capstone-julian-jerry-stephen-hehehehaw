@@ -36,7 +36,7 @@ public class DeathScreen implements Screen {
 	private final float W_BUTTON_WIDTH = 1.5f*BUTTON_WIDTH;
 	private final float W_BUTTON_HEIGHT = 4.5f*BUTTON_HEIGHT;
 	private long initTime;
-	private static int LIVES_LEFT = 3; // change to 6 with the addition of the second player, and add for each player a counter for numLives lost (number of times lives reaches 0)
+	private static int LIVES_LEFT = 2; // change to 5 with the addition of the second player, and add for each player a counter for numLives lost (number of times lives reaches 0)
 	
 	public DeathScreen(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
@@ -54,6 +54,10 @@ public class DeathScreen implements Screen {
 
 	public int getWeaponChoice() {
 		return weaponChoice;
+	}
+	
+	public boolean isAlive() {
+		return LIVES_LEFT > 0;
 	}
 	
 	// The statements in the setup() function 
@@ -75,6 +79,7 @@ public class DeathScreen implements Screen {
 //		}
 			
 		surface.background(255,0,0);
+		surface.textAlign(surface.CENTER);
 		
 		if(LIVES_LEFT > 0) {
 			// draw buttons
@@ -98,8 +103,6 @@ public class DeathScreen implements Screen {
 			surface.rect(knife.x, knife.y, knife.width, knife.height, 10, 10, 10, 10);
 			
 			// draw text
-			surface.textAlign(surface.CENTER);
-			
 			surface.fill(0);
 			String title = "You Died! Choose a weapon to proceed";
 			surface.textSize(70);
@@ -128,6 +131,7 @@ public class DeathScreen implements Screen {
 			surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 		}
 		else {
+			surface.fill(0);
 			String title = "GAME OVER";
 			surface.textSize(150);
 			surface.text(title, (int)(DRAWING_WIDTH/2), (int)(DRAWING_HEIGHT/2));
