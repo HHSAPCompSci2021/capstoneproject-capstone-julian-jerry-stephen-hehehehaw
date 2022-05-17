@@ -139,7 +139,8 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		activeScreen = screens.get(i);
 		if(i == 2)
 			world.changeWeapon(screen2.getWeaponChoice());
-		
+		if(i == 4)
+			world.resetHealth();
 	}
 
 }

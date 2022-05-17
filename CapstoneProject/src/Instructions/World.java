@@ -103,6 +103,10 @@ public class World implements Screen {
 			player1.setWeapon(new Knife());
 	}
 	
+	public void resetHealth() {
+		player1.heal(100);
+	}
+	
 	// The statements in the setup() function 
 	// execute once when the program beginsas
 	public void setup() {
