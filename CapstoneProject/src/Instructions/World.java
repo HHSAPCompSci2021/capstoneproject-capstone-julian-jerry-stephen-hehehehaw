@@ -193,11 +193,7 @@ public class World implements Screen {
 			dead1 = true;
 		}
 		else {
-		//add code to remove bullets from screen if they collide with a wall or 
-		
-		//need to add a cooldown timer to the amount of the player is slowed down by traps, steal julians code for cooldown on sniper
-		
-		
+
 		//System.out.println(p.frameRate);
 		p.background(220,220,220);  
 		p.textAlign(p.CENTER);

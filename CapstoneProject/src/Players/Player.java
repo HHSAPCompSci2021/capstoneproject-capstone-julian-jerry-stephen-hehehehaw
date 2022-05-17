@@ -143,7 +143,7 @@ public class Player {
 				if (slowed) {
 					slowCD++;
 
-					if (slowCD >= 40) {
+					if (slowCD >= 30) {
 						slowed = false;
 						slowCD = 0;
 						speed = defaultSpeed;					}

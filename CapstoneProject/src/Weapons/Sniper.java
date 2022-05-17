@@ -33,7 +33,7 @@ public class Sniper extends Weapon{
 		{
 			coolDown++;
 			
-			if(coolDown == 4)
+			if(coolDown == 1)
 			{
 				justShot = false;
 				coolDown = 0;
