@@ -23,15 +23,19 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	private int DRAWING_WIDTH, DRAWING_HEIGHT;
 	
 	private int weapon;
+	private static boolean isFirst;
 	
 	private World world;
 	WeaponChoiceScreen screen2;
+	DeathScreen screen3;
 	
 	public MainMenu() {
 		world = new World(this);
 		
 		DRAWING_WIDTH = world.screenWidth;
 		DRAWING_HEIGHT = world.screenHeight;
+		
+		isFirst = true;
 		
 		screens = new ArrayList<Screen>();
 		keys = new ArrayList<Integer>();
@@ -47,7 +51,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		Instructions iScreen = new Instructions(this, DRAWING_WIDTH, DRAWING_HEIGHT);
 		screens.add(iScreen);
 		
-		DeathScreen screen3 = new DeathScreen(this, DRAWING_WIDTH, DRAWING_HEIGHT);
+		screen3 = new DeathScreen(this, DRAWING_WIDTH, DRAWING_HEIGHT);
 		screens.add(screen3);
 		
 		activeScreen = screens.get(0);
@@ -137,10 +141,21 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
-		if(i == 2)
-			world.changeWeapon(screen2.getWeaponChoice());
-		if(i == 4)
-			world.resetHealth();
+		if(i == 1)
+			isFirst = true;
+		if(i == 2) {
+			if(isFirst) {
+				world.changeWeapon(screen2.getWeaponChoice());
+				isFirst = false;
+			}
+			else {
+				world.changeWeapon(screen3.getWeaponChoice());
+				world.resetHealth();
+				if(!screen3.isAlive()) {
+					isFirst = true;
+				}
+			}
+		}
 	}
 
 }
