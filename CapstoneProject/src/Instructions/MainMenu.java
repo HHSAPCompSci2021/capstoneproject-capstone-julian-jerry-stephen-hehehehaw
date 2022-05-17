@@ -33,6 +33,9 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	private SoundFile mainMenuSound;
 	private SoundFile inGameSound;
 
+
+	
+
 	
 	
 	public MainMenu() {
@@ -84,11 +87,14 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	
 	public void setup() {
 		mainMenuSound = new SoundFile(this, "Assets/Music/Level1.wav");
+		inGameSound = new SoundFile(this, "Assets/Music/Level3.wav");
 		
 		
 		for (Screen s : screens) {
 			s.setup();
 		}
+		
+		mainMenuSound.play();
 	}
 	
 	public void draw() {
@@ -102,21 +108,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 		activeScreen.draw();
 		
-		if(activeScreen instanceof World)
-		{
-			
-		} else if(activeScreen instanceof MenuScreen) {
-			mainMenuSound.loop();
-		} else if(activeScreen instanceof WeaponChoiceScreen) {
-			
-		} else if(activeScreen instanceof Instructions) {
-			
-		} else if(activeScreen instanceof DeathScreen) {
-			
-		}
-		
-//		mainMenuSound.loop();
-		
+				
 		pop();
 	}
 	
@@ -163,10 +155,29 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 
 	public void switchScreen(int i) {
 		activeScreen = screens.get(i);
+				
 		if(i == 2)
 			world.changeWeapon(screen2.getWeaponChoice());
 		if(i == 4)
 			world.resetHealth();
+		
+
+		if(activeScreen instanceof World)
+		{
+			if(!inGameSound.isPlaying())
+			{
+				mainMenuSound.stop();
+				inGameSound.loop();
+			}
+			
+		} else if(activeScreen instanceof MenuScreen) {
+			inGameSound.stop();
+			mainMenuSound.loop();
+		} 
+
 	}
+	
+	
+	
 
 }

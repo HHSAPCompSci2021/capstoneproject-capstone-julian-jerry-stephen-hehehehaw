@@ -18,6 +18,8 @@ import Screens.*;
 import Weapons.*;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.sound.Sound;
+import processing.sound.SoundFile;
 import Tiles.*;
 
 public class World implements Screen {
@@ -26,6 +28,7 @@ public class World implements Screen {
 	public final static String lineSeparator = System.getProperty("line.separator");
 	public final static String userDir = System.getProperty("user.dir");
 	private PApplet p;
+	private SoundFile heHeHaHa;
 	
 	
 //put walls around the map to add borders
@@ -112,6 +115,8 @@ public class World implements Screen {
 	// The statements in the setup() function 
 	// execute once when the program beginsas
 	public void setup() {
+		heHeHaHa = new SoundFile(p, "Assets/Music/HeHeHeHa.wav");
+
 		
 		p.frameRate(30);
 		
@@ -280,6 +285,7 @@ public class World implements Screen {
 		if(p.key == 'e')
 		{
 			player1.emote();
+			heHeHaHa.play();
 		}
 	}
 			
