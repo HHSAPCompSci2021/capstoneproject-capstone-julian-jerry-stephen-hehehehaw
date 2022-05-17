@@ -19,7 +19,7 @@ public class Collider {
 		
 	}
 	
-	public void checkTile(Player player) {
+	public int checkTile(Player player) {
 		Rectangle r = player.getDimensions();
 		int playerLeftWorldX = (int)(player.getWorldX() + r.x);
 		int playerRightWorldX = (int)(player.getWorldX() + r.x + r.width);
@@ -61,13 +61,44 @@ public class Collider {
 				t7 = map[playerRightCol][playerTopRow];
 				t8 = map[playerRightCol][playerBottomRow];
 			}
-	
-			if (tL.get(t1).solidState() || tL.get(t2).solidState() 
-					|| tL.get(t3).solidState() || tL.get(t4).solidState() 
-					|| tL.get(t5).solidState() || tL.get(t6).solidState() 
-					|| tL.get(t7).solidState() || tL.get(t8).solidState()) {
-				player.setCollisions(true);
+			ArrayList<Integer> t = new ArrayList<Integer>();
+			t.add(t1);
+			t.add(t2);
+			t.add(t3);
+			t.add(t4);
+			t.add(t5);
+			t.add(t6);
+			t.add(t7);
+			t.add(t8);
+			
+
+			boolean notMoving = true;
+			for (int ti: t)
+				if (ti != 0)
+					notMoving = false;
+			
+			if (notMoving) {
+				t.set(0, map[playerLeftCol][playerTopRow]);
+				t.set(1, map[playerRightCol][playerTopRow]);
+				t.set(2, map[playerLeftCol][playerBottomRow]);
+				t.set(3, map[playerRightCol][playerBottomRow]);
+				t.set(4, map[playerLeftCol][playerTopRow]);
+				t.set(5, map[playerLeftCol][playerTopRow]);
+				t.set(6, map[playerRightCol][playerTopRow]);
+				t.set(7, map[playerRightCol][playerTopRow]);
 			}
+			
+			for (int ti: t) {
+				if (tL.get(ti).solidState())
+					player.setCollisions(true);
+				else if (tL.get(ti).isPowerUp() || tL.get(ti).isTrap())
+					return tM.tileInteract(ti, player);					
+			}
+			
+			
+			return -1;
+			
+			
 	}
 	
 	public boolean checkTiles(Bullet b) {

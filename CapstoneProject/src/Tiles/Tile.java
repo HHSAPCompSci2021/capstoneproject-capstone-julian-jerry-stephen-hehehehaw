@@ -8,11 +8,29 @@ public class Tile {
 
 	private PImage image;
 	private boolean collision = false;
+	private boolean powerUp = false;
+	private boolean trap = false;
+	
 
 	public Tile() {
 		
 	}
 
+	public void powerUp() {
+		powerUp = true;
+	}
+	
+	public boolean isPowerUp() {
+		return powerUp;
+	}
+	
+	public void trap() {
+		trap = true;
+	}
+	
+	public boolean isTrap() {
+		return trap;
+	}
 	public boolean solidState() {
 		return collision;
 	}

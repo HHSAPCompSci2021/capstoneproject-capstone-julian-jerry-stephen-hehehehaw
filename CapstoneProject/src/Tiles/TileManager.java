@@ -3,6 +3,7 @@ package Tiles;
 import java.util.ArrayList;
 
 import Players.Player;
+import Weapons.*;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -13,7 +14,7 @@ public class TileManager {
 	private Tile redBrick1, redBrick2, redBrick3, redBrick4, redBrick5, 
 	redBrickWall1, stoneWall1, stoneWall2,
 	stoneBrick1, stoneBrick2, stoneBrick3, stoneBrick4, stoneBrick5, stoneBrick6,
-	spikeTile, tarPitTile, healthPowerUp, damagePowerUp, ratePowerUp, speedPowerUp, arenaTile1, arenaTile2;
+	spikeTile, tarPitTile, healthPowerUp, damagePowerUp, ammoPowerUp, speedPowerUp, arenaTile1, arenaTile2;
 	
 	private ArrayList<Tile> tilesList = new ArrayList<Tile>();
 	
@@ -31,7 +32,7 @@ public class TileManager {
 		tarPitTile = new Tile();
 		healthPowerUp = new Tile();
 		damagePowerUp = new Tile();
-		ratePowerUp = new Tile();
+		ammoPowerUp = new Tile();
 		speedPowerUp = new Tile();
 		arenaTile2 = new Tile();
 		redBrick1 = new Tile();
@@ -70,7 +71,7 @@ public class TileManager {
 		tilesList.add(tarPitTile);//17
 		tilesList.add(healthPowerUp);//18
 		tilesList.add(damagePowerUp);//19
-		tilesList.add(ratePowerUp);//20
+		tilesList.add(ammoPowerUp);//20
 		tilesList.add(speedPowerUp);//21
 		redBrick1.setImage(tiles[0]);
 		redBrick2.setImage(tiles[1]);
@@ -92,12 +93,17 @@ public class TileManager {
 		arenaTile1.setImage(tiles[14]);
 		arenaTile2.setImage(tiles[15]);
 		spikeTile.setImage(tiles[16]);
+		spikeTile.trap();
 		tarPitTile.setImage(tiles[17]);
+		tarPitTile.trap();
 		healthPowerUp.setImage(tiles[18]);
+		healthPowerUp.powerUp();
 		damagePowerUp.setImage(tiles[19]);
-		ratePowerUp.setImage(tiles[20]);
+		damagePowerUp.powerUp();
+		ammoPowerUp.setImage(tiles[20]);
+		damagePowerUp.powerUp();
 		speedPowerUp.setImage(tiles[21]);
-		
+		speedPowerUp.powerUp();
 	}
 		
 	
@@ -106,10 +112,36 @@ public class TileManager {
 		originalTileSize = ogTileSize;
 		tileDesignator = tileGrid;
 		tileSize = this.scale * originalTileSize;
-		
-		
-		 		
 	
+	}
+	
+	public int tileInteract(int tileNum, Player p) {
+		switch (tileNum) {
+		case 16:
+			p.loseHealth(0.2);//test this number
+			break;
+		case 17:
+			p.setSpeedDown(p.getSpeed() * 0.5);
+			return 17;
+
+	//		System.out.print("speedslowtrap");
+		case 18: 
+			p.heal(50);
+			break;
+		case 19: 
+			p.getWeapon().setDamage((int)(p.getWeapon().getDamage()*1.2));
+			return 19;
+		case 20: 
+			p.getWeapon().setMagSize(p.getWeapon().getMagSize()*3);
+			return 20;
+			
+		case 21:
+			p.setSpeedUp(1.5);
+		//	System.out.print("speedfast");
+			return 21;
+		}
+		return -1;
+		
 	}
 	
 	public int[][] getMap(){

@@ -12,6 +12,8 @@ public class Player {
 	public Avatar avatar;
 	private double vision;
 	private double speed;
+	private double defaultSpeed;
+	private final double realDefaultSpeed;
 	private double health; 
 	private Rectangle dimensions;
 	private double initHealth;
@@ -26,6 +28,10 @@ public class Player {
 	private boolean east;
 	
 	private boolean collisionOn = false;
+	private boolean slowed, slowed2, speedBuffed, damageBuffed, magBuffed;
+	private int slowCD, speedCD, dmgCD, magCD;
+
+	private int cd = 0;
 	private Collider c;
 	
 	
@@ -34,7 +40,6 @@ public class Player {
 		c = cl;
 		worldX = x;
 		worldY = y;
-		
 		screenX = xS;
 		screenY = yS;
 		
@@ -42,6 +47,9 @@ public class Player {
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
 		this.vision = vision;
 		this.speed = speed * w.getSpeed();
+		defaultSpeed = speed * w.getSpeed();
+
+		realDefaultSpeed = speed * w.getSpeed();
 		this.health = health;
 		initHealth = health;
 		dimensions = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.35), (int)(tileSize * 0.6), (int)(tileSize * 0.55));
@@ -55,6 +63,8 @@ public class Player {
 		
 		screenX = xS;
 		screenY = yS;
+		defaultSpeed = 5;
+		realDefaultSpeed = 5;
 		
 		
 		speed = 5;
@@ -84,15 +94,67 @@ public class Player {
 	}
 	
 	public void draw(PApplet p) {
-		
-		//need to add a cooldown timer to the amount of the player is slowed down by traps, steal julians code for cooldown on sniper
+	
 		collisionOn = false;
 		if (c != null) {
-			c.checkTile(this);
+			int whichOne = c.checkTile(this);
+	//		System.out.println("whichOne: " + whichOne + " Speed: " + speed + " slowed: " + slowed + " slowCD: " + slowCD);
+			
+
+				switch (whichOne) {
+				case 17:
+					if (slowed)
+						slowed2 = true;
+					
+					slowed = true;
+					break;
+				case 21:
+					speedBuffed = true;
+					break;
+				case 19:
+					damageBuffed = true;
+					break;
+					
+				case 20:
+					magBuffed = true;
+					break;
+					
+				case -1:
+					break;
+				}
+				
+				if (slowed) {
+					if (slowed2) {
+						slowCD = 0;
+						slowed2 = false;
+					}
+					slowCD++;
+
+					if (slowCD >= 60) {
+						slowed = false;
+						slowCD = 0;
+						speed = defaultSpeed;					}
+					
+				}
+//				if (speedBuffed) {
+//					speedCD ++;
+//					
+//					if (speedCD >= )
+//					
+//				}
+//				if (damageBuffed) {
+//					
+//				}
+//				if (magBuffed){
+//					
+//				}
+				
+				
 			if (!collisionOn) 
 				moveObject();
 		}else 
 			moveObject();
+		
 		p.fill(0);
 		avatar.draw(p, screenX, screenY);
 		avatar.spriteCounter++;
@@ -104,9 +166,6 @@ public class Player {
 			}
 			avatar.spriteCounter = 0;
 		}
-//		//not sure if this should be worldX or screenX yet
-//		dimensions.x = (int)worldX;
-//		dimensions.y = (int)worldY;
 
 
 		
@@ -167,8 +226,13 @@ public class Player {
 	
 	public double getSpeed()
 	{
-		return speed;
+		return defaultSpeed;
 	}
+	
+	public double getRealDefaultSpeed() {
+		return realDefaultSpeed;
+	}
+	
 	
 	public double getHealth()
 	{
@@ -178,6 +242,19 @@ public class Player {
 	public void loseHealth(double damage)
 	{
 		health -= damage;
+	}
+	public void setSpeedUp(double sped) {
+		speed = sped;
+		defaultSpeed = sped;
+	}
+	public void setSpeedDown(double sped) {
+		speed = sped;
+	}
+	
+	public void heal(int health) {
+		this.health += health;
+		if (this.health > 100)
+			this.health = 100;
 	}
 	
 	public double getInitHealth()
