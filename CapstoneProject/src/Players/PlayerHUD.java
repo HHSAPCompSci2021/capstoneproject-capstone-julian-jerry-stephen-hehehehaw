@@ -1,12 +1,15 @@
 package Players;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class PlayerHUD {
-	
+	public final static String fileSeparator = System.getProperty("file.separator");
+	private PImage weapon;
 
 	public void draw(PApplet p, int width, int height, Player player, Player avatar)
 	{
+		weapon = p.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "Submachine.png");
 		
 		p.push();		
 		p.fill(255, 255, 255);
@@ -42,6 +45,10 @@ public class PlayerHUD {
 			p.fill(255, 0, 0);
 			p.rect((float) (p.width-p.width/5.5), (float) (p.height-p.height/10.5), (float) (ratio * (player.getWeapon().getReloadTime()-player.getWeapon().getReloadCounter())), height/10);
 		}
+		
+		
+		if(avatar != null)
+		p.image(weapon,(float)( (avatar.getScreenX()) + width/35), (float) ((avatar.getScreenY()) + height/15));
 		
 		
 		p.pop();

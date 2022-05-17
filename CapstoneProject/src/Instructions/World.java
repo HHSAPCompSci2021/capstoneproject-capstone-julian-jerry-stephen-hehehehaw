@@ -189,7 +189,6 @@ public class World implements Screen {
 		p.textAlign(p.CENTER);
 
 		tM.draw(p, player1);
-		player1.draw(p);
 		
 		p.push();
 		for(Bullet b : bullets)
@@ -209,8 +208,13 @@ public class World implements Screen {
 		//}
 			
 		p.pop();
-		if(player1.getWeapon().getAmmo() == 0)
-		{
+
+
+		
+		player1.draw(p);
+		
+		if(player1.getWeapon().getAmmo() <= 0){
+
 			player1.getWeapon().reload();
 		}
 		hud.draw(p, screenWidth, screenHeight, player1, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
@@ -228,13 +232,11 @@ public class World implements Screen {
 		if(playerShoot)
 		{
 			
-			if ((player1.getWeapon() instanceof Submachine))
+			if(player1.getWeapon().getAmmo() <= 0)
 			{
-				if(player1.getWeapon().getAmmo() <= 0)
-				{
-					playerShoot = false;
-				}
-			}	
+				playerShoot = false;
+			}
+		
 			
 			for(Bullet b : player1.shoot(p.mouseX, p.mouseY)) {	
 				bullets.add(b);
