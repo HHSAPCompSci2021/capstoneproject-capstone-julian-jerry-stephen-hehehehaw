@@ -36,10 +36,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	private SoundFile inGameSound;
 
 
-	
 
-	
-	
 	public MainMenu() {
 		world = new World(this);
 		
@@ -91,7 +88,10 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	
 	public void setup() {
 		mainMenuSound = new SoundFile(this, "Assets/Music/Level1.wav");
+		mainMenuSound.amp(0.2f);
 		inGameSound = new SoundFile(this, "Assets/Music/Level3.wav");
+		inGameSound.amp(0.2f);
+
 		
 		
 		for (Screen s : screens) {

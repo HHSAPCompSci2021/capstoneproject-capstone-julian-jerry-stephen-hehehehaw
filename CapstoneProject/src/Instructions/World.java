@@ -29,6 +29,11 @@ public class World implements Screen {
 	public final static String userDir = System.getProperty("user.dir");
 	private PApplet p;
 	private SoundFile heHeHaHa;
+	private SoundFile shotGunShot;
+	private SoundFile subMachineShot;
+	private int soundCounter = 0;
+
+
 	
 	
 //put walls around the map to add borders
@@ -116,6 +121,11 @@ public class World implements Screen {
 	// execute once when the program beginsas
 	public void setup() {
 		heHeHaHa = new SoundFile(p, "Assets/Music/HeHeHeHa.wav");
+		heHeHaHa.amp(0.7f);
+		shotGunShot = new SoundFile(p, "Assets/Music/ShotgunShot.wav");
+		shotGunShot.amp(0.3f);
+		subMachineShot = new SoundFile(p, "Assets/Music/Submachine.wav");
+		subMachineShot.amp(0.1f);
 
 		
 		p.frameRate(30);
@@ -262,6 +272,35 @@ public class World implements Screen {
 				bullets.add(b);
 			}
 			
+			if(player1.getWeapon() instanceof Shotgun && player1.getWeapon().getAmmo() >= 0)
+			{
+				shotGunShot.play();
+			}
+			else if(player1.getWeapon() instanceof Submachine && player1.getWeapon().getAmmo() >= 0)
+			{
+				if(soundCounter == 10)
+				{
+					subMachineShot.play();
+					soundCounter = 0;
+				}
+		
+				else {
+					soundCounter++;
+				}
+			}
+			else if(player1.getWeapon() instanceof Sniper && player1.getWeapon().getAmmo() >= 0)
+			{
+				if(soundCounter == 10)
+				{
+					subMachineShot.play();
+					soundCounter = 0;
+				}
+		
+				else {
+					soundCounter++;
+				}
+			}
+			
 			if (!(player1.getWeapon() instanceof Submachine))
 			{
 				playerShoot = false;
@@ -307,7 +346,7 @@ public class World implements Screen {
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 		
 
-			
+		
 		playerShoot = true;
 	}
 
