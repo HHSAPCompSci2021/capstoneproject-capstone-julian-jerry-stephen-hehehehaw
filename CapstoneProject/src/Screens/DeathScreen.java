@@ -127,6 +127,11 @@ public class DeathScreen implements Screen {
 			float w0 = surface.textWidth(str0);
 			surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 		}
+		else {
+			String title = "GAME OVER";
+			surface.textSize(150);
+			surface.text(title, (int)(DRAWING_WIDTH/2), (int)(DRAWING_HEIGHT/2));
+		}
 	}
 
 	public void mousePressed() {
