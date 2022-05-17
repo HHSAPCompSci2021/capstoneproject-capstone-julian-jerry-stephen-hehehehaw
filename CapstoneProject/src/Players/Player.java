@@ -110,20 +110,20 @@ public class Player {
 	}
 	
 	public void draw(PApplet p) {
-	
-		
+
 		collisionOn = false;
 		if (c != null) {
-			int whichOne = c.checkTile(this);
-	//		System.out.println("whichOne: " + whichOne + " Speed: " + speed + " slowed: " + slowed + " slowCD: " + slowCD);
-			
+
+			int whichOne= c.checkTile(this);
+			if (whichOne != -1)
+				System.out.println("whichOne: " + whichOne); 			
+				System.out.println(" Speed: " + speed + " speedBuffed: " + speedBuffed + " speedCD: " + speedCD);
 
 				switch (whichOne) {
 				case 17:
-					if (slowed)
-						slowed2 = true;
-					
 					slowed = true;
+					
+					
 					break;
 				case 21:
 					speedBuffed = true;
@@ -141,10 +141,6 @@ public class Player {
 				}
 				
 				if (slowed) {
-					if (slowed2) {
-						slowCD = 0;
-						slowed2 = false;
-					}
 					slowCD++;
 
 					if (slowCD >= 60) {
@@ -153,18 +149,38 @@ public class Player {
 						speed = defaultSpeed;					}
 					
 				}
-//				if (speedBuffed) {
-//					speedCD ++;
-//					
-//					if (speedCD >= )
-//					
-//				}
-//				if (damageBuffed) {
-//					
-//				}
-//				if (magBuffed){
-//					
-//				}
+				
+
+				if (speedBuffed) {
+					speedCD ++;
+					
+					if (speedCD >= 450) {
+						speedBuffed = false;
+						speedCD = 0;
+						speed = getRealDefaultSpeed();
+						defaultSpeed = getRealDefaultSpeed();
+					}
+				}
+				if (damageBuffed) {
+					dmgCD++;
+					
+					if (dmgCD >= 400) {
+						dmgCD = 0;
+						damageBuffed = false;
+						getWeapon().setDamage((int)(getWeapon().getDamage()));
+					}
+					
+				}
+				if (magBuffed){
+					magCD++;
+					
+					if (magCD >= 400) {
+						magCD = 0;
+						magBuffed = false;
+						getWeapon().setMagSize(getWeapon().getMagSize());
+					}
+					
+				}
 				
 				
 			if (!collisionOn) 

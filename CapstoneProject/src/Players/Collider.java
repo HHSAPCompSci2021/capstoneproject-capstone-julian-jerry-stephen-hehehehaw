@@ -18,8 +18,12 @@ public class Collider {
 		this.tM = tM;
 		
 	}
-	
+	/*
+	 * returns an int designating what powerup/trap is collided with: -1 is a noninteractble tile
+	*/
 	public int checkTile(Player player) {
+		int index = -1;
+		
 		Rectangle r = player.getDimensions();
 		int playerLeftWorldX = (int)(player.getWorldX() + r.x);
 		int playerRightWorldX = (int)(player.getWorldX() + r.x + r.width);
@@ -91,13 +95,26 @@ public class Collider {
 			for (int ti: t) {
 				if (tL.get(ti).solidState())
 					player.setCollisions(true);
-				else if (tL.get(ti).isPowerUp() || tL.get(ti).isTrap())
-					return tM.tileInteract(ti, player);					
-			}
+				else if (tL.get(ti).isPowerUp() || tL.get(ti).isTrap()) {
+					 index =  tM.tileInteract(ti, player);	
+
+					}
+					
+				}
+			if (tL.get(map[playerLeftCol][playerTopRow]).isPowerUp())
+				map[playerLeftCol][playerTopRow] = 0;
 			
+			if (tL.get(map[playerRightCol][playerTopRow]).isPowerUp())
+				map[playerRightCol][playerTopRow] = 0;
 			
-			return -1;
+			if (tL.get(map[playerLeftCol][playerBottomRow]).isPowerUp())
+				map[playerLeftCol][playerBottomRow] = 0;
 			
+			if (tL.get(map[playerRightCol][playerBottomRow]).isPowerUp())
+				map[playerRightCol][playerBottomRow] = 0;
+
+			
+			return index;
 			
 	}
 	

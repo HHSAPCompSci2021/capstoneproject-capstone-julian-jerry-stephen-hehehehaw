@@ -10,6 +10,8 @@ import processing.core.PImage;
 public class TileManager {
 	
 //	private Tile[] tiles;
+	private boolean spawnPowerUps = true;
+	private int cd, cd2;
 	private int[][] tileDesignator;
 	private Tile redBrick1, redBrick2, redBrick3, redBrick4, redBrick5, 
 	redBrickWall1, stoneWall1, stoneWall2,
@@ -18,9 +20,23 @@ public class TileManager {
 	
 	private ArrayList<Tile> tilesList = new ArrayList<Tile>();
 	
+	private int[] randList;
+	
 	private final int originalTileSize;
 	private final int scale;
 	private final int tileSize;
+
+	public TileManager(int ogTileSize, int scale, int[][] tileGrid) {
+		this.scale = scale;
+		originalTileSize = ogTileSize;
+		tileDesignator = tileGrid;
+		tileSize = this.scale * originalTileSize;
+		randList = new int[6];
+		changePowerUpList();
+
+	
+	}
+	
 
 	public ArrayList<Tile> getTilesList() {
 		return tilesList;
@@ -101,19 +117,18 @@ public class TileManager {
 		damagePowerUp.setImage(tiles[19]);
 		damagePowerUp.powerUp();
 		ammoPowerUp.setImage(tiles[20]);
-		damagePowerUp.powerUp();
+		ammoPowerUp.powerUp();
 		speedPowerUp.setImage(tiles[21]);
 		speedPowerUp.powerUp();
 	}
 		
+	public void changePowerUpList() {
 	
-	public TileManager(int ogTileSize, int scale, int[][] tileGrid) {
-		this.scale = scale;
-		originalTileSize = ogTileSize;
-		tileDesignator = tileGrid;
-		tileSize = this.scale * originalTileSize;
-	
+		for (int i = 0; i < randList.length; i ++) {
+			randList[i] = (int) (Math.random() * 4 + 18);
+		}
 	}
+	
 	
 	public int tileInteract(int tileNum, Player p) {
 		switch (tileNum) {
@@ -124,20 +139,24 @@ public class TileManager {
 			p.setSpeedDown(p.getSpeed() * 0.5);
 			return 17;
 
-	//		System.out.print("speedslowtrap");
 		case 18: 
 			p.heal(50);
 			break;
 		case 19: 
 			p.getWeapon().setDamage((int)(p.getWeapon().getDamage()*1.2));
+			
 			return 19;
 		case 20: 
-			p.getWeapon().setMagSize(p.getWeapon().getMagSize()*3);
+			if (p.getWeapon() instanceof Submachine)
+				p.getWeapon().setMagSize(p.getWeapon().getMagSize()*2);
+			else 
+				p.getWeapon().setMagSize(p.getWeapon().getMagSize()*3);
+
+		//	System.out.println("Ammo : " + p.getWeapon().getAmmo() + " magazineSize: " + p.getWeapon().magazineSize);
 			return 20;
 			
 		case 21:
-			p.setSpeedUp(1.5);
-		//	System.out.print("speedfast");
+			p.setSpeedUp(p.getRealDefaultSpeed() * 1.5);
 			return 21;
 		}
 		return -1;
@@ -152,6 +171,38 @@ public class TileManager {
 	}
 	
 	public void draw(PApplet p, Player player) {
+		
+		if (spawnPowerUps) {
+			
+			changePowerUpList();
+				
+			tileDesignator[12][48] = randList[0];
+			tileDesignator[13][49] = 18;
+			
+			tileDesignator[48][9] = 21;//randList[1];
+			tileDesignator[49][10] = 18;
+			
+			tileDesignator[50][48] = randList[2];
+			tileDesignator[51][49] = randList[3];
+			
+			tileDesignator[84][48] = randList[4];
+			tileDesignator[85][49] = 18;
+			
+			tileDesignator[48][87] = randList[5];
+			tileDesignator[49][88] = 18;
+			
+			cd = 0;
+			spawnPowerUps = false;
+		
+			}		
+		cd++;
+		if (cd >= 1200) {
+			spawnPowerUps = true;
+		}
+
+		
+		
+		
 		for (int worldRow = 0; worldRow < tileDesignator.length; worldRow++) {
 			for (int worldCol = 0; worldCol < tileDesignator[worldRow].length; worldCol++) {
 				
@@ -170,6 +221,8 @@ public class TileManager {
 				}
 				
 			}
+			
+		
 		}
 		
 	}

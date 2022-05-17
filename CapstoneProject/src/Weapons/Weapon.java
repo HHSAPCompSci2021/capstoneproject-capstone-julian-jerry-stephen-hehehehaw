@@ -68,8 +68,9 @@ public abstract class Weapon {
 		return defaultMagSize;
 	}
 	
-	public void setMagSize(int index) {
-		magazineSize = index;
+	public void setMagSize(int size) {
+		magazineSize = size;
+		ammo = magazineSize;
 	}
 //	public void changeAmmo(double index) {
 //		ammo = magazineSize * index;
