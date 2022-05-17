@@ -5,15 +5,18 @@ import java.util.ArrayList;
 import Players.Player;
 
 public abstract class Weapon {
-	protected double magazineSize;
+	protected int magazineSize;
+	private final int defaultMagSize;
+	private final double defaultDamage;
 	protected double reloadTime;
 	protected double sightRange;
-	protected double fireRate;
+//	protected double fireRate;
 	protected double movementSpeed;
 	protected int reloadCounter;
 	protected double ammo;
 	protected boolean justShot = false;
 	protected double coolDown;
+	protected double damage;
 
 	/**
 	* Weapon constructor, creates a weapon object
@@ -23,13 +26,16 @@ public abstract class Weapon {
 	* @param sight Sight of the Player when holding the weapon
 	* @param movement Movement of the weapon
 	*/
-	public Weapon(double mag, double reloadTime, double sight, double movement)
+	public Weapon(int mag, double reloadTime, double sight, double movement, double dmg)
 	{
 		magazineSize = mag;
+		defaultMagSize = mag;
 		this.reloadTime = reloadTime; 
 		sightRange = sight;
 		movementSpeed = movement;
 		ammo = magazineSize;
+		damage = dmg;
+		defaultDamage = dmg;
 		reloadCounter = 0;
 		coolDown = 0;
 //		this.fireRate = fireRate;
@@ -57,11 +63,21 @@ public abstract class Weapon {
 	/**
 	* @return returns magazine size
 	*/
-	public double getMagSize()
+	public int getMagSize()
 	{
-		return magazineSize;
+		return defaultMagSize;
 	}
-
+	
+	public void setMagSize(int index) {
+		magazineSize = index;
+	}
+//	public void changeAmmo(double index) {
+//		ammo = magazineSize * index;
+//	}
+	
+	public void setDamage(int index) {
+		damage = index;
+	}
 	/**
 	* @return Returns movement speed
 	*/
@@ -85,4 +101,7 @@ public abstract class Weapon {
 		return reloadTime;
 	}
 	
+	public double getDamage() {
+		return defaultDamage;
+	}
 }

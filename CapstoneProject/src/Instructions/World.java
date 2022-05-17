@@ -103,6 +103,10 @@ public class World implements Screen {
 			player1.setWeapon(new Knife());
 	}
 	
+	public void resetHealth() {
+		player1.heal(100);
+	}
+	
 	// The statements in the setup() function 
 	// execute once when the program beginsas
 	public void setup() {
@@ -174,7 +178,15 @@ public class World implements Screen {
 	* @post Changes PApplet's text alignment to Center
 	*/
 	public void draw() {
+		
+		// check if player has lost all its health
+		if(player1.getHealth() <= 0)
+			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
+		else {
 		//add code to remove bullets from screen if they collide with a wall or 
+		
+		//need to add a cooldown timer to the amount of the player is slowed down by traps, steal julians code for cooldown on sniper
+		
 		
 		//System.out.println(p.frameRate);
 		p.background(220,220,220);  
@@ -219,10 +231,7 @@ public class World implements Screen {
 		String str0 = "Back";
 		float w0 = surface.textWidth(str0);
 		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
-		
-		// check if player has lost all its health
-		if(player1.getHealth() == 0)
-			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
+
 		
 		if(playerShoot)
 		{
@@ -244,6 +253,7 @@ public class World implements Screen {
 			
 					
 			
+			}
 		}
 	}
 			 

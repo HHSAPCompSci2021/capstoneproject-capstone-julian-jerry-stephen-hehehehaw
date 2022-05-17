@@ -36,6 +36,7 @@ public class DeathScreen implements Screen {
 	private final float W_BUTTON_WIDTH = 1.5f*BUTTON_WIDTH;
 	private final float W_BUTTON_HEIGHT = 4.5f*BUTTON_HEIGHT;
 	private long initTime;
+	private static int LIVES_LEFT = 3; // change to 6 with the addition of the second player, and add for each player a counter for numLives lost (number of times lives reaches 0)
 	
 	public DeathScreen(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
@@ -67,63 +68,70 @@ public class DeathScreen implements Screen {
 	// sequence and after the last line is read, the first 
 	// line is executed again.
 	public void draw() {
-		Calendar c2 = Calendar.getInstance();
-		if(c2.getTimeInMillis() - initTime > 10000) {
-			weaponChoice = (int)(4*Math.random())+1;
-			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
-		}
+//		Calendar c2 = Calendar.getInstance();
+//		if(c2.getTimeInMillis() - initTime > 10000) {
+//			weaponChoice = (int)(4*Math.random())+1;
+//			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
+//		}
 			
 		surface.background(255,0,0);
 		
-		// draw buttons
-		surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
-		surface.rect(gameStarter.x, gameStarter.y, gameStarter.width, gameStarter.height, 10, 10, 10, 10);
-		
-		if(shade == 1) surface.fill(155);
-		else surface.fill(255);
-		surface.rect(shotgun.x, shotgun.y, shotgun.width, shotgun.height, 10, 10, 10, 10);
-		
-		if(shade == 2) surface.fill(155);
-		else surface.fill(255);
-		surface.rect(sniper.x, sniper.y, sniper.width, sniper.height, 10, 10, 10, 10);
-		
-		if(shade == 3) surface.fill(155);
-		else surface.fill(255);
-		surface.rect(submachine.x, submachine.y, submachine.width, submachine.height, 10, 10, 10, 10);
-		
-		if(shade == 4) surface.fill(155);
-		else surface.fill(255);
-		surface.rect(knife.x, knife.y, knife.width, knife.height, 10, 10, 10, 10);
-		
-		// draw text
-		surface.textAlign(surface.CENTER);
-		
-		surface.fill(0);
-		String title = "You Died! Choose a weapon to proceed";
-		surface.textSize(70);
-		surface.text(title, (int)(DRAWING_WIDTH/2), (int)(shotgun.y-gameStarter.height*1.3));
-		
-		String str = "Confirm Start Game";
-		float w = surface.textWidth(str);
-		surface.textSize(20);
-		surface.text(str, gameStarter.x+gameStarter.width/2, gameStarter.y+gameStarter.height/2);
-		
-		String g1 = "Shotgun";
-		surface.textSize(20);
-		surface.text(g1, shotgun.x+shotgun.width/2,shotgun.y+shotgun.height/2);
-		
-		String g2 = "Sniper";
-		surface.text(g2, sniper.x+sniper.width/2,sniper.y+sniper.height/2);
-		
-		String g3 = "Submachine";
-		surface.text(g3, submachine.x+submachine.width/2,submachine.y+submachine.height/2);
-		
-		String g4 = "Knife";
-		surface.text(g4, knife.x+knife.width/2,knife.y+knife.height/2);
-		
-		String str0 = "Back";
-		float w0 = surface.textWidth(str0);
-		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
+		if(LIVES_LEFT > 0) {
+			// draw buttons
+			surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
+			surface.rect(gameStarter.x, gameStarter.y, gameStarter.width, gameStarter.height, 10, 10, 10, 10);
+			
+			if(shade == 1) surface.fill(155);
+			else surface.fill(255);
+			surface.rect(shotgun.x, shotgun.y, shotgun.width, shotgun.height, 10, 10, 10, 10);
+			
+			if(shade == 2) surface.fill(155);
+			else surface.fill(255);
+			surface.rect(sniper.x, sniper.y, sniper.width, sniper.height, 10, 10, 10, 10);
+			
+			if(shade == 3) surface.fill(155);
+			else surface.fill(255);
+			surface.rect(submachine.x, submachine.y, submachine.width, submachine.height, 10, 10, 10, 10);
+			
+			if(shade == 4) surface.fill(155);
+			else surface.fill(255);
+			surface.rect(knife.x, knife.y, knife.width, knife.height, 10, 10, 10, 10);
+			
+			// draw text
+			surface.textAlign(surface.CENTER);
+			
+			surface.fill(0);
+			String title = "You Died! Choose a weapon to proceed";
+			surface.textSize(70);
+			surface.text(title, (int)(DRAWING_WIDTH/2), (int)(shotgun.y-gameStarter.height*1.3));
+			
+			String str = "Confirm Start Game";
+			float w = surface.textWidth(str);
+			surface.textSize(20);
+			surface.text(str, gameStarter.x+gameStarter.width/2, gameStarter.y+gameStarter.height/2);
+			
+			String g1 = "Shotgun";
+			surface.textSize(20);
+			surface.text(g1, shotgun.x+shotgun.width/2,shotgun.y+shotgun.height/2);
+			
+			String g2 = "Sniper";
+			surface.text(g2, sniper.x+sniper.width/2,sniper.y+sniper.height/2);
+			
+			String g3 = "Submachine";
+			surface.text(g3, submachine.x+submachine.width/2,submachine.y+submachine.height/2);
+			
+			String g4 = "Knife";
+			surface.text(g4, knife.x+knife.width/2,knife.y+knife.height/2);
+			
+			String str0 = "Back";
+			float w0 = surface.textWidth(str0);
+			surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
+		}
+		else {
+			String title = "GAME OVER";
+			surface.textSize(150);
+			surface.text(title, (int)(DRAWING_WIDTH/2), (int)(DRAWING_HEIGHT/2));
+		}
 	}
 
 	public void mousePressed() {
@@ -151,6 +159,7 @@ public class DeathScreen implements Screen {
 		else if(gameStarter.contains(p)) {
 			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
 			shade = 0;
+			LIVES_LEFT--;
 		}
 	}
 	
