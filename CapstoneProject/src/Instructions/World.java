@@ -201,8 +201,12 @@ public class World implements Screen {
 			
 		p.pop();
 
-		if(player1.getWeapon().getAmmo() == 0)
-		{
+
+		
+		player1.draw(p);
+		
+		if(player1.getWeapon().getAmmo() <= 0){
+
 			player1.getWeapon().reload();
 		}
 		hud.draw(p, screenWidth, screenHeight, player1, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
