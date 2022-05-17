@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import Instructions.World;
 import Tiles.Tile;
 import Tiles.TileManager;
+import Weapons.Bullet;
 
 public class Collider {
 	int tileSize;
@@ -67,5 +68,10 @@ public class Collider {
 					|| tL.get(t7).solidState() || tL.get(t8).solidState()) {
 				player.setCollisions(true);
 			}
+	}
+	
+	public boolean checkTiles(Bullet b) {
+		//if 
+		return false;
 	}
 }
