@@ -8,6 +8,9 @@ import javax.swing.JFrame;
 
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
+import processing.core.PImage;
+import processing.sound.Sound;
+import processing.sound.SoundFile;
 import Screens.MenuScreen;
 import Screens.*;
 
@@ -28,6 +31,11 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	private World world;
 	WeaponChoiceScreen screen2;
 	DeathScreen screen3;
+	
+	private SoundFile mainMenuSound;
+	private SoundFile inGameSound;
+
+	
 	
 	public MainMenu() {
 		world = new World(this);
@@ -55,6 +63,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		screens.add(screen3);
 		
 		activeScreen = screens.get(0);
+		
 	}
 	
 
@@ -78,6 +87,8 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	}
 	
 	public void setup() {
+		mainMenuSound = new SoundFile(this, "Assets/Music/Level1.wav");
+		
 		
 		for (Screen s : screens) {
 			s.setup();
@@ -94,6 +105,21 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 			scale(ratioX, ratioY);
 		
 		activeScreen.draw();
+		
+		if(activeScreen instanceof World)
+		{
+			
+		} else if(activeScreen instanceof MenuScreen) {
+			mainMenuSound.loop();
+		} else if(activeScreen instanceof WeaponChoiceScreen) {
+			
+		} else if(activeScreen instanceof Instructions) {
+			
+		} else if(activeScreen instanceof DeathScreen) {
+			
+		}
+		
+//		mainMenuSound.loop();
 		
 		pop();
 	}
