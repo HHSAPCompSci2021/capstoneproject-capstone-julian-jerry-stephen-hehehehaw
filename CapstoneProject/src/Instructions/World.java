@@ -308,7 +308,16 @@ public class World implements Screen {
 			
 					
 			
+		}
+		
+		for(int i = 0; i < bullets.size(); i++)
+		{
+			if(player1.getWeapon().getMaxDistance() < bullets.get(i).getDistanceTraveled())
+			{
+				bullets.remove(i);
 			}
+		}
+		
 		}
 	}
 			 

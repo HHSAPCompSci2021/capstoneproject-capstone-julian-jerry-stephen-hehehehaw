@@ -17,6 +17,8 @@ public abstract class Weapon {
 	protected boolean justShot = false;
 	protected double coolDown;
 	protected double damage;
+	private double maxDistance;
+
 
 	/**
 	* Weapon constructor, creates a weapon object
@@ -26,7 +28,7 @@ public abstract class Weapon {
 	* @param sight Sight of the Player when holding the weapon
 	* @param movement Movement of the weapon
 	*/
-	public Weapon(int mag, double reloadTime, double sight, double movement, double dmg)
+	public Weapon(int mag, double reloadTime, double sight, double movement, double dmg, double maxDistance)
 	{
 		magazineSize = mag;
 		defaultMagSize = mag;
@@ -38,6 +40,7 @@ public abstract class Weapon {
 		defaultDamage = dmg;
 		reloadCounter = 0;
 		coolDown = 0;
+		this.maxDistance = maxDistance;
 //		this.fireRate = fireRate;
 		
 	}
@@ -102,7 +105,17 @@ public abstract class Weapon {
 		return reloadTime;
 	}
 	
+	/**
+	* @return defaultDamage of the weapon
+	*/
 	public double getDamage() {
 		return defaultDamage;
+	}
+	
+	/**
+	* @return The max distance of the bullets of the weapon
+	*/
+	public double getMaxDistance(){
+		return maxDistance;
 	}
 }

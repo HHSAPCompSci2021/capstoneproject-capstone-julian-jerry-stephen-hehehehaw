@@ -11,6 +11,7 @@ public class Bullet {
 	private double vx, vy, worldX, worldY, damage, health; 
 	private int width, height; 
 	private Rectangle dimensions;
+	private double distanceTraveled;
 	
 	public Bullet(double x, double y, double vx, double vy, double damage, double health, int width, int height, int speed)
 	{
@@ -37,6 +38,8 @@ public class Bullet {
 	{
 		this.worldX += vx;
 		this.worldY += vy;
+		
+		distanceTraveled += Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2));
 	}
 	
 	public void draw(PApplet p, Player player)
@@ -94,6 +97,11 @@ public class Bullet {
 			return true;
 		}
 		return false;
+	}
+	
+	public double getDistanceTraveled()
+	{
+		return distanceTraveled;
 	}
 	
 }
