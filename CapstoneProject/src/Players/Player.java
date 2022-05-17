@@ -8,6 +8,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Player {
+	public final static String fileSeparator = System.getProperty("file.separator");
 	private Weapon weapon;
 	public Avatar avatar;
 	private double vision;
@@ -34,6 +35,16 @@ public class Player {
 	private int cd = 0;
 	private Collider c;
 	
+	private ArrayList<PImage> emotes;
+	private PImage activeEmote;
+	private PApplet p;
+	
+	private double emoteInitWidth;
+	private double emoteInitHeight;
+	private double emoteCounter;
+	
+
+	
 	
 	public Player(Collider cl, float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images, int tileSize)
 	{
@@ -53,6 +64,11 @@ public class Player {
 		this.health = health;
 		initHealth = health;
 		dimensions = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.35), (int)(tileSize * 0.6), (int)(tileSize * 0.55));
+		
+		emotes = new ArrayList<PImage>();
+		emotes.add(pa.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png"));
+		p = pa;
+		emoteCounter = 0;
 		
 		
 	}
@@ -95,6 +111,7 @@ public class Player {
 	
 	public void draw(PApplet p) {
 	
+		
 		collisionOn = false;
 		if (c != null) {
 			int whichOne = c.checkTile(this);
@@ -168,6 +185,35 @@ public class Player {
 		}
 
 
+		if(activeEmote != null)
+		{
+			p.push();
+			if(activeEmote.width >= emoteInitWidth || activeEmote.height >= emoteInitHeight)
+			{
+				emoteCounter++;
+				if(emoteCounter >= 20)
+				{
+					activeEmote = null;
+					emoteCounter = 0;
+				}
+			
+			}
+			else {
+				
+				activeEmote.resize(activeEmote.width+10, activeEmote.height+10);
+				p.image(activeEmote, screenX+5*dimensions.width/4, screenY-dimensions.height/2);
+			}
+			
+			if(activeEmote != null)
+			{
+				p.image(activeEmote, screenX+5*dimensions.width/4, screenY-dimensions.height/2);
+			}
+			
+			p.pop();
+		}
+		
+	
+			
 		
 	}
 	
@@ -260,6 +306,15 @@ public class Player {
 	public double getInitHealth()
 	{
 		return initHealth;
+	}
+	
+	public void emote()
+	{
+		activeEmote = p.loadImage("Assets" + fileSeparator + "hehehaha.png");
+		emoteInitWidth = activeEmote.width;
+		emoteInitHeight = activeEmote.height;
+		activeEmote.resize(60, 60);
+
 	}
 	
 

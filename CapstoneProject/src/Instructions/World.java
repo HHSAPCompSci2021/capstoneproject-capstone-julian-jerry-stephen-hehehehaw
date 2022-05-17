@@ -264,6 +264,12 @@ public class World implements Screen {
 		final int k = p.keyCode;
 		player1.setDirection(k, true);
 		player1.avatar.setDirection(k, true);
+		
+		//Currently selected emote will display
+		if(p.key == 'e')
+		{
+			player1.emote();
+		}
 	}
 			
 	/**
