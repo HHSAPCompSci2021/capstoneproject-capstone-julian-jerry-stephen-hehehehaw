@@ -66,6 +66,8 @@ public class World implements Screen {
 //	private final int worldWidth = maxWorldCol * tM.getTileSize();
 //	private final int worldHeight = maxWorldRow * tM.getTileSize();
 	private BufferedImage image;
+	
+	private boolean dead1, dead2;
 	Player player1, player2;
 	
 	public World(MainMenu p) {
@@ -178,10 +180,18 @@ public class World implements Screen {
 	* @post Changes PApplet's text alignment to Center
 	*/
 	public void draw() {
+		if (dead1) {
+			player1.setWorldX(tM.getTileSize() * 50);
+			player1.setWorldY(tM.getTileSize() * 2);
+			dead1 = false;
+			
+		}
 		
 		// check if player has lost all its health
-		if(player1.getHealth() <= 0)
+		if(player1.getHealth() <= 0) {
 			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
+			dead1 = true;
+		}
 		else {
 		//add code to remove bullets from screen if they collide with a wall or 
 		
@@ -201,15 +211,20 @@ public class World implements Screen {
 			b.draw(p, player1);
 		}
 		
-//		for (int i = 0; i < bullets.size(); i++) {
+		for (int i = 0; i < bullets.size(); i++) {
+
+			if (cC.checkTiles(bullets.get(i))) {
+				bullets.remove(i);
+				i--;
+			}
+		
 //			if (bullets.get(i).damagePlayer(player2)) {
 //				bullets.remove(i);
 //				i--;
 //			}
 			
-			//checkTiles(bullets.get(i));
 				
-		//}
+		}
 			
 		p.pop();
 

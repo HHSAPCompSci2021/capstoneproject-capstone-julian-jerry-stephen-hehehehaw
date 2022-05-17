@@ -125,7 +125,7 @@ public class TileManager {
 	public void changePowerUpList() {
 	
 		for (int i = 0; i < randList.length; i ++) {
-			randList[i] = (int) (Math.random() * 4 + 18);
+			randList[i] = (int) (Math.random() * 3 + 19);
 		}
 	}
 	
@@ -179,7 +179,7 @@ public class TileManager {
 			tileDesignator[12][48] = randList[0];
 			tileDesignator[13][49] = 18;
 			
-			tileDesignator[48][9] = 21;//randList[1];
+			tileDesignator[48][9] = randList[1];
 			tileDesignator[49][10] = 18;
 			
 			tileDesignator[50][48] = randList[2];

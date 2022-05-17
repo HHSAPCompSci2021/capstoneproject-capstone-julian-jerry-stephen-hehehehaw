@@ -116,8 +116,8 @@ public class Player {
 
 			int whichOne= c.checkTile(this);
 			if (whichOne != -1)
-				System.out.println("whichOne: " + whichOne); 			
-				System.out.println(" Speed: " + speed + " speedBuffed: " + speedBuffed + " speedCD: " + speedCD);
+				//System.out.println("whichOne: " + whichOne); 			
+			//	System.out.println(" Speed: " + speed + " speedBuffed: " + speedBuffed + " speedCD: " + speedCD);
 
 				switch (whichOne) {
 				case 17:
@@ -143,7 +143,7 @@ public class Player {
 				if (slowed) {
 					slowCD++;
 
-					if (slowCD >= 60) {
+					if (slowCD >= 40) {
 						slowed = false;
 						slowCD = 0;
 						speed = defaultSpeed;					}
@@ -248,9 +248,16 @@ public class Player {
 		return worldX;
 	}
 	
+	public void setWorldX(int x) {
+		worldX = x;
+	}
+	
 	public float getWorldY()
 	{
 		return worldY;
+	}	
+	public void setWorldY(int y) {
+		worldY = y;
 	}
 	public float getScreenX()
 	{

@@ -11,11 +11,16 @@ import Weapons.Bullet;
 public class Collider {
 	int tileSize;
 	TileManager tM;
+	ArrayList<Tile> tL;
+	int[][]map;
 	
 //	World world;
 	public Collider(int tSize, TileManager tM){//World worldd) {
 		tileSize = tSize;
 		this.tM = tM;
+		
+		tL = tM.getTilesList();
+		map = tM.getMap();
 		
 	}
 	/*
@@ -38,9 +43,7 @@ public class Collider {
 		int playerBottomRow = playerBottomWorldY/tileSize;
 
 		int t1 = 0, t2 = 0, t3 = 0, t4 = 0 , t5= 0, t6= 0, t7= 0, t8 = 0;
-		
-		ArrayList<Tile> tL = tM.getTilesList();
-		int[][]map = tM.getMap();
+
 			if (player.getN()) {
 				playerTopRow =(int) ((playerTopWorldY - player.getSpeed())/tileSize);
 
@@ -119,7 +122,12 @@ public class Collider {
 	}
 	
 	public boolean checkTiles(Bullet b) {
-		//if 
+		ArrayList<Tile> tL = tM.getTilesList();
+		int[][]map = tM.getMap();
+		
+		if(tL.get(map[(int) (b.getWorldX()/tM.getTileSize())][(int) (b.getWorldY()/tM.getTileSize())]).solidState())
+				return true;
+		
 		return false;
 	}
 }
