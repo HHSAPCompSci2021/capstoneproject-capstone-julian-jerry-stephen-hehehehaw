@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import Players.Player;
 
 public class Sniper extends Weapon{
-	private double coolDownTimer = 10;
+	private double coolDownTimer;
 	
 	public Sniper() {
 		super(5, 70, 20, 1, 95, 1000);
+		coolDownTimer = 50;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,16 +30,7 @@ public class Sniper extends Weapon{
 			justShot = true;
 			return bullets;
 		}
-		else if(ammo >= 1 && justShot == true)
-		{
-			coolDown++;
-			
-			if(coolDown == 1)
-			{
-				justShot = false;
-				coolDown = 0;
-			}
-		}
+		
 	
 		return new ArrayList<Bullet>();
 
@@ -49,10 +41,11 @@ public class Sniper extends Weapon{
 	public void reload() {
 		reloadCounter++;
 		
-		if(reloadCounter == reloadTime)
+		if(reloadCounter >= reloadTime)
 		{
 			ammo = magazineSize;
 			reloadCounter = 0;
+			justShot = false;
 		}
 		
 	}
@@ -60,6 +53,24 @@ public class Sniper extends Weapon{
 	public double getAmmo()
 	{
 		return ammo;
+	}
+	
+	public void incrementCoolDown()
+	{
+		coolDown++;
+		
+		
+		if(coolDown == coolDownTimer)
+		{
+			justShot = false;
+			coolDown = 0;
+		}
+		
+	}
+	
+	public boolean getJustShot()
+	{
+		return justShot;
 	}
 
 }

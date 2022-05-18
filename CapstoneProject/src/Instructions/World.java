@@ -353,6 +353,14 @@ public class World implements Screen {
 		}
 
 		
+		if(me.getWeapon() instanceof Sniper)
+		{
+			Sniper s = (Sniper)me.getWeapon();
+			if(s.getJustShot())
+			{
+				s.incrementCoolDown();
+			}
+		}
 		
 		if(playerShoot)
 		{
@@ -448,6 +456,11 @@ public class World implements Screen {
 			me.emote();
 			heHeHaHa.play();
 		}
+	}
+	
+	
+	public void setPlayerGameMode(boolean gameMode) {
+		me.setGameMode(gameMode);
 	}
 			
 	/**

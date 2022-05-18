@@ -48,6 +48,9 @@ public class Player {
 	
 	private String uniqueID;
 	
+	//false = KOTH, true = deathmatch, default is KOTH
+	private boolean gameDecision; 
+	
 
 	
 	
@@ -80,7 +83,7 @@ public class Player {
 		p = pa;
 		emoteCounter = 0;
 		
-		
+		gameDecision = false; 
 		
 	}
 	
@@ -199,7 +202,10 @@ public class Player {
 		
 	}
 	
-	
+	public void setGameMode(boolean gameMode)
+	{
+		gameDecision = gameMode;
+	}
 	
 	public boolean getN() {
 		return north;
@@ -222,6 +228,7 @@ public class Player {
 	}
 	
 	public void draw(PApplet p) {
+//		System.out.println(gameDecision);
 	//	System.out.println(worldX + " " + worldY)
 		collisionOn = false;
 		if (c != null) {

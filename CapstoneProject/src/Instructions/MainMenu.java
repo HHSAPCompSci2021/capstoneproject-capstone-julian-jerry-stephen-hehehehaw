@@ -64,6 +64,8 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 		screens.add(world);
 		
+		
+		
 		Instructions iScreen = new Instructions(this, DRAWING_WIDTH, DRAWING_HEIGHT);
 		screens.add(iScreen);
 		
@@ -106,7 +108,6 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		activeScreen.draw();
 		
 	
-//		mainMenuSound.loop();
 		
 		pop();
 	}
@@ -153,7 +154,23 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	}
 
 	public void switchScreen(int i) {
+		
+		if(activeScreen == screen1)
+		{
+			int decision = screen1.getChosenGamemode();
+			boolean gameMode = true;
+			if(decision == 1) gameMode = false;
+			
+			System.out.println(decision);
+			
+			world.setPlayerGameMode(gameMode);
+		}
+		
+		
 		activeScreen = screens.get(i);
+		
+		
+		
 		if(i <= 2)
 			isFirst = true;
 		if(i == 3) {
@@ -169,6 +186,8 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 				}
 			}
 		}
+		
+		
 		
 		if(activeScreen instanceof World)
 		{
