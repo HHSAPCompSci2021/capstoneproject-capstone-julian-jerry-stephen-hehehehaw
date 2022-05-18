@@ -311,6 +311,7 @@ public class World implements Screen {
 		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 
 		
+		
 		if(playerShoot)
 		{
 			
