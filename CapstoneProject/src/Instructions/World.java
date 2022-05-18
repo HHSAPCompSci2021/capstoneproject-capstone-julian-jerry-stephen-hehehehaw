@@ -373,6 +373,9 @@ public class World implements Screen {
 		}
 		
 
+	}
+		
+
 		if (!currentlySending && me.isDataChanged()) {
 			currentlySending = true;
 			myUserRef.setValue(me.getDataObject(), new CompletionListener() {
@@ -384,7 +387,6 @@ public class World implements Screen {
 				
 			});
 		}
-	}
 }
 			 
 	/**
