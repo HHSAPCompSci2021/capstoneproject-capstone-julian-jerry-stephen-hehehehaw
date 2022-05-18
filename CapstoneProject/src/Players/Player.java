@@ -3,7 +3,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import FireBaseStuff.PlayerData;
-import Weapons.Bullet;
+import Weapons.*;
 import Weapons.Weapon;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -16,7 +16,7 @@ public class Player {
 //	private double vision;
 	private double speed;
 	private double defaultSpeed;
-	private final double realDefaultSpeed;
+	private double realDefaultSpeed;
 	private double health; 
 	private Rectangle dimensions;
 	private double initHealth;
@@ -83,6 +83,10 @@ public class Player {
 		
 		
 	}
+	
+/*
+ * 
+ */
 	public Player(float xS, float yS, float xW, float yW, PApplet pa, PImage[] images, int tileSize) { //placeholder for testing purposes
 		
 		worldX = xW;
@@ -100,17 +104,61 @@ public class Player {
 		
 	}
 
-	
-	public Player(String uniqueID, PlayerData data, PApplet p) {
-		worldX = data.worldX;
-		worldY = data.worldY;
-		realDefaultSpeed = 12.5;
+	/*
+	 * 
+	 */
+	public Player(String uniqueID, PlayerData data, PApplet p, PImage[] images, Collider c, int tileSize) {
+		this.uniqueID = uniqueID;
 		this.data = data;
 		this.p = p;
+		
+		worldX = data.worldX;
+		worldY = data.worldY;
+		screenX = data.screenX;
+		screenY = data.screenY;
+		east = data.east;
+		west = data.west;
+		north = data.north;
+		south = data.south;
+		health = data.health;
+		speed = data.speed;
+		switch (data.weapon) {
+		case 0:
+			setWeapon(new Shotgun());
+			break;
+		case 1: 
+			setWeapon(new Sniper());
+			break;
+		case 2:
+			setWeapon(new Submachine());
+			break;
+		case 3: 
+			setWeapon(new Knife());
+			break;
+		}
 
+		
+		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
+
+//		
 		syncWithDataObject(data);
 		
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void setImages(PImage[] images) {
+
+		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
+	}
+	public int getWeaponInt() {
+		if (weapon instanceof Shotgun) 
+			return 0;
+		if (weapon instanceof Sniper)
+			return 1;
+		if (weapon instanceof Submachine)
+			return 2;
+		return 3;
+		
 	}
 	public void setDead(boolean d) {
 		dead = d;
@@ -125,6 +173,15 @@ public class Player {
 		
 		data.worldX = worldX;
 		data.worldY = worldY;
+		data.screenX = screenX;
+		data.screenY = screenY;
+		data.west = west;
+		data.east = east;
+		data.south = south;
+		data.north = north;
+		data.health = health;
+		data.speed = realDefaultSpeed;
+		data.weapon = getWeaponInt();
 		return data;
 	}
 	
@@ -133,6 +190,13 @@ public class Player {
 		
 		worldX = (float) data.worldX;
 		worldY = (float) data.worldY;
+		screenX = data.screenX;
+		screenY = data.screenY;
+		west = data.west;
+		east =data.east;
+		south = data.south;
+		north = data.north;
+		
 	}
 	
 	
@@ -238,14 +302,18 @@ public class Player {
 		
 		p.fill(0);
 		avatar.draw(p, screenX, screenY);
+		dataUpdated = true;
 		avatar.spriteCounter++;
 		if (avatar.spriteCounter > (int)(65 * Math.pow(0.8835, speed + 8))) {
+			dataUpdated = true;
 			if (avatar.spriteNum == 1)
 				avatar.spriteNum = 2;
 			else if (avatar.spriteNum == 2) {
 				avatar.spriteNum = 1;
 			}
 			avatar.spriteCounter = 0;
+		
+			syncWithDataObject(getDataObject());
 		}
 
 
@@ -313,6 +381,12 @@ public class Player {
 	public float getScreenX()
 	{
 		return screenX;
+	}
+	public void setScreenX(float x) {
+		screenX = x;
+	}
+	public void setScreenY(float y) {
+		screenY = y;
 	}
 	
 	public float getScreenY()
@@ -400,6 +474,7 @@ public class Player {
 	}
 	
 	public void setDirection(int k, boolean decision) {
+		
 		dataUpdated = true;
 	 if      (k == 'w'    || k == 'W')   {
 		 north = decision;
