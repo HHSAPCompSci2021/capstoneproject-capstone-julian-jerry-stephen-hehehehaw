@@ -47,16 +47,22 @@ public class Player {
 	private double emoteCounter;
 	
 	private String uniqueID;
+	private ArrayList<Integer> powerUpList;
+
+	public int powerUpRow, powerUpColumn;
 	
 
 	
 	
-	public Player(String uniqueID, Collider cl, float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images, int tileSize)
+	public Player(ArrayList<Integer> powrUpList, String uniqueID, Collider cl, float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images, int tileSize)
 	{
+		powerUpList = powrUpList;
 		this.uniqueID = uniqueID;
 		data = new PlayerData();
 		dataUpdated = false;
 		
+		powerUpRow = -1;
+		powerUpColumn = -1;
 		
 		c = cl;
 		worldX = x;
@@ -89,6 +95,9 @@ public class Player {
  */
 	public Player(float xS, float yS, float xW, float yW, PApplet pa, PImage[] images, int tileSize) { //placeholder for testing purposes
 		
+
+		powerUpRow = -1;
+		powerUpColumn = -1;
 		worldX = xW;
 		worldY = yW;
 		
@@ -111,7 +120,9 @@ public class Player {
 		this.uniqueID = uniqueID;
 		this.data = data;
 		this.p = p;
-		
+		powerUpList = data.powerUpList;
+		powerUpRow = data.powerUpRow;
+		powerUpColumn = data.powerUpColumn;
 		worldX = data.worldX;
 		worldY = data.worldY;
 		screenX = data.screenX;
@@ -146,6 +157,20 @@ public class Player {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void setPowerUpRow(int r) {
+		powerUpRow = r;
+	}
+	public void setPowerUpCol(int c) {
+		
+		powerUpColumn = c;
+	}
+	public int getPRow(){
+		return powerUpRow;
+	}
+	public int getPCol() {
+		return powerUpColumn;
+	}
+	
 	public void setImages(PImage[] images) {
 
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
@@ -170,7 +195,10 @@ public class Player {
 	
 	public PlayerData getDataObject() {
 		dataUpdated = false;
+		data.powerUpRow = powerUpRow;
+		data.powerUpColumn = powerUpColumn;
 		
+		data.powerUpList = powerUpList;
 		data.worldX = worldX;
 		data.worldY = worldY;
 		data.screenX = screenX;
@@ -187,6 +215,10 @@ public class Player {
 	
 	public void syncWithDataObject(PlayerData data) {
 		dataUpdated = false;
+		
+		powerUpRow = data.powerUpRow;
+		powerUpColumn = data.powerUpColumn;
+		powerUpList = data.powerUpList;
 		
 		worldX = (float) data.worldX;
 		worldY = (float) data.worldY;
@@ -500,6 +532,14 @@ public class Player {
 	public boolean isDataChanged() {
 		// TODO Auto-generated method stub
 		return dataUpdated;
+	}
+
+	public int[] getPowerUpList() {
+		int[] arr = new int[powerUpList.size()];
+		for (int i = 0; i < powerUpList.size(); i++) {
+			arr[i] = powerUpList.get(i);
+		}
+		return arr;
 	}
 	
 

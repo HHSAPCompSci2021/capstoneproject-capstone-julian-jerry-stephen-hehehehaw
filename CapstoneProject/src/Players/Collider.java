@@ -104,17 +104,32 @@ public class Collider {
 					}
 					
 				}
-			if (tL.get(map[playerLeftCol][playerTopRow]).isPowerUp())
+			if (tL.get(map[playerLeftCol][playerTopRow]).isPowerUp()) {
 				map[playerLeftCol][playerTopRow] = 0;
+				player.setPowerUpRow(playerTopRow);
+				player.setPowerUpCol(playerLeftCol);
+			}
 			
-			if (tL.get(map[playerRightCol][playerTopRow]).isPowerUp())
+			else if (tL.get(map[playerRightCol][playerTopRow]).isPowerUp()) {
 				map[playerRightCol][playerTopRow] = 0;
+
+				player.setPowerUpRow(playerTopRow);
+				player.setPowerUpCol(playerRightCol);
+			}
 			
-			if (tL.get(map[playerLeftCol][playerBottomRow]).isPowerUp())
+			else if (tL.get(map[playerLeftCol][playerBottomRow]).isPowerUp()) {
 				map[playerLeftCol][playerBottomRow] = 0;
+
+				player.setPowerUpRow(playerBottomRow);
+				player.setPowerUpCol(playerLeftCol);
+			}
 			
-			if (tL.get(map[playerRightCol][playerBottomRow]).isPowerUp())
+			else if (tL.get(map[playerRightCol][playerBottomRow]).isPowerUp()) {
 				map[playerRightCol][playerBottomRow] = 0;
+
+				player.setPowerUpRow(playerBottomRow);
+				player.setPowerUpCol(playerRightCol);
+			}
 
 			
 			return index;

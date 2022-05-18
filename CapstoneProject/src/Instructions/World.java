@@ -97,7 +97,7 @@ public class World implements Screen {
 //	private final int worldWidth = maxWorldCol * tM.getTileSize();
 //	private final int worldHeight = maxWorldRow * tM.getTileSize();
 	private BufferedImage image;
-	
+	private ArrayList<Integer> powerUpList;
 
 	
 	public World(MainMenu p, DatabaseReference roomRef) {
@@ -123,7 +123,10 @@ public class World implements Screen {
 		
 		tileGrid = reader.ImageToArr(image);
 		
+
+		powerUpList = TileManager.getPowerUpList();
 		tM = new TileManager(16, 5, tileGrid);
+		tM.changePowerUpList(powerUpList);
 		screenWidth = maxScreenCol * tM.getTileSize();
 		screenHeight = maxScreenRow * tM.getTileSize();
 		this.p = p;
@@ -190,8 +193,7 @@ public class World implements Screen {
 //		player.setWeapon(new Shotgun());
 //		player.setWeapon(new Submachine());
 	myUserRef = roomRef.child("users").push();
-		
-		me =  new Player(myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
+		me =  new Player(powerUpList, myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
 		
 	//	System.out.println(me.getWorldX());
 		myUserRef.setValueAsync(me.getDataObject());
@@ -302,7 +304,7 @@ public class World implements Screen {
 		}
 	//	p.fill(220, 220, 220);
 
-	if (players.size() == 1) {
+	if (players.size() > 0) {
 			
 			Player p2 = players.get(0);
 			float screenX = p2.getWorldX() - me.getWorldX() + me.getScreenX();
@@ -321,12 +323,18 @@ public class World implements Screen {
 			p2.setScreenX(screenX);
 			p2.setScreenY(screenY);
 			p2.draw(p);
+			
+			if (p2.getPRow() > 0 && p2.getPCol() > 0) {
+				tM.getMap()[p2.getPCol()][p2.getPRow()] = 0;
+			}
 
 		}
 
 		
 		
 		me.draw(p);
+		
+		
 	
 		
 		
