@@ -10,7 +10,7 @@ public class PlayerHUD {
 	public void draw(PApplet p, int width, int height, Player player, Player avatar)
 	{
 		weapon = p.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "Submachine.png");
-		//p.push();
+		p.push();
 				
 		p.fill(255, 255, 255);
 		

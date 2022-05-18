@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.DatabaseReference.CompletionListener;
 
 import FireBaseStuff.PlayerData;
+import Players.Avatar;
 //import FireBase.DrawingSurface.UserChangeListener;
 import Players.Collider;
 import Players.Player;
@@ -77,6 +78,7 @@ public class World implements Screen {
 	private ArrayList<Integer> keysDown;
 	private Player me;
 	private ArrayList<Player> players;
+	private ArrayList<Avatar> avatars;
 	
 	private DatabaseReference roomRef;  // This is the database entry for the whole room
 	private DatabaseReference myUserRef;  // This is the database entry for just our user's data. This allows us to more easily update ourselves.
@@ -101,6 +103,7 @@ public class World implements Screen {
 	public World(MainMenu p, DatabaseReference roomRef) {
 
 		players = new ArrayList<Player>();
+		avatars = new ArrayList<Avatar>();
 		
 		this.roomRef = roomRef;
 		currentlySending = false;
@@ -164,14 +167,14 @@ public class World implements Screen {
 		
 		p.frameRate(30);
 		
-		playerImage2[0] = p.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
-		playerImage2[1] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
-		playerImage2[2] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
-		playerImage2[3] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
-		playerImage2[4] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
-		playerImage2[5] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
-		playerImage2[6] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
-		playerImage2[7] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png");
+		playerImage2[0] = p.loadImage("Assets" + fileSeparator + "RedAvatar" + fileSeparator + "Forward1.png");
+		playerImage2[1] = p.loadImage("Assets"  + fileSeparator + "RedAvatar" + fileSeparator + "Backward1.png");
+		playerImage2[2] = p.loadImage("Assets"  + fileSeparator + "RedAvatar" + fileSeparator + "Forward2.png");
+		playerImage2[3] = p.loadImage("Assets"  + fileSeparator + "RedAvatar" + fileSeparator + "Backward2.png");
+		playerImage2[4] = p.loadImage("Assets"  + fileSeparator + "RedAvatar" + fileSeparator + "Left1.png");
+		playerImage2[5] = p.loadImage("Assets"  + fileSeparator + "RedAvatar" + fileSeparator + "Right1.png");
+		playerImage2[6] = p.loadImage("Assets"  + fileSeparator + "RedAvatar" + fileSeparator + "Left2.png");
+		playerImage2[7] = p.loadImage("Assets"  + fileSeparator + "RedAvatar" + fileSeparator + "Right2.png");
 
 		
 		playerImage[0] = p.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "Backwards1.png");
@@ -189,10 +192,10 @@ public class World implements Screen {
 	myUserRef = roomRef.child("users").push();
 		
 		me =  new Player(myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
-
-		System.out.println(me.getWorldX());
+		
+	//	System.out.println(me.getWorldX());
 		myUserRef.setValueAsync(me.getDataObject());
-		System.out.println(me.getDataObject().worldX);
+	//	System.out.println(me.getDataObject().worldX);
 		
 		roomRef.child("users").addChildEventListener(new UserChangeListener());
 		
@@ -269,14 +272,20 @@ public class World implements Screen {
 		p.background(220,220,220);  
 		p.textAlign(p.CENTER);
 
+	
+//			if (bullets.get(i).damagePlayer(player2)) {
+//				bullets.remove(i);
+//				i--;
+//			}
 		tM.draw(p, me);
 		
-		p.push();
+		
 		for(Bullet b : bullets)
 		{
 			p.fill(0, 255, 0);
 			b.draw(p, me);
 		}
+		
 		
 		for (int i = 0; i < bullets.size(); i++) {
 
@@ -284,25 +293,44 @@ public class World implements Screen {
 				bullets.remove(i);
 				i--;
 			}
+		}
 		
-//			if (bullets.get(i).damagePlayer(player2)) {
-//				bullets.remove(i);
-//				i--;
-//			}
-			
-				
-		}
-		for (int i = 0; i < players.size(); i++) {
-			players.get(i).draw(p);
-		}
-		me.draw(p);
-
-	
 		
 		if(me.getWeapon().getAmmo() <= 0){
 
 			me.getWeapon().reload();
 		}
+	//	p.fill(220, 220, 220);
+
+	if (players.size() == 1) {
+			
+			Player p2 = players.get(0);
+			float screenX = p2.getWorldX() - me.getWorldX() + me.getScreenX();
+			float screenY = p2.getWorldY() - me.getWorldY() + me.getScreenY();
+			p2.setImages(playerImage2);	
+			
+			if (p2.getN())
+				p2.avatar.setDirection('w', true);
+			else if (p2.getS())
+				p2.avatar.setDirection('s', true);
+			else if (p2.getW())
+				p2.avatar.setDirection('a', true);
+			else if (p2.getE())
+				p2.avatar.setDirection('d', true);
+			
+			p2.setScreenX(screenX);
+			p2.setScreenY(screenY);
+			p2.draw(p);
+
+		}
+
+		
+		
+		me.draw(p);
+	
+		
+		
+		
 		hud.draw(p, screenWidth, screenHeight, me, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
 
 		surface.textAlign(surface.CENTER);
@@ -315,6 +343,7 @@ public class World implements Screen {
 		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 
 
+
 		for(int i = 0; i < bullets.size(); i++)
 		{
 			if(me.getWeapon().getMaxDistance() < bullets.get(i).getDistanceTraveled())
@@ -322,6 +351,7 @@ public class World implements Screen {
 				bullets.remove(i);
 			}
 		}
+
 		
 		
 		if(playerShoot)
@@ -364,11 +394,14 @@ public class World implements Screen {
 						sniperShotSound.play();
 					
 				}
+
 				else if(me.getWeapon() instanceof Knife)
 				{
 					knifeSound.play();
-				}
+
 			}
+			
+		
 			
 			
 			
@@ -380,7 +413,7 @@ public class World implements Screen {
 					
 			
 		}
-		
+
 
 	}
 		
@@ -396,7 +429,8 @@ public class World implements Screen {
 				
 			});
 		}
-}
+	}
+
 			 
 	/**
 	* Tracks the keys pressed that moves the player
@@ -502,8 +536,9 @@ public class World implements Screen {
 					}
 					
 					PlayerData data = arg0.getValue(PlayerData.class);
-					Player player = new Player(arg0.getKey(), data, p);
+					Player player = new Player(arg0.getKey(), data, p, playerImage2, cC, tM.getTileSize());
 					players.add(player);
+					
 				}
 				
 			});

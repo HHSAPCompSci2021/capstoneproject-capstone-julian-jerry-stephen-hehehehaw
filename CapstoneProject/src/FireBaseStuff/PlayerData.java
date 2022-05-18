@@ -29,13 +29,19 @@ package FireBaseStuff;
  */
 public class PlayerData {
 	
-	public float worldX, worldY;
-	public boolean player1, player2;
-	public int weapon;
-	public boolean dead;
+	public float worldX, worldY, screenX, screenY;
+	public boolean player2;
+	public int weapon; //0-3
+	public double health;
+	public double speed;
 	public boolean east, west, north, south;
 	
+	
+	public boolean gameDecision; 
+	//get this from the screen class that holds it, if both are the same then execute the game, else do nothing
 //	public boolean emote;
+	//need to check for bullet collisions with player2, store the damage dealt in here
+	//need to check for picking up a powerup and remove that tile, doesnt have to be done in here
 	
 	// One thing that is interesting is that the Firebase database cannot store arrays.
 	// So, if you want to use a library class that uses arrays (the Color class is one such example), then
