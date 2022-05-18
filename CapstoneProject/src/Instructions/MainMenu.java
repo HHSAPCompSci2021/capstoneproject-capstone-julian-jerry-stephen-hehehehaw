@@ -161,7 +161,6 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 			boolean gameMode = true;
 			if(decision == 1) gameMode = false;
 			
-			System.out.println(decision);
 			
 			world.setPlayerGameMode(gameMode);
 		}
