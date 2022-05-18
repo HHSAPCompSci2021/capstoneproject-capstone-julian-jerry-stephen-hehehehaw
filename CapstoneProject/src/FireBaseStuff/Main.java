@@ -1,4 +1,13 @@
-package FireBase;
+package FireBaseStuff;
+
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+
+import Instructions.MainMenu;
+import Instructions.World;
+import processing.awt.PSurfaceAWT;
+import processing.core.PApplet;
 
 public class Main {
 
@@ -11,7 +20,7 @@ public class Main {
 	    
 		RoomChooser rc = new RoomChooser();
 		rc.show();
-		
+
 		
 	}
 	

@@ -1,4 +1,4 @@
-package FireBase;
+package FireBaseStuff;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -20,6 +20,10 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.ValueEventListener;
+
+import Instructions.MainMenu;
+import Instructions.World;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +48,9 @@ public class RoomChooser extends JPanel
 	private DatabaseReference postsRef;
 	
 	
-	
+	public DatabaseReference getDBR() {
+		return postsRef;
+	}
 	
 	public RoomChooser() {
 		
@@ -130,17 +136,20 @@ public class RoomChooser extends JPanel
 				
 				theWindow.setVisible(false);
 				
-				DrawingSurface drawing = new DrawingSurface(snap.getChildren().iterator().next().getRef());
-				PApplet.runSketch(new String[]{""}, drawing);
-				PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
+				MainMenu main = new MainMenu ( snap.getChildren().iterator().next().getRef());
+				World drawing = new World(main, snap.getChildren().iterator().next().getRef());
+				PApplet.runSketch(new String[]{""}, main);
+				PSurfaceAWT surf = (PSurfaceAWT) main.getSurface();
 				PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
 				JFrame window = (JFrame)canvas.getFrame();
 
-				window.setSize(800, 600);
-				window.setMinimumSize(new Dimension(100,100));
+				window.setSize(drawing.screenWidth, drawing.screenHeight);
+				window.setMinimumSize(new Dimension(drawing.screenWidth, drawing.screenHeight));
+				window.setMaximumSize(new Dimension(drawing.screenWidth + 1, drawing.screenHeight + 1));
 				window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				window.setResizable(true);
-
+				
+				window.setLocationRelativeTo(null);
 				window.setVisible(true);
 				
 				canvas.requestFocus();
