@@ -1,8 +1,10 @@
 package FireBaseStuff;
 
+import java.util.ArrayList;
+
 /**
  * 
- *  The class you store in the database must fit 3 simple constraints:
+ *  The class you store in the datsabase must fit 3 simple constraints:
 
 	The class must have a default constructor that takes no arguments.
 	The class must define public getters for the properties to be assigned. Properties without a public getter will be set to their default value when an instance is deserialized.
@@ -35,6 +37,8 @@ public class PlayerData {
 	public double health;
 	public double speed;
 	public boolean east, west, north, south;
+	public int powerUpRow, powerUpColumn;
+	public ArrayList<Integer> powerUpList;
 	
 	
 	public boolean gameDecision; 

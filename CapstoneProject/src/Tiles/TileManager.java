@@ -32,7 +32,7 @@ public class TileManager {
 		tileDesignator = tileGrid;
 		tileSize = this.scale * originalTileSize;
 		randList = new int[6];
-		changePowerUpList();
+	//	changePowerUpList();
 
 	
 	}
@@ -122,13 +122,22 @@ public class TileManager {
 		speedPowerUp.powerUp();
 	}
 		
-	public void changePowerUpList() {
-	
-		for (int i = 0; i < randList.length; i ++) {
-			randList[i] = (int) (Math.random() * 3 + 19);
+	public void changePowerUpList(ArrayList<Integer> arr) {
+		int[] ar = new int[randList.length];
+		for (int i = 0; i< arr.size(); i++) {
+			ar[i] = arr.get(i);
 		}
+	
+		randList = ar;
 	}
 	
+	public static ArrayList<Integer> getPowerUpList() {
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		for (int i = 0; i < 6; i ++) {
+			arr.add((int) (Math.random() * 3 + 19));
+		}
+		return arr;
+	}
 	
 	public int tileInteract(int tileNum, Player p) {
 		switch (tileNum) {
@@ -173,8 +182,6 @@ public class TileManager {
 	public void draw(PApplet p, Player player) {
 		
 		if (spawnPowerUps) {
-			
-			changePowerUpList();
 				
 			tileDesignator[12][48] = randList[0];
 			tileDesignator[13][49] = 18;
