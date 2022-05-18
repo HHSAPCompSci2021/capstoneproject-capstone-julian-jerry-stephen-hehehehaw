@@ -1,4 +1,4 @@
-package FireBase;
+package FireBaseStuff;
 
 /**
  * 
@@ -29,10 +29,9 @@ package FireBase;
  */
 public class PlayerData {
 	
-	public String username;
-	public double x, y;
-	public int r, g, b;
-	public int shapeType;
+	public float worldX, worldY;
+	public boolean player1, player2;
+//	public boolean emote;
 	
 	// One thing that is interesting is that the Firebase database cannot store arrays.
 	// So, if you want to use a library class that uses arrays (the Color class is one such example), then
@@ -43,32 +42,13 @@ public class PlayerData {
 		
 	}
 	
-	public String getUsername() {
-		return username;
-	}
-
 	public double getX() {
-		return x;
+		return worldX;
 	}
 
 	public double getY() {
-		return y;
+		return worldY;
 	}
 
-	public int getR() {
-		return r;
-	}
-
-	public int getG() {
-		return g;
-	}
-
-	public int getB() {
-		return b;
-	}
-
-	public int getShapeType() {
-		return shapeType;
-	}
 	
 }

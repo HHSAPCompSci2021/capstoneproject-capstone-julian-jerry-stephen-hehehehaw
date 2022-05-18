@@ -7,9 +7,18 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.imageio.ImageIO;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DatabaseReference.CompletionListener;
+
+import FireBaseStuff.PlayerData;
+//import FireBase.DrawingSurface.UserChangeListener;
 import Players.Collider;
 import Players.Player;
 import Players.PlayerHUD;
@@ -27,7 +36,7 @@ public class World implements Screen {
 	public final static String fileSeparator = System.getProperty("file.separator");
 	public final static String lineSeparator = System.getProperty("line.separator");
 	public final static String userDir = System.getProperty("user.dir");
-	private PApplet p;
+	public PApplet p;
 	private SoundFile heHeHaHa;
 	private SoundFile shotGunShot;
 	private SoundFile subMachineShot;
@@ -61,6 +70,14 @@ public class World implements Screen {
 	*/
 	public int screenHeight;
 	
+	private ArrayList<Integer> keysDown;
+	private Player me;
+	private ArrayList<Player> players;
+	
+	private DatabaseReference roomRef;  // This is the database entry for the whole room
+	private DatabaseReference myUserRef;  // This is the database entry for just our user's data. This allows us to more easily update ourselves.
+	private boolean currentlySending;
+	
 	private MainMenu surface;
 	private Rectangle backButton;
 	private final float BUTTON_WIDTH = 0.1f;
@@ -75,10 +92,15 @@ public class World implements Screen {
 //	private final int worldHeight = maxWorldRow * tM.getTileSize();
 	private BufferedImage image;
 	
-	private boolean dead1, dead2;
-	Player player1, player2;
+
 	
-	public World(MainMenu p) {
+	public World(MainMenu p, DatabaseReference roomRef) {
+
+		players = new ArrayList<Player>();
+		
+		this.roomRef = roomRef;
+		currentlySending = false;
+		
 		surface = p;
 		try {
 			image = ImageIO.read(new File("Assets" + fileSeparator + "map.png"));
@@ -86,6 +108,9 @@ public class World implements Screen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+
 		
 		reader = new imageReaderToRGB();
 		
@@ -104,17 +129,17 @@ public class World implements Screen {
 	
 	public void changeWeapon(int w) {
 		if(w == 1)
-			player1.setWeapon(new Shotgun());
+			me.setWeapon(new Shotgun());
 		else if(w == 2)
-			player1.setWeapon(new Sniper());
+			me.setWeapon(new Sniper());
 		else if(w == 3)
-			player1.setWeapon(new Submachine());
+			me.setWeapon(new Submachine());
 		else if(w == 4)
-			player1.setWeapon(new Knife());
+			me.setWeapon(new Knife());
 	}
 	
 	public void resetHealth() {
-		player1.heal(100);
+		me.heal(100);
 	}
 	
 	// The statements in the setup() function 
@@ -127,6 +152,7 @@ public class World implements Screen {
 		subMachineShot = new SoundFile(p, "Assets/Music/Submachine.wav");
 		subMachineShot.amp(0.1f);
 
+	
 		
 		p.frameRate(30);
 		
@@ -149,10 +175,30 @@ public class World implements Screen {
 		playerImage[6] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left2.png");
 		playerImage[7] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
 
-		player1 =  new Player(cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
 //		player.setWeapon(new Sniper());
 //		player.setWeapon(new Shotgun());
 //		player.setWeapon(new Submachine());
+	myUserRef = roomRef.child("users").push();
+		
+		me =  new Player(myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
+
+		System.out.println(me.getWorldX());
+		myUserRef.setValueAsync(me.getDataObject());
+		System.out.println(me.getDataObject().worldX);
+		
+		roomRef.child("users").addChildEventListener(new UserChangeListener());
+		
+		Runtime.getRuntime().addShutdownHook(new Thread()  // This code runs when the program exits.
+	    {
+	      public void run()
+	      {
+	    	  if (players.size() == 0)
+					roomRef.removeValueAsync();
+				else
+					myUserRef.removeValueAsync();
+	      }
+	    });
+		
 
 
 		tileImage[0] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick1.png");
@@ -186,6 +232,8 @@ public class World implements Screen {
 		
 		tM.setTiles(tileImage);
 		
+		
+	
 	}
 
 	/**
@@ -195,17 +243,17 @@ public class World implements Screen {
 	* @post Changes PApplet's text alignment to Center
 	*/
 	public void draw() {
-		if (dead1) {
-			player1.setWorldX(tM.getTileSize() * 50);
-			player1.setWorldY(tM.getTileSize() * 2);
-			dead1 = false;
+		if (me.getDead()) {
+			me.setWorldX(tM.getTileSize() * 50);
+			me.setWorldY(tM.getTileSize() * 2);
+			me.setDead(false);
 			
 		}
 		
 		// check if player has lost all its health
-		if(player1.getHealth() <= 0) {
+		if(me.getHealth() <= 0) {
 			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
-			dead1 = true;
+			me.setDead(true);
 		}
 		else {
 
@@ -213,13 +261,13 @@ public class World implements Screen {
 		p.background(220,220,220);  
 		p.textAlign(p.CENTER);
 
-		tM.draw(p, player1);
+		tM.draw(p, me);
 		
 		p.push();
 		for(Bullet b : bullets)
 		{
 			p.fill(0, 255, 0);
-			b.draw(p, player1);
+			b.draw(p, me);
 		}
 		
 		for (int i = 0; i < bullets.size(); i++) {
@@ -236,18 +284,18 @@ public class World implements Screen {
 			
 				
 		}
-			
-		p.pop();
-
-
-		
-		player1.draw(p);
-		
-		if(player1.getWeapon().getAmmo() <= 0){
-
-			player1.getWeapon().reload();
+		for (int i = 0; i < players.size(); i++) {
+			players.get(i).draw(p);
 		}
-		hud.draw(p, screenWidth, screenHeight, player1, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
+		me.draw(p);
+
+	
+		
+		if(me.getWeapon().getAmmo() <= 0){
+
+			me.getWeapon().reload();
+		}
+		hud.draw(p, screenWidth, screenHeight, me, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
 
 		surface.textAlign(surface.CENTER);
 		surface.fill(255);
@@ -262,21 +310,21 @@ public class World implements Screen {
 		if(playerShoot)
 		{
 			
-			if(player1.getWeapon().getAmmo() <= 0)
+			if(me.getWeapon().getAmmo() <= 0)
 			{
 				playerShoot = false;
 			}
 		
 			
-			for(Bullet b : player1.shoot(p.mouseX, p.mouseY)) {	
+			for(Bullet b : me.shoot(p.mouseX, p.mouseY)) {	
 				bullets.add(b);
 			}
 			
-			if(player1.getWeapon() instanceof Shotgun && player1.getWeapon().getAmmo() >= 0)
+			if(me.getWeapon() instanceof Shotgun && me.getWeapon().getAmmo() >= 0)
 			{
 				shotGunShot.play();
 			}
-			else if(player1.getWeapon() instanceof Submachine && player1.getWeapon().getAmmo() >= 0)
+			else if(me.getWeapon() instanceof Submachine && me.getWeapon().getAmmo() >= 0)
 			{
 				if(soundCounter == 10)
 				{
@@ -288,7 +336,7 @@ public class World implements Screen {
 					soundCounter++;
 				}
 			}
-			else if(player1.getWeapon() instanceof Sniper && player1.getWeapon().getAmmo() >= 0)
+			else if(me.getWeapon() instanceof Sniper && me.getWeapon().getAmmo() >= 0)
 			{
 				if(soundCounter == 10)
 				{
@@ -301,7 +349,7 @@ public class World implements Screen {
 				}
 			}
 			
-			if (!(player1.getWeapon() instanceof Submachine))
+			if (!(me.getWeapon() instanceof Submachine))
 			{
 				playerShoot = false;
 			}
@@ -312,27 +360,41 @@ public class World implements Screen {
 		
 		for(int i = 0; i < bullets.size(); i++)
 		{
-			if(player1.getWeapon().getMaxDistance() < bullets.get(i).getDistanceTraveled())
+			if(me.getWeapon().getMaxDistance() < bullets.get(i).getDistanceTraveled())
 			{
 				bullets.remove(i);
 			}
 		}
 		
+
+		if (!currentlySending && me.isDataChanged()) {
+			currentlySending = true;
+			myUserRef.setValue(me.getDataObject(), new CompletionListener() {
+
+				@Override
+				public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
+					currentlySending = false;
+				}
+				
+			});
 		}
 	}
+}
 			 
 	/**
 	* Tracks the keys pressed that moves the player
 	*/
 	public void keyPressed() {
 		final int k = p.keyCode;
-		player1.setDirection(k, true);
-		player1.avatar.setDirection(k, true);
+
+		
+		me.setDirection(k, true);
+		me.avatar.setDirection(k, true);
 		
 		//Currently selected emote will display
 		if(p.key == 'e')
 		{
-			player1.emote();
+			me.emote();
 			heHeHaHa.play();
 		}
 	}
@@ -341,8 +403,9 @@ public class World implements Screen {
 	* Tracks the keys released
 	*/
 	public void keyReleased() {
-		player1.setDirection(p.keyCode, false) ;
-		player1.avatar.setDirection(p.keyCode, false) ;
+
+		me.setDirection(p.keyCode, false) ;
+		me.avatar.setDirection(p.keyCode, false) ;
 	}
 
 
@@ -375,6 +438,108 @@ public class World implements Screen {
 	* Tracks when the mouse is moved
 	*/
 	public void mouseMoved() {
+		
+	}
+	
+	/**
+	 * 
+	 * Handles all changes to the "users" database reference. This part of the database contains information about the players currently in this room.
+	 * Because Firebase uses a separate thread than most other processes we're using (both Swing and Processing),
+	 * we need to have a strategy for ensuring that code is executed somewhere besides these methods.
+	 * 
+	 * @author john_shelby
+	 *
+	 */
+	public class UserChangeListener implements ChildEventListener {
+
+		private ConcurrentLinkedQueue<Runnable> tasks;
+		
+		public UserChangeListener() {  // This threading strategy will work with Processing programs. Just use this code inside your PApplet.
+			tasks = new ConcurrentLinkedQueue<Runnable>();
+			
+			p.registerMethod("post", this);
+		}
+		
+		
+		public void post() {
+			while (!tasks.isEmpty()) {
+				Runnable r = tasks.remove();
+				r.run();
+			}
+		}
+		
+		@Override
+		public void onCancelled(DatabaseError arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onChildAdded(DataSnapshot arg0, String arg1) {
+			tasks.add(new Runnable() {
+
+				@Override
+				public void run() {
+					if (me.idMatch(arg0.getKey())) {  // Don't react to our own data
+						return;
+					}
+					
+					PlayerData data = arg0.getValue(PlayerData.class);
+					Player player = new Player(arg0.getKey(), data, p);
+					players.add(player);
+				}
+				
+			});
+		}
+
+		@Override
+		public void onChildChanged(DataSnapshot arg0, String arg1) {
+			tasks.add(new Runnable() {
+
+				@Override
+				public void run() {
+					if (me.idMatch(arg0.getKey()))
+						return;
+					
+					for (int i = 0; i < players.size(); i++) {
+						Player player = players.get(i);
+						if (player.idMatch(arg0.getKey())) {
+							PlayerData data = arg0.getValue(PlayerData.class);
+							player.syncWithDataObject(data);
+						}
+					}
+				}
+				
+			});
+			
+		}
+
+		@Override
+		public void onChildMoved(DataSnapshot arg0, String arg1) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onChildRemoved(DataSnapshot arg0) {
+			tasks.add(new Runnable() {
+
+				@Override
+				public void run() {
+					if (me.idMatch(arg0.getKey()))
+						return;
+					
+					for (int i = 0; i < players.size(); i++) {
+						if (players.get(i).idMatch(arg0.getKey())) {
+							players.remove(i);
+							break;
+						}
+					}
+				}
+				
+			});
+			
+		}
 		
 	}
 }

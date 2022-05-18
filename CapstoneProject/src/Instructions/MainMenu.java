@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import com.google.firebase.database.DatabaseReference;
+
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -35,9 +37,16 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	private SoundFile mainMenuSound;
 	private SoundFile inGameSound;
 
-	public MainMenu() {
-		world = new World(this);
+
+	public World getWorld() {
+		return world;
+	}
+
+	public MainMenu(DatabaseReference postsRef) {
+		
+		world = new World(this, postsRef);
 		isFirst = true;
+		
 		DRAWING_WIDTH = world.screenWidth;
 		DRAWING_HEIGHT = world.screenHeight;
 		
@@ -66,24 +75,9 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	}
 	
 
-	public static void main(String args[]) {
-		MainMenu m = new MainMenu();
-		
-		World drawing = new World(m);
-		PApplet.runSketch(new String[]{""}, m);
-		PSurfaceAWT surf = (PSurfaceAWT) m.getSurface();
-		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
-		JFrame window = (JFrame)canvas.getFrame();
-
-		window.setSize(drawing.screenWidth, drawing.screenHeight);
-		window.setMinimumSize(new Dimension(drawing.screenWidth, drawing.screenHeight));
-		window.setMaximumSize(new Dimension(drawing.screenWidth + 1, drawing.screenHeight + 1));
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(true);
-		
-		window.setLocationRelativeTo(null);
-		window.setVisible(true);
-	}
+//	public static void main(String args[]) {
+//
+//	}
 	
 	public void setup() {
 		mainMenuSound = new SoundFile(this, "Assets/Music/Level1.wav");
