@@ -54,6 +54,8 @@ public class Player {
 
 
 	public int powerUpRow, powerUpColumn;
+	public int powerUpRow1, powerUpColumn1, powerUpRow2, powerUpColumn2, powerUpRow3, powerUpColumn3, powerUpRow4, powerUpColumn4;
+
 	
 	private int killCount;
 	private int deathCount;
@@ -67,8 +69,14 @@ public class Player {
 		data = new PlayerData();
 		dataUpdated = false;
 		
-		powerUpRow = -1;
-		powerUpColumn = -1;
+		powerUpRow1 = -1;
+		powerUpColumn1 = -1;
+		powerUpRow2 = -1;
+		powerUpColumn2 = -1;
+		powerUpRow3 = -1;
+		powerUpColumn3 = -1;
+		powerUpRow4 = -1;
+		powerUpColumn4 = -1;;
 		
 		c = cl;
 		worldX = x;
@@ -106,8 +114,14 @@ public class Player {
 	public Player(float xS, float yS, float xW, float yW, PApplet pa, PImage[] images, int tileSize) { //placeholder for testing purposes
 		
 
-		powerUpRow = -1;
-		powerUpColumn = -1;
+		powerUpRow1 = -1;
+		powerUpColumn1 = -1;
+		powerUpRow2 = -1;
+		powerUpColumn2 = -1;
+		powerUpRow3 = -1;
+		powerUpColumn3 = -1;
+		powerUpRow4 = -1;
+		powerUpColumn4 = -1;
 		worldX = xW;
 		worldY = yW;
 		
@@ -131,8 +145,18 @@ public class Player {
 		this.data = data;
 		this.p = p;
 		powerUpList = data.powerUpList;
-		powerUpRow = data.powerUpRow;
-		powerUpColumn = data.powerUpColumn;
+		powerUpRow1 = data.powerUpRow1;
+		powerUpColumn1 = data.powerUpColumn1;
+
+		powerUpRow2 = data.powerUpRow2;
+		powerUpColumn2 = data.powerUpColumn2;
+
+		powerUpRow3 = data.powerUpRow3;
+		powerUpColumn3 = data.powerUpColumn3;
+
+		powerUpRow4 = data.powerUpRow4;
+		powerUpColumn4 = data.powerUpColumn4;
+		
 		worldX = data.worldX;
 		worldY = data.worldY;
 		screenX = data.screenX;
@@ -168,18 +192,39 @@ public class Player {
 	}
 	
 	public void setPowerUpRow(int r) {
-		powerUpRow = r;
+		powerUpRow1 = r;
 	}
 	public void setPowerUpCol(int c) {
 		
-		powerUpColumn = c;
+		powerUpColumn1 = c;
 	}
-	public int getPRow(){
-		return powerUpRow;
+	public int getR1(){
+		return powerUpRow1;
 	}
-	public int getPCol() {
-		return powerUpColumn;
+	public int getC1() {
+		return powerUpColumn1;
 	}
+	public int getR2(){
+		return powerUpRow2;
+	}
+	public int getC2() {
+		return powerUpColumn2;
+	}
+	
+	public int getR3(){
+		return powerUpRow3;
+	}
+	public int getC3() {
+		return powerUpColumn3;
+	}
+	
+	public int getR4(){
+		return powerUpRow4;
+	}
+	public int getC4() {
+		return powerUpColumn4;
+	}
+	
 	
 	public void setImages(PImage[] images) {
 
@@ -205,8 +250,17 @@ public class Player {
 	
 	public PlayerData getDataObject() {
 		dataUpdated = false;
-		data.powerUpRow = powerUpRow;
-		data.powerUpColumn = powerUpColumn;
+		data.powerUpRow1 = powerUpRow1;
+		data.powerUpColumn1 = powerUpColumn1;
+
+		data.powerUpRow2 = powerUpRow2;
+		data.powerUpColumn2 = powerUpColumn2;
+
+		data.powerUpRow3 = powerUpRow3;
+		data.powerUpColumn3 = powerUpColumn3;
+
+		data.powerUpRow4 = powerUpRow4;
+		data.powerUpColumn4 = powerUpColumn4;
 		
 		data.powerUpList = powerUpList;
 		data.worldX = worldX;
@@ -225,9 +279,18 @@ public class Player {
 	
 	public void syncWithDataObject(PlayerData data) {
 		dataUpdated = false;
-		
-		powerUpRow = data.powerUpRow;
-		powerUpColumn = data.powerUpColumn;
+
+		powerUpRow1 = data.powerUpRow1;
+		powerUpColumn1 = data.powerUpColumn1;
+
+		powerUpRow2 = data.powerUpRow2;
+		powerUpColumn2 = data.powerUpColumn2;
+
+		powerUpRow3 = data.powerUpRow3;
+		powerUpColumn3 = data.powerUpColumn3;
+
+		powerUpRow4 = data.powerUpRow4;
+		powerUpColumn4 = data.powerUpColumn4;
 		powerUpList = data.powerUpList;
 		
 		worldX = (float) data.worldX;

@@ -110,21 +110,21 @@ public class Collider {
 				player.setPowerUpCol(playerLeftCol);
 			}
 			
-			else if (tL.get(map[playerRightCol][playerTopRow]).isPowerUp()) {
+			if (tL.get(map[playerRightCol][playerTopRow]).isPowerUp()) {
 				map[playerRightCol][playerTopRow] = 0;
 
 				player.setPowerUpRow(playerTopRow);
 				player.setPowerUpCol(playerRightCol);
 			}
 			
-			else if (tL.get(map[playerLeftCol][playerBottomRow]).isPowerUp()) {
+			if (tL.get(map[playerLeftCol][playerBottomRow]).isPowerUp()) {
 				map[playerLeftCol][playerBottomRow] = 0;
 
 				player.setPowerUpRow(playerBottomRow);
 				player.setPowerUpCol(playerLeftCol);
 			}
 			
-			else if (tL.get(map[playerRightCol][playerBottomRow]).isPowerUp()) {
+			if (tL.get(map[playerRightCol][playerBottomRow]).isPowerUp()) {
 				map[playerRightCol][playerBottomRow] = 0;
 
 				player.setPowerUpRow(playerBottomRow);

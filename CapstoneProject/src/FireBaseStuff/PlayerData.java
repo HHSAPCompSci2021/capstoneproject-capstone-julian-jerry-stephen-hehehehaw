@@ -37,7 +37,7 @@ public class PlayerData {
 	public double health;
 	public double speed;
 	public boolean east, west, north, south;
-	public int powerUpRow, powerUpColumn;
+	public int powerUpRow1, powerUpColumn1, powerUpRow2, powerUpColumn2,powerUpRow3, powerUpColumn3,powerUpRow4, powerUpColumn4;
 	public ArrayList<Integer> powerUpList;
 	
 	

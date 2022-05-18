@@ -327,9 +327,18 @@ public class World implements Screen {
 			p2.setScreenX(screenX);
 			p2.setScreenY(screenY);
 			p2.draw(p);
-			
-			if (p2.getPRow() > 0 && p2.getPCol() > 0) {
-				tM.getMap()[p2.getPCol()][p2.getPRow()] = 0;
+	
+			if (p2.getR1() > 0 && p2.getC1() > 0) {
+				tM.getMap()[p2.getC1()][p2.getR1()] = 0;
+			}
+			if (p2.getR2() > 0 && p2.getC2() > 0) {
+				tM.getMap()[p2.getC2()][p2.getR2()] = 0;
+			}
+			if (p2.getR3() > 0 && p2.getC3() > 0) {
+				tM.getMap()[p2.getC3()][p2.getR3()] = 0;
+			}
+			if (p2.getR4() > 0 && p2.getC4() > 0) {
+				tM.getMap()[p2.getC4()][p2.getR4()] = 0;
 			}
 
 		}
@@ -438,10 +447,10 @@ public class World implements Screen {
 	}
 		
 
-		if (!currentlySending && me.isDataChanged()) {
+		if (me.isDataChanged()) { // !currentlySending && {
 			currentlySending = true;
 			myUserRef.setValue(me.getDataObject(), new CompletionListener() {
-
+				//set value bullet object
 				@Override
 				public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
 					currentlySending = false;
@@ -479,7 +488,6 @@ public class World implements Screen {
 	* Tracks the keys released
 	*/
 	public void keyReleased() {
-
 		me.setDirection(p.keyCode, false) ;
 		me.avatar.setDirection(p.keyCode, false) ;
 	}
