@@ -326,15 +326,6 @@ public class World implements Screen {
 				bullets.add(b);
 			}
 			
-
-			if(me.getWeapon() instanceof Shotgun && me.getWeapon().getAmmo() >= 0)
-			{
-				shotGunShot.play();
-			}
-			else if(me.getWeapon() instanceof Submachine && me.getWeapon().getAmmo() >= 0)
-			{
-				if(soundCounter == 10)
-
 			int newNum = bullets.size();
 			
 			if(oldNum != newNum)
@@ -343,18 +334,7 @@ public class World implements Screen {
 				{
 					shotGunShot.play();
 				}
-
-		
-				else {
-					soundCounter++;
-				}
-			}
-			else if(me.getWeapon() instanceof Sniper && me.getWeapon().getAmmo() >= 0)
-			{
-				if(soundCounter == 10)
-
 				else if(me.getWeapon() instanceof Submachine && me.getWeapon().getAmmo() >= 0)
-
 				{
 					if(soundCounter == 10)
 					{
@@ -366,13 +346,21 @@ public class World implements Screen {
 						soundCounter++;
 					}
 				}
-				else if(player1.getWeapon() instanceof Sniper && player1.getWeapon().getAmmo() >= 0)
+				else if(me.getWeapon() instanceof Sniper && me.getWeapon().getAmmo() >= 0)
 				{
 					
 						sniperShotSound.play();
 					
 				}
-				
+			}
+			
+			
+			for(int i = 0; i < bullets.size(); i++)
+			{
+				if(me.getWeapon().getMaxDistance() < bullets.get(i).getDistanceTraveled())
+				{
+					bullets.remove(i);
+				}
 			}
 			
 			if (!(me.getWeapon() instanceof Submachine))
@@ -382,14 +370,6 @@ public class World implements Screen {
 			
 					
 			
-		}
-		
-		for(int i = 0; i < bullets.size(); i++)
-		{
-			if(me.getWeapon().getMaxDistance() < bullets.get(i).getDistanceTraveled())
-			{
-				bullets.remove(i);
-			}
 		}
 		
 
