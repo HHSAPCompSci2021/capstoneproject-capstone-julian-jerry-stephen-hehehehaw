@@ -330,7 +330,7 @@ public class Player {
 	}
 	
 	public void draw(PApplet p) {
-		System.out.println(this + ":" + gameDecision);
+//		System.out.println(this + ":" + gameDecision);
 	//	System.out.println(worldX + " " + worldY)
 		collisionOn = false;
 		if (c != null) {

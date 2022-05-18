@@ -3,6 +3,7 @@ package Screens;
 import java.awt.Point;
 import java.awt.Rectangle;
 import Instructions.*;
+import processing.sound.SoundFile;
 
 // 
 public class MenuScreen implements Screen {
@@ -15,7 +16,8 @@ public class MenuScreen implements Screen {
 	private final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	private final float BUTTON_WIDTH = 0.2f;
 	private final float BUTTON_HEIGHT = 0.1f;
-	
+//	private SoundFile menuClick;
+
 	public MenuScreen(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
@@ -26,7 +28,8 @@ public class MenuScreen implements Screen {
 	}
 	
 	public void setup() {
-		
+//		menuClick = new SoundFile(surface, "Assets" + fileSeparator + "Music" + fileSeparator + "Menu Select.wav");
+
 	}
 	
 	// add one extra button for the Instructions screen
@@ -58,9 +61,16 @@ public class MenuScreen implements Screen {
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (startButton.contains(p))
+		{
+			World.menuClick.play();
 			surface.switchScreen(ScreenSwitcher.GAMEMODE_SELECTION_SCREEN);
+		}
 		else if (instButton.contains(p))
+		{
+			World.menuClick.play();
 			surface.switchScreen(ScreenSwitcher.INSTRUCTION_SCREEN);
+		}
+			
 	}
 	
 	public void mouseMoved() {}

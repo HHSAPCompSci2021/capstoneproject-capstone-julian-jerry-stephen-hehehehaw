@@ -38,14 +38,15 @@ public class World implements Screen {
 	public final static String lineSeparator = System.getProperty("line.separator");
 	public final static String userDir = System.getProperty("user.dir");
 	public PApplet p;
+	public static SoundFile menuClick;
 	private SoundFile heHeHaHa;
 	private SoundFile shotGunShot;
 	private SoundFile subMachineShot;
 	private SoundFile sniperShotSound;
 	private SoundFile knifeSound;
-
-
 	private int soundCounter = 0;
+	
+	
 
 
 	
@@ -159,12 +160,14 @@ public class World implements Screen {
 	// The statements in the setup() function 
 	// execute once when the program beginsas
 	public void setup() {
+		menuClick = new SoundFile(surface, "Assets" + fileSeparator + "Music" + fileSeparator + "Menu Select.wav");
+		menuClick.amp(0.5f);
 		heHeHaHa = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "HeHeHeHa.wav");
 		heHeHaHa.amp(0.7f);
 		shotGunShot = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "ShotgunShot.wav");
 		shotGunShot.amp(0.3f);
 		subMachineShot = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "Submachine.wav");
-		subMachineShot.amp(0.1f);
+		subMachineShot.amp(0.2f);
 		sniperShotSound = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "SniperShot.wav");
 		knifeSound = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "KnifeSlash.wav");
 

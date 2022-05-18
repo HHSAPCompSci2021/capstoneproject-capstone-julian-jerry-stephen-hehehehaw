@@ -190,12 +190,19 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 		if(activeScreen instanceof World)
 		{
-			mainMenuSound.stop();
-			inGameSound.loop();
+			if(!inGameSound.isPlaying())
+			{
+				mainMenuSound.stop();
+				inGameSound.loop();
+			}
+			
 		}
 		else if(activeScreen instanceof MenuScreen){
-			inGameSound.stop();
-			mainMenuSound.loop();
+			if(!mainMenuSound.isPlaying())
+			{
+				inGameSound.stop();
+				mainMenuSound.loop();
+			}
 		}
 //		System.out.println(screen1.getChosenGamemode());
 	}
