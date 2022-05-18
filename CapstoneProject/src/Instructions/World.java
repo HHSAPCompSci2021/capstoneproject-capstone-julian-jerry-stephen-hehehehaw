@@ -40,6 +40,8 @@ public class World implements Screen {
 	private SoundFile heHeHaHa;
 	private SoundFile shotGunShot;
 	private SoundFile subMachineShot;
+	private SoundFile sniperShotSound;
+
 	private int soundCounter = 0;
 
 
@@ -145,12 +147,14 @@ public class World implements Screen {
 	// The statements in the setup() function 
 	// execute once when the program beginsas
 	public void setup() {
-		heHeHaHa = new SoundFile(p, "Assets/Music/HeHeHeHa.wav");
+		heHeHaHa = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "HeHeHeHa.wav");
 		heHeHaHa.amp(0.7f);
-		shotGunShot = new SoundFile(p, "Assets/Music/ShotgunShot.wav");
+		shotGunShot = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "ShotgunShot.wav");
 		shotGunShot.amp(0.3f);
-		subMachineShot = new SoundFile(p, "Assets/Music/Submachine.wav");
+		subMachineShot = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "Submachine.wav");
 		subMachineShot.amp(0.1f);
+		sniperShotSound = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "SniperShot.wav");
+
 
 	
 		
@@ -315,11 +319,13 @@ public class World implements Screen {
 				playerShoot = false;
 			}
 		
+			int oldNum = bullets.size();
 			
 			for(Bullet b : me.shoot(p.mouseX, p.mouseY)) {	
 				bullets.add(b);
 			}
 			
+
 			if(me.getWeapon() instanceof Shotgun && me.getWeapon().getAmmo() >= 0)
 			{
 				shotGunShot.play();
@@ -327,10 +333,16 @@ public class World implements Screen {
 			else if(me.getWeapon() instanceof Submachine && me.getWeapon().getAmmo() >= 0)
 			{
 				if(soundCounter == 10)
+
+			int newNum = bullets.size();
+			
+			if(oldNum != newNum)
+			{
+				if(me.getWeapon() instanceof Shotgun && me.getWeapon().getAmmo() >= 0)
 				{
-					subMachineShot.play();
-					soundCounter = 0;
+					shotGunShot.play();
 				}
+
 		
 				else {
 					soundCounter++;
@@ -339,14 +351,27 @@ public class World implements Screen {
 			else if(me.getWeapon() instanceof Sniper && me.getWeapon().getAmmo() >= 0)
 			{
 				if(soundCounter == 10)
+
+				else if(me.getWeapon() instanceof Submachine && me.getWeapon().getAmmo() >= 0)
+
 				{
-					subMachineShot.play();
-					soundCounter = 0;
+					if(soundCounter == 10)
+					{
+						subMachineShot.play();
+						soundCounter = 0;
+					}
+			
+					else {
+						soundCounter++;
+					}
 				}
-		
-				else {
-					soundCounter++;
+				else if(player1.getWeapon() instanceof Sniper && player1.getWeapon().getAmmo() >= 0)
+				{
+					
+						sniperShotSound.play();
+					
 				}
+				
 			}
 			
 			if (!(me.getWeapon() instanceof Submachine))
