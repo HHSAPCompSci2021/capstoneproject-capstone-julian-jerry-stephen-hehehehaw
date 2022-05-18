@@ -86,6 +86,9 @@ public class World implements Screen {
 	
 	private MainMenu surface;
 	private Rectangle backButton;
+	private Rectangle instructions;
+	private Rectangle scoreBoard;
+	
 	private final float BUTTON_WIDTH = 0.1f;
 	private final float BUTTON_HEIGHT = 0.1f;
 	
@@ -132,6 +135,7 @@ public class World implements Screen {
 		this.p = p;
 		
 		backButton = new Rectangle((int)(screenWidth*0.015), (int)(screenHeight*0.03), (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
+		scoreBoard = new Rectangle((int)(screenWidth*0.8), 0, (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
 		
 		cC = new Collider(tM.getTileSize(), tM);
 		playerShoot = false;

@@ -51,7 +51,9 @@ public class Player {
 
 	public int powerUpRow, powerUpColumn;
 	
-
+	private int killCount;
+	private int deathCount;
+	private int points;
 	
 	
 	public Player(ArrayList<Integer> powrUpList, String uniqueID, Collider cl, float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images, int tileSize)
@@ -86,8 +88,9 @@ public class Player {
 		p = pa;
 		emoteCounter = 0;
 		
-		
-		
+		killCount = 0;
+		deathCount = 0;
+		points = 0;
 	}
 	
 /*
@@ -542,7 +545,27 @@ public class Player {
 		return arr;
 	}
 	
-
+	public int getKillCount() {
+		return killCount;
+	}
 	
+	public int getDeathCount() {
+		return deathCount;
+	}
 	
+	public int getPoints() {
+		return points;
+	}
+	
+	public void incrementKillCount(int x) {
+		killCount += x;
+	}
+	
+	public void incrementDeathCount(int x) {
+		deathCount += x;
+	}
+	
+	public void incrementPoints(int x) {
+		points += x;
+	}
 }
