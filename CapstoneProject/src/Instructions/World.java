@@ -41,6 +41,8 @@ public class World implements Screen {
 	private SoundFile shotGunShot;
 	private SoundFile subMachineShot;
 	private SoundFile sniperShotSound;
+	private SoundFile knifeSound;
+
 
 	private int soundCounter = 0;
 
@@ -154,6 +156,8 @@ public class World implements Screen {
 		subMachineShot = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "Submachine.wav");
 		subMachineShot.amp(0.1f);
 		sniperShotSound = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "SniperShot.wav");
+		knifeSound = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "KnifeSlash.wav");
+
 
 
 	
@@ -310,6 +314,14 @@ public class World implements Screen {
 		float w0 = surface.textWidth(str0);
 		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 
+
+		for(int i = 0; i < bullets.size(); i++)
+		{
+			if(me.getWeapon().getMaxDistance() < bullets.get(i).getDistanceTraveled())
+			{
+				bullets.remove(i);
+			}
+		}
 		
 		
 		if(playerShoot)
@@ -352,16 +364,13 @@ public class World implements Screen {
 						sniperShotSound.play();
 					
 				}
-			}
-			
-			
-			for(int i = 0; i < bullets.size(); i++)
-			{
-				if(me.getWeapon().getMaxDistance() < bullets.get(i).getDistanceTraveled())
+				else if(me.getWeapon() instanceof Knife)
 				{
-					bullets.remove(i);
+					knifeSound.play();
 				}
 			}
+			
+			
 			
 			if (!(me.getWeapon() instanceof Submachine))
 			{

@@ -105,19 +105,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 		activeScreen.draw();
 		
-		if(activeScreen instanceof World)
-		{
-			
-		} else if(activeScreen instanceof MenuScreen) {
-			mainMenuSound.loop();
-		} else if(activeScreen instanceof WeaponSelectionScreen) {
-			
-		} else if(activeScreen instanceof Instructions) {
-			
-		} else if(activeScreen instanceof DeathScreen) {
-			
-		}
-		
+	
 //		mainMenuSound.loop();
 		
 		pop();
@@ -182,7 +170,16 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 			}
 		}
 		
-		System.out.println(screen1.getChosenGamemode());
+		if(activeScreen instanceof World)
+		{
+			mainMenuSound.stop();
+			inGameSound.loop();
+		}
+		else if(activeScreen instanceof MenuScreen){
+			inGameSound.stop();
+			mainMenuSound.loop();
+		}
+//		System.out.println(screen1.getChosenGamemode());
 	}
 	
 	
