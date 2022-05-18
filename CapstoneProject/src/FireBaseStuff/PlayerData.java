@@ -31,6 +31,10 @@ public class PlayerData {
 	
 	public float worldX, worldY;
 	public boolean player1, player2;
+	public int weapon;
+	public boolean dead;
+	public boolean east, west, north, south;
+	
 //	public boolean emote;
 	
 	// One thing that is interesting is that the Firebase database cannot store arrays.
