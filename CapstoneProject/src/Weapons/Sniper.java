@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Players.Player;
 
 public class Sniper extends Weapon{
-	
+	private double coolDownTimer = 10;
 	
 	public Sniper() {
 		super(5, 70, 20, 1, 95, 1000);
