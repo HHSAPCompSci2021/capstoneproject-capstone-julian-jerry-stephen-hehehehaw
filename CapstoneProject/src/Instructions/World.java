@@ -427,10 +427,10 @@ public class World implements Screen {
 					currentlySending = false;
 				}
 				
-			});
+			});	
+		}
 		}
 	}
-
 			 
 	/**
 	* Tracks the keys pressed that moves the player
