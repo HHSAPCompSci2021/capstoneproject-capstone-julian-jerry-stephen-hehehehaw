@@ -40,6 +40,9 @@ public class PlayerData {
 	public int powerUpRow1, powerUpColumn1, powerUpRow2, powerUpColumn2,powerUpRow3, powerUpColumn3,powerUpRow4, powerUpColumn4;
 	public ArrayList<Integer> powerUpList;
 	
+	public ArrayList <BulletData> incBullets = new ArrayList<BulletData>();
+	public ArrayList <BulletData> outBullets = new ArrayList<BulletData>();
+	
 	
 	public boolean gameDecision; 
 	//get this from the screen class that holds it, if both are the same then execute the game, else do nothing

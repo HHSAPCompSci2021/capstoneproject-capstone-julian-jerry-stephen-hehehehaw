@@ -60,7 +60,8 @@ public class World implements Screen {
 	private int tileGrid[][];
 	private Collider cC;
 	
-	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	private ArrayList<Bullet> bulletsOut = new ArrayList<Bullet>();
+	private ArrayList<Bullet> bulletsIn = new ArrayList<Bullet>();
 	private PlayerHUD hud = new PlayerHUD();
 	private TileManager tM;
 	
@@ -207,7 +208,7 @@ public class World implements Screen {
 //		player.setWeapon(new Shotgun());
 //		player.setWeapon(new Submachine());
 	myUserRef = roomRef.child("users").push();
-		me =  new Player(powerUpList, myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
+		me =  new Player(bulletsOut, bulletsIn, powerUpList, myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
 		
 	//	System.out.println(me.getWorldX());
 		myUserRef.setValueAsync(me.getDataObject());
@@ -293,21 +294,7 @@ public class World implements Screen {
 		tM.draw(p, me);
 		
 		
-		for(Bullet b : bullets)
-		{
-			p.fill(0, 255, 0);
-			b.draw(p, me);
-		}
-		
-		
-		for (int i = 0; i < bullets.size(); i++) {
-
-			if (cC.checkTiles(bullets.get(i))) {
-				bullets.remove(i);
-				i--;
-			}
-		}
-		
+	
 		
 		if(me.getWeapon().getAmmo() <= 0){
 
@@ -322,16 +309,6 @@ public class World implements Screen {
 			float screenY = p2.getWorldY() - me.getWorldY() + me.getScreenY();
 			p2.setImages(playerImage2);	
 			
-			p2.avatar.spriteCounter++;
-			if (p2.avatar.spriteCounter > (int)(65 * Math.pow(0.8835, p2.getSpeed() + 8))) {
-				if (p2.avatar.spriteNum == 1)
-					p2.avatar.spriteNum = 2;
-				else if (p2.avatar.spriteNum == 2) {
-					p2.avatar.spriteNum = 1;
-				}
-				p2.avatar.spriteCounter = 0;
-			}
-			
 			if (p2.getN())
 				p2.avatar.setDirection('w', true);
 			else if (p2.getS())
@@ -344,7 +321,9 @@ public class World implements Screen {
 			p2.setScreenX(screenX);
 			p2.setScreenY(screenY);
 			p2.draw(p);
-			
+			bulletsIn = p2.getOut();
+			me.setInc(bulletsIn);
+			myUserRef.setValueAsync(me.getDataObject());
 	
 			if (p2.getR1() > 0 && p2.getC1() > 0) {
 				tM.getMap()[p2.getC1()][p2.getR1()] = 0;
@@ -362,8 +341,42 @@ public class World implements Screen {
 		}
 
 		
-		
+		me.setOut(bulletsOut);
+		myUserRef.setValueAsync(me.getDataObject());
 		me.draw(p);
+		
+		for(Bullet b : bulletsOut)
+		{
+			p.fill(0, 255, 0);
+			b.draw(p, me);
+		}
+		for(Bullet b : bulletsIn) {
+			p.fill(0, 255, 0);
+			b.draw(p, me);
+			
+		}
+		
+		
+		for (int j = 0; j < bulletsOut.size(); j++) {
+
+			if (cC.checkTiles(bulletsOut.get(j))) {
+				bulletsOut.remove(j);
+				j--;
+			}
+		}
+		for (int k = 0; k < bulletsIn.size() && k!= -1; k++) {
+			
+			System.out.println("Incoming bullet, player health: " + me.getHealth());
+			if (bulletsIn.get(k).damagePlayer(me)){
+				System.out.println("damaged, health left: " + me.getHealth());
+				bulletsIn.remove(k);
+				k--;
+			}else if (cC.checkTiles(bulletsIn.get(k))) {
+				bulletsIn.remove(k);
+				k--;
+			}
+		}
+		
 		
 		
 	
@@ -381,13 +394,21 @@ public class World implements Screen {
 		float w0 = surface.textWidth(str0);
 		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 
-
-
-		for(int i = 0; i < bullets.size(); i++)
+		for(int w = 0; w < bulletsIn.size(); w++)
 		{
-			if(me.getWeapon().getMaxDistance() < bullets.get(i).getDistanceTraveled())
+			if(me.getWeapon().getMaxDistance() < bulletsIn.get(w).getDistanceTraveled())
 			{
-				bullets.remove(i);
+				bulletsIn.remove(w);
+			}
+		}
+
+
+
+		for(int q = 0; q < bulletsOut.size(); q++)
+		{
+			if(me.getWeapon().getMaxDistance() < bulletsOut.get(q).getDistanceTraveled())
+			{
+				bulletsOut.remove(q);
 			}
 		}
 
@@ -409,13 +430,13 @@ public class World implements Screen {
 				playerShoot = false;
 			}
 		
-			int oldNum = bullets.size();
+			int oldNum = bulletsOut.size();
 			
 			for(Bullet b : me.shoot(p.mouseX, p.mouseY)) {	
-				bullets.add(b);
+				bulletsOut.add(b);
 			}
 			
-			int newNum = bullets.size();
+			int newNum = bulletsOut.size();
 			
 			if(oldNum != newNum)
 			{

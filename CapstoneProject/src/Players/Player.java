@@ -2,6 +2,7 @@ package Players;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import FireBaseStuff.BulletData;
 import FireBaseStuff.PlayerData;
 import Weapons.*;
 import Weapons.Weapon;
@@ -60,10 +61,16 @@ public class Player {
 	private int killCount;
 	private int deathCount;
 	private int points;
+
+	private ArrayList<Bullet> incoming = new ArrayList<Bullet>();
+	private ArrayList<Bullet> outgoing = new ArrayList<Bullet>();
 	
+
 	
-	public Player(ArrayList<Integer> powrUpList, String uniqueID, Collider cl, float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images, int tileSize)
+	public Player(ArrayList<Bullet> in,  ArrayList<Bullet> out, ArrayList<Integer> powrUpList, String uniqueID, Collider cl, float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images, int tileSize)
 	{
+		incoming = in;
+		outgoing = out;
 		powerUpList = powrUpList;
 		this.uniqueID = uniqueID;
 		data = new PlayerData();
@@ -144,8 +151,20 @@ public class Player {
 		this.uniqueID = uniqueID;
 		this.data = data;
 		this.p = p;
+		ArrayList<Bullet> blI = new ArrayList<Bullet>();
+		ArrayList<Bullet> blO = new ArrayList<Bullet>();
 		
-
+		for (BulletData b: data.incBullets) {
+			blI.add(new Bullet(b.worldX, b.worldY, b.vx, b.vy, b.damage, b.health, b.width, b.height, b.defaultSpeed));
+			
+		}
+		incoming = blI;
+		
+		for (BulletData b: data.outBullets) {
+			blO.add(new Bullet(b.worldX, b.worldY, b.vx, b.vy, b.damage, b.health, b.width, b.height, b.defaultSpeed));
+		}
+		outgoing = blO;
+		
 		dimensions = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.35), (int)(tileSize * 0.6), (int)(tileSize * 0.55));
 		
 		powerUpList = data.powerUpList;
@@ -196,6 +215,23 @@ public class Player {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public ArrayList<Bullet> getInc(){
+		return incoming;
+	}
+
+	public void setInc(ArrayList<Bullet> i) {
+		incoming = i;
+	}
+	
+	public ArrayList<Bullet> getOut(){
+		return outgoing;
+	}
+
+	public void setOut(ArrayList<Bullet> o) {
+		outgoing = o;
+	}
+	
+	
 	public void setPowerUpRow(int r) {
 		powerUpRow1 = r;
 	}
@@ -231,6 +267,7 @@ public class Player {
 	}
 	
 	
+	
 	public void setImages(PImage[] images) {
 
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
@@ -254,6 +291,43 @@ public class Player {
 	}
 	
 	public PlayerData getDataObject() {
+		ArrayList<BulletData> blI = new ArrayList<BulletData>();
+		ArrayList<BulletData> blO = new ArrayList<BulletData>();
+		
+		for (Bullet b: incoming) {
+			
+			BulletData bD = new BulletData();
+			bD.worldX = b.getWorldX();
+			bD.worldY = b.getWorldY();
+			bD.defaultSpeed = b.getSpeed();
+			bD.damage = b.getDamage();
+			bD.vx = b.getvX();
+			bD.vy = b.getvY();
+			bD.health = b.getHealth();
+			bD.width = b.getWidth();
+			bD.height = b.getHeight();
+			blI.add(bD);
+			
+		}
+		data.incBullets = blI;
+		
+		for (Bullet b: outgoing) {
+			
+			BulletData bD = new BulletData();
+			bD.worldX = b.getWorldX();
+			bD.worldY = b.getWorldY();
+			bD.defaultSpeed = b.getSpeed();
+			bD.damage = b.getDamage();
+			bD.vx = b.getvX();
+			bD.vy = b.getvY();
+			bD.health = b.getHealth();
+			bD.width = b.getWidth();
+			bD.height = b.getHeight();
+			blO.add(bD);
+			
+		}
+		data.outBullets = blO;
+		
 		dataUpdated = false;
 		data.powerUpRow1 = powerUpRow1;
 		data.powerUpColumn1 = powerUpColumn1;
@@ -283,6 +357,21 @@ public class Player {
 	}
 	
 	public void syncWithDataObject(PlayerData data) {
+		
+		
+		ArrayList<Bullet> blI = new ArrayList<Bullet>();
+		ArrayList<Bullet> blO = new ArrayList<Bullet>();
+		
+		for (BulletData b: data.incBullets) {
+			blI.add(new Bullet(b.worldX, b.worldY, b.vx, b.vy, b.damage, b.health, b.width, b.height, b.defaultSpeed));
+			
+		}
+		incoming = blI;
+		
+		for (BulletData b: data.outBullets) {
+			blO.add(new Bullet(b.worldX, b.worldY, b.vx, b.vy, b.damage, b.health, b.width, b.height, b.defaultSpeed));
+		}
+		outgoing = blO;
 		dataUpdated = false;
 
 		powerUpRow1 = data.powerUpRow1;

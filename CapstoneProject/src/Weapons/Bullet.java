@@ -13,7 +13,7 @@ public class Bullet {
 	private Rectangle dimensions;
 	private double distanceTraveled;
 	
-	public Bullet(double x, double y, double vx, double vy, double damage, double health, int width, int height, int speed)
+	public Bullet(double x, double y, double vx, double vy, double damage, double health, int width, int height, double speed)
 	{
 		this.worldX = x;
 		this.worldY = y; 
@@ -26,8 +26,31 @@ public class Bullet {
 		DEFAULT_SPEED = speed;
 	}
 	
+	public double getDamage() {
+		return damage;
+	}
+	public double getSpeed() {
+		return DEFAULT_SPEED;
+	}
+	public double getvX() {
+		return vx;
+	}
+	public double getvY() {
+		return vy;
+	}
+
+	public double getHealth() {
+		return health;
+	}
 	public double getWorldX() {
 		return worldX;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	public int getHeight() {
+		return height;
 	}
 	
 	
@@ -56,7 +79,7 @@ public class Bullet {
 	
 	public boolean intersects(Player player)
 	{
-		Rectangle r = player.getRectangle();
+		Rectangle r = player.getDimensions();
 		
 
 		int playerLeftWorldX = (int)(player.getWorldX() + r.x);
@@ -96,7 +119,7 @@ public class Bullet {
 		{
 			p.loseHealth(damage);
 			p.syncWithDataObject(p.getDataObject());
-		//	System.out.println("damaged " + p.getHealth());
+			System.out.println("damaged " + p.getHealth());
 			return true;
 		}
 		return false;
