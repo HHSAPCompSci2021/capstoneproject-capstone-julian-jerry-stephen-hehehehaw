@@ -260,6 +260,7 @@ public class World implements Screen {
 	* @post Changes PApplet's text alignment to Center
 	*/
 	public void draw() {
+		
 		if (me.getDead()) {
 			me.setWorldX(tM.getTileSize() * 50);
 			me.setWorldY(tM.getTileSize() * 2);
@@ -279,10 +280,6 @@ public class World implements Screen {
 		p.textAlign(p.CENTER);
 
 	
-//			if (bullets.get(i).damagePlayer(player2)) {
-//				bullets.remove(i);
-//				i--;
-//			}
 		tM.draw(p, me);
 		
 		
@@ -327,6 +324,7 @@ public class World implements Screen {
 			p2.setScreenX(screenX);
 			p2.setScreenY(screenY);
 			p2.draw(p);
+			
 	
 			if (p2.getR1() > 0 && p2.getC1() > 0) {
 				tM.getMap()[p2.getC1()][p2.getR1()] = 0;
@@ -447,7 +445,7 @@ public class World implements Screen {
 	}
 		
 
-		if (me.isDataChanged()) { // !currentlySending && {
+		if (me.isDataChanged() && !currentlySending) {
 			currentlySending = true;
 			myUserRef.setValue(me.getDataObject(), new CompletionListener() {
 				//set value bullet object
