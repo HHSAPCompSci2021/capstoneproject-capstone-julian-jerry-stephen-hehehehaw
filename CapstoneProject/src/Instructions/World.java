@@ -204,28 +204,6 @@ public class World implements Screen {
 		playerImage[6] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Left2.png");
 		playerImage[7] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
 
-//		player.setWeapon(new Sniper());
-//		player.setWeapon(new Shotgun());
-//		player.setWeapon(new Submachine());
-	myUserRef = roomRef.child("users").push();
-		me =  new Player(bulletsOut, bulletsIn, powerUpList, myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
-		
-	//	System.out.println(me.getWorldX());
-		myUserRef.setValueAsync(me.getDataObject());
-	//	System.out.println(me.getDataObject().worldX);
-		
-		roomRef.child("users").addChildEventListener(new UserChangeListener());
-		
-		Runtime.getRuntime().addShutdownHook(new Thread()  // This code runs when the program exits.
-	    {
-	      public void run()
-	      {
-	    	  if (players.size() == 0)
-					roomRef.removeValueAsync();
-				else
-					myUserRef.removeValueAsync();
-	      }
-	    });
 		
 
 
@@ -257,8 +235,34 @@ public class World implements Screen {
 		
 		
 		
-		
 		tM.setTiles(tileImage);
+//		player.setWeapon(new Sniper());
+//		player.setWeapon(new Shotgun());
+//		player.setWeapon(new Submachine());
+	myUserRef = roomRef.child("users").push();
+		me =  new Player(bulletsOut, bulletsIn, powerUpList, myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
+		
+	//	System.out.println(me.getWorldX());
+		myUserRef.setValueAsync(me.getDataObject());
+	//	System.out.println(me.getDataObject().worldX);
+		
+		roomRef.child("users").addChildEventListener(new UserChangeListener());
+		
+		Runtime.getRuntime().addShutdownHook(new Thread()  // This code runs when the program exits.
+	    {
+	      public void run()
+	      {
+	    	  if (players.size() == 0)
+					roomRef.removeValueAsync();
+				else
+					myUserRef.removeValueAsync();
+	      }
+	    });
+		
+
+		
+		
+		
 		
 		
 	
@@ -307,34 +311,46 @@ public class World implements Screen {
 	if (players.size() > 0) {
 		Player p2 = players.get(0);
 
-			//System.out.println();
+			
 			if (p2.getDead()) {
-				System.out.println("Other Player is Dead");
+				p.textSize(80);
+				p.text("Other Player is Dead", me.getScreenX(), me.getScreenY() - 80); 
 				
 			}	
 			else {			
 				
 			float screenX = p2.getWorldX() - me.getWorldX() + me.getScreenX();
 			float screenY = p2.getWorldY() - me.getWorldY() + me.getScreenY();
-			p2.setImages(playerImage2);	
+	//		p2.setImages(playerImage2);	
 			
-			if (p2.getN())
+			if (p2.getN()) {
 				p2.avatar.setDirection('w', true);
-			else if (p2.getS())
+				
+			}
+			else if (p2.getS()) {
 				p2.avatar.setDirection('s', true);
-			else if (p2.getW())
+					
+				}
+			else if (p2.getW()) {
 				p2.avatar.setDirection('a', true);
-			else if (p2.getE())
+				
+			}
+			else if (p2.getE()) {
 				p2.avatar.setDirection('d', true);
+				
+			}
+			
+			
 			
 			p2.setScreenX(screenX);
 			p2.setScreenY(screenY);
-				
-			
+			myUserRef.setValueAsync(me.getDataObject());
 			p2.draw(p);	
+
+		
 			bulletsIn = p2.getOut();
 			me.setInc(bulletsIn);
-			myUserRef.setValueAsync(me.getDataObject());
+			
 	
 			if (p2.getR1() > 0 && p2.getC1() > 0) {
 				tM.getMap()[p2.getC1()][p2.getR1()] = 0;
@@ -348,8 +364,9 @@ public class World implements Screen {
 			if (p2.getR4() > 0 && p2.getC4() > 0) {
 				tM.getMap()[p2.getC4()][p2.getR4()] = 0;
 			}
-			}
+			
 		}
+	}
 
 		
 		me.setOut(bulletsOut);
@@ -382,6 +399,7 @@ public class World implements Screen {
 	//			System.out.println("damaged, health left: " + me.getHealth());
 				bulletsIn.remove(k);
 				k--;
+				me.setDataChanged(true);
 			}else if (cC.checkTiles(bulletsIn.get(k))) {
 				bulletsIn.remove(k);
 				k--;
@@ -495,7 +513,10 @@ public class World implements Screen {
 
 
 	}
-		
+//		if (players.size() > 0 && players.get(0).getDead()) {	
+//		p.textSize(80);
+//		p.text("Other Player is Dead", me.getScreenX(), me.getScreenY() - 80); 
+//		}
 
 		if (me.isDataChanged()){// && !currentlySending) {
 			currentlySending = true;
@@ -527,6 +548,7 @@ public class World implements Screen {
 			me.emote();
 			heHeHaHa.play();
 		}
+		myUserRef.setValueAsync(me.getDataObject());
 	}
 	
 	
@@ -538,8 +560,10 @@ public class World implements Screen {
 	* Tracks the keys released
 	*/
 	public void keyReleased() {
+		
 		me.setDirection(p.keyCode, false) ;
 		me.avatar.setDirection(p.keyCode, false) ;
+		myUserRef.setValueAsync(me.getDataObject());
 	}
 
 	
@@ -620,7 +644,7 @@ public class World implements Screen {
 					}
 					
 					PlayerData data = arg0.getValue(PlayerData.class);
-					Player player = new Player(arg0.getKey(), data, p, playerImage2, cC, tM.getTileSize());
+					Player player = new Player(arg0.getKey(), data, p, playerImage2, cC, tM.getTileSize(), tM);
 					players.add(player);
 					
 				}
@@ -641,7 +665,7 @@ public class World implements Screen {
 						Player player = players.get(i);
 						if (player.idMatch(arg0.getKey())) {
 							PlayerData data = arg0.getValue(PlayerData.class);
-							player.syncWithDataObject(data);
+							player.syncWithDataObject(data, tM, cC);
 						}
 					}
 				}

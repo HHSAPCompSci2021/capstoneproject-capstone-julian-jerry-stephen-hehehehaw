@@ -120,13 +120,14 @@ public class Bullet {
 			if(!p.getJustSpawned())
 			{
 				p.loseHealth(damage);
+				p.setDataChanged(true);
 			}
-			
-			p.syncWithDataObject(p.getDataObject());
-//			System.out.println("damaged " + p.getHealth());
 			if (p.getHealth() <= 0)
 				p.setDead(true);
 			return true;
+			
+//			System.out.println("damaged " + p.getHealth());
+
 		}
 		return false;
 	}

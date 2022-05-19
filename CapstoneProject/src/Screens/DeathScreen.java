@@ -36,7 +36,7 @@ public class DeathScreen implements Screen {
 	private final float W_BUTTON_WIDTH = 1.5f*BUTTON_WIDTH;
 	private final float W_BUTTON_HEIGHT = 4.5f*BUTTON_HEIGHT;
 	private long initTime;
-	private static int LIVES_LEFT = 2; // change to 5 with the addition of the second player, and add for each player a counter for numLives lost (number of times lives reaches 0)
+	private static int LIVES_LEFT = 5; // change to 5 with the addition of the second player, and add for each player a counter for numLives lost (number of times lives reaches 0)
 	
 	public DeathScreen(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
@@ -162,7 +162,7 @@ public class DeathScreen implements Screen {
 		else if(gameStarter.contains(p)) {
 			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
 			shade = 0;
-			LIVES_LEFT--;
+	//		LIVES_LEFT--;
 		}
 	}
 	

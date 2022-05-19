@@ -101,8 +101,7 @@ public class Collider {
 				else if (tL.get(ti).isPowerUp() || tL.get(ti).isTrap()) {
 					 index =  tM.tileInteract(ti, player);	
 
-					}
-					
+					}	
 				}
 			if (tL.get(map[playerLeftCol][playerTopRow]).isPowerUp()) {
 				map[playerLeftCol][playerTopRow] = 0;

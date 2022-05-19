@@ -8,7 +8,7 @@ public class Knife extends Weapon{
 	
 	
 	public Knife() {
-		super(1000000, 0, 20, 1, 100, 100);
+		super(1000000, 0, 20, 1.4, 100, 120);
 	}
 
 
@@ -29,7 +29,7 @@ public class Knife extends Weapon{
 		{
 			ammo--;
 			
-			Bullet bullet = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, damage, 1, 30, 30, 50);
+			Bullet bullet = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, damage, 1, 20, 40, 50);
 			bullet.setVelocity(x - p.getScreenX(), y - p.getScreenY());
 			
 			ArrayList<Bullet> bullets = new ArrayList<Bullet>();

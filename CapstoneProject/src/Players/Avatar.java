@@ -8,10 +8,13 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Avatar {
-	private PImage up1, down1, up2, down2, left1, right1, left2, right2;
+	public PImage up1, down1, up2, down2, left1, right1, left2, right2;
 	private String direction;
+	public PImage image = null;
 	
-	public Avatar(String direction, PImage up1, PImage down1, PImage up2, PImage down2, PImage left1, PImage right1, PImage left2, PImage right2) {
+	public Avatar(String direction, PImage up1, PImage down1, PImage up2, PImage down2, PImage left1, PImage right1, PImage left2, PImage right2, int spriteNum, int spriteCounter) {
+		this.spriteNum = spriteNum;
+		this.spriteCounter = spriteCounter;
 		this.direction = direction;
 		this.up1 = up1;
 		this.up2 = up2; 
@@ -26,12 +29,12 @@ public class Avatar {
 	/**
 	* Tracks the sprite counter
 	*/
-	public int spriteCounter = 0;
+	public int spriteCounter;
 	
 	/**
 	* Tracks the sprite num
 	*/
-	public int spriteNum = 1;
+	public int spriteNum;
 	
 	
 	public String getDir() {
@@ -70,7 +73,7 @@ public class Avatar {
 	*/
 	public void draw(PApplet p, float x, float y) {
 		
-		PImage image = null;
+		
 		switch(direction) {
 		case "up":
 			if (spriteNum == 1) {
