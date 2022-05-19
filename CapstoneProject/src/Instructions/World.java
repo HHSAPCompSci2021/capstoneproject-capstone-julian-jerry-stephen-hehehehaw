@@ -358,7 +358,7 @@ public class World implements Screen {
 			
 			if (p2.getEmote()) {
 				p2.emote();
-				heHeHaHa.play();
+	//			heHeHaHa.play();
 			}
 //			p2.incrementEmoteCounter;
 			myUserRef.setValueAsync(me.getDataObject());
