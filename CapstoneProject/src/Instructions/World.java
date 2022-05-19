@@ -327,12 +327,9 @@ public class World implements Screen {
 			
 			p2.setScreenX(screenX);
 			p2.setScreenY(screenY);
-		//		System.out.println(p2.getDead());
-			//	System.out.println("Other Player is Alive");
-				
 				
 			
-				p2.draw(p);	
+			p2.draw(p);	
 			bulletsIn = p2.getOut();
 			me.setInc(bulletsIn);
 			myUserRef.setValueAsync(me.getDataObject());
