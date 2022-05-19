@@ -29,7 +29,7 @@ public class Knife extends Weapon{
 		{
 			ammo--;
 			
-			Bullet bullet = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, damage, 1, 20, 20, 50);
+			Bullet bullet = new Bullet(p.getWorldX() + p.getWidth(), p.getWorldY() + p.getHeight(), 0, 0, damage, 1, 30, 30, 50);
 			bullet.setVelocity(x - p.getScreenX(), y - p.getScreenY());
 			
 			ArrayList<Bullet> bullets = new ArrayList<Bullet>();

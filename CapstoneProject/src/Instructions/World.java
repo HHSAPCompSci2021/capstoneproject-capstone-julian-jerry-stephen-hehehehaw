@@ -366,7 +366,7 @@ public class World implements Screen {
 		}
 		for (int k = 0; k < bulletsIn.size() && k!= -1; k++) {
 			
-			System.out.println("Incoming bullet, player health: " + me.getHealth());
+		//	System.out.println("Incoming bullet, player health: " + me.getHealth());
 			if (bulletsIn.get(k).damagePlayer(me)){
 				System.out.println("damaged, health left: " + me.getHealth());
 				bulletsIn.remove(k);

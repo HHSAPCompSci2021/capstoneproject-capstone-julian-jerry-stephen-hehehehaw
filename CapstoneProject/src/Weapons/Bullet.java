@@ -119,7 +119,7 @@ public class Bullet {
 		{
 			p.loseHealth(damage);
 			p.syncWithDataObject(p.getDataObject());
-			System.out.println("damaged " + p.getHealth());
+//			System.out.println("damaged " + p.getHealth());
 			return true;
 		}
 		return false;
