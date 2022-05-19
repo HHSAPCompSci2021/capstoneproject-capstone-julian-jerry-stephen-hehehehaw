@@ -7,7 +7,7 @@ import Players.Player;
 public class Shotgun extends Weapon{
 	
 	public Shotgun() {
-		super(2, 40, 10, 0.9, 30, 1000);
+		super(2, 40, 10, 0.9, 25, 1000);
 		// TODO Auto-generated constructor stub
 	}
 

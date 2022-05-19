@@ -303,8 +303,15 @@ public class World implements Screen {
 	//	p.fill(220, 220, 220);
 
 	if (players.size() > 0) {
-			
-			Player p2 = players.get(0);
+		Player p2 = players.get(0);
+
+			//System.out.println();
+			if (p2.getDead()) {
+				System.out.println("Other Player is Dead");
+				
+			}	
+			else {			
+				
 			float screenX = p2.getWorldX() - me.getWorldX() + me.getScreenX();
 			float screenY = p2.getWorldY() - me.getWorldY() + me.getScreenY();
 			p2.setImages(playerImage2);	
@@ -320,7 +327,12 @@ public class World implements Screen {
 			
 			p2.setScreenX(screenX);
 			p2.setScreenY(screenY);
-			p2.draw(p);
+		//		System.out.println(p2.getDead());
+			//	System.out.println("Other Player is Alive");
+				
+				
+			
+				p2.draw(p);	
 			bulletsIn = p2.getOut();
 			me.setInc(bulletsIn);
 			myUserRef.setValueAsync(me.getDataObject());
@@ -337,7 +349,7 @@ public class World implements Screen {
 			if (p2.getR4() > 0 && p2.getC4() > 0) {
 				tM.getMap()[p2.getC4()][p2.getR4()] = 0;
 			}
-
+			}
 		}
 
 		
@@ -368,7 +380,7 @@ public class World implements Screen {
 			
 		//	System.out.println("Incoming bullet, player health: " + me.getHealth());
 			if (bulletsIn.get(k).damagePlayer(me)){
-				System.out.println("damaged, health left: " + me.getHealth());
+	//			System.out.println("damaged, health left: " + me.getHealth());
 				bulletsIn.remove(k);
 				k--;
 			}else if (cC.checkTiles(bulletsIn.get(k))) {

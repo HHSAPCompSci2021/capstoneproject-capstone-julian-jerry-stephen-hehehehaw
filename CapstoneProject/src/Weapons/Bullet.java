@@ -120,6 +120,8 @@ public class Bullet {
 			p.loseHealth(damage);
 			p.syncWithDataObject(p.getDataObject());
 //			System.out.println("damaged " + p.getHealth());
+			if (p.getHealth() <= 0)
+				p.setDead(true);
 			return true;
 		}
 		return false;

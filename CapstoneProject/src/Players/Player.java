@@ -108,6 +108,9 @@ public class Player {
 		emoteCounter = 0;
 		
 		gameDecision = false; 
+		dead = false;
+		if (health <=  0)
+			dead = true;
 		
 
 		killCount = 0;
@@ -190,6 +193,7 @@ public class Player {
 		south = data.south;
 		health = data.health;
 		initHealth = health;
+		dead = data.dead;
 		speed = data.speed;
 		switch (data.weapon) {
 		case 0:
@@ -328,6 +332,8 @@ public class Player {
 		}
 		data.outBullets = blO;
 		
+		data.dead = dead;
+		
 		dataUpdated = false;
 		data.powerUpRow1 = powerUpRow1;
 		data.powerUpColumn1 = powerUpColumn1;
@@ -396,6 +402,7 @@ public class Player {
 		east =data.east;
 		south = data.south;
 		north = data.north;
+		dead = data.dead;
 		
 	}
 	
