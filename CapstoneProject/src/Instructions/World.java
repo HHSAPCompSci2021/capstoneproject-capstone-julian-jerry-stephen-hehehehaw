@@ -40,6 +40,8 @@ public class World implements Screen {
 	public PApplet p;
 	public static SoundFile menuClick;
 	public static SoundFile loseHealth;
+	public static SoundFile collectPowerUp;
+
 
 	private SoundFile heHeHaHa;
 	private SoundFile shotGunShot;
@@ -174,7 +176,8 @@ public class World implements Screen {
 		sniperShotSound = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "SniperShot.wav");
 		knifeSound = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "KnifeSlash.wav");
 		loseHealth = new SoundFile(surface, "Assets" + fileSeparator + "Music" + fileSeparator + "Pain Sound Effect.wav");
-
+		collectPowerUp = new SoundFile(surface, "Assets" + fileSeparator + "Music" + fileSeparator + "CollectPowerupSound.wav");
+		collectPowerUp.amp(0.3f);
 
 
 	

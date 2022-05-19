@@ -27,7 +27,6 @@ public class TileManager {
 	private final int scale;
 	private final int tileSize;
 	
-	private int counter;
 
 	public TileManager(int ogTileSize, int scale, int[][] tileGrid) {
 		this.scale = scale;
@@ -35,7 +34,6 @@ public class TileManager {
 		tileDesignator = tileGrid;
 		tileSize = this.scale * originalTileSize;
 		randList = new int[6];
-		counter = 0;
 	//	changePowerUpList();
 
 	
@@ -147,20 +145,26 @@ public class TileManager {
 		switch (tileNum) {
 		case 16:
 			p.loseHealth(0.2);//test this number
-			counter++;
-			if(counter % 40 == 0)
+			if(!World.loseHealth.isPlaying())
 			World.loseHealth.play();
 
 			break;
 		case 17:
 			p.setSpeedDown(p.getSpeed() * 0.5);
+			
+			if(!World.collectPowerUp.isPlaying())
+			World.collectPowerUp.play();
 			return 17;
 
 		case 18: 
 			p.heal(50);
+			if(!World.collectPowerUp.isPlaying())
+				World.collectPowerUp.play();
 			break;
 		case 19: 
 			p.getWeapon().setDamage((int)(p.getWeapon().getDamage()*1.2));
+			if(!World.collectPowerUp.isPlaying())
+				World.collectPowerUp.play();
 			
 			return 19;
 		case 20: 
@@ -169,11 +173,17 @@ public class TileManager {
 			else 
 				p.getWeapon().setMagSize(p.getWeapon().getMagSize()*3);
 
+			if(!World.collectPowerUp.isPlaying())
+				World.collectPowerUp.play();
 		//	System.out.println("Ammo : " + p.getWeapon().getAmmo() + " magazineSize: " + p.getWeapon().magazineSize);
 			return 20;
 			
 		case 21:
 			p.setSpeedUp(p.getRealDefaultSpeed() * 1.5);
+			
+			if(!World.collectPowerUp.isPlaying())
+				World.collectPowerUp.play();
+			
 			return 21;
 		}
 		return -1;
