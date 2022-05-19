@@ -40,6 +40,7 @@ public class PlayerData {
 	public boolean east, west, north, south;
 	public int powerUpRow1, powerUpColumn1, powerUpRow2, powerUpColumn2,powerUpRow3, powerUpColumn3,powerUpRow4, powerUpColumn4;
 	public ArrayList<Integer> powerUpList;
+	public String username;
 	
 	public ArrayList <BulletData> incBullets = new ArrayList<BulletData>();
 	public ArrayList <BulletData> outBullets = new ArrayList<BulletData>();

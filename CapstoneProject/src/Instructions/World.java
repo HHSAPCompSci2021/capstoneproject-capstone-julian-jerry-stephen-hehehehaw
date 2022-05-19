@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -95,6 +96,7 @@ public class World implements Screen {
 	private Rectangle backButton;
 	private Rectangle instructions;
 	private Rectangle scoreBoard;
+	private String un;
 	
 	private final float BUTTON_WIDTH = 0.1f;
 	private final float BUTTON_HEIGHT = 0.1f;
@@ -239,8 +241,12 @@ public class World implements Screen {
 //		player.setWeapon(new Sniper());
 //		player.setWeapon(new Shotgun());
 //		player.setWeapon(new Submachine());
-	myUserRef = roomRef.child("users").push();
-		me =  new Player(bulletsOut, bulletsIn, powerUpList, myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
+
+		un = JOptionPane.showInputDialog("Enter your epic gamertag:" );
+		
+		myUserRef = roomRef.child("users").push();
+	
+		me =  new Player(un, bulletsOut, bulletsIn, powerUpList, myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
 		
 	//	System.out.println(me.getWorldX());
 		myUserRef.setValueAsync(me.getDataObject());
@@ -276,7 +282,7 @@ public class World implements Screen {
 	*/
 	public void draw() {
 		if(me != null)
-		System.out.println(me.getJustSpawned());
+//		System.out.println(me.getJustSpawned());
 		if (me.getDead()) {
 			me.setWorldX(tM.getTileSize() * 50);
 			me.setWorldY(tM.getTileSize() * 2);
@@ -412,7 +418,7 @@ public class World implements Screen {
 		
 		
 		
-		hud.draw(p, screenWidth, screenHeight, me, new Player(screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
+		hud.draw(p, screenWidth, screenHeight, me, new Player(un, screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
 
 		surface.textAlign(surface.CENTER);
 		surface.fill(255);

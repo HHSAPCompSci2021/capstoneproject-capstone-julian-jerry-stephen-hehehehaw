@@ -32,6 +32,7 @@ public class Player {
 	
 	private boolean north;
 	private boolean south;
+	private String username;
 	private boolean west;
 	private boolean east;
 	
@@ -59,7 +60,7 @@ public class Player {
 
 	public int powerUpRow, powerUpColumn;
 	public int powerUpRow1, powerUpColumn1, powerUpRow2, powerUpColumn2, powerUpRow3, powerUpColumn3, powerUpRow4, powerUpColumn4;
-
+	private int tileSize;
 	
 	private int killCount;
 	private int deathCount;
@@ -70,8 +71,10 @@ public class Player {
 	
 
 	
-	public Player(ArrayList<Bullet> in,  ArrayList<Bullet> out, ArrayList<Integer> powrUpList, String uniqueID, Collider cl, float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images, int tileSize)
+	public Player(String username, ArrayList<Bullet> in,  ArrayList<Bullet> out, ArrayList<Integer> powrUpList, String uniqueID, Collider cl, float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images, int tileSize)
 	{
+		this.tileSize = tileSize;
+		this.username = username;
 		spawnCounter = 0;
 		collisionOn = false;
 		incoming = in;
@@ -128,8 +131,9 @@ public class Player {
 /*
  * 
  */
-	public Player(float xS, float yS, float xW, float yW, PApplet pa, PImage[] images, int tileSize) { //placeholder for testing purposes
+	public Player(String username, float xS, float yS, float xW, float yW, PApplet pa, PImage[] images, int tileSize) { //placeholder for testing purposes
 		
+		this.username = username;
 		spawnCounter = 0;
 
 		powerUpRow1 = -1;
@@ -161,7 +165,7 @@ public class Player {
 	 */
 	public Player(String uniqueID, PlayerData data, PApplet p, PImage[] images, Collider c, int tileSize, TileManager tM) {
 
-
+		username = data.username;
 		
 		collide = c;
 		collisionOn = data.collisionOn;
@@ -317,6 +321,7 @@ public class Player {
 	
 	public PlayerData getDataObject() {
 
+		data.username = username;
 		data.spriteNum = avatar.spriteNum;
 		data.spriteCounter = avatar.spriteCounter;
 		if (data.spriteCounter > (int)(65 * Math.pow(0.8835, speed + 8))) {
@@ -403,6 +408,7 @@ public class Player {
 	}
 	
 	public void syncWithDataObject(PlayerData data, TileManager tM, Collider c) {
+		username = data.username;
 		
 		
 		avatar.spriteNum = data.spriteNum;
@@ -499,6 +505,14 @@ public class Player {
 	}
 	
 	public void draw(PApplet p) {
+		p.push();
+		p.fill(0);
+		p.textAlign(p.CENTER);
+		p.textSize(20);
+		p.text(username, screenX + tileSize/2, screenY + (tileSize) * 1.5f);
+		p.pop();
+		
+		
 //		System.out.println(this + ":" + gameDecision);
 	//	System.out.println(worldX + " " + worldY)
 		
