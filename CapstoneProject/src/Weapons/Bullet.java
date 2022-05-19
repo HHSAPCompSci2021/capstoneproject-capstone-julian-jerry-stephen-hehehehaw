@@ -91,9 +91,12 @@ public class Bullet {
 	
 	public boolean damagePlayer(Player p)
 	{
-		if(p.getDimensions().intersects(dimensions))
+		p.setDataChanged(true);
+		if(intersects(p))
 		{
 			p.loseHealth(damage);
+			p.syncWithDataObject(p.getDataObject());
+		//	System.out.println("damaged " + p.getHealth());
 			return true;
 		}
 		return false;

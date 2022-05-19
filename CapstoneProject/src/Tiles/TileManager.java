@@ -200,7 +200,8 @@ public class TileManager {
 	public void draw(PApplet p, Player player) {
 		
 		if (spawnPowerUps) {
-				
+			changePowerUpList(getPowerUpList());
+			
 			tileDesignator[12][48] = randList[0];
 			tileDesignator[13][49] = 18;
 			

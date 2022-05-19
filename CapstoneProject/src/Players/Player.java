@@ -144,6 +144,10 @@ public class Player {
 		this.uniqueID = uniqueID;
 		this.data = data;
 		this.p = p;
+		
+
+		dimensions = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.35), (int)(tileSize * 0.6), (int)(tileSize * 0.55));
+		
 		powerUpList = data.powerUpList;
 		powerUpRow1 = data.powerUpRow1;
 		powerUpColumn1 = data.powerUpColumn1;
@@ -166,6 +170,7 @@ public class Player {
 		north = data.north;
 		south = data.south;
 		health = data.health;
+		initHealth = health;
 		speed = data.speed;
 		switch (data.weapon) {
 		case 0:
@@ -292,6 +297,7 @@ public class Player {
 		powerUpRow4 = data.powerUpRow4;
 		powerUpColumn4 = data.powerUpColumn4;
 		powerUpList = data.powerUpList;
+		health = data.health;
 		
 		worldX = (float) data.worldX;
 		worldY = (float) data.worldY;
@@ -609,6 +615,9 @@ public class Player {
 	public boolean isDataChanged() {
 		// TODO Auto-generated method stub
 		return dataUpdated;
+	}
+	public void setDataChanged(boolean t) {
+		dataUpdated = true;
 	}
 
 	public int[] getPowerUpList() {
