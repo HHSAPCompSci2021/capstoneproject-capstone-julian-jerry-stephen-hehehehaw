@@ -39,10 +39,13 @@ public class World implements Screen {
 	public final static String userDir = System.getProperty("user.dir");
 	public PApplet p;
 	public static SoundFile menuClick;
+	public static SoundFile loseHealth;
+
 	private SoundFile heHeHaHa;
 	private SoundFile shotGunShot;
 	private SoundFile subMachineShot;
 	private SoundFile sniperShotSound;
+	
 	private SoundFile knifeSound;
 	private int soundCounter = 0;
 	
@@ -170,6 +173,7 @@ public class World implements Screen {
 		subMachineShot.amp(0.2f);
 		sniperShotSound = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "SniperShot.wav");
 		knifeSound = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "KnifeSlash.wav");
+		loseHealth = new SoundFile(surface, "Assets" + fileSeparator + "Music" + fileSeparator + "Pain Sound Effect.wav");
 
 
 
@@ -495,6 +499,7 @@ public class World implements Screen {
 		me.avatar.setDirection(p.keyCode, false) ;
 	}
 
+	
 
 	/**
 	* Tracks when the mouse is pressed and shoots the player 

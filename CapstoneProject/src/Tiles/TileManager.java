@@ -3,6 +3,7 @@ package Tiles;
 import java.util.ArrayList;
 
 import Players.Player;
+import Instructions.*;
 import Weapons.*;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -25,6 +26,8 @@ public class TileManager {
 	private final int originalTileSize;
 	private final int scale;
 	private final int tileSize;
+	
+	private int counter;
 
 	public TileManager(int ogTileSize, int scale, int[][] tileGrid) {
 		this.scale = scale;
@@ -32,6 +35,7 @@ public class TileManager {
 		tileDesignator = tileGrid;
 		tileSize = this.scale * originalTileSize;
 		randList = new int[6];
+		counter = 0;
 	//	changePowerUpList();
 
 	
@@ -143,6 +147,10 @@ public class TileManager {
 		switch (tileNum) {
 		case 16:
 			p.loseHealth(0.2);//test this number
+			counter++;
+			if(counter % 40 == 0)
+			World.loseHealth.play();
+
 			break;
 		case 17:
 			p.setSpeedDown(p.getSpeed() * 0.5);

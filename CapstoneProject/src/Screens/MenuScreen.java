@@ -3,6 +3,7 @@ package Screens;
 import java.awt.Point;
 import java.awt.Rectangle;
 import Instructions.*;
+import processing.core.PImage;
 import processing.sound.SoundFile;
 
 // 
@@ -16,6 +17,7 @@ public class MenuScreen implements Screen {
 	private final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	private final float BUTTON_WIDTH = 0.2f;
 	private final float BUTTON_HEIGHT = 0.1f;
+	private PImage bg; 
 //	private SoundFile menuClick;
 
 	public MenuScreen(MainMenu surface, int width, int height) {
@@ -29,6 +31,7 @@ public class MenuScreen implements Screen {
 	
 	public void setup() {
 //		menuClick = new SoundFile(surface, "Assets" + fileSeparator + "Music" + fileSeparator + "Menu Select.wav");
+		bg = surface.loadImage("Assets" + fileSeparator + "Background" + fileSeparator + "b6.png");
 
 	}
 	
@@ -38,7 +41,8 @@ public class MenuScreen implements Screen {
 //		System.out.println("You are on the 1st Screen");
 		
 		// start button
-		surface.background(0);
+		surface.image(bg, 0, 0, surface.width, surface.height*2);
+//		surface.background(0);
 		surface.rect(startButton.x, startButton.y, startButton.width, startButton.height, 10, 10, 10, 10);
 		String str = "Start!";
 		float w = surface.textWidth(str);
@@ -52,7 +56,7 @@ public class MenuScreen implements Screen {
 		surface.text(str, startButton.x+startButton.width*4/7-w/2, startButton.y+startButton.height*4/7);
 		surface.text(str2, instButton.x+instButton.width*3/7-w2/2, instButton.y+instButton.height*4/7);
 		
-		String str3 = "<HEEHEEHEEHAW>";
+		String str3 = "HEEHAW Brawls";
 		surface.textSize(50);
 		surface.fill(255);
 		surface.text(str3, (int)(DRAWING_WIDTH*0.33), (int)(DRAWING_HEIGHT*0.2));
