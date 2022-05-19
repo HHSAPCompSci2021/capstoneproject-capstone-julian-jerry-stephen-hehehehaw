@@ -125,26 +125,38 @@ public class WeaponSelectionScreen implements Screen {
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (backButton.contains(p)) {
+			World.menuClick.play();
+
 			surface.switchScreen(ScreenSwitcher.GAMEMODE_SELECTION_SCREEN);
 			shade = 0;
 		}
 		else if(shotgun.contains(p)) {
+			World.menuClick.play();
+
 			weaponChoice = 1;
 			shade = 1;
 		}
 		else if(sniper.contains(p)) {
+			World.menuClick.play();
+
 			weaponChoice = 2;
 			shade = 2;
 		}
 		else if(submachine.contains(p)) {
+			World.menuClick.play();
+
 			weaponChoice = 3;
 			shade = 3;
 		}
 		else if(knife.contains(p)) {
+			World.menuClick.play();
+
 			weaponChoice = 4;
 			shade = 4;
 		}
 		else if(gameStarter.contains(p)) {
+			World.menuClick.play();
+
 			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
 			shade = 0;
 		}

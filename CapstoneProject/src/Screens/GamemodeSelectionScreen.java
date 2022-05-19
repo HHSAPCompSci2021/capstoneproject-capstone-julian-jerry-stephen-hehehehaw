@@ -9,6 +9,8 @@ import java.awt.Shape;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+import processing.sound.Sound;
+import processing.sound.SoundFile;
 
 import javax.swing.JFrame;
 
@@ -18,6 +20,7 @@ import processing.core.PApplet;
 
 public class GamemodeSelectionScreen implements Screen {
 		
+		public final static String fileSeparator = System.getProperty("file.separator");
 		private MainMenu surface;
 		private int chosenGamemode;
 		
@@ -32,6 +35,8 @@ public class GamemodeSelectionScreen implements Screen {
 		private final float BUTTON_HEIGHT = 0.1f;
 		private final float W_BUTTON_WIDTH = 1.5f*BUTTON_WIDTH;
 		private final float W_BUTTON_HEIGHT = 4.5f*BUTTON_HEIGHT;
+		
+//		private SoundFile menuClick;
 		
 		public GamemodeSelectionScreen(MainMenu surface, int width, int height) {
 			this.DRAWING_WIDTH = width;
@@ -52,7 +57,8 @@ public class GamemodeSelectionScreen implements Screen {
 		// The statements in the setup() function 
 		// execute once when the program begins
 		public void setup() {
-			
+//			menuClick = new SoundFile(surface, "Assets" + fileSeparator + "Music" + fileSeparator + "Menu Select.wav");
+
 		}
 
 		// The statements in draw() are executed until the 
@@ -104,18 +110,25 @@ public class GamemodeSelectionScreen implements Screen {
 		public void mousePressed() {
 			Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 			if (backButton.contains(p)) {
+				World.menuClick.play();
 				surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 				shade = 0;
 			}
 			else if(proceed.contains(p)) {
+				World.menuClick.play();
+
 				surface.switchScreen(ScreenSwitcher.WEAPON_SELECTION_SCREEN);
 				shade = 0;
 			}
 			else if(kOTH.contains(p)) {
+				World.menuClick.play();
+
 				chosenGamemode = 1;
 				shade = 1;
 			}
 			else if(deathMatch.contains(p)) {
+				World.menuClick.play();
+
 				chosenGamemode = 2;
 				shade = 2;
 			}
