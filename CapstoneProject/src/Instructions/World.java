@@ -465,7 +465,7 @@ public class World implements Screen {
 	}
 		
 
-		if (me.isDataChanged() && !currentlySending) {
+		if (me.isDataChanged()){// && !currentlySending) {
 			currentlySending = true;
 			myUserRef.setValue(me.getDataObject(), new CompletionListener() {
 				//set value bullet object
