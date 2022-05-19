@@ -325,6 +325,16 @@ public class World implements Screen {
 			float screenY = p2.getWorldY() - me.getWorldY() + me.getScreenY();
 			p2.setImages(playerImage2);	
 			
+			p2.avatar.spriteCounter++;
+			if (p2.avatar.spriteCounter > (int)(65 * Math.pow(0.8835, p2.getSpeed() + 8))) {
+				if (p2.avatar.spriteNum == 1)
+					p2.avatar.spriteNum = 2;
+				else if (p2.avatar.spriteNum == 2) {
+					p2.avatar.spriteNum = 1;
+				}
+				p2.avatar.spriteCounter = 0;
+			}
+			
 			if (p2.getN())
 				p2.avatar.setDirection('w', true);
 			else if (p2.getS())
