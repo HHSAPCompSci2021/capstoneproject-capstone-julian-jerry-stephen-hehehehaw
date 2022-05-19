@@ -117,7 +117,11 @@ public class Bullet {
 		p.setDataChanged(true);
 		if(intersects(p))
 		{
-			p.loseHealth(damage);
+			if(!p.getJustSpawned())
+			{
+				p.loseHealth(damage);
+			}
+			
 			p.syncWithDataObject(p.getDataObject());
 //			System.out.println("damaged " + p.getHealth());
 			if (p.getHealth() <= 0)

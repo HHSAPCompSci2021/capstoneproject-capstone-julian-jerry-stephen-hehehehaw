@@ -271,7 +271,8 @@ public class World implements Screen {
 	* @post Changes PApplet's text alignment to Center
 	*/
 	public void draw() {
-		
+		if(me != null)
+		System.out.println(me.getJustSpawned());
 		if (me.getDead()) {
 			me.setWorldX(tM.getTileSize() * 50);
 			me.setWorldY(tM.getTileSize() * 2);
@@ -283,6 +284,7 @@ public class World implements Screen {
 		if(me.getHealth() <= 0) {
 			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
 			me.setDead(true);
+			me.justSpawned(true);
 		}
 		else {
 

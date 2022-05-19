@@ -23,6 +23,8 @@ public class Player {
 	private double initHealth;
 	private boolean dataUpdated;
 	private PlayerData data;
+	private boolean justSpawned;
+	private double spawnCounter;
 	
 	private float screenX, screenY;
 	private float worldX, worldY;
@@ -69,6 +71,7 @@ public class Player {
 	
 	public Player(ArrayList<Bullet> in,  ArrayList<Bullet> out, ArrayList<Integer> powrUpList, String uniqueID, Collider cl, float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images, int tileSize)
 	{
+		spawnCounter = 0;
 		incoming = in;
 		outgoing = out;
 		powerUpList = powrUpList;
@@ -116,6 +119,8 @@ public class Player {
 		killCount = 0;
 		deathCount = 0;
 		points = 0;
+		
+		justSpawned = true;
 	}
 	
 /*
@@ -123,6 +128,7 @@ public class Player {
  */
 	public Player(float xS, float yS, float xW, float yW, PApplet pa, PImage[] images, int tileSize) { //placeholder for testing purposes
 		
+		spawnCounter = 0;
 
 		powerUpRow1 = -1;
 		powerUpColumn1 = -1;
@@ -144,7 +150,8 @@ public class Player {
 		speed = 5;
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
 		//dimensions = new Rectangle(0, 0, (int)(tileSize * 2), (int)(tileSize * 2)); //notsure if this should be worldX or screenX
-		
+		justSpawned = true;
+
 	}
 
 	/*
@@ -208,9 +215,12 @@ public class Player {
 		case 3: 
 			setWeapon(new Knife());
 			break;
+			
 		}
 
-		
+		justSpawned = true;
+		spawnCounter = 0;
+
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7]);
 
 //		
@@ -434,6 +444,17 @@ public class Player {
 	public void draw(PApplet p) {
 //		System.out.println(this + ":" + gameDecision);
 	//	System.out.println(worldX + " " + worldY)
+		
+		if(justSpawned == true)
+		{
+			spawnCounter++;
+			if(spawnCounter == 50)
+			{
+				justSpawned = false;
+				spawnCounter = 0;
+			}
+		}
+		
 		collisionOn = false;
 		if (c != null) {
 
@@ -608,6 +629,15 @@ public class Player {
 	public double getWidth()
 	{
 		return dimensions.width/2;
+	}
+	
+	public boolean getJustSpawned()
+	{
+		return justSpawned;
+	}
+	
+	public void justSpawned(boolean spawn) {
+		justSpawned = spawn;
 	}
 	
 	public double getHeight()
