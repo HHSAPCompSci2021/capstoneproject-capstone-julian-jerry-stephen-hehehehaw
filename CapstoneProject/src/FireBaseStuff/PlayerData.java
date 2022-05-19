@@ -30,12 +30,15 @@ import java.util.ArrayList;
  *
  */
 public class PlayerData {
+
+	public boolean slowed, speedBuffed, damageBuffed, magBuffed;
+	public int slowCD, speedCD, dmgCD, magCD;
+	
 	public int spriteCounter, spriteNum;
 	public float worldX, worldY, screenX, screenY;
 	public boolean player2;
 	public int weapon; //0-3
 	public double health;
-	public double speed;
 	public boolean dead;
 	public boolean east, west, north, south;
 	public int powerUpRow1, powerUpColumn1, powerUpRow2, powerUpColumn2,powerUpRow3, powerUpColumn3,powerUpRow4, powerUpColumn4;

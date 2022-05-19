@@ -23,10 +23,23 @@ public class Collider {
 		map = tM.getMap();
 		
 	}
+	
+	public void checkTileCleanup(Player player) {
+
+		player.setR1(-1);
+		player.setC1(-1);
+		player.setR2(-1);
+		player.setC2(-1);
+		player.setR3(-1);
+		player.setC3(-1);
+		player.setR4(-1);
+		player.setC4(-1);
+	}
 	/*
 	 * returns an int designating what powerup/trap is collided with: -1 is a noninteractble tile
 	*/
 	public int checkTile(Player player) {
+		player.setDataChanged(true);
 		int index = -1;
 		
 		Rectangle r = player.getDimensions();
@@ -104,30 +117,30 @@ public class Collider {
 					}	
 				}
 			if (tL.get(map[playerLeftCol][playerTopRow]).isPowerUp()) {
-				map[playerLeftCol][playerTopRow] = 0;
-				player.setPowerUpRow(playerTopRow);
-				player.setPowerUpCol(playerLeftCol);
+				map[playerLeftCol][playerTopRow] = 22;
+				player.setR1(playerTopRow);
+				player.setC1(playerLeftCol);
 			}
 			
 			if (tL.get(map[playerRightCol][playerTopRow]).isPowerUp()) {
-				map[playerRightCol][playerTopRow] = 0;
+				map[playerRightCol][playerTopRow] = 22;
 
-				player.setPowerUpRow(playerTopRow);
-				player.setPowerUpCol(playerRightCol);
+				player.setR2(playerTopRow);
+				player.setC2(playerRightCol);
 			}
 			
 			if (tL.get(map[playerLeftCol][playerBottomRow]).isPowerUp()) {
-				map[playerLeftCol][playerBottomRow] = 0;
+				map[playerLeftCol][playerBottomRow] = 22;
 
-				player.setPowerUpRow(playerBottomRow);
-				player.setPowerUpCol(playerLeftCol);
+				player.setR3(playerBottomRow);
+				player.setC3(playerLeftCol);
 			}
 			
 			if (tL.get(map[playerRightCol][playerBottomRow]).isPowerUp()) {
-				map[playerRightCol][playerBottomRow] = 0;
+				map[playerRightCol][playerBottomRow] = 22;
 
-				player.setPowerUpRow(playerBottomRow);
-				player.setPowerUpCol(playerRightCol);
+				player.setR4(playerBottomRow);
+				player.setC4(playerRightCol);
 			}
 
 			

@@ -103,7 +103,7 @@ public class World implements Screen {
 	
 	private PImage[] playerImage = new PImage[8];
 	private PImage[] playerImage2 = new PImage[8];
-	private PImage[] tileImage = new PImage[22]; 
+	private PImage[] tileImage = new PImage[23]; 
 //	private final int maxWorldCol = 100;
 //	private final int maxWorldRow = 100;
 //	private final int worldWidth = maxWorldCol * tM.getTileSize();
@@ -234,7 +234,7 @@ public class World implements Screen {
 		tileImage[19] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "damagePowerUp.png");
 		tileImage[20] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "ratePowerUp.png");
 		tileImage[21] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "speedPowerUp.png");
-		
+		tileImage[22] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "powerUpLoader.png");
 		
 		
 		tM.setTiles(tileImage);
@@ -329,6 +329,7 @@ public class World implements Screen {
 			float screenY = p2.getWorldY() - me.getWorldY() + me.getScreenY();
 	//		p2.setImages(playerImage2);	
 			
+			
 			if (p2.getN()) {
 				p2.avatar.setDirection('w', true);
 				
@@ -346,7 +347,7 @@ public class World implements Screen {
 				
 			}
 			
-			
+			cC.checkTile(p2);
 			
 			p2.setScreenX(screenX);
 			p2.setScreenY(screenY);
@@ -358,18 +359,23 @@ public class World implements Screen {
 			me.setInc(bulletsIn);
 			
 	
-			if (p2.getR1() > 0 && p2.getC1() > 0) {
-				tM.getMap()[p2.getC1()][p2.getR1()] = 0;
+			if (p2.getR1() > 0 && p2.getC1() > 0 ) {
+				tM.getMap()[p2.getC1()][p2.getR1()] = 22;
+
 			}
 			if (p2.getR2() > 0 && p2.getC2() > 0) {
-				tM.getMap()[p2.getC2()][p2.getR2()] = 0;
+				tM.getMap()[p2.getC2()][p2.getR2()] = 22;
+
 			}
 			if (p2.getR3() > 0 && p2.getC3() > 0) {
-				tM.getMap()[p2.getC3()][p2.getR3()] = 0;
+				tM.getMap()[p2.getC3()][p2.getR3()] = 22;
+
 			}
 			if (p2.getR4() > 0 && p2.getC4() > 0) {
-				tM.getMap()[p2.getC4()][p2.getR4()] = 0;
+				tM.getMap()[p2.getC4()][p2.getR4()] = 22;
+
 			}
+			cC.checkTileCleanup(me);
 			
 		}
 	}
@@ -378,6 +384,8 @@ public class World implements Screen {
 		me.setOut(bulletsOut);
 		myUserRef.setValueAsync(me.getDataObject());
 		me.draw(p);
+
+		myUserRef.setValueAsync(me.getDataObject());
 		
 		for(Bullet b : bulletsOut)
 		{

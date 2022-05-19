@@ -37,8 +37,8 @@ public class Player {
 	private boolean east;
 	
 	private boolean collisionOn = false;
-	private boolean slowed, slowed2, speedBuffed, damageBuffed, magBuffed;
-	private int slowCD, speedCD, dmgCD, magCD;
+	private boolean slowed, speedBuffed, damageBuffed, magBuffed;
+	private int slowCD = 0, speedCD = 0, dmgCD = 0, magCD = 0;
 
 //	private int cd = 0;
 	private Collider collide;
@@ -57,8 +57,6 @@ public class Player {
 	private boolean gameDecision; 
 	private ArrayList<Integer> powerUpList;
 
-
-	public int powerUpRow, powerUpColumn;
 	public int powerUpRow1, powerUpColumn1, powerUpRow2, powerUpColumn2, powerUpRow3, powerUpColumn3, powerUpRow4, powerUpColumn4;
 	private int tileSize;
 	
@@ -108,7 +106,7 @@ public class Player {
 		realDefaultSpeed = speed * w.getSpeed();
 		this.health = health;
 		initHealth = health;
-		dimensions = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.35), (int)(tileSize * 0.6), (int)(tileSize * 0.55));
+		dimensions = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.2), (int)(tileSize * 0.7), (int)(tileSize * 0.7));
 		
 		emotes = new ArrayList<PImage>();
 		emotes.add(pa.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png"));
@@ -165,6 +163,15 @@ public class Player {
 	 */
 	public Player(String uniqueID, PlayerData data, PApplet p, PImage[] images, Collider c, int tileSize, TileManager tM) {
 
+		slowed = data.slowed;
+		speedBuffed = data.speedBuffed;
+		damageBuffed = data.damageBuffed;
+		magBuffed = data.magBuffed;
+		slowCD = data.slowCD;
+		speedCD = data.speedCD;
+		dmgCD = data.dmgCD;
+		magCD = data.magCD;
+		
 		username = data.username;
 		
 		collide = c;
@@ -186,7 +193,7 @@ public class Player {
 		}
 		outgoing = blO;
 		
-		dimensions = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.35), (int)(tileSize * 0.6), (int)(tileSize * 0.55));
+		dimensions = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.2), (int)(tileSize * 0.7), (int)(tileSize * 0.7));
 		
 		powerUpList = data.powerUpList;
 		powerUpRow1 = data.powerUpRow1;
@@ -212,7 +219,6 @@ public class Player {
 		health = data.health;
 		initHealth = health;
 		dead = data.dead;
-		speed = data.speed;
 		switch (data.weapon) {
 		case 0:
 			setWeapon(new Shotgun());
@@ -261,13 +267,37 @@ public class Player {
 	}
 	
 	
-	public void setPowerUpRow(int r) {
+	public void setR1(int r) {
 		powerUpRow1 = r;
 	}
-	public void setPowerUpCol(int c) {
+	public void setC1(int c) {
 		
 		powerUpColumn1 = c;
 	}
+	public void setR2(int r) {
+		powerUpRow2 = r;
+	}
+	public void setC2(int c) {
+		
+		powerUpColumn2 = c;
+	}
+	
+	public void setR3(int r) {
+		powerUpRow3 = r;
+	}
+	public void setC3(int c) {
+		
+		powerUpColumn3 = c;
+	}
+	
+	public void setR4(int r) {
+		powerUpRow4 = r;
+	}
+	public void setC4(int c) {
+		
+		powerUpColumn4 = c;
+	}
+	
 	public int getR1(){
 		return powerUpRow1;
 	}
@@ -320,6 +350,14 @@ public class Player {
 	}
 	
 	public PlayerData getDataObject() {
+		data.slowed = slowed;
+		data.speedBuffed = speedBuffed;
+		data.damageBuffed = damageBuffed;
+		data.magBuffed = magBuffed;
+		data.slowCD = slowCD;
+		data.speedCD = speedCD;
+		data.dmgCD = dmgCD;
+		data.magCD = magCD;
 
 		data.username = username;
 		data.spriteNum = avatar.spriteNum;
@@ -399,10 +437,7 @@ public class Player {
 		data.south = south;
 		data.north = north;
 		data.health = health;
-		data.speed = realDefaultSpeed;
 		data.weapon = getWeaponInt();
-		if (collide !=null)
-			collide.checkTile(this);
 		data.collisionOn = collisionOn;
 		return data;
 	}
@@ -410,6 +445,14 @@ public class Player {
 	public void syncWithDataObject(PlayerData data, TileManager tM, Collider c) {
 		username = data.username;
 		
+		slowed = data.slowed;
+		speedBuffed = data.speedBuffed;
+		damageBuffed = data.damageBuffed;
+		magBuffed = data.magBuffed;
+		slowCD = data.slowCD;
+		speedCD = data.speedCD;
+		dmgCD = data.dmgCD;
+		magCD = data.magCD;
 		
 		avatar.spriteNum = data.spriteNum;
 		avatar.spriteCounter = data.spriteCounter;
@@ -466,9 +509,6 @@ public class Player {
 		dead = data.dead;
 		if (data.health <= 0)
 			dead = true;
-		if (collide !=null)
-			collide.checkTile(this);
-		
 		
 		
 		powerUpList = data.powerUpList;
@@ -505,6 +545,9 @@ public class Player {
 	}
 	
 	public void draw(PApplet p) {
+
+	
+
 		p.push();
 		p.fill(0);
 		p.textAlign(p.CENTER);
@@ -515,7 +558,7 @@ public class Player {
 		
 //		System.out.println(this + ":" + gameDecision);
 	//	System.out.println(worldX + " " + worldY)
-		
+	//	System.out.println(" Speed: " + speed + " speedBuffed: " + speedBuffed + " speedCD: " + speedCD);
 		if(justSpawned == true)
 		{
 			spawnCounter++;
@@ -529,19 +572,13 @@ public class Player {
 		collisionOn = false;
 		if (collide != null) {
 
-			int whichOne= collide.checkTile(this);
+			int whichOne = collide.checkTile(this);
 			if (whichOne != -1)
-				//System.out.println("whichOne: " + whichOne); 			
-			//	System.out.println(" Speed: " + speed + " speedBuffed: " + speedBuffed + " speedCD: " + speedCD);
-
+			//	System.out.println(whichOne);
+			
 				switch (whichOne) {
 				case 17:
 					slowed = true;
-					
-					
-					break;
-				case 21:
-					speedBuffed = true;
 					break;
 				case 19:
 					damageBuffed = true;
@@ -549,6 +586,11 @@ public class Player {
 					
 				case 20:
 					magBuffed = true;
+					break;
+
+				case 21:
+		//			System.out.println("speed buffed");
+					speedBuffed = true;
 					break;
 					
 				case -1:
@@ -567,7 +609,7 @@ public class Player {
 				
 
 				if (speedBuffed) {
-					speedCD ++;
+					speedCD++;
 					
 					if (speedCD >= 450) {
 						speedBuffed = false;
@@ -583,6 +625,7 @@ public class Player {
 						dmgCD = 0;
 						damageBuffed = false;
 						getWeapon().setDamage((int)(getWeapon().getDamage()));
+						
 					}
 					
 				}
@@ -601,8 +644,9 @@ public class Player {
 			if (!collisionOn) 
 				moveObject();
 			
-		} else 
-			moveObject();
+			dataUpdated = true;
+			
+		} 
 		
 		p.fill(0);
 		avatar.draw(p, screenX, screenY);
@@ -661,7 +705,7 @@ public class Player {
 	public void setWeapon(Weapon w)
 	{
 		weapon = w;
-//		dataUpdated = true;
+		dataUpdated = true;
 	}
 	
 	public float getWorldX()
@@ -705,7 +749,38 @@ public class Player {
 	
 	public boolean getJustSpawned()
 	{
+		dataUpdated = true;
 		return justSpawned;
+		
+	}
+	
+	public void changeTileGrid(TileManager tM) {
+
+		if (getR1() > 0 && getC1() > 0 ) {
+			tM.getMap()[getC1()][getR1()] = 22;
+
+		}
+		if (getR2() > 0 && getC2() > 0) {
+			tM.getMap()[getC2()][getR2()] = 22;
+
+		}
+		if (getR3() > 0 && getC3() > 0) {
+			tM.getMap()[getC3()][getR3()] = 22;
+
+		}
+		if (getR4() > 0 && getC4() > 0) {
+			tM.getMap()[getC4()][getR4()] = 22;
+
+		}
+		setR1(-1);
+		setC1(-1);
+		setR2(-1);
+		setC2(-1);
+		setR3(-1);
+		setC3(-1);
+		setR4(-1);
+		setC4(-1);
+		
 	}
 	
 	public void justSpawned(boolean spawn) {
