@@ -34,6 +34,7 @@ public class PlayerData {
 	public boolean slowed, speedBuffed, damageBuffed, magBuffed;
 	public int slowCD, speedCD, dmgCD, magCD;
 	
+	public boolean emote;
 	public int spriteCounter, spriteNum;
 	public float worldX, worldY, screenX, screenY;
 	public boolean player2;

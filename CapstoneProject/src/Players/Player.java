@@ -14,6 +14,7 @@ public class Player {
 	public final static String fileSeparator = System.getProperty("file.separator");
 	private Weapon weapon;
 	private boolean dead;
+	private boolean emote;
 	public Avatar avatar;
 //	private double vision;
 	private double speed;
@@ -73,6 +74,8 @@ public class Player {
 	{
 		this.tileSize = tileSize;
 		this.username = username;
+		emote = false;
+
 		spawnCounter = 0;
 		collisionOn = false;
 		incoming = in;
@@ -133,6 +136,7 @@ public class Player {
 		
 		this.username = username;
 		spawnCounter = 0;
+		
 
 		powerUpRow1 = -1;
 		powerUpColumn1 = -1;
@@ -173,6 +177,7 @@ public class Player {
 		magCD = data.magCD;
 		
 		username = data.username;
+		emote = data.emote;
 		
 		collide = c;
 		collisionOn = data.collisionOn;
@@ -250,6 +255,13 @@ public class Player {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public double getEmoteCounter() {
+		return emoteCounter;
+	}
+	public void incrementEmoteCounter() {
+		emoteCounter++;
+	}
+	
 	public ArrayList<Bullet> getInc(){
 		return incoming;
 	}
@@ -264,6 +276,9 @@ public class Player {
 
 	public void setOut(ArrayList<Bullet> o) {
 		outgoing = o;
+	}
+	public boolean getEmote() {
+		return emote;
 	}
 	
 	
@@ -360,6 +375,8 @@ public class Player {
 		data.magCD = magCD;
 
 		data.username = username;
+		data.emote = emote;
+
 		data.spriteNum = avatar.spriteNum;
 		data.spriteCounter = avatar.spriteCounter;
 		if (data.spriteCounter > (int)(65 * Math.pow(0.8835, speed + 8))) {
@@ -443,6 +460,7 @@ public class Player {
 	}
 	
 	public void syncWithDataObject(PlayerData data, TileManager tM, Collider c) {
+
 		username = data.username;
 		
 		slowed = data.slowed;
@@ -453,6 +471,7 @@ public class Player {
 		speedCD = data.speedCD;
 		dmgCD = data.dmgCD;
 		magCD = data.magCD;
+		emote = data.emote;
 		
 		avatar.spriteNum = data.spriteNum;
 		avatar.spriteCounter = data.spriteCounter;
@@ -675,6 +694,8 @@ public class Player {
 				{
 					activeEmote = null;
 					emoteCounter = 0;
+					emote = false;
+					dataUpdated = true;
 				}
 			
 			}
@@ -847,6 +868,8 @@ public class Player {
 		emoteInitWidth = activeEmote.width;
 		emoteInitHeight = activeEmote.height;
 		activeEmote.resize(60, 60);
+		
+		emote = true;
 		dataUpdated = true;
 
 	}

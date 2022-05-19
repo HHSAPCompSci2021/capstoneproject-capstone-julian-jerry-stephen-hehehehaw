@@ -52,6 +52,8 @@ public class World implements Screen {
 	private SoundFile knifeSound;
 	private int soundCounter = 0;
 	
+	private int hill;
+	private int player1SpawnX, player1SpawnY, player2SpawnX, player2SpawnY;
 	
 
 
@@ -281,8 +283,9 @@ public class World implements Screen {
 	* @post Changes PApplet's text alignment to Center
 	*/
 	public void draw() {
-		if(me != null)
-//		System.out.println(me.getJustSpawned());
+	//	if(me != null)
+	//	System.out.println(me.getJustSpawned());
+
 		if (me.getDead()) {
 			me.setWorldX(tM.getTileSize() * 50);
 			me.setWorldY(tM.getTileSize() * 2);
@@ -329,7 +332,7 @@ public class World implements Screen {
 			float screenY = p2.getWorldY() - me.getWorldY() + me.getScreenY();
 	//		p2.setImages(playerImage2);	
 			
-			
+	
 			if (p2.getN()) {
 				p2.avatar.setDirection('w', true);
 				
@@ -349,8 +352,15 @@ public class World implements Screen {
 			
 			cC.checkTile(p2);
 			
+			
 			p2.setScreenX(screenX);
 			p2.setScreenY(screenY);
+			
+			if (p2.getEmote()) {
+				p2.emote();
+				heHeHaHa.play();
+			}
+//			p2.incrementEmoteCounter;
 			myUserRef.setValueAsync(me.getDataObject());
 			p2.draw(p);	
 
@@ -406,11 +416,11 @@ public class World implements Screen {
 				j--;
 			}
 		}
-		for (int k = 0; k < bulletsIn.size() && k!= -1; k++) {
+		for (int k = 0; k < bulletsIn.size(); k++) {
 			
-		//	System.out.println("Incoming bullet, player health: " + me.getHealth());
+//			System.out.println("Incoming bullet, player health: " + me.getHealth());
 			if (bulletsIn.get(k).damagePlayer(me)){
-	//			System.out.println("damaged, health left: " + me.getHealth());
+				System.out.println("damaged, health left: " + me.getHealth());
 				bulletsIn.remove(k);
 				k--;
 				me.setDataChanged(true);
@@ -527,10 +537,6 @@ public class World implements Screen {
 
 
 	}
-//		if (players.size() > 0 && players.get(0).getDead()) {	
-//		p.textSize(80);
-//		p.text("Other Player is Dead", me.getScreenX(), me.getScreenY() - 80); 
-//		}
 
 		if (me.isDataChanged()){// && !currentlySending) {
 			currentlySending = true;

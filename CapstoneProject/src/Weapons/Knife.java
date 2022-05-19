@@ -8,7 +8,7 @@ public class Knife extends Weapon{
 	
 	
 	public Knife() {
-		super(1000000, 0, 20, 1.6, 50, 120);
+		super(1000000, 0, 20, 1.6, 100, 120);
 	}
 
 

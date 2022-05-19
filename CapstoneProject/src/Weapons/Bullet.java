@@ -124,7 +124,9 @@ public class Bullet {
 			}
 			if (p.getHealth() <= 0)
 				p.setDead(true);
+			
 			return true;
+			
 			
 //			System.out.println("damaged " + p.getHealth());
 
