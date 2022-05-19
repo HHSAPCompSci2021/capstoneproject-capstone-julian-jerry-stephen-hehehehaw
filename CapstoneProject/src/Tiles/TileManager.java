@@ -144,7 +144,9 @@ public class TileManager {
 	public int tileInteract(int tileNum, Player p) {
 		switch (tileNum) {
 		case 16:
+			if(!p.getJustSpawned())
 			p.loseHealth(0.2);//test this number
+			
 			if(!World.loseHealth.isPlaying())
 			World.loseHealth.play();
 
