@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import Players.Player;
 
+/** 
+ * This class represents a Submachine gun. It can perform various actions such as shooting and reloading
+ * @author Julian
+ * @version 5/20
+ */
 public class Submachine extends Weapon{
 		
 	public Submachine() {
