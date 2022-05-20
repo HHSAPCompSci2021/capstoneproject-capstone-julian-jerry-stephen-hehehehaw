@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DatabaseReference.CompletionListener;
 
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
@@ -103,16 +105,18 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		activeScreen.draw();
 		
 		if(activeScreen == world)
-		{
-			world.incrementGameTimer();
-			if(!world.getGameStatus())
-			{
-				if(!world.getPlayerGameMode() == false)
-					activeScreen = new PostMatchScreenDeathMatch(this, DRAWING_WIDTH, DRAWING_HEIGHT);
-				else
-					activeScreen = new PostMatchScreenKOTH(this, DRAWING_WIDTH, DRAWING_HEIGHT);
-
-			}
+		{			
+				if (world.getGameStatus())
+						world.incrementGameTimer();
+					if(!world.getGameStatus())
+					{
+						if(world.getPlayerGameMode() == 1)
+							activeScreen = new PostMatchScreenDeathMatch(this, DRAWING_WIDTH, DRAWING_HEIGHT);
+						else if (world.getPlayerGameMode() == 2)
+							activeScreen = new PostMatchScreenKOTH(this, DRAWING_WIDTH, DRAWING_HEIGHT);
+						
+					}
+			
 		}
 		
 		pop();
@@ -164,21 +168,19 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		if(activeScreen == screen1)
 		{
 			int decision = screen1.getChosenGamemode();
-			boolean gameMode = true;
-			if(decision == 1) gameMode = false;
-			
-			
-			world.setPlayerGameMode(gameMode);
+			world.setPlayerGameMode(decision);
+			world.myUserRef.setValue(world.me.getDataObject(), new CompletionListener(){
+				//set value bullet object
+				@Override
+				public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
+				//	currentlySending = false;
+				}
+				
+			});
 		}
 		
 		
 		activeScreen = screens.get(i);
-		
-		if(activeScreen == world)
-		{
-			world.setGameStatus(true);
-			world.setGameTimer(0);
-		}
 		
 		if(i <= 2)
 			isFirst = true;

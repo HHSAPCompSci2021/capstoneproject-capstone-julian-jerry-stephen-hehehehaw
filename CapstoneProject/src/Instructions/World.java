@@ -97,13 +97,12 @@ public class World implements Screen {
 	private boolean increment;
 	
 	private ArrayList<Integer> keysDown;
-	private Player me;
-	private ArrayList<Player> players;
-	private ArrayList<Avatar> avatars;
+	public Player me;
+	public ArrayList<Player> players;
 	
 	private DatabaseReference roomRef;  // This is the database entry for the whole room
-	private DatabaseReference myUserRef;  // This is the database entry for just our user's data. This allows us to more easily update ourselves.
-	private boolean currentlySending;
+	public DatabaseReference myUserRef;  // This is the database entry for just our user's data. This allows us to more easily update ourselves.
+//	private boolean currentlySending;
 	
 	private MainMenu surface;
 	private Rectangle backButton;
@@ -129,10 +128,8 @@ public class World implements Screen {
 	public World(MainMenu p, DatabaseReference roomRef) {
 
 		players = new ArrayList<Player>();
-		avatars = new ArrayList<Avatar>();
 		
 		this.roomRef = roomRef;
-		currentlySending = false;
 		
 		surface = p;
 		try {
@@ -142,7 +139,7 @@ public class World implements Screen {
 			e.printStackTrace();
 		}
 		
-		gameActive = true;
+		gameActive = false;
 		
 
 		increment = true;
@@ -201,7 +198,7 @@ public class World implements Screen {
 	// execute once when the program beginsas
 	public void setup() {
 		
-		gameActive = true;
+		gameActive = false;
 		menuClick = new SoundFile(surface, "Assets" + fileSeparator + "Music" + fileSeparator + "Menu Select.wav");
 		menuClick.amp(0.5f);
 		heHeHaHa = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "HeHeHeHa.wav");
@@ -317,13 +314,22 @@ public class World implements Screen {
 	*/
 	public void draw() {
 		//if (add check for if player decisions are the same)
-
+	if (players.size() > 0) {
+	Player p2 = players.get(0);
+	if (me.returnGameMode() == p2.returnGameMode() && me.returnGameMode() != 0) {
+		System.out.println("me choice: " + me.returnGameMode() + " p2 choice: " +  p2.returnGameMode());
+		gameActive = true;
+	}
+	else gameActive = false;
+	if (gameActive) {
+		System.out.println(gameTimer);
 
 		if(gameTimer >= 10000)
 		{
 			gameActive = false;
 			gameTimer = 0;
 		}
+
 		
 		if (me.getDead()) {
 			me.setDead(false);
@@ -340,17 +346,6 @@ public class World implements Screen {
 			me.justSpawned(true);
 		}
 		else {
-		if (players.size() > 0) {
-			
-			
-			
-			
-		
-		Player p2 = players.get(0);
-
-		
-		
-
 		
 		while (me.getUsername().equals(p2.getUsername()) || me.getUsername() == "") {
 			me.changeUsername();
@@ -639,7 +634,6 @@ public class World implements Screen {
 			
 		}
 
-		
 	}
 		
 		
@@ -695,22 +689,25 @@ public class World implements Screen {
 		
 		
 		}
+	}
+	}
+	me.setDataChanged(true);
 
 		if (me.isDataChanged()){// && !currentlySending) {
-			currentlySending = true;
+		//	currentlySending = true;
 			myUserRef.setValue(me.getDataObject(), new CompletionListener() {
 				//set value bullet object
 				@Override
 				public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
-					currentlySending = false;
+				//	currentlySending = false;
 				}
 				
 			});	
 		}
-		}
+		
 	}
 		
-	public boolean getPlayerGameMode()
+	public int getPlayerGameMode()
 	{
 		return me.returnGameMode();
 	}
@@ -756,7 +753,7 @@ public class World implements Screen {
 	}
 	
 	
-	public void setPlayerGameMode(boolean gameMode) {
+	public void setPlayerGameMode(int gameMode) {
 		me.setGameMode(gameMode);
 	}
 			

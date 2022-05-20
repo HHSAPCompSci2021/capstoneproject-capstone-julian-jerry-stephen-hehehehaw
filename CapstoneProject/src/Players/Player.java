@@ -56,7 +56,7 @@ public class Player {
 	private String uniqueID;
 	
 	//false = KOTH, true = deathmatch, default is KOTH
-	private boolean gameDecision; 
+	private int gameDecision; 
 	private ArrayList<Integer> powerUpList;
 
 	public int powerUpRow1, powerUpColumn1, powerUpRow2, powerUpColumn2, powerUpRow3, powerUpColumn3, powerUpRow4, powerUpColumn4;
@@ -117,7 +117,7 @@ public class Player {
 		p = pa;
 		emoteCounter = 0;
 		
-		gameDecision = false; 
+		gameDecision = 0; 
 		dead = false;
 		if (health <=  0)
 			dead = true;
@@ -168,6 +168,7 @@ public class Player {
 	 */
 	public Player(String uniqueID, PlayerData data, PApplet p, PImage[] images, Collider c, int tileSize, TileManager tM) {
 
+		gameDecision = data.gameDecision;
 		emoteCounter = data.emoteCounter;
 		slowed = data.slowed;
 		speedBuffed = data.speedBuffed;
@@ -368,6 +369,7 @@ public class Player {
 	}
 	
 	public PlayerData getDataObject() {
+		data.gameDecision = gameDecision;
 		data.emoteCounter = emoteCounter;
 		data.slowed = slowed;
 		data.speedBuffed = speedBuffed;
@@ -464,6 +466,7 @@ public class Player {
 	}
 	
 	public void syncWithDataObject(PlayerData data, TileManager tM, Collider c) {
+		gameDecision = data.gameDecision;
 		emoteCounter = data.emoteCounter;
 		username = data.username;
 		
@@ -542,7 +545,7 @@ public class Player {
 		
 	}
 	
-	public void setGameMode(boolean gameMode)
+	public void setGameMode(int gameMode)
 	{
 		gameDecision = gameMode;
 	}
@@ -722,7 +725,7 @@ public class Player {
 		
 	}
 	
-	public boolean returnGameMode()
+	public int returnGameMode()
 	{
 		return gameDecision;
 	}

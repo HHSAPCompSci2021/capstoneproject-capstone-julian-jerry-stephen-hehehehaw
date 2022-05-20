@@ -51,7 +51,7 @@ public class PlayerData {
 	public ArrayList <BulletData> outBullets = new ArrayList<BulletData>();
 	
 	
-	public boolean gameDecision; 
+	public int gameDecision; 
 	public boolean collisionOn;
 	//get this from the screen class that holds it, if both are the same then execute the game, else do nothing
 //	public boolean emote;

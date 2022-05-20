@@ -167,7 +167,7 @@ public class TileManager {
 			p.setDataChanged(true);
 			break;
 		case 19: 
-			p.getWeapon().setDamage((int)(p.getWeapon().getDamage()*1.25));
+			p.getWeapon().setDamage((int)(p.getWeapon().getDamage()*1.3));
 			if(!World.collectPowerUp.isPlaying())
 				World.collectPowerUp.play();
 			p.setDataChanged(true);
