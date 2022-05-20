@@ -53,7 +53,7 @@ public class World implements Screen {
 	private int soundCounter = 0;
 	
 	private int hill;
-	private int player1SpawnX, player1SpawnY, player2SpawnX, player2SpawnY;
+//	private int player1SpawnX, player1SpawnY, player2SpawnX, player2SpawnY;
 	
 	private final int SPAWN1X, SPAWN1Y, SPAWN2X, SPAWN2Y, SPAWN3X, SPAWN3Y, SPAWN4X, SPAWN4Y;
 	
@@ -101,6 +101,7 @@ public class World implements Screen {
 	private Rectangle instructions;
 	private Rectangle scoreBoard;
 	private String un;
+	private boolean spawn;
 	
 	private final float BUTTON_WIDTH = 0.1f;
 	private final float BUTTON_HEIGHT = 0.1f;
@@ -299,9 +300,8 @@ public class World implements Screen {
 	//	System.out.println(me.getJustSpawned());
 
 		if (me.getDead()) {
-			me.setWorldX(tM.getTileSize() * 50);
-			me.setWorldY(tM.getTileSize() * 2);
 			me.setDead(false);
+			spawn = false;
 			
 		}
 		
@@ -317,12 +317,28 @@ public class World implements Screen {
 			
 			
 		
-			Player p2 = players.get(0);
+		Player p2 = players.get(0);
 
-			
-			while (me.getUsername().equals(p2.getUsername())) {
-				me.changeUsername();
+		
+		while (me.getUsername().equals(p2.getUsername()) || me.getUsername() == "") {
+			me.changeUsername();
+		}
+		
+		if (me.getUsername().compareTo(p2.getUsername()) > 0) {
+			if (!spawn) {
+			me.setWorldX(SPAWN1X);
+			me.setWorldY(SPAWN1Y);
+			spawn = true;
 			}
+		} else {
+			if (!spawn) {
+			me.setWorldX(SPAWN3X);
+			me.setWorldY(SPAWN3Y);
+			spawn = true;
+			}
+		}
+			
+			
 		//System.out.println(p.frameRate);
 		p.background(220,220,220);  
 		p.textAlign(p.CENTER);
