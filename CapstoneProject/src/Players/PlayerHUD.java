@@ -3,10 +3,26 @@ package Players;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/** 
+ * This class represents a Player HUD. It represents a player's health, avatar, and ammo.
+ * @author Julian
+ */
 public class PlayerHUD {
+	/** 
+	 * File separator
+	 */
 	public final static String fileSeparator = System.getProperty("file.separator");
 	private PImage weapon;
 
+	/** 
+	 * Draws a new instance of a Player HUD. Displays health, ammo, and avatar. 
+	 * @param p PAPplet surface to draw on
+	 * @param width Width of the window
+	 * @param height Height of the window
+	 * @param Player Current player
+	 * @param Avatar Avatar to draw
+	 * @pre Properties affecting the World are set on p
+	 */
 	public void draw(PApplet p, int width, int height, Player player, Player avatar)
 	{
 		weapon = p.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "Submachine.png");

@@ -10,12 +10,16 @@ import Weapons.Weapon;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/** 
+ * This class represents a Player. It represents a player within the game.
+ * @author Jerry and Julian
+ */
 public class Player {
 	public final static String fileSeparator = System.getProperty("file.separator");
 	private Weapon weapon;
 	private boolean dead;
 	private boolean emote;
-	public Avatar avatar;
+	private Avatar avatar;
 //	private double vision;
 	private double speed;
 	private double defaultSpeed;
@@ -58,7 +62,9 @@ public class Player {
 	//1 = KOTH, 2 = deathmatch
 	private int gameDecision; 
 	private ArrayList<Integer> powerUpList;
-
+	/** 
+	 * The type of powerup in each of the row and columns
+	 */
 	public int powerUpRow1, powerUpColumn1, powerUpRow2, powerUpColumn2, powerUpRow3, powerUpColumn3, powerUpRow4, powerUpColumn4;
 	private int tileSize;
 	
@@ -70,7 +76,26 @@ public class Player {
 	private ArrayList<Bullet> outgoing = new ArrayList<Bullet>();
 	
 
-	
+	/** 
+	 * Creates a new instance of a Player object 
+	 * @param username The username of the player object
+	 * @param in The ArrayList of incoming bullets
+	 * @param out The ArrayList of outgoing bullets
+	 * @param powrUpList The ArrayList of power ups
+	 * @param uniqueID The uniqueID of the player
+	 * @param cl The collider of the object
+	 * @param xS The x location of the object on the screen
+	 * @param yS The y location of the object on the screen
+	 * @param x The x location of the player on the world
+	 * @param y The y location of the player on the world
+	 * @param pa PApplet surface to draw on
+	 * @param w Weapon of the player
+	 * @param vision Vision of the player
+	 * @param speed Speed of the player
+	 * @param health Health of the player
+	 * @param images Images of the player (animations)
+	 * @param tileSize Size of the tiles
+	 */
 	public Player(String username, ArrayList<Bullet> in,  ArrayList<Bullet> out, ArrayList<Integer> powrUpList, String uniqueID, Collider cl, float xS, float yS, float x, float y, PApplet pa, Weapon w, double vision, double speed, double health, PImage[] images, int tileSize)
 	{
 		this.tileSize = tileSize;
@@ -129,10 +154,18 @@ public class Player {
 		
 		justSpawned = true;
 	}
-	
-/*
- * 
- */
+
+	/** 
+	 * Creates a new instance of a Player object 
+	 * @param username The unique ID of the player object
+	 * @param xS The x coordinate of the player in teh screen
+	 * @param yS The y coordinate of the player in the screen
+	 * @param xW The x coordinate of the player in the world
+	 * @param yW The y coordinate of the player in the world
+	 * @param pa The PApplet surface to drawn on
+	 * @param images The images of the player (animations)
+	 * @param tileSize The tile size of the tiles
+	 */
 	public Player(String username, float xS, float yS, float xW, float yW, PApplet pa, PImage[] images, int tileSize) { //placeholder for testing purposes
 		
 		this.username = username;
@@ -163,8 +196,15 @@ public class Player {
 
 	}
 
-	/*
-	 * 
+	/** 
+	 * Creates a new instance of a Player object 
+	 * @param uniqueID The unique ID of the player object
+	 * @param data The data of the current player
+	 * @param p The PApplet surface that the player will be on
+	 * @param images The images of the player (animations)
+	 * @param c The collider object which tests for collsiions
+	 * @param tileSize The tileSize of the tiles
+	 * @param tM The tile manager of the program
 	 */
 	public Player(String uniqueID, PlayerData data, PApplet p, PImage[] images, Collider c, int tileSize, TileManager tM) {
 
@@ -263,97 +303,216 @@ public class Player {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	* Returns the current active emote counter
+	* @return emoteCounter
+	*/
 	public double getEmoteCounter() {
 		return emoteCounter;
 	}
+	
+	/**
+	* Changes the current active emote
+	* @post emoteCounter is incremented by 1
+	*/
 	public void incrementEmoteCounter() {
 		emoteCounter++;
 	}
 	
+	/**
+	* Gets the incoming bullets
+	* @return ArrayList of bullets that are incoming
+	*/
 	public ArrayList<Bullet> getInc(){
 		return incoming;
 	}
 
+	/**
+	* Sets the incoming bullets
+	* @param o the ArrayList of bullets that are incoming
+	*/
 	public void setInc(ArrayList<Bullet> i) {
 		incoming = i;
 	}
 	
+	/**
+	* Gets the outgoing bullets
+	* @return ArrayList of bullets that are outgoing
+	*/
 	public ArrayList<Bullet> getOut(){
 		return outgoing;
 	}
 
+	/**
+	* Sets the outgoing bullets
+	* @param o the ArrayList of bullets that are outgoing in the program
+	*/
 	public void setOut(ArrayList<Bullet> o) {
 		outgoing = o;
 	}
+	
+	/**
+	* Gets the emote of the player
+	* @return The emote of the player that is currently active
+	*/
 	public boolean getEmote() {
 		return emote;
 	}
 	
-	
+	/**
+	* Sets the powerup at this row
+	* @param int The type of power up
+	*/
 	public void setR1(int r) {
 		powerUpRow1 = r;
 	}
+	
+	/**
+	* Sets the powerup at this column
+	* @param int The type of power up
+	*/
 	public void setC1(int c) {
 		
 		powerUpColumn1 = c;
 	}
+	
+	/**
+	* Gets the avatar of the player
+	* @return Avatar the avatar of the player
+	*/
+	public Avatar getAvatar()
+	{
+		return avatar;
+	}
+	
+	/**
+	* Sets the powerup at this row
+	* @param int The type of power up
+	*/
 	public void setR2(int r) {
 		powerUpRow2 = r;
 	}
+	
+	/**
+	* Sets the powerup at this column
+	* @param int The type of power up
+	*/
 	public void setC2(int c) {
 		
 		powerUpColumn2 = c;
 	}
 	
+	/**
+	* Sets the powerup at this row
+	* @param int The type of power up
+	*/
 	public void setR3(int r) {
 		powerUpRow3 = r;
 	}
+	
+	/**
+	* Sets the powerup at this column
+	* @param int The type of power up
+	*/
 	public void setC3(int c) {
 		
 		powerUpColumn3 = c;
 	}
 	
+	/**
+	* Sets the powerup at this row
+	* @param int The type of power up
+	*/
 	public void setR4(int r) {
 		powerUpRow4 = r;
 	}
+	
+	/**
+	* Sets the powerup at this column
+	* @param int The type of power up
+	*/
 	public void setC4(int c) {
 		
 		powerUpColumn4 = c;
 	}
 	
+	/**
+	* Returns the powerup at this row
+	* @return int The type of power up
+	*/
 	public int getR1(){
 		return powerUpRow1;
 	}
+	
+	/**
+	* Returns the powerup at this column
+	* @return int The type of power up
+	*/
 	public int getC1() {
 		return powerUpColumn1;
 	}
+	
+	/**
+	* Returns the powerup at this row
+	* @return int The type of power up
+	*/
 	public int getR2(){
 		return powerUpRow2;
 	}
+	
+	/**
+	* Returns the powerup at this column
+	* @return int The type of power up
+	*/
 	public int getC2() {
 		return powerUpColumn2;
 	}
-	
+	/**
+	* Returns the powerup at this row
+	* @return int The type of power up
+	*/
 	public int getR3(){
 		return powerUpRow3;
 	}
+	
+	/**
+	* Returns the powerup at this column
+	* @return int The type of power up
+	*/
 	public int getC3() {
 		return powerUpColumn3;
 	}
 	
+	/**
+	* Returns the powerup at this row
+	* @return int The type of power up
+	*/
 	public int getR4(){
 		return powerUpRow4;
 	}
+	
+	/**
+	* Returns the powerup at this column
+	* @return int The type of power up
+	*/
 	public int getC4() {
 		return powerUpColumn4;
 	}
 	
 	
-	
+	/**
+	* Sets the images of the player
+	* @param images the Images of the player
+	*/
 	public void setImages(PImage[] images) {
 
 		avatar = new Avatar("down", images[0], images[1], images[2], images[3], images[4], images[5], images[6], images[7], 1, 0);
 	}
+	
+	/**
+	* Gets the current weapon instance of the Player
+	* @return int 0 is Shotgun, 1 is Sniper, 2 is Submachine, 3 is Sniper
+	*/
 	public int getWeaponInt() {
 		if (weapon instanceof Shotgun) 
 			return 0;
@@ -364,14 +523,28 @@ public class Player {
 		return 3;
 		
 	}
+	
+	/**
+	* Sets the player to dead
+	* @return d THe boolean of whether or not the player is dead
+	*/
 	public void setDead(boolean d) {
 		dead = d;
 	}
 	
+	/**
+	* Checks if player is dead
+	* @return dead
+	*/
 	public boolean getDead() {
 		return dead;
 	}
 	
+	
+	/**
+	* Gets the player data 
+	* @return PlayerData The data of the current player
+	*/
 	public PlayerData getDataObject() {
 
 		data.killCount = killCount;
@@ -473,6 +646,12 @@ public class Player {
 		return data;
 	}
 	
+	/**
+	* Syncs the data with the other user 
+	* @param dataThe data of the other player
+	* @param tm The tile manager of the other player
+	* @param c Collider to check collisions with the other player's bullets
+	*/
 	public void syncWithDataObject(PlayerData data, TileManager tM, Collider c) {
 
 		killCount = data.killCount;
@@ -557,20 +736,43 @@ public class Player {
 		
 	}
 	
+	/**
+	* Sets the game mode of the player
+	* @param int The decision of the player: 
+	*/
 	public void setGameMode(int gameMode)
 	{
 		gameDecision = gameMode;
 	}
 	
+	/**
+	* Returns true if direction of player is north
+	* @return west
+	*/
 	public boolean getN() {
 		return north;
 	}
+	
+	/**
+	* Returns true if direction of player is south
+	* @return west
+	*/
 	public boolean getS() {
 		return south;
 	}
+	
+	/**
+	* Returns true if direction of player is east
+	* @return west
+	*/
 	public boolean getE() {
 		return east;
 	}
+	
+	/**
+	* Returns true if direction of player is west
+	* @return west
+	*/
 	public boolean getW() {
 		return west;
 	}
@@ -578,15 +780,30 @@ public class Player {
 	public void setCollisions(boolean t) {
 		collisionOn = t;
 	}
+	
+	/**
+	* Returns the bullet hit box
+	* @return Rectangle of the hit box of the bullet
+	*/
 	public Rectangle getBulletHitBox() {
 		return bulletHitBox;
 	}
 	
+	/**
+	* Sets the username of the player
+	* @param name New username of the player
+	*/
 	public void setUsername(String name)
 	{
 		username = name;
 	}
 	
+	
+	/** 
+	 * Draws a new instance of a World object 
+	 * @param p object type PApplet to draw the line 
+	 * @pre Properties affecting the World are set on p
+	 */
 	public void draw(PApplet p) {
 
 	
@@ -743,62 +960,118 @@ public class Player {
 		
 	}
 	
+	/**
+	* Gets the current gam emode decision
+	* @return int 1 if deathmatch, 0 if koth
+	*/
 	public int returnGameMode()
 	{
 		return gameDecision;
 	}
 	
 	
+	/**
+	* Gets the current weapon of player
+	* @return weapon The weapon of the player
+	*/
 	public Weapon getWeapon()
 	{
 		return weapon;
 	}
 	
+	/**
+	* Sets the weapon of the player
+	* @param w Weapon of the player
+	*/
 	public void setWeapon(Weapon w)
 	{
 		weapon = w;
 		dataUpdated = true;
 	}
 	
+	/**
+	* Gets worldX
+	* @return x The new worldX
+	*/
 	public float getWorldX()
 	{
 		return worldX;
 	}
 	
+	/**
+	* Sets world X
+	* @param x The new worldX
+	*/
 	public void setWorldX(int x) {
 		worldX = x;
 		dataUpdated = true;
 	}
 	
+	/**
+	* Gets worldY
+	* @return y The new worldY
+	*/
 	public float getWorldY()
 	{
 		return worldY;
 	}	
+	
+	/**
+	* Sets world Y
+	* @param y The new worldY
+	*/
 	public void setWorldY(int y) {
 		worldY = y;
 		dataUpdated = true;
 	}
+	
+	/**
+	* Gets screen X
+	* @return screenX
+	*/
 	public float getScreenX()
 	{
 		return screenX;
 	}
+	
+	/**
+	* Sets screen X
+	* @param x The new screenY
+	*/
 	public void setScreenX(float x) {
 		screenX = x;
 	}
+	
+	/**
+	* Sets screen Y
+	* @param y The new screenY
+	*/
 	public void setScreenY(float y) {
 		screenY = y;
 	}
 	
+	/**
+	* Gets screen Y
+	* @return screenY
+	*/
 	public float getScreenY()
 	{
 		return screenY;
 	}
 	
+	/**
+	* Gets the width of the bullet hit box
+	* @return Returns the width of the bullet hit box 
+	*/
 	public double getWidth()
 	{
 		return bulletHitBox.width/2;
 	}
 	
+	/**
+	* Checks if player has just spawned
+	* @return Boolean if player has just spawned
+	*/
 	public boolean getJustSpawned()
 	{
 		dataUpdated = true;
@@ -806,6 +1079,10 @@ public class Player {
 		
 	}
 	
+	/**
+	* Changes the layout of tile grid
+	* @param tM New TileManager to base grid off of
+	*/
 	public void changeTileGrid(TileManager tM) {
 
 		if (getR1() > 0 && getC1() > 0 ) {
@@ -835,64 +1112,117 @@ public class Player {
 		
 	}
 	
+	/**
+	* Sets a boolean if the player has just spawned in order to prevent spawn killing
+	* @param spawn The boolean of whether or not 
+	*/
 	public void justSpawned(boolean spawn) {
 		justSpawned = spawn;
 	}
 	
+	/**
+	* Returns the height of the bullet hit box
+	* @return Returns the height of the bulletHitBox
+	*/
 	public double getHeight()
 	{
 		return bulletHitBox.height/2;
 	}
 	
+	/**
+	* Gets the tile hit box
+	* @return Rectangle dimensions of the tile hit box
+	*/
 	public Rectangle getTileHitBox()
 	{
 		return tileHitBox;
 	}
 	
+	/**
+	* Shoots the current weapon the player is holding
+	* @return ArrayList<Bullet> Bullets of the weapon that was shot
+	* @post Changes dataUpdated to true
+	*/
 	public ArrayList<Bullet> shoot(int x, int y) {
 		
 		dataUpdated = true;
 		return weapon.shoot(x,y, this); 
 	}
 	
+	/**
+	* Returns the original speed of player
+	* @return defaultSpeed of player
+	*/
 	public double getSpeed()
 	{
 		return defaultSpeed;
 	}
 	
+	/**
+	* Returns the default speed of the player
+	* @return realDefaultSpeed of the player 
+	*/
 	public double getRealDefaultSpeed() {
 		return realDefaultSpeed;
 	}
 	
-	
+	/**
+	* Returns the health of the player
+	* @return The health of the player
+	*/
 	public double getHealth()
 	{
 		return health;
 	}
 	
+	/**
+	* Damages the player
+	* @param damage The amount of damage to apply to the player's health
+	*/
 	public void loseHealth(double damage)
 	{
 		health -= damage;
 	}
+	
+	/**
+	* Sets speed of player
+	* @param sped New speed of the player
+	*/
 	public void setSpeedUp(double sped) {
 		speed = sped;
 		defaultSpeed = sped;
 	}
+	
+	/**
+	* Sets speed of player
+	* @param sped New speed of the player
+	*/
 	public void setSpeedDown(double sped) {
 		speed = sped;
 	}
 	
+	/**
+	* Heals the player
+	* @param health Healths the player by a certain health
+	*/
 	public void heal(int health) {
 		this.health += health;
 		if (this.health > 100)
 			this.health = 100;
 	}
 	
+	/**
+	* Returns the initial health of the player
+	* @return initHealth of the player
+	*/
 	public double getInitHealth()
 	{
 		return initHealth;
 	}
 	
+	/**
+	* Emotes the player
+	*/
 	public void emote()
 	{
 		activeEmote = p.loadImage("Assets" + fileSeparator + "hehehaha.png");
@@ -904,11 +1234,18 @@ public class Player {
 		dataUpdated = true;
 
 	}
+	
+	/**
+	* Checks if the unique ID matches the passed in ID
+	* @param uid The ID to test 
+	*/
 	public boolean idMatch(String uid) {
 		return this.uniqueID.equals(uid);
 	}
 	
-
+	/**
+	* Moves the player within the "world"
+	*/
 	public void moveObject() {
 		if (!collisionOn) {
 		  worldX += (east?  speed : 0) - (west?  speed : 0); //ternary condition, if east is true add 20, if east is false add 0
@@ -917,6 +1254,11 @@ public class Player {
 		  dataUpdated = true;
 	}
 	
+	/**
+	* Sets direction of the Player
+	* @param k The key that was clicked to set the direction of the player 
+	* @param decision The decision of the player
+	*/
 	public void setDirection(int k, boolean decision) {
 		
 		dataUpdated = true;
@@ -941,14 +1283,28 @@ public class Player {
 	
 	
 	}
+	
+	/**
+	* Returns whether or not data has been changed
+	* @return Boolean if data has been changed
+	*/
 	public boolean isDataChanged() {
 		// TODO Auto-generated method stub
 		return dataUpdated;
 	}
+	
+	/**
+	* Indicates that the data has been updated
+	* @param t Boolean whether or not data has been changed
+	*/
 	public void setDataChanged(boolean t) {
 		dataUpdated = true;
 	}
 
+	/**
+	* Returns the powerup list of the game
+	* @return Array of power ups within the game 
+	*/
 	public int[] getPowerUpList() {
 		int[] arr = new int[powerUpList.size()];
 		for (int i = 0; i < powerUpList.size(); i++) {
@@ -957,44 +1313,85 @@ public class Player {
 		return arr;
 	}
 	
+	/**
+	* Gets the kill count of the player
+	* @return killCount of the player
+	*/
 	public int getKillCount() {
 		return killCount;
 	}
 	
+	/**
+	* Gets death count of the Player
+	* @return deathCount
+	*/
 	public int getDeathCount() {
 		return deathCount;
 	}
 	
+	/**
+	* Gets the points of the player
+	* @return Points
+	*/
 	public int getPoints() {
 		return points;
 	}
 	
+	/**
+	* Increments the kill count of the player in Death Match game mode
+	* @param x The amount of points to increment by 
+	*/
 	public void incrementKillCount(int x) {
 		killCount += x;
 	}
 	
+	/**
+	* Increments the death count of the player in Death Match game mode
+	* @param x The amount of points to increment by 
+	*/
 	public void incrementDeathCount(int x) {
 		deathCount += x;
 	}
 	
+	/**
+	* Increments the points of the player in KOTH game mode
+	* @param x The amount of points to increment by 
+	*/
 	public void incrementPoints(int x) {
 		points += x;
 	}
 
+	/**
+	* Activates the emote of the player
+	* @param b Boolean to set emote to true
+	*/
 	public void setEmote(boolean b) {
 		emote = b;
 		
 	}
 
+	/**
+	* Changes the current emote of the player
+	* @param i The index of the new emote 
+	* 	
+	*/
 	public void setEmoteCounter(int i) {
 		emoteCounter = i;
 		
 	}
-
+	
+	/**
+	* Gets the username of the Player
+	* @return Username of the player
+	*/
 	public String getUsername() {
 
 		return username;
 	}
+	
+	/**
+	* Changes username of the Player 
+	*/
 	public void changeUsername() {
 		username += 1;
 	}

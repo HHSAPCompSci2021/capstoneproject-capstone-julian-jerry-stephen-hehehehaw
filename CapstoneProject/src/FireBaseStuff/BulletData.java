@@ -2,9 +2,8 @@ package FireBaseStuff;
 
 import java.awt.Rectangle;
 /**
- * 
- * @author 
- *
+ * This class tracks the bullet data of the program
+ * @author Jerry
  */
 public class BulletData {
 	/**
