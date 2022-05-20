@@ -21,7 +21,8 @@ public class Player {
 	private double defaultSpeed;
 	private double realDefaultSpeed;
 	private double health; 
-	private Rectangle dimensions;
+	private Rectangle bulletHitBox;
+	private Rectangle tileHitBox;
 	private double initHealth;
 	private boolean dataUpdated;
 	private PlayerData data;
@@ -50,7 +51,7 @@ public class Player {
 	
 	private double emoteInitWidth;
 	private double emoteInitHeight;
-	private double emoteCounter;
+	private int emoteCounter;
 	
 	private String uniqueID;
 	
@@ -109,8 +110,8 @@ public class Player {
 		realDefaultSpeed = speed * w.getSpeed();
 		this.health = health;
 		initHealth = health;
-		dimensions = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.2), (int)(tileSize * 0.7), (int)(tileSize * 0.7));
-		
+		tileHitBox = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.35), (int)(tileSize * 0.6), (int)(tileSize * 0.55));
+		bulletHitBox = new Rectangle(0, 0, tileSize, tileSize);
 		emotes = new ArrayList<PImage>();
 		emotes.add(pa.loadImage("Assets" + fileSeparator + "BlueAvatar" + fileSeparator + "StandingBlueAvatar.png"));
 		p = pa;
@@ -167,6 +168,7 @@ public class Player {
 	 */
 	public Player(String uniqueID, PlayerData data, PApplet p, PImage[] images, Collider c, int tileSize, TileManager tM) {
 
+		emoteCounter = data.emoteCounter;
 		slowed = data.slowed;
 		speedBuffed = data.speedBuffed;
 		damageBuffed = data.damageBuffed;
@@ -198,7 +200,8 @@ public class Player {
 		}
 		outgoing = blO;
 		
-		dimensions = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.2), (int)(tileSize * 0.7), (int)(tileSize * 0.7));
+		tileHitBox = new Rectangle((int)(tileSize * 0.2), (int)(tileSize * 0.35), (int)(tileSize * 0.6), (int)(tileSize * 0.55));
+		bulletHitBox = new Rectangle(0, 0, tileSize, tileSize);
 		
 		powerUpList = data.powerUpList;
 		powerUpRow1 = data.powerUpRow1;
@@ -222,7 +225,7 @@ public class Player {
 		north = data.north;
 		south = data.south;
 		health = data.health;
-		initHealth = health;
+		initHealth = data.health;
 		dead = data.dead;
 		switch (data.weapon) {
 		case 0:
@@ -365,6 +368,7 @@ public class Player {
 	}
 	
 	public PlayerData getDataObject() {
+		data.emoteCounter = emoteCounter;
 		data.slowed = slowed;
 		data.speedBuffed = speedBuffed;
 		data.damageBuffed = damageBuffed;
@@ -460,7 +464,7 @@ public class Player {
 	}
 	
 	public void syncWithDataObject(PlayerData data, TileManager tM, Collider c) {
-
+		emoteCounter = data.emoteCounter;
 		username = data.username;
 		
 		slowed = data.slowed;
@@ -559,8 +563,8 @@ public class Player {
 	public void setCollisions(boolean t) {
 		collisionOn = t;
 	}
-	public Rectangle getDimensions() {
-		return dimensions;
+	public Rectangle getBulletHitBox() {
+		return bulletHitBox;
 	}
 	
 	public void draw(PApplet p) {
@@ -684,7 +688,7 @@ public class Player {
 		}
 
 
-		if(activeEmote != null)
+		if(activeEmote != null && emote)
 		{
 			p.push();
 			if(activeEmote.width >= emoteInitWidth || activeEmote.height >= emoteInitHeight)
@@ -702,12 +706,12 @@ public class Player {
 			else {
 				
 				activeEmote.resize(activeEmote.width+10, activeEmote.height+10);
-				p.image(activeEmote, screenX+5*dimensions.width/4, screenY-dimensions.height/2);
+				p.image(activeEmote, screenX+5*tileHitBox.width/4, screenY-tileHitBox.height/2);
 			}
 			
-			if(activeEmote != null)
+			if(activeEmote != null )
 			{
-				p.image(activeEmote, screenX+5*dimensions.width/4, screenY-dimensions.height/2);
+				p.image(activeEmote, screenX+5*tileHitBox.width/4, screenY-tileHitBox.height/2);
 			}
 			
 			p.pop();
@@ -765,7 +769,7 @@ public class Player {
 	
 	public double getWidth()
 	{
-		return dimensions.width/2;
+		return bulletHitBox.width/2;
 	}
 	
 	public boolean getJustSpawned()
@@ -810,12 +814,12 @@ public class Player {
 	
 	public double getHeight()
 	{
-		return dimensions.height/2;
+		return bulletHitBox.height/2;
 	}
 	
-	public Rectangle getRectangle()
+	public Rectangle getTileHitBox()
 	{
-		return dimensions;
+		return tileHitBox;
 	}
 	
 	public ArrayList<Bullet> shoot(int x, int y) {
@@ -948,5 +952,23 @@ public class Player {
 	
 	public void incrementPoints(int x) {
 		points += x;
+	}
+
+	public void setEmote(boolean b) {
+		emote = b;
+		
+	}
+
+	public void setEmoteCounter(int i) {
+		emoteCounter = i;
+		
+	}
+
+	public String getUsername() {
+
+		return username;
+	}
+	public void changeUsername() {
+		username += 1;
 	}
 }

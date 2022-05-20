@@ -55,6 +55,8 @@ public class World implements Screen {
 	private int hill;
 	private int player1SpawnX, player1SpawnY, player2SpawnX, player2SpawnY;
 	
+	private final int SPAWN1X, SPAWN1Y, SPAWN2X, SPAWN2Y, SPAWN3X, SPAWN3Y, SPAWN4X, SPAWN4Y;
+	
 
 
 	
@@ -150,13 +152,22 @@ public class World implements Screen {
 		
 		cC = new Collider(tM.getTileSize(), tM);
 		playerShoot = false;
+		
+		SPAWN1X = tM.getTileSize() * 50;
+		SPAWN1Y = tM.getTileSize() * 2;
+		SPAWN2X = tM.getTileSize() * 98;
+		SPAWN2Y = tM.getTileSize() * 50;
+		SPAWN3X = tM.getTileSize() * 50;
+		SPAWN3Y = tM.getTileSize() * 98;
+		SPAWN4X = tM.getTileSize() * 2;
+		SPAWN4Y = tM.getTileSize() * 50;
 	}
 	
 	public void changeWeapon(int w) {
 		if(w == 1)
 			me.setWeapon(new Shotgun());
 		else if(w == 2)
-			me.setWeapon(new Sniper());
+			me.setWeapon(new Sniper());	
 		else if(w == 3)
 			me.setWeapon(new Submachine());
 		else if(w == 4)
@@ -164,7 +175,7 @@ public class World implements Screen {
 	}
 	
 	public void resetHealth() {
-		me.heal(100);
+		me.heal(999);
 	}
 	
 	// The statements in the setup() function 
@@ -248,7 +259,7 @@ public class World implements Screen {
 		
 		myUserRef = roomRef.child("users").push();
 	
-		me =  new Player(un, bulletsOut, bulletsIn, powerUpList, myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
+		me =  new Player(un, bulletsIn, bulletsOut, powerUpList, myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
 		
 	//	System.out.println(me.getWorldX());
 		myUserRef.setValueAsync(me.getDataObject());
@@ -283,6 +294,7 @@ public class World implements Screen {
 	* @post Changes PApplet's text alignment to Center
 	*/
 	public void draw() {
+		//if (add check for if player decisions are the same)
 	//	if(me != null)
 	//	System.out.println(me.getJustSpawned());
 
@@ -300,14 +312,23 @@ public class World implements Screen {
 			me.justSpawned(true);
 		}
 		else {
+		if (players.size() > 0) {
+			
+			
+			
+		
+			Player p2 = players.get(0);
 
+			
+			while (me.getUsername().equals(p2.getUsername())) {
+				me.changeUsername();
+			}
 		//System.out.println(p.frameRate);
 		p.background(220,220,220);  
 		p.textAlign(p.CENTER);
 
 	
 		tM.draw(p, me);
-		
 		
 	
 		
@@ -317,8 +338,8 @@ public class World implements Screen {
 		}
 	//	p.fill(220, 220, 220);
 
-	if (players.size() > 0) {
-		Player p2 = players.get(0);
+		bulletsIn = p2.getOut();
+		me.setInc(bulletsIn);
 
 			
 			if (p2.getDead()) {
@@ -357,10 +378,18 @@ public class World implements Screen {
 			p2.setScreenY(screenY);
 			
 			if (p2.getEmote()) {
+		//		System.out.println("p2 emote: " + p2.getEmote() + " p2 counter: " + p2.getEmoteCounter());
 				p2.emote();
-	//			heHeHaHa.play();
+				
+				if (p2.getEmoteCounter() == 0) {
+					heHeHaHa.play();
+					p2.setEmote(false);
+					p2.setEmoteCounter(0);
+				}
+				p2.incrementEmoteCounter();
+//				if (p2.getEmoteCounter() >= 20)
+//					p2.setEmoteCounter(0);
 			}
-//			p2.incrementEmoteCounter;
 			myUserRef.setValueAsync(me.getDataObject());
 			p2.draw(p);	
 
@@ -388,7 +417,7 @@ public class World implements Screen {
 			cC.checkTileCleanup(me);
 			
 		}
-	}
+	
 
 		
 		me.setOut(bulletsOut);
@@ -409,24 +438,31 @@ public class World implements Screen {
 		}
 		
 		
-		for (int j = 0; j < bulletsOut.size(); j++) {
 
-			if (cC.checkTiles(bulletsOut.get(j))) {
-				bulletsOut.remove(j);
-				j--;
-			}
-		}
 		for (int k = 0; k < bulletsIn.size(); k++) {
 			
 //			System.out.println("Incoming bullet, player health: " + me.getHealth());
 			if (bulletsIn.get(k).damagePlayer(me)){
-				System.out.println("damaged, health left: " + me.getHealth());
+		//		System.out.println("damaged, health left: " + me.getHealth());
+		//		me.getInc().remove(k);
 				bulletsIn.remove(k);
 				k--;
 				me.setDataChanged(true);
 			}else if (cC.checkTiles(bulletsIn.get(k))) {
 				bulletsIn.remove(k);
 				k--;
+				me.setDataChanged(true);
+			}
+		}
+		
+		for (int j = 0; j < bulletsOut.size(); j++) {
+			if (bulletsOut.get(j).damagePlayer(p2)) {
+				bulletsOut.remove(j);
+				j--;
+			}
+			else if (cC.checkTiles(bulletsOut.get(j))) {
+				bulletsOut.remove(j);
+				j--;
 			}
 		}
 		
@@ -537,6 +573,7 @@ public class World implements Screen {
 
 
 	}
+		}
 
 		if (me.isDataChanged()){// && !currentlySending) {
 			currentlySending = true;
