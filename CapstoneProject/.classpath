@@ -72,6 +72,7 @@
 	<classpathentry kind="lib" path="lib/proto-google-common-protos-2.3.2.jar"/>
 	<classpathentry kind="lib" path="lib/proto-google-iam-v1-1.0.14.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.32.jar"/>
+	<classpathentry kind="lib" path="lib/Shapes10-21.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,5 +1,9 @@
 package Instructions;
 
+import juliannth.shapes.Shape;
+import juliannth.shapes.Line;
+import processing.core.PApplet;
+
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -315,7 +319,6 @@ public class World implements Screen {
 		//if (add check for if player decisions are the same)
 
 
-		System.out.println(gameTimer);
 		if(gameTimer >= 10000)
 		{
 			gameActive = false;
@@ -341,8 +344,12 @@ public class World implements Screen {
 			
 			
 			
+			
 		
 		Player p2 = players.get(0);
+
+		
+		
 
 		
 		while (me.getUsername().equals(p2.getUsername()) || me.getUsername() == "") {
@@ -500,7 +507,6 @@ public class World implements Screen {
 		}
 		
 		
-
 		for (int k = 0; k < bulletsIn.size(); k++) {
 			
 //			System.out.println("Incoming bullet, player health: " + me.getHealth());
@@ -633,8 +639,48 @@ public class World implements Screen {
 			
 		}
 
-
+		
 	}
+		
+		
+		p.push();
+
+		double p2X = p2.getWorldX();
+		double p2Y = p2.getWorldY();
+		double	angle = Math.atan(Math.abs(p2Y - me.getWorldY())/Math.abs(p2X - me.getWorldX()));
+		
+		
+		if(me.getWorldY() < p2Y && me.getWorldX() > p2X)
+		{
+			angle = Math.PI + angle;
+		}
+//		
+		if(me.getWorldY() > p2Y && me.getWorldX() > p2X)
+		{
+			angle = Math.PI - angle;
+		}
+//		
+		if(me.getWorldY() < p2Y && me.getWorldX() < p2X)
+		{
+			angle = 2*Math.PI - angle;
+
+		}
+//		
+//		p.translate(p.width/2, p.height/2);
+//		p.rotate((float) ((Math.PI * 2) - angle));
+		
+//		if(p2Y > me.getWorldY() && p2X > me.getWorldX())
+//		{
+//			
+//		}
+		System.out.println(angle);
+		
+		Line line = Line.constructLineFromAngle((float)(screenWidth/2+me.getWidth()/10), (float)(screenHeight/2 - 3*me.getHeight()/2), angle * 180 / Math.PI, 100);
+		line.draw(p);
+//		p.rect(SPAWN1X, BUTTON_HEIGHT, maxScreenCol, BUTTON_WIDTH);
+		p.pop();
+		
+		
 		}
 
 		if (me.isDataChanged()){// && !currentlySending) {
