@@ -167,11 +167,11 @@ public class World implements Screen {
 		
 		SPAWN1X = tM.getTileSize() * 50;
 		SPAWN1Y = tM.getTileSize() * 2;
-		SPAWN2X = tM.getTileSize() * 98;
+		SPAWN2X = tM.getTileSize() * 97;
 		SPAWN2Y = tM.getTileSize() * 50;
 		SPAWN3X = tM.getTileSize() * 50;
-		SPAWN3Y = tM.getTileSize() * 98;
-		SPAWN4X = tM.getTileSize() * 2;
+		SPAWN3Y = tM.getTileSize() * 97;
+		SPAWN4X = tM.getTileSize() * 3;
 		SPAWN4Y = tM.getTileSize() * 50;
 	}
 	
@@ -466,7 +466,7 @@ public class World implements Screen {
 		p.textAlign(p.CENTER);
 		
 		if (me.returnGameMode() == 1)
-			surface.text("Game Ends In: fra" + gameTimer + "/5000", p.width/3, 30);
+			surface.text("Game Ends In: " + gameTimer + "/5000", p.width/3, 30);
 		else if (me.returnGameMode() == 2) {
 			String hillDir = "";
 			switch (hill){
@@ -485,7 +485,7 @@ public class World implements Screen {
 			case 4: 
 				hillDir = "Middle Hill";
 			}
-			surface.text("Go to " + hillDir + "| Game Ends In: fra" + gameTimer + "/5000", p.width/3, 30);
+			surface.text("Go to " + hillDir + "| Game Ends In: " + gameTimer + "/5000", p.width/3, 30);
 			
 		}
 		
@@ -540,6 +540,8 @@ public class World implements Screen {
 				
 			}
 			
+
+			cC1.checkTile(me);
 			cC2.checkTile(p2);
 			
 			
@@ -583,6 +585,7 @@ public class World implements Screen {
 				tM.getMap()[p2.getC4()][p2.getR4()] = 22;
 
 			}
+			
 			cC2.checkTileCleanup(me);
 			
 		}
