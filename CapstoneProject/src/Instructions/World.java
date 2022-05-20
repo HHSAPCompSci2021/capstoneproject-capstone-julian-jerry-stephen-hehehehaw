@@ -149,14 +149,14 @@ public class World implements Screen {
 		cC = new Collider(tM.getTileSize(), tM);
 		playerShoot = false;
 		
-		SPAWN1X = tM.getTileSize() * 50;
-		SPAWN1Y = tM.getTileSize() * 2;
-		SPAWN2X = tM.getTileSize() * 98;
-		SPAWN2Y = tM.getTileSize() * 50;
-		SPAWN3X = tM.getTileSize() * 50;
-		SPAWN3Y = tM.getTileSize() * 98;
-		SPAWN4X = tM.getTileSize() * 2;
-		SPAWN4Y = tM.getTileSize() * 50;
+//		SPAWN1X = tM.getTileSize() * 50;
+//		SPAWN1Y = tM.getTileSize() * 2;
+//		SPAWN2X = tM.getTileSize() * 98;
+//		SPAWN2Y = tM.getTileSize() * 50;
+//		SPAWN3X = tM.getTileSize() * 50;
+//		SPAWN3Y = tM.getTileSize() * 98;
+//		SPAWN4X = tM.getTileSize() * 2;
+//		SPAWN4Y = tM.getTileSize() * 50;
 	}
 	
 	public void changeWeapon(int w) {
@@ -307,13 +307,7 @@ public class World implements Screen {
 		}
 		else {
 		if (players.size() > 0) {
-			
-			
-			
-		
 			Player p2 = players.get(0);
-
-			
 			while (me.getUsername().equals(p2.getUsername())) {
 				me.changeUsername();
 			}
@@ -338,7 +332,6 @@ public class World implements Screen {
 		p.fill(255);
 		
 		if (players.size() > 0) {
-			Player p2 = players.get(0);
 			if (p2.getDead()) {
 				p.textSize(80);
 				p.textAlign(p.CENTER);
@@ -401,6 +394,7 @@ public class World implements Screen {
 			}
 			p.fill(0);
 			p.textSize(20);
+			p.textAlign(p.LEFT);
 			surface.text("" + p2.getUsername() + p2.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+4*scoreBoard.height/6);
 			p.fill(255);
 		}

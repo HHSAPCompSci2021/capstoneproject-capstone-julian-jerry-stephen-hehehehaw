@@ -967,11 +967,7 @@ public class Player {
 		emoteCounter = i;
 		
 	}
-
-	public String getUsername() {
-
-		return username;
-	}
+	
 	public void changeUsername() {
 		username += 1;
 	}
