@@ -76,11 +76,6 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 	}
 	
-
-//	public static void main(String args[]) {
-//
-//	}
-	
 	public void setup() {
 		mainMenuSound = new SoundFile(this, "Assets/Music/Level1.wav");
 		mainMenuSound.amp(0.2f);
