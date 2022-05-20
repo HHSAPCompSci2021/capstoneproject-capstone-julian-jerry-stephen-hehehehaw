@@ -333,7 +333,6 @@ public class World implements Screen {
 			gameActive = false;
 			gameTimer = 0;
 		}
-
 		
 		if (me.getDead()) {
 			me.setDead(false);
@@ -406,20 +405,12 @@ public class World implements Screen {
 		//System.out.println(p.frameRate);
 		p.background(220,220,220);  
 		p.textAlign(p.CENTER);
-
 	
 		tM.draw(p, me);
 		
-	
-		
 		if(me.getWeapon().getAmmo() <= 0){
-
 			me.getWeapon().reload();
-			
-			
 		}
-		
-		
 		
 		surface.rect(scoreBoard.x, scoreBoard.y, scoreBoard.width, scoreBoard.height, 10, 10, 10, 10);
 		p.textSize(20);
@@ -595,13 +586,7 @@ public class World implements Screen {
 			public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
 			//	currentlySending = false;
 			}
-			
 		});	
-		
-		
-	
-		
-		
 		
 		hud.draw(p, screenWidth, screenHeight, me, new Player(un, screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage, tM.getTileSize()));
 
@@ -771,12 +756,20 @@ public class World implements Screen {
 		
 		
 	}
-		
+	
+	/**
+	 * Returns the gamemode this player has selected
+	 * @return int the gamemode this player has selected
+	 */
 	public int getPlayerGameMode()
 	{
 		return me.returnGameMode();
 	}
 		
+	/**
+	 * Returns the status of this player in the game
+	 * @return boolean - if this player is active or not
+	 */
 	public boolean getGameStatus()
 	{
 		return gameActive;
@@ -787,16 +780,26 @@ public class World implements Screen {
 		return increment;
 	}
 	
+	/**
+	 * Increments the game timer by 1
+	 */
 	public void incrementGameTimer()
 	{
 		gameTimer++;
 	}
 	
+	/**
+	 * Sets the game status of tis player in the game
+	 * @boolean status the to-be game status of the player
+	 */
 	public void setGameStatus(boolean status)
 	{
 		gameActive = status;
 	}
 	
+	/**
+	 * Resets the game timer for this user
+	 */
 	public void setGameTimer(double timer)
 	{
 		gameTimer = 0;
@@ -821,7 +824,10 @@ public class World implements Screen {
 		myUserRef.setValueAsync(me.getDataObject());
 	}
 	
-	
+	/**
+	 * Changes the gamemode of this player to match the parameter
+	 * @param gameMode the gamemode to change to
+	 */
 	public void setPlayerGameMode(int gameMode) {
 		me.setGameMode(gameMode);
 	}
