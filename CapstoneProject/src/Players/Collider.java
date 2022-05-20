@@ -13,11 +13,13 @@ public class Collider {
 	TileManager tM;
 	ArrayList<Tile> tL;
 	int[][]map;
+	boolean sound;
 	
 //	World world;
-	public Collider(int tSize, TileManager tM){//World worldd) {
+	public Collider(int tSize, TileManager tM, boolean sound){//World worldd) {
 		tileSize = tSize;
 		this.tM = tM;
+		this.sound = sound;
 		
 		tL = tM.getTilesList();
 		map = tM.getMap();
@@ -112,7 +114,7 @@ public class Collider {
 				if (tL.get(ti).solidState())
 					player.setCollisions(true);
 				else if (tL.get(ti).isPowerUp() || tL.get(ti).isTrap()) {
-					 index =  tM.tileInteract(ti, player);	
+					 index =  tM.tileInteract(ti, player, sound);	
 
 					}	
 				}

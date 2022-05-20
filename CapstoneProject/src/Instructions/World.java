@@ -67,7 +67,7 @@ public class World implements Screen {
 	
 //put walls around the map to add borders
 	private int tileGrid[][];
-	private Collider cC;
+	private Collider cC1, cC2;
 	
 	private ArrayList<Bullet> bulletsOut = new ArrayList<Bullet>();
 	private ArrayList<Bullet> bulletsIn = new ArrayList<Bullet>();
@@ -162,7 +162,8 @@ public class World implements Screen {
 		backButton = new Rectangle((int)(screenWidth*0.015), (int)(screenHeight*0.03), (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
 		scoreBoard = new Rectangle((int)(screenWidth*0.8), 0, (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
 		
-		cC = new Collider(tM.getTileSize(), tM);
+		cC1 = new Collider(tM.getTileSize(), tM, true);
+		cC2= new Collider(tM.getTileSize(), tM, false);
 		playerShoot = false;
 		
 		SPAWN1X = tM.getTileSize() * 50;
@@ -278,7 +279,7 @@ public class World implements Screen {
 		
 		myUserRef = roomRef.child("users").push();
 	
-		me =  new Player(un, bulletsIn, bulletsOut, powerUpList, myUserRef.getKey(), cC, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
+		me =  new Player(un, bulletsIn, bulletsOut, powerUpList, myUserRef.getKey(), cC1, screenWidth/2 - tM.getTileSize()/2, screenHeight/2 - tM.getTileSize()/2, tM.getTileSize() * 50, tM.getTileSize() * 2, p, new Sniper(), 5.0, 12.5, 100, playerImage, tM.getTileSize());
 		
 	//	System.out.println(me.getWorldX());
 		myUserRef.setValueAsync(me.getDataObject());
@@ -429,7 +430,7 @@ public class World implements Screen {
 				
 			}
 			
-			cC.checkTile(p2);
+			cC2.checkTile(p2);
 			
 			
 			p2.setScreenX(screenX);
@@ -472,7 +473,7 @@ public class World implements Screen {
 				tM.getMap()[p2.getC4()][p2.getR4()] = 22;
 
 			}
-			cC.checkTileCleanup(me);
+			cC2.checkTileCleanup(me);
 			
 		}
 			p.fill(0);
@@ -511,7 +512,7 @@ public class World implements Screen {
 				bulletsIn.remove(k);
 				k--;
 				me.setDataChanged(true);
-			}else if (cC.checkTiles(bulletsIn.get(k))) {
+			}else if (cC1.checkTiles(bulletsIn.get(k))) {
 				bulletsIn.remove(k);
 				k--;
 				me.setDataChanged(true);
@@ -523,7 +524,7 @@ public class World implements Screen {
 				bulletsOut.remove(j);
 				j--;
 			}
-			else if (cC.checkTiles(bulletsOut.get(j))) {
+			else if (cC1.checkTiles(bulletsOut.get(j))) {
 				bulletsOut.remove(j);
 				j--;
 			}
@@ -832,7 +833,7 @@ public class World implements Screen {
 					}
 					
 					PlayerData data = arg0.getValue(PlayerData.class);
-					Player player = new Player(arg0.getKey(), data, p, playerImage2, cC, tM.getTileSize(), tM);
+					Player player = new Player(arg0.getKey(), data, p, playerImage2, cC2, tM.getTileSize(), tM);
 					players.add(player);
 					
 				}
@@ -853,7 +854,7 @@ public class World implements Screen {
 						Player player = players.get(i);
 						if (player.idMatch(arg0.getKey())) {
 							PlayerData data = arg0.getValue(PlayerData.class);
-							player.syncWithDataObject(data, tM, cC);
+							player.syncWithDataObject(data, tM, cC1);
 						}
 					}
 				}

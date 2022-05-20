@@ -55,7 +55,7 @@ public class Player {
 	
 	private String uniqueID;
 	
-	//false = KOTH, true = deathmatch, default is KOTH
+	//1 = KOTH, 2 = deathmatch
 	private int gameDecision; 
 	private ArrayList<Integer> powerUpList;
 
