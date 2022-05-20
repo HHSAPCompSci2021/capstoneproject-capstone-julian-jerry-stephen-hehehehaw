@@ -17,7 +17,7 @@ public class TileManager {
 	private Tile redBrick1, redBrick2, redBrick3, redBrick4, redBrick5, 
 	redBrickWall1, stoneWall1, stoneWall2,
 	stoneBrick1, stoneBrick2, stoneBrick3, stoneBrick4, stoneBrick5, stoneBrick6,
-	spikeTile, tarPitTile, healthPowerUp, damagePowerUp, ammoPowerUp, speedPowerUp, arenaTile1, arenaTile2;
+	spikeTile, tarPitTile, healthPowerUp, damagePowerUp, ammoPowerUp, speedPowerUp, arenaTile1, arenaTile2, powerUpLoader;
 	
 	private ArrayList<Tile> tilesList = new ArrayList<Tile>();
 	
@@ -34,7 +34,6 @@ public class TileManager {
 		tileDesignator = tileGrid;
 		tileSize = this.scale * originalTileSize;
 		randList = new int[6];
-	//	changePowerUpList();
 
 	
 	}
@@ -43,7 +42,6 @@ public class TileManager {
 	public ArrayList<Tile> getTilesList() {
 		return tilesList;
 	}
-// tiles length should be 17	
 	public void setTiles(PImage[] tiles)//, PImage wallTile, PImage spikeTile, PImage tarPitTile, PImage gasTile)
 	{
 		spikeTile = new Tile();
@@ -68,6 +66,7 @@ public class TileManager {
 		stoneWall1 = new Tile();
 		stoneWall2 = new Tile();
 		arenaTile1 = new Tile();
+		powerUpLoader = new Tile();
 		
 		tilesList.add(redBrick1);
 		tilesList.add(redBrick2);
@@ -91,6 +90,7 @@ public class TileManager {
 		tilesList.add(damagePowerUp);//19
 		tilesList.add(ammoPowerUp);//20
 		tilesList.add(speedPowerUp);//21
+		tilesList.add(powerUpLoader);//22
 		redBrick1.setImage(tiles[0]);
 		redBrick2.setImage(tiles[1]);
 		redBrick3.setImage(tiles[2]);
@@ -122,6 +122,7 @@ public class TileManager {
 		ammoPowerUp.powerUp();
 		speedPowerUp.setImage(tiles[21]);
 		speedPowerUp.powerUp();
+		powerUpLoader.setImage(tiles[22]);
 	}
 		
 	public void changePowerUpList(ArrayList<Integer> arr) {
@@ -145,39 +146,39 @@ public class TileManager {
 		switch (tileNum) {
 		case 16:
 			if(!p.getJustSpawned())
-			p.loseHealth(0.2);//test this number
+			p.loseHealth(0.2);
 			
 			if(!World.loseHealth.isPlaying())
 			World.loseHealth.play();
-
+			p.setDataChanged(true);
 			break;
 		case 17:
 			p.setSpeedDown(p.getSpeed() * 0.5);
 			
 			if(!World.collectPowerUp.isPlaying())
 			World.collectPowerUp.play();
+			p.setDataChanged(true);
 			return 17;
 
 		case 18: 
 			p.heal(50);
 			if(!World.collectPowerUp.isPlaying())
 				World.collectPowerUp.play();
+			p.setDataChanged(true);
 			break;
 		case 19: 
-			p.getWeapon().setDamage((int)(p.getWeapon().getDamage()*1.2));
+			p.getWeapon().setDamage((int)(p.getWeapon().getDamage()*1.25));
 			if(!World.collectPowerUp.isPlaying())
 				World.collectPowerUp.play();
-			
+			p.setDataChanged(true);
 			return 19;
 		case 20: 
-			if (p.getWeapon() instanceof Submachine)
-				p.getWeapon().setMagSize(p.getWeapon().getMagSize()*2);
-			else 
-				p.getWeapon().setMagSize(p.getWeapon().getMagSize()*3);
+			p.getWeapon().setMagSize(p.getWeapon().getMagSize()*2);
 
 			if(!World.collectPowerUp.isPlaying())
 				World.collectPowerUp.play();
 		//	System.out.println("Ammo : " + p.getWeapon().getAmmo() + " magazineSize: " + p.getWeapon().magazineSize);
+			p.setDataChanged(true);
 			return 20;
 			
 		case 21:
@@ -185,7 +186,7 @@ public class TileManager {
 			
 			if(!World.collectPowerUp.isPlaying())
 				World.collectPowerUp.play();
-			
+			p.setDataChanged(true);
 			return 21;
 		}
 		return -1;
@@ -242,10 +243,11 @@ public class TileManager {
 				if (worldX + tileSize> player.getWorldX() - player.getScreenX() 
 						&& worldX - tileSize < player.getWorldX() + player.getScreenX() 
 						&& worldY + tileSize > player.getWorldY() - player.getScreenY() 
-						&& worldY - tileSize < player.getWorldY() + player.getScreenY() )
+						&& worldY - tileSize < player.getWorldY() + player.getScreenY() ) {
 						p.image(tilesList.get(tileDesignator[worldCol][worldRow]).getImage(), screenX, screenY);
-
+						
 				
+				}
 				}
 				
 			}

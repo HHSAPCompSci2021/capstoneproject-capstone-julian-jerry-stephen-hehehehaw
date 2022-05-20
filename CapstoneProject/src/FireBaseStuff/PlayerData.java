@@ -30,22 +30,29 @@ import java.util.ArrayList;
  *
  */
 public class PlayerData {
+
+	public boolean slowed, speedBuffed, damageBuffed, magBuffed;
+	public int slowCD, speedCD, dmgCD, magCD;
+	public int emoteCounter;
 	
+	public boolean emote;
+	public int spriteCounter, spriteNum;
 	public float worldX, worldY, screenX, screenY;
 	public boolean player2;
 	public int weapon; //0-3
 	public double health;
-	public double speed;
 	public boolean dead;
 	public boolean east, west, north, south;
 	public int powerUpRow1, powerUpColumn1, powerUpRow2, powerUpColumn2,powerUpRow3, powerUpColumn3,powerUpRow4, powerUpColumn4;
 	public ArrayList<Integer> powerUpList;
+	public String username;
 	
 	public ArrayList <BulletData> incBullets = new ArrayList<BulletData>();
 	public ArrayList <BulletData> outBullets = new ArrayList<BulletData>();
 	
 	
 	public boolean gameDecision; 
+	public boolean collisionOn;
 	//get this from the screen class that holds it, if both are the same then execute the game, else do nothing
 //	public boolean emote;
 	//need to check for bullet collisions with player2, store the damage dealt in here

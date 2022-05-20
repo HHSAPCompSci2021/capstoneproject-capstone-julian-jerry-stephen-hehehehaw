@@ -60,11 +60,9 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		screens.add(screen1);
 		
 		screen2 = new WeaponSelectionScreen(this, DRAWING_WIDTH, DRAWING_HEIGHT);
-		screens.add(screen2);		
+		screens.add(screen2);
 		
 		screens.add(world);
-		
-		
 		
 		Instructions iScreen = new Instructions(this, DRAWING_WIDTH, DRAWING_HEIGHT);
 		screens.add(iScreen);
@@ -104,7 +102,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 		if (activeScreen != world)
 			scale(ratioX, ratioY);
-		
+		//add check for world
 		activeScreen.draw();
 		
 		if(activeScreen == world)
@@ -178,10 +176,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 			world.setPlayerGameMode(gameMode);
 		}
 		
-		
 		activeScreen = screens.get(i);
-		
-		
 		
 		if(i <= 2)
 			isFirst = true;
@@ -199,8 +194,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 			}
 		}
 		
-//		if(activeScreen instanceof World || activeScreen instanceof DeathScreen || activeScreen instanceof )
-		
+
 		if(activeScreen instanceof World)
 		{
 			if(!inGameSound.isPlaying())
@@ -217,10 +211,10 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 				mainMenuSound.loop();
 			}
 		}
+		
+		world.updateGamemode(screen1.getChosenGamemode());
+		System.out.println(screen1.getChosenGamemode());
+		
 //		System.out.println(screen1.getChosenGamemode());
 	}
-	
-	
-	
-
 }
