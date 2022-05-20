@@ -316,7 +316,7 @@ public class World implements Screen {
 
 
 		System.out.println(gameTimer);
-		if(gameTimer >= 10000)
+		if(gameTimer >= 100)
 		{
 			gameActive = false;
 			gameTimer = 0;
@@ -670,6 +670,11 @@ public class World implements Screen {
 	public void setGameStatus(boolean status)
 	{
 		gameActive = status;
+	}
+	
+	public void setGameTimer(double timer)
+	{
+		gameTimer = 0;
 	}
 	
 	/**
