@@ -159,7 +159,7 @@ public class World implements Screen {
 		this.p = p;
 		
 		backButton = new Rectangle((int)(screenWidth*0.015), (int)(screenHeight*0.03), (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
-		scoreBoard = new Rectangle((int)(screenWidth*0.8), 0, (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
+		scoreBoard = new Rectangle((int)(screenWidth*0.8), 0, (int)(screenWidth*4*BUTTON_WIDTH), (int)(screenHeight*2*BUTTON_HEIGHT));
 		
 		cC1 = new Collider(tM.getTileSize(), tM, true);
 		cC2= new Collider(tM.getTileSize(), tM, false);
@@ -414,11 +414,13 @@ public class World implements Screen {
 		
 		surface.rect(scoreBoard.x, scoreBoard.y, scoreBoard.width, scoreBoard.height, 10, 10, 10, 10);
 		p.textSize(20);
-		p.textAlign(p.CENTER);
 		p.fill(0);
-		surface.text("" + me.getUsername() + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+2*scoreBoard.height/6);
+		p.textAlign(p.LEFT);
+		surface.text("Scoreboard ", scoreBoard.x+scoreBoard.width/6, scoreBoard.y+scoreBoard.height/6);
+		surface.text("" + me.getUsername() + ": " + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+3*scoreBoard.height/6);
 		p.textSize(40);
 		p.fill(0, 0, 255);
+		p.textAlign(p.CENTER);
 		surface.text("Game Ends In: " + gameTimer + "/5000", p.width/3, 30);
 		p.fill(255);
 	//	p.fill(220, 220, 220);
@@ -437,7 +439,6 @@ public class World implements Screen {
 		
 			if (p2.getDead()) {
 				p.textSize(80);
-				p.textAlign(p.CENTER);
 		//		System.out.println(increment);
 				if(killUp) {
 					me.incrementKillCount(1);
@@ -521,7 +522,7 @@ public class World implements Screen {
 		p.textSize(20);
 		p.textAlign(p.LEFT);
 		
-		surface.text("" + p2.getUsername() + p2.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+4*scoreBoard.height/6);
+		surface.text("" + p2.getUsername() + ": " + p2.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+5*scoreBoard.height/6);
 		p.fill(255);
 
 	
