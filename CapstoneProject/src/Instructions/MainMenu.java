@@ -117,7 +117,6 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 				else
 					activeScreen = new PostMatchScreenKOTH(this, DRAWING_WIDTH, DRAWING_HEIGHT);
 
-				world.setup();
 			}
 		}
 		
