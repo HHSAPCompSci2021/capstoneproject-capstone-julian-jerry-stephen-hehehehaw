@@ -376,23 +376,20 @@ public class World implements Screen {
 			}
 		} else {
 			if (!spawn) {
-				i++;
-				if (i == 4)
-					i = 0;
 				switch (i) {
-				case 2:
+				case 1:
 					me.setWorldX(SPAWN1X);
 					me.setWorldY(SPAWN1Y);
 					break;
-				case 3:
+				case 2:
 					me.setWorldX(SPAWN2X);
 					me.setWorldY(SPAWN2Y);
 					break;
-				case 0:				
+				case 3:				
 					me.setWorldX(SPAWN3X);
 					me.setWorldY(SPAWN3Y);
 					break;
-				case 1:
+				case 0:
 					me.setWorldX(SPAWN4X);
 					me.setWorldY(SPAWN4Y);
 					break;

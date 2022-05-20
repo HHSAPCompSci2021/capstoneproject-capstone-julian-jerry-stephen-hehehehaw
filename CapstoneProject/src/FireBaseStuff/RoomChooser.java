@@ -125,12 +125,14 @@ public class RoomChooser extends JPanel
 	
 	
 	public void selectRoom(String name) {
-		
+
 
 		postsRef.orderByChild("name").equalTo(name).limitToFirst(1).addListenerForSingleValueEvent(new ValueEventListener() {
 			@Override
 			public void onDataChange(DataSnapshot snap) {
 				
+				if (getNumPlayers(snap) >= 2)
+					return;
 				if (!snap.hasChildren())
 					return;
 				
@@ -165,6 +167,13 @@ public class RoomChooser extends JPanel
 		
 		
 	}
+	
+	
+	public int getNumPlayers(DataSnapshot dataSnapshot) {
+		System.out.println((int)dataSnapshot.getChildren().iterator().next().getChildrenCount());
+		
+		return (int)dataSnapshot.getChildren().iterator().next().getChildrenCount();
+	}
 
 	
 
@@ -195,6 +204,7 @@ public class RoomChooser extends JPanel
 					
 					String name = dataSnapshot.child("name").getValue(String.class);
 					model.add(0,name);
+					System.out.println ("room name: " + name + " player count: " + getNumPlayers(dataSnapshot));
 					
 				}
 				
@@ -202,6 +212,9 @@ public class RoomChooser extends JPanel
 			
 			
 		}
+		
+		
+		
 
 
 		@Override
