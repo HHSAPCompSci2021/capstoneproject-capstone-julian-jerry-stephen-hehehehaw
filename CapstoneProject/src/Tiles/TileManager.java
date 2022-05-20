@@ -8,6 +8,11 @@ import Weapons.*;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/** 
+ * This class represents the Tile Manager. It handles everything Tile related (intersections, creation, etc...) 
+ * @author Jerry
+ * @version 5/20
+ */
 public class TileManager {
 	
 //	private Tile[] tiles;
@@ -28,6 +33,12 @@ public class TileManager {
 	private final int tileSize;
 	
 
+	/**
+	* Creates a TileManager object, initializing the tile gridm scale, and size
+	* @param ogTileSize Initial size of tiles
+	* @param scale Scale size of tile
+	* @param tileGrid An ArrayList of the tile grid
+	*/
 	public TileManager(int ogTileSize, int scale, int[][] tileGrid) {
 		this.scale = scale;
 		originalTileSize = ogTileSize;
@@ -38,10 +49,16 @@ public class TileManager {
 	
 	}
 	
-
+	/**
+	* @return An ArrayList of the tiles
+	*/
 	public ArrayList<Tile> getTilesList() {
 		return tilesList;
 	}
+	
+	/**
+	* Initializes and adds tiles to the tiles ArrayList
+	*/
 	public void setTiles(PImage[] tiles)//, PImage wallTile, PImage spikeTile, PImage tarPitTile, PImage gasTile)
 	{
 		spikeTile = new Tile();
@@ -125,6 +142,9 @@ public class TileManager {
 		powerUpLoader.setImage(tiles[22]);
 	}
 		
+	/**
+	* Changes the power up list (assinged power ups)
+	*/
 	public void changePowerUpList(ArrayList<Integer> arr) {
 		int[] ar = new int[randList.length];
 		for (int i = 0; i< arr.size(); i++) {
@@ -134,6 +154,10 @@ public class TileManager {
 		randList = ar;
 	}
 	
+	/**
+	 * Returns an arraylist of random integers to assign random power ups for tiles
+	* @return An arraylist of random integers to assign power ups
+	*/
 	public static ArrayList<Integer> getPowerUpList() {
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		for (int i = 0; i < 6; i ++) {
@@ -142,6 +166,14 @@ public class TileManager {
 		return arr;
 	}
 	
+	/** 
+	 * Handles the interaction of the player, and tiles within the interaction. This includes sound, 
+	 * damage, and other power up affects
+	 * @param tileNum The tile being tested
+	 * @param p The player
+	 * @param sound If sound should be played when interacting the tile
+	* @return returns the reloadCounter
+	*/
 	public int tileInteract(int tileNum, Player p, boolean sound) {
 		switch (tileNum) {
 		case 16:
@@ -194,13 +226,25 @@ public class TileManager {
 		
 	}
 	
+	/**
+	* @return Returns the 2D Array of the map
+	*/
 	public int[][] getMap(){
 		return tileDesignator;
 	}
+	
+	/**
+	* @return The tile size 
+	*/
 	public int getTileSize() {
 		return tileSize;
 	}
 	
+	/** 
+	 * Draws the tiles within the program, and randomly assigns powerups
+	* @param p PApplet surface to draw on
+	* @param player The current player
+	*/
 	public void draw(PApplet p, Player player) {
 		
 		if (spawnPowerUps) {

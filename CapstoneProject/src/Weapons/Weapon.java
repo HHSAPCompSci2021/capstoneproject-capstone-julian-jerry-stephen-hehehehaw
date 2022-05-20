@@ -4,13 +4,17 @@ import java.util.ArrayList;
 
 import Players.Player;
 
+/** 
+ * This class represents a Weapon. It can perform various actions such as shooting and reloading
+ * @author Julian
+ * @version 5/20
+ */
 public abstract class Weapon {
 	protected int magazineSize;
 	private final int defaultMagSize;
 	private final double defaultDamage;
 	protected double reloadTime;
 	protected double sightRange;
-//	protected double fireRate;
 	protected double movementSpeed;
 	protected int reloadCounter;
 	protected double ammo;

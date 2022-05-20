@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import Players.Player;
 
+/** 
+ * This class represents a Knife. It can perform various actions such as stabbing.
+ * @author Julian
+ * @version 5/20
+ */
 public class Knife extends Weapon{
 	
 	
