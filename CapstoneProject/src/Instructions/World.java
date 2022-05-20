@@ -668,9 +668,22 @@ public class World implements Screen {
 //			
 //		}
 		System.out.println(angle);
+
 		
-		Line line = Line.constructLineFromAngle((float)(screenWidth/2+me.getWidth()/10), (float)(screenHeight/2 - 3*me.getHeight()/2), angle * 180 / Math.PI, 100);
+		Line line = Line.constructLineFromAngle((float)(screenWidth/2+me.getWidth()/10), (float)(screenHeight/2 - 4*me.getHeight()/2), angle * 180 / Math.PI, 20);
+		
+		Line line2 = Line.constructLineFromAngle(line.getX2(), line.getY2(), (angle-2.35)*(180/Math.PI), 10);
+		Line line3 = Line.constructLineFromAngle(line.getX2(), line.getY2(), (angle+2.35)*(180/Math.PI), 10);
+
+		line.setStrokeWeight(6);
+		line.setStrokeColor(new Color(0, 255, 0));
+		line2.setStrokeWeight(6);
+		line2.setStrokeColor(new Color(0, 255, 0));
+		line3.setStrokeWeight(6);
+		line3.setStrokeColor(new Color(0, 255, 0));
 		line.draw(p);
+		line2.draw(p);
+		line3.draw(p);
 //		p.rect(SPAWN1X, BUTTON_HEIGHT, maxScreenCol, BUTTON_WIDTH);
 		p.pop();
 		
