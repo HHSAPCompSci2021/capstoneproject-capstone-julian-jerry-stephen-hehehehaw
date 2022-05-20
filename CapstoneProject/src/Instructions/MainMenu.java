@@ -30,6 +30,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	private int DRAWING_WIDTH, DRAWING_HEIGHT;
 	
 	private int weapon;
+
 	private static boolean isFirst;
 	
 	private World world;
@@ -98,6 +99,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	}
 	
 	public void draw() {
+		this.frameRate(30);
 		ratioX = (float)width/DRAWING_WIDTH;
 		ratioY = (float)height/DRAWING_HEIGHT;
 		

@@ -7,11 +7,29 @@ import javax.imageio.ImageIO;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/** 
+ * This class represents a Player's avatar. 
+ * @author Jerry and Julian
+ */
 public class Avatar {
-	public PImage up1, down1, up2, down2, left1, right1, left2, right2;
+	private PImage up1, down1, up2, down2, left1, right1, left2, right2;
 	private String direction;
-	public PImage image = null;
+	private PImage image = null;
 	
+	/** 
+	 * Creates a new instance of an Avatar object 
+	 * @param direciton The direction of the avatar
+	 * @param up1 Up1 image
+	 * @param down1 down1 image
+	 * @param up2 up2 image
+	 * @param down2 down2 image
+	 * @param left1 lef1 image
+	 * @param right1 right1 image
+	 * @param left2 left2 image
+	 * @param right2 right2 image
+	 * @param spriteNum SpriteNum
+	 * @param spriteCounter Sprite counter to keep track of which sprite to use
+	 */
 	public Avatar(String direction, PImage up1, PImage down1, PImage up2, PImage down2, PImage left1, PImage right1, PImage left2, PImage right2, int spriteNum, int spriteCounter) {
 		this.spriteNum = spriteNum;
 		this.spriteCounter = spriteCounter;

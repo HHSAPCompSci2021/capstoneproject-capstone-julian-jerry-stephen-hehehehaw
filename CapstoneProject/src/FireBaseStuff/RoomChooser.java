@@ -34,9 +34,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
-/**
- * Represents the ability of choosing a room
- * @author 
+
+/** 
+ * This class represents a Room Chooser
+ * @author john_shelby
  */
 public class RoomChooser extends JPanel
 {
@@ -51,11 +52,17 @@ public class RoomChooser extends JPanel
 	
 	private DatabaseReference postsRef;
 	
-	
+	/**
+	* Returns the data base references
+	* @return DatabaseReference 
+	*/
 	public DatabaseReference getDBR() {
 		return postsRef;
 	}
 	
+	/** 
+	 * Creates a new instance of a RoomChooser object
+	 */
 	public RoomChooser() {
 		
 		model = new DefaultListModel<String>();
@@ -116,7 +123,9 @@ public class RoomChooser extends JPanel
 
 	}
 	
-	
+	/** 
+	 * Displays the window
+	 */
 	public void show() {
 		
 		theWindow = new JFrame();
@@ -127,13 +136,19 @@ public class RoomChooser extends JPanel
 		
 	}
 	
-	
+	/** 
+	 * Selects the room
+	 * @param name The name of the room
+	 */
 	public void selectRoom(String name) {
-		
+
 
 		postsRef.orderByChild("name").equalTo(name).limitToFirst(1).addListenerForSingleValueEvent(new ValueEventListener() {
 			@Override
 			public void onDataChange(DataSnapshot snap) {
+				
+//				if (getNumPlayers(snap) >= 2)
+//					return;
 				
 				if (!snap.hasChildren())
 					return;
@@ -169,6 +184,13 @@ public class RoomChooser extends JPanel
 		
 		
 	}
+	
+	
+//	public int getNumPlayers(DataSnapshot dataSnapshot) {
+//		System.out.println((int)dataSnapshot.getChildren().iterator().next().getChildrenCount());
+//		
+//		return (int)dataSnapshot.getChildren().iterator().next().getChildrenCount();
+//	}
 
 	
 
@@ -180,7 +202,7 @@ public class RoomChooser extends JPanel
 	 * @author john_shelby
 	 *
 	 */
-	class DatabaseChangeListener implements ChildEventListener {
+	private class DatabaseChangeListener implements ChildEventListener {
 
 
 		@Override
@@ -199,6 +221,7 @@ public class RoomChooser extends JPanel
 					
 					String name = dataSnapshot.child("name").getValue(String.class);
 					model.add(0,name);
+					//System.out.println ("room name: " + name + " player count: " + getNumPlayers(dataSnapshot));
 					
 				}
 				
@@ -206,6 +229,9 @@ public class RoomChooser extends JPanel
 			
 			
 		}
+		
+		
+		
 
 
 		@Override

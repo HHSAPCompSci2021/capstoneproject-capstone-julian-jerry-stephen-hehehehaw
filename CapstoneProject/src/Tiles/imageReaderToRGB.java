@@ -24,10 +24,10 @@ public class imageReaderToRGB {
 		    	// Components will be in the range of 0..255:
 		    	int blue = color & 0xff;
 	//	    	int green = (color & 0xff00) >> 8;
-		//    	int red = (color & 0xff0000) >> 16;
+		    	int red = (color & 0xff0000) >> 16;
 
 //		    	System.out.println("blue: " + blue );//+ " green: " + green + " red: " + red);
-		    	arr[i][j] = blue/10;
+		    	arr[i][j] = blue/10 + red/10;
 //	    	arr[i][j] = image.getRGB(i, j)/10;	
 //	    	System.out.print(image.getRGB(i, j) + " ");
 		    }
