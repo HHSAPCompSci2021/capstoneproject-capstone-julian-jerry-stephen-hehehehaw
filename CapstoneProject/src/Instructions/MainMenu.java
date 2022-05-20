@@ -106,16 +106,16 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 		if(activeScreen == world)
 		{			
-				if (world.getGameStatus())
+				if (world.getIncrement())
 						world.incrementGameTimer();
-					if(!world.getGameStatus())
-					{
-						if(world.getPlayerGameMode() == 2)
-							activeScreen = new PostMatchScreenDeathMatch(this, DRAWING_WIDTH, DRAWING_HEIGHT);
-						else if (world.getPlayerGameMode() == 1)
-							activeScreen = new PostMatchScreenKOTH(this, DRAWING_WIDTH, DRAWING_HEIGHT);
-						
-					}
+				if(!world.getGameStatus())
+				{
+					if(world.getPlayerGameMode() == 2)
+						activeScreen = new PostMatchScreenDeathMatch(this, DRAWING_WIDTH, DRAWING_HEIGHT);
+					else if (world.getPlayerGameMode() == 1)
+						activeScreen = new PostMatchScreenKOTH(this, DRAWING_WIDTH, DRAWING_HEIGHT);
+					
+				}
 			
 		}
 		
