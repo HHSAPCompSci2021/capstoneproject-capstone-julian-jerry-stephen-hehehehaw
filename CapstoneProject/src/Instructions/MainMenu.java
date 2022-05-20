@@ -30,6 +30,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	private int DRAWING_WIDTH, DRAWING_HEIGHT;
 	
 	private int weapon;
+
 	private static boolean isFirst;
 	
 	private World world;

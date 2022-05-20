@@ -319,8 +319,13 @@ public class World implements Screen {
 	*/
 	public void draw() {
 		//if (add check for if player decisions are the same)
+		
+		
+	
 	if (players.size() > 0) {
 	Player p2 = players.get(0);
+	
+	
 	if (me.returnGameMode() == p2.returnGameMode() && me.returnGameMode() != 0) {
 //		System.out.println("me choice: " + me.returnGameMode() + " p2 choice: " +  p2.returnGameMode());
 		gameActive = true;
@@ -331,6 +336,7 @@ public class World implements Screen {
 		if(gameTimer >= 5000)
 		{
 			gameActive = false;
+			
 			gameTimer = 0;
 		}
 		

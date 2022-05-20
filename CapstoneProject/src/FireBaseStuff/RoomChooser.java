@@ -47,11 +47,17 @@ public class RoomChooser extends JPanel
 	
 	private DatabaseReference postsRef;
 	
-	
+	/**
+	* Returns the data base references
+	* @return DatabaseReference 
+	*/
 	public DatabaseReference getDBR() {
 		return postsRef;
 	}
 	
+	/** 
+	 * Creates a new instance of a RoomChooser object
+	 */
 	public RoomChooser() {
 		
 		model = new DefaultListModel<String>();
@@ -112,7 +118,9 @@ public class RoomChooser extends JPanel
 
 	}
 	
-	
+	/** 
+	 * Displays the window
+	 */
 	public void show() {
 		
 		theWindow = new JFrame();
@@ -123,7 +131,10 @@ public class RoomChooser extends JPanel
 		
 	}
 	
-	
+	/** 
+	 * Selects the room
+	 * @param name The name of the room
+	 */
 	public void selectRoom(String name) {
 		
 
@@ -176,7 +187,7 @@ public class RoomChooser extends JPanel
 	 * @author john_shelby
 	 *
 	 */
-	class DatabaseChangeListener implements ChildEventListener {
+	private class DatabaseChangeListener implements ChildEventListener {
 
 
 		@Override
