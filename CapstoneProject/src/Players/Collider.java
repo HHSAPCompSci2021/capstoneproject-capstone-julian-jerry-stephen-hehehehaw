@@ -9,7 +9,7 @@ import Tiles.TileManager;
 import Weapons.Bullet;
 
 /** 
- * Checks for collisions within the class
+ * Checks for collisions within the program
  * @author Jerry
  */
 public class Collider {
