@@ -52,6 +52,12 @@ public class World implements Screen {
 	private SoundFile knifeSound;
 	private int soundCounter = 0;
 	
+	private boolean gameActive;
+	private double gameTimer;
+
+
+	
+
 	private int hill;
 	private int player1SpawnX, player1SpawnY, player2SpawnX, player2SpawnY;
 	
@@ -128,6 +134,9 @@ public class World implements Screen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		gameActive = true;
+
 	
 		increment = true;
 		
@@ -220,7 +229,7 @@ public class World implements Screen {
 		playerImage[7] = p.loadImage("Assets"  + fileSeparator + "BlueAvatar" + fileSeparator + "Right2.png");
 
 		
-
+		gameActive = true;
 
 		tileImage[0] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick1.png");
 		tileImage[1] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick2.png");
@@ -247,8 +256,13 @@ public class World implements Screen {
 		tileImage[19] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "damagePowerUp.png");
 		tileImage[20] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "ratePowerUp.png");
 		tileImage[21] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "speedPowerUp.png");
+		
+		
+		gameTimer = 0;
+
 		tileImage[22] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "powerUpLoader.png");
 		
+
 		
 		tM.setTiles(tileImage);
 //		player.setWeapon(new Sniper());
@@ -286,6 +300,16 @@ public class World implements Screen {
 	* @post Changes PApplet's text alignment to Center
 	*/
 	public void draw() {
+		
+		System.out.println(gameTimer);
+		if(gameTimer >= 50)
+		{
+			gameActive = false;
+			gameTimer = 0;
+		}
+		
+		if(me != null)
+		System.out.println(me.getJustSpawned());
 		//if (add check for if player decisions are the same)
 	//	if(me != null)
 	//	System.out.println(me.getJustSpawned());
@@ -592,6 +616,11 @@ public class World implements Screen {
 	public void setPlayerGameMode(boolean gameMode) {
 		me.setGameMode(gameMode);
 	}
+	
+	public boolean getPlayerGameMode()
+	{
+		return me.returnGameMode();
+	}
 			
 	/**
 	* Tracks the keys released
@@ -637,6 +666,21 @@ public class World implements Screen {
 		
 	}
 	
+	public boolean getGameStatus()
+	{
+		return gameActive;
+	
+	}
+	
+	public void incrementGameTimer()
+	{
+		gameTimer++;
+	}
+	
+	public void setGameStatus(boolean status)
+	{
+		gameActive = status;
+	}
 	/**
 	 * 
 	 * Handles all changes to the "users" database reference. This part of the database contains information about the players currently in this room.
@@ -737,6 +781,8 @@ public class World implements Screen {
 			});
 			
 		}
+		
+
 		
 	}
 }
