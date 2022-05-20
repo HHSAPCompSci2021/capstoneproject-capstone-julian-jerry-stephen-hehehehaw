@@ -182,12 +182,6 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 		activeScreen = screens.get(i);
 		
-		if(activeScreen == world)
-		{
-			world.setGameTimer(0);
-			
-		}
-		
 		if(i <= 2)
 			isFirst = true;
 		if(i == 3) {
