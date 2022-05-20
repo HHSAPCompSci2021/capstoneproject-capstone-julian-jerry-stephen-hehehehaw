@@ -416,7 +416,8 @@ public class World implements Screen {
 		p.textSize(20);
 		p.fill(0);
 		p.textAlign(p.LEFT);
-		surface.text("" + me.getUsername() + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+2*scoreBoard.height/6);
+		surface.text("Scoreboard ", scoreBoard.x+scoreBoard.width/6, scoreBoard.y+scoreBoard.height/6);
+		surface.text("" + me.getUsername() + ": " + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+3*scoreBoard.height/6);
 		p.textSize(40);
 		p.fill(0, 0, 255);
 		p.textAlign(p.CENTER);
@@ -521,7 +522,7 @@ public class World implements Screen {
 		p.textSize(20);
 		p.textAlign(p.LEFT);
 		
-		surface.text("" + p2.getUsername() + p2.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+4*scoreBoard.height/6);
+		surface.text("" + p2.getUsername() + ": " + p2.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+5*scoreBoard.height/6);
 		p.fill(255);
 
 	
