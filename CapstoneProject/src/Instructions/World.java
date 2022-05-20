@@ -326,7 +326,7 @@ public class World implements Screen {
 			me.setDead(false);
 			spawn = false;			
 			if(players.size() > 0)
-				players.get(0).incrementKillCount();
+				players.get(0).incrementKillCount(1);
 			
 		}
 		
@@ -397,7 +397,7 @@ public class World implements Screen {
 				p.textSize(80);
 				p.textAlign(p.CENTER);
 				if(increment)
-					me.incrementKillCount();
+					me.incrementKillCount(1);
 				increment = false;
 				p.text("Other Player is Dead", me.getScreenX(), me.getScreenY() - 80); 
 				
