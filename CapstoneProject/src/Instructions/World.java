@@ -175,10 +175,19 @@ public class World implements Screen {
 		SPAWN4Y = tM.getTileSize() * 50;
 	}
 	
+	/**
+	 * Updates the gamemode in the World class based on the gamemode selected from the 
+	 * GamemodeSelectionScreen class
+	 * @param i integer that represents the gamemode, 1 for KoTH and 2 for deathmatch
+	 */
 	public void updateGamemode(int i) {
 		gamemode = i;
 	}
 	
+	/**
+	 * Changes the weapon of the player that the user is controlling
+	 * @param w integer representing the new weapon for the player
+	 */
 	public void changeWeapon(int w) {
 		if(w == 1)
 			me.setWeapon(new Shotgun());
@@ -190,6 +199,9 @@ public class World implements Screen {
 			me.setWeapon(new Knife());
 	}
 	
+	/**
+	 * Resets the health of the player
+	 */
 	public void resetHealth() {
 		me.heal(999);
 	}
@@ -296,14 +308,6 @@ public class World implements Screen {
 					myUserRef.removeValueAsync();
 	      }
 	    });
-		
-
-		
-		
-		
-		
-		
-	
 	}
 
 	/**

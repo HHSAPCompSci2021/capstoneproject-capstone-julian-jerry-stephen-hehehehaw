@@ -40,7 +40,10 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	private SoundFile mainMenuSound;
 	private SoundFile inGameSound;
 
-
+	/**
+	 * Returns the world object represented by this class
+	 * @return world the object represented by this class
+	 */
 	public World getWorld() {
 		return world;
 	}
