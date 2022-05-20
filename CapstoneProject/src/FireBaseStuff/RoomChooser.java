@@ -34,6 +34,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
+/**
+ * Represents the ability of choosing a room
+ * @author 
+ */
 public class RoomChooser extends JPanel
 {
 	private JFrame theWindow;
