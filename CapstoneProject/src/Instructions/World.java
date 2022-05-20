@@ -85,7 +85,12 @@ public class World implements Screen {
 	/**
 	* Represents the screen's height
 	*/
-	public int screenHeight;
+	public int screenHeight;	
+	private boolean gameActive;
+	private double gameTimer;
+
+	private int gamemode; // 1 for KoTH, 2 for Deathmatch
+	private boolean increment;
 	
 	private ArrayList<Integer> keysDown;
 	private Player me;
@@ -133,6 +138,11 @@ public class World implements Screen {
 			e.printStackTrace();
 		}
 		
+		gameActive = true;
+		
+
+		increment = true;
+		
 		
 
 		
@@ -164,6 +174,10 @@ public class World implements Screen {
 		SPAWN4Y = tM.getTileSize() * 50;
 	}
 	
+	public void updateGamemode(int i) {
+		gamemode = i;
+	}
+	
 	public void changeWeapon(int w) {
 		if(w == 1)
 			me.setWeapon(new Shotgun());
@@ -182,6 +196,8 @@ public class World implements Screen {
 	// The statements in the setup() function 
 	// execute once when the program beginsas
 	public void setup() {
+		
+		gameActive = true;
 		menuClick = new SoundFile(surface, "Assets" + fileSeparator + "Music" + fileSeparator + "Menu Select.wav");
 		menuClick.amp(0.5f);
 		heHeHaHa = new SoundFile(p, "Assets" + fileSeparator + "Music" + fileSeparator + "HeHeHeHa.wav");
@@ -250,6 +266,7 @@ public class World implements Screen {
 		tileImage[21] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "speedPowerUp.png");
 		tileImage[22] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "powerUpLoader.png");
 		
+		gameTimer = 0;
 		
 		tM.setTiles(tileImage);
 //		player.setWeapon(new Sniper());
@@ -296,12 +313,20 @@ public class World implements Screen {
 	*/
 	public void draw() {
 		//if (add check for if player decisions are the same)
-	//	if(me != null)
-	//	System.out.println(me.getJustSpawned());
 
+
+		System.out.println(gameTimer);
+		if(gameTimer >= 50)
+		{
+			gameActive = false;
+			gameTimer = 0;
+		}
+		
 		if (me.getDead()) {
 			me.setDead(false);
-			spawn = false;
+			spawn = false;			
+			if(players.size() > 0)
+				players.get(0).incrementKillCount();
 			
 		}
 		
@@ -351,7 +376,17 @@ public class World implements Screen {
 		if(me.getWeapon().getAmmo() <= 0){
 
 			me.getWeapon().reload();
+			
+			
 		}
+		
+		
+		surface.rect(scoreBoard.x, scoreBoard.y, scoreBoard.width, scoreBoard.height, 10, 10, 10, 10);
+		p.textSize(20);
+		p.textAlign(p.LEFT);
+		p.fill(0);
+		surface.text("" + me.getUsername() + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+2*scoreBoard.height/6);
+		p.fill(255);
 	//	p.fill(220, 220, 220);
 
 		bulletsIn = p2.getOut();
@@ -360,10 +395,15 @@ public class World implements Screen {
 			
 			if (p2.getDead()) {
 				p.textSize(80);
+				p.textAlign(p.CENTER);
+				if(increment)
+					me.incrementKillCount();
+				increment = false;
 				p.text("Other Player is Dead", me.getScreenX(), me.getScreenY() - 80); 
 				
 			}	
-			else {			
+			else {		
+				increment = true;
 				
 			float screenX = p2.getWorldX() - me.getWorldX() + me.getScreenX();
 			float screenY = p2.getWorldY() - me.getWorldY() + me.getScreenY();
@@ -433,6 +473,12 @@ public class World implements Screen {
 			cC.checkTileCleanup(me);
 			
 		}
+			p.fill(0);
+		p.textSize(20);
+		p.textAlign(p.LEFT);
+		surface.text("" + p2.getUsername() + p2.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+4*scoreBoard.height/6);
+		p.fill(255);
+
 	
 
 		
@@ -604,7 +650,28 @@ public class World implements Screen {
 		}
 		}
 	}
-			 
+		
+	public boolean getPlayerGameMode()
+	{
+		return me.returnGameMode();
+	}
+		
+	public boolean getGameStatus()
+	{
+		return gameActive;
+	
+	}
+	
+	public void incrementGameTimer()
+	{
+		gameTimer++;
+	}
+	
+	public void setGameStatus(boolean status)
+	{
+		gameActive = status;
+	}
+	
 	/**
 	* Tracks the keys pressed that moves the player
 	*/

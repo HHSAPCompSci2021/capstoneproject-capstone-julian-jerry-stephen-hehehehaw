@@ -722,6 +722,12 @@ public class Player {
 		
 	}
 	
+	public boolean returnGameMode()
+	{
+		return gameDecision;
+	}
+	
+	
 	public Weapon getWeapon()
 	{
 		return weapon;
