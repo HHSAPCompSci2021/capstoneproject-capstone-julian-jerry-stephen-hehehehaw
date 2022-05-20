@@ -335,6 +335,7 @@ public class World implements Screen {
 		if (players.size() > 0) {
 			
 			
+			
 		
 		Player p2 = players.get(0);
 
