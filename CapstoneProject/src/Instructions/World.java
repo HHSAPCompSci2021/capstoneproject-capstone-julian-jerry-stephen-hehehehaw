@@ -167,11 +167,11 @@ public class World implements Screen {
 		
 		SPAWN1X = tM.getTileSize() * 50;
 		SPAWN1Y = tM.getTileSize() * 2;
-		SPAWN2X = tM.getTileSize() * 98;
+		SPAWN2X = tM.getTileSize() * 97;
 		SPAWN2Y = tM.getTileSize() * 50;
 		SPAWN3X = tM.getTileSize() * 50;
-		SPAWN3Y = tM.getTileSize() * 98;
-		SPAWN4X = tM.getTileSize() * 2;
+		SPAWN3Y = tM.getTileSize() * 97;
+		SPAWN4X = tM.getTileSize() * 3;
 		SPAWN4Y = tM.getTileSize() * 50;
 	}
 	
