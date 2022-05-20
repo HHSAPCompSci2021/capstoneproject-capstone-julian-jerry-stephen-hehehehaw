@@ -24,6 +24,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	private ArrayList<Integer> keys;
 	
 	private Screen activeScreen;
+	boolean incrementing = false;
 	private ArrayList<Screen> screens;
 
 	private int DRAWING_WIDTH, DRAWING_HEIGHT;
@@ -106,12 +107,17 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 		if(activeScreen == world)
 		{			
+			incrementing = true;
+		}
+		if (incrementing) {
 				if (world.getIncrement())
 						world.incrementGameTimer();
 				if(!world.getGameStatus())
 				{
+					incrementing = false;
 					if(world.getPlayerGameMode() == 2)
 						activeScreen = new PostMatchScreenDeathMatch(this, DRAWING_WIDTH, DRAWING_HEIGHT);
+					
 					else if (world.getPlayerGameMode() == 1)
 						activeScreen = new PostMatchScreenKOTH(this, DRAWING_WIDTH, DRAWING_HEIGHT);
 					

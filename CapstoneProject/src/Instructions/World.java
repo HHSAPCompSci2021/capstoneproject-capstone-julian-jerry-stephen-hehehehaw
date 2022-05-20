@@ -324,7 +324,7 @@ public class World implements Screen {
 	else gameActive = false;
 	if (gameActive) {
 
-		if(gameTimer >= 10000)
+		if(gameTimer >= 5000)
 		{
 			gameActive = false;
 			gameTimer = 0;
@@ -346,20 +346,58 @@ public class World implements Screen {
 			me.changeUsername();
 		}
 		
+		int i = (int)(Math.random() * 4);
 		if (me.getUsername().compareTo(p2.getUsername()) > 0) {
 			if (!spawn) {
-			me.setWorldX(SPAWN1X);
-			me.setWorldY(SPAWN1Y);
+					
+			switch (i) {
+			case 0:
+				me.setWorldX(SPAWN1X);
+				me.setWorldY(SPAWN1Y);
+				break;
+			case 1:
+				me.setWorldX(SPAWN2X);
+				me.setWorldY(SPAWN2Y);
+				break;
+			case 2:				
+				me.setWorldX(SPAWN3X);
+				me.setWorldY(SPAWN3Y);
+				break;
+			case 3:
+				me.setWorldX(SPAWN4X);
+				me.setWorldY(SPAWN4Y);
+				break;
+			}
+
 			spawn = true;
 			}
 		} else {
 			if (!spawn) {
-			me.setWorldX(SPAWN3X);
-			me.setWorldY(SPAWN3Y);
-			spawn = true;
+				i++;
+				if (i == 4)
+					i = 0;
+				switch (i) {
+				case 2:
+					me.setWorldX(SPAWN1X);
+					me.setWorldY(SPAWN1Y);
+					break;
+				case 3:
+					me.setWorldX(SPAWN2X);
+					me.setWorldY(SPAWN2Y);
+					break;
+				case 0:				
+					me.setWorldX(SPAWN3X);
+					me.setWorldY(SPAWN3Y);
+					break;
+				case 1:
+					me.setWorldX(SPAWN4X);
+					me.setWorldY(SPAWN4Y);
+					break;
+				}
+				spawn = true;
 			}
-		}
 			
+		}
 			
 		//System.out.println(p.frameRate);
 		p.background(220,220,220);  
@@ -386,14 +424,22 @@ public class World implements Screen {
 		surface.text("" + me.getUsername() + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+2*scoreBoard.height/6);
 		p.textSize(40);
 		p.fill(0, 0, 255);
-		surface.text("Game Ends In: " + gameTimer + "/10000", p.width/3, 30);
+		surface.text("Game Ends In: " + gameTimer + "/5000", p.width/3, 30);
 		p.fill(255);
 	//	p.fill(220, 220, 220);
 
 		bulletsIn = p2.getOut();
 		me.setInc(bulletsIn);
 
+		myUserRef.setValue(me.getDataObject(), new CompletionListener() {
+			//set value bullet object
+			@Override
+			public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
+			//	currentlySending = false;
+			}
 			
+		});		
+		
 			if (p2.getDead()) {
 				p.textSize(80);
 				p.textAlign(p.CENTER);
@@ -484,6 +530,14 @@ public class World implements Screen {
 		p.fill(255);
 
 	
+		myUserRef.setValue(me.getDataObject(), new CompletionListener() {
+			//set value bullet object
+			@Override
+			public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
+			//	currentlySending = false;
+			}
+			
+		});	
 
 		
 		me.setOut(bulletsOut);
@@ -531,6 +585,14 @@ public class World implements Screen {
 			}
 		}
 		
+		myUserRef.setValue(me.getDataObject(), new CompletionListener() {
+			//set value bullet object
+			@Override
+			public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
+			//	currentlySending = false;
+			}
+			
+		});	
 		
 		
 	
@@ -637,6 +699,14 @@ public class World implements Screen {
 		}
 
 	}
+		myUserRef.setValue(me.getDataObject(), new CompletionListener() {
+			//set value bullet object
+			@Override
+			public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
+			//	currentlySending = false;
+			}
+			
+		});	
 		
 		
 		p.push();
@@ -683,11 +753,8 @@ public class World implements Screen {
 		
 		}
 	}
-	}
-	me.setDataChanged(true);
 
-	//	if (me.isDataChanged()){// && !currentlySending) {
-		//	currentlySending = true;
+
 			myUserRef.setValue(me.getDataObject(), new CompletionListener() {
 				//set value bullet object
 				@Override
@@ -696,6 +763,7 @@ public class World implements Screen {
 				}
 				
 			});	
+		}
 		
 		
 	}
