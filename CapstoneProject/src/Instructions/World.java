@@ -335,8 +335,7 @@ public class World implements Screen {
 		if (me.getDead()) {
 			me.setDead(false);
 			spawn = false;			
-			if(players.size() > 0)
-				players.get(0).incrementKillCount(1);
+			p2.incrementKillCount(1);
 			
 		}
 		
