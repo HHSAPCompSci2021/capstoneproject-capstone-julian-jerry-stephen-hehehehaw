@@ -10,6 +10,10 @@ import Weapons.Weapon;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/** 
+ * This class represents a Player. It represents a player within the game.
+ * @author Jerry and Julian
+ */
 public class Player {
 	public final static String fileSeparator = System.getProperty("file.separator");
 	private Weapon weapon;
@@ -58,7 +62,9 @@ public class Player {
 	//1 = KOTH, 2 = deathmatch
 	private int gameDecision; 
 	private ArrayList<Integer> powerUpList;
-
+	/** 
+	 * The type of powerup in each of the row and columns
+	 */
 	public int powerUpRow1, powerUpColumn1, powerUpRow2, powerUpColumn2, powerUpRow3, powerUpColumn3, powerUpRow4, powerUpColumn4;
 	private int tileSize;
 	

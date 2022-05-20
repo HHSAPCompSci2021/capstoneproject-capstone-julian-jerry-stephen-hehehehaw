@@ -3,6 +3,10 @@ package Players;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/** 
+ * This class represents a Player HUD. It represents a player's health, avatar, and ammo.
+ * @author Julian
+ */
 public class PlayerHUD {
 	/** 
 	 * File separator

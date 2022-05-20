@@ -8,14 +8,23 @@ import Tiles.Tile;
 import Tiles.TileManager;
 import Weapons.Bullet;
 
+/** 
+ * Checks for collisions within the class
+ * @author Jerry
+ */
 public class Collider {
-	int tileSize;
-	TileManager tM;
-	ArrayList<Tile> tL;
-	int[][]map;
-	boolean sound;
+	private int tileSize;
+	private TileManager tM;
+	private ArrayList<Tile> tL;
+	private int[][]map;
+	private boolean sound;
 	
-//	World world;
+	/** 
+	 * Creates a new instance of a Collider object 
+	 * @param tSize The tile size
+	 * @param tM The tile manafer
+	 * @param sound If sound should be played when collisions occur
+	 */
 	public Collider(int tSize, TileManager tM, boolean sound){//World worldd) {
 		tileSize = tSize;
 		this.tM = tM;
@@ -23,9 +32,13 @@ public class Collider {
 		
 		tL = tM.getTilesList();
 		map = tM.getMap();
-		
+	
 	}
 	
+	/** 
+	 * Cleans the tiles within the game
+	 * @param plaer the Player of the tiles to clean
+	 */
 	public void checkTileCleanup(Player player) {
 
 		player.setR1(-1);
@@ -37,9 +50,12 @@ public class Collider {
 		player.setR4(-1);
 		player.setC4(-1);
 	}
-	/*
-	 * returns an int designating what powerup/trap is collided with: -1 is a noninteractble tile
-	*/
+	
+	/** 
+	 * Checks tile-player collisions
+	 * @param Player the player to test collisoins with
+	 * @return Whether or not player collides with tile
+	 */
 	public int checkTile(Player player) {
 		player.setDataChanged(true);
 		int index = -1;
@@ -150,6 +166,10 @@ public class Collider {
 			
 	}
 	
+	/** 
+	 * Checks tile-bullet collisions
+	 * @return Whether or not bullet collides with tile
+	 */
 	public boolean checkTiles(Bullet b) {
 		ArrayList<Tile> tL = tM.getTilesList();
 		int[][]map = tM.getMap();
