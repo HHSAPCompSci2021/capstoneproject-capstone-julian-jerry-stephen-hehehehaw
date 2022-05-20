@@ -582,6 +582,11 @@ public class Player {
 		return bulletHitBox;
 	}
 	
+	public void setUsername(String name)
+	{
+		username = name;
+	}
+	
 	public void draw(PApplet p) {
 
 	
@@ -589,6 +594,7 @@ public class Player {
 		p.push();
 		p.fill(0);
 		p.textAlign(p.CENTER);
+		p.fill(0,255, 0);
 		p.textSize(20);
 		p.text(username, screenX + tileSize/2, screenY + (tileSize) * 1.5f);
 		p.pop();

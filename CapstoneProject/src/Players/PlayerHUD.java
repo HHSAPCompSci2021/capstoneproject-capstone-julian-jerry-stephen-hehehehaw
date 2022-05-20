@@ -15,6 +15,7 @@ public class PlayerHUD {
 		p.fill(255, 255, 255);
 		
 		p.rect((float) (width-width/5.5),(float) (height-height/2.5), width/5, 300);
+		avatar.setUsername("");
 		avatar.draw(p);
 //		if(avatar.avatar.spriteNum == 1)
 //		{

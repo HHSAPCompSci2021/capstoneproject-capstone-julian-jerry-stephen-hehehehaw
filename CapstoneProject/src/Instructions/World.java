@@ -63,8 +63,6 @@ public class World implements Screen {
 	private final int SPAWN1X, SPAWN1Y, SPAWN2X, SPAWN2Y, SPAWN3X, SPAWN3Y, SPAWN4X, SPAWN4Y;
 	
 
-
-	
 	
 //put walls around the map to add borders
 	private int tileGrid[][];
@@ -311,8 +309,9 @@ public class World implements Screen {
 	/**
 	* Draws the entire in-game perspective
 	* 
-	* @post Changes background to (220, 220, 220)
+	* @post Changes background to arena background
 	* @post Changes PApplet's text alignment to Center
+	* 
 	*/
 	public void draw() {
 		//if (add check for if player decisions are the same)
@@ -324,7 +323,6 @@ public class World implements Screen {
 	}
 	else gameActive = false;
 	if (gameActive) {
-		System.out.println(gameTimer);
 
 		if(gameTimer >= 10000)
 		{
@@ -336,7 +334,6 @@ public class World implements Screen {
 		if (me.getDead()) {
 			me.setDead(false);
 			spawn = false;		
-			increment = false;
 		}else if(me.getHealth() <= 0) {
 			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
 			me.setDead(true);
@@ -381,11 +378,15 @@ public class World implements Screen {
 		}
 		
 		
+		
 		surface.rect(scoreBoard.x, scoreBoard.y, scoreBoard.width, scoreBoard.height, 10, 10, 10, 10);
 		p.textSize(20);
-		p.textAlign(p.LEFT);
+		p.textAlign(p.CENTER);
 		p.fill(0);
 		surface.text("" + me.getUsername() + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+2*scoreBoard.height/6);
+		p.textSize(40);
+		p.fill(0, 0, 255);
+		surface.text("Game Ends In: " + gameTimer + "/10000", p.width/3, 30);
 		p.fill(255);
 	//	p.fill(220, 220, 220);
 
@@ -401,7 +402,6 @@ public class World implements Screen {
 					me.incrementKillCount(1);
 					killUp = false;
 				}
-				increment = false;
 				p.text("Other Player is Dead", me.getScreenX(), me.getScreenY() - 80); 
 				
 			} else {		
@@ -479,6 +479,7 @@ public class World implements Screen {
 			p.fill(0);
 		p.textSize(20);
 		p.textAlign(p.LEFT);
+		
 		surface.text("" + p2.getUsername() + p2.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+4*scoreBoard.height/6);
 		p.fill(255);
 
@@ -536,7 +537,7 @@ public class World implements Screen {
 		
 		
 		
-		hud.draw(p, screenWidth, screenHeight, me, new Player(un, screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage2, tM.getTileSize()));
+		hud.draw(p, screenWidth, screenHeight, me, new Player(un, screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage, tM.getTileSize()));
 
 		surface.textAlign(surface.CENTER);
 		surface.fill(255);
@@ -660,15 +661,6 @@ public class World implements Screen {
 			angle = 2*Math.PI - angle;
 
 		}
-//		
-//		p.translate(p.width/2, p.height/2);
-//		p.rotate((float) ((Math.PI * 2) - angle));
-		
-//		if(p2Y > me.getWorldY() && p2X > me.getWorldX())
-//		{
-//			
-//		}
-	//	System.out.println(angle);
 
 		
 		Line line = Line.constructLineFromAngle((float)(screenWidth/2+me.getWidth()/10), (float)(screenHeight/2 - 4*me.getHeight()/2), angle * 180 / Math.PI, 20);
