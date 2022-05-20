@@ -455,19 +455,19 @@ public class World implements Screen {
 			
 	
 			if (p2.getN()) {
-				p2.avatar.setDirection('w', true);
+				p2.getAvatar().setDirection('w', true);
 				
 			}
 			else if (p2.getS()) {
-				p2.avatar.setDirection('s', true);
+				p2.getAvatar().setDirection('s', true);
 					
 				}
 			else if (p2.getW()) {
-				p2.avatar.setDirection('a', true);
+				p2.getAvatar().setDirection('a', true);
 				
 			}
 			else if (p2.getE()) {
-				p2.avatar.setDirection('d', true);
+				p2.getAvatar().setDirection('d', true);
 				
 			}
 			
@@ -813,7 +813,7 @@ public class World implements Screen {
 
 		
 		me.setDirection(k, true);
-		me.avatar.setDirection(k, true);
+		me.getAvatar().setDirection(k, true);
 		
 		//Currently selected emote will display
 		if(p.key == 'e')
@@ -838,7 +838,7 @@ public class World implements Screen {
 	public void keyReleased() {
 		
 		me.setDirection(p.keyCode, false) ;
-		me.avatar.setDirection(p.keyCode, false) ;
+		me.getAvatar().setDirection(p.keyCode, false) ;
 		myUserRef.setValueAsync(me.getDataObject());
 	}
 
