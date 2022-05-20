@@ -560,6 +560,11 @@ public class Player {
 		return west;
 	}
 	
+	public boolean returnGameMode()
+	{
+		return gameDecision;
+	}
+	
 	public void setCollisions(boolean t) {
 		collisionOn = t;
 	}
@@ -930,6 +935,10 @@ public class Player {
 		return arr;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+	
 	public int getKillCount() {
 		return killCount;
 	}
@@ -942,12 +951,12 @@ public class Player {
 		return points;
 	}
 	
-	public void incrementKillCount(int x) {
-		killCount += x;
+	public void incrementKillCount() {
+		killCount++;
 	}
 	
-	public void incrementDeathCount(int x) {
-		deathCount += x;
+	public void incrementDeathCount() {
+		deathCount++;
 	}
 	
 	public void incrementPoints(int x) {
@@ -963,11 +972,7 @@ public class Player {
 		emoteCounter = i;
 		
 	}
-
-	public String getUsername() {
-
-		return username;
-	}
+	
 	public void changeUsername() {
 		username += 1;
 	}

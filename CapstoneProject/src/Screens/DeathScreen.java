@@ -23,7 +23,6 @@ public class DeathScreen implements Screen {
 	private int weaponChoice;
 	
 	private Rectangle gameStarter;
-	private Rectangle backButton;
 	private Rectangle shotgun;
 	private Rectangle sniper;
 	private Rectangle submachine;
@@ -45,7 +44,6 @@ public class DeathScreen implements Screen {
 		weaponChoice = 0;
 		shade = 0;
 		gameStarter = new Rectangle((int)(DRAWING_WIDTH*(1-BUTTON_WIDTH*4)/2), (int)(DRAWING_HEIGHT*(1-1.5*BUTTON_HEIGHT)), (int)(width*BUTTON_WIDTH*4), (int)(height*BUTTON_HEIGHT));
-		backButton = new Rectangle((int)(DRAWING_WIDTH*0.015), (int)(DRAWING_HEIGHT*0.03), (int)(width*BUTTON_WIDTH), (int)(height*BUTTON_HEIGHT/2));
 		shotgun = new Rectangle((int)(2*DRAWING_WIDTH/15), (int)(DRAWING_HEIGHT*(1-4*BUTTON_HEIGHT)/2), (int)(width*W_BUTTON_WIDTH), (int)(height*W_BUTTON_HEIGHT));
 		sniper = new Rectangle((int)(5*DRAWING_WIDTH/15), (int)(DRAWING_HEIGHT*(1-4*BUTTON_HEIGHT)/2), (int)(width*W_BUTTON_WIDTH), (int)(height*W_BUTTON_HEIGHT));
 		submachine = new Rectangle((int)(8*DRAWING_WIDTH/15), (int)(DRAWING_HEIGHT*(1-4*BUTTON_HEIGHT)/2), (int)(width*W_BUTTON_WIDTH), (int)(height*W_BUTTON_HEIGHT));
@@ -83,7 +81,6 @@ public class DeathScreen implements Screen {
 		
 		if(LIVES_LEFT > 0) {
 			// draw buttons
-			surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
 			surface.rect(gameStarter.x, gameStarter.y, gameStarter.width, gameStarter.height, 10, 10, 10, 10);
 			
 			if(shade == 1) surface.fill(155);
@@ -127,7 +124,6 @@ public class DeathScreen implements Screen {
 			
 			String str0 = "Back";
 			float w0 = surface.textWidth(str0);
-			surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 		}
 		else {
 			surface.fill(0);
@@ -139,11 +135,7 @@ public class DeathScreen implements Screen {
 
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		if (backButton.contains(p)) {
-			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
-			shade = 0;
-		}
-		else if(shotgun.contains(p)) {
+		if(shotgun.contains(p)) {
 			weaponChoice = 1;
 			shade = 1;
 		}
