@@ -55,9 +55,7 @@ public class World implements Screen {
 	private int hill;
 	private int player1SpawnX, player1SpawnY, player2SpawnX, player2SpawnY;
 	
-
-
-	
+	private int gamemode; // 1 for KoTH, 2 for Deathmatch
 	
 //put walls around the map to add borders
 	private int tileGrid[][];
@@ -98,6 +96,7 @@ public class World implements Screen {
 	private Rectangle backButton;
 	private Rectangle instructions;
 	private Rectangle scoreBoard;
+	
 	private String un;
 	
 	private final float BUTTON_WIDTH = 0.1f;
@@ -112,10 +111,10 @@ public class World implements Screen {
 //	private final int worldHeight = maxWorldRow * tM.getTileSize();
 	private BufferedImage image;
 	private ArrayList<Integer> powerUpList;
-
+	
+	private boolean increment;
 	
 	public World(MainMenu p, DatabaseReference roomRef) {
-
 		players = new ArrayList<Player>();
 		avatars = new ArrayList<Avatar>();
 		
@@ -129,9 +128,8 @@ public class World implements Screen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-
+	
+		increment = true;
 		
 		reader = new imageReaderToRGB();
 		
@@ -146,7 +144,7 @@ public class World implements Screen {
 		this.p = p;
 		
 		backButton = new Rectangle((int)(screenWidth*0.015), (int)(screenHeight*0.03), (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
-		scoreBoard = new Rectangle((int)(screenWidth*0.8), 0, (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
+		scoreBoard = new Rectangle((int)(screenWidth*0.8), 0, (int)(screenWidth*BUTTON_WIDTH*3), (int)(screenHeight*BUTTON_HEIGHT*2));
 		
 		cC = new Collider(tM.getTileSize(), tM);
 		playerShoot = false;
@@ -163,12 +161,16 @@ public class World implements Screen {
 			me.setWeapon(new Knife());
 	}
 	
+	public void updateGamemode(int i) {
+		gamemode = i;
+	}
+	
 	public void resetHealth() {
 		me.heal(100);
 	}
 	
 	// The statements in the setup() function 
-	// execute once when the program beginsas
+	// execute once when the program begins
 	public void setup() {
 		menuClick = new SoundFile(surface, "Assets" + fileSeparator + "Music" + fileSeparator + "Menu Select.wav");
 		menuClick.amp(0.5f);
@@ -266,14 +268,6 @@ public class World implements Screen {
 					myUserRef.removeValueAsync();
 	      }
 	    });
-		
-
-		
-		
-		
-		
-		
-	
 	}
 
 	/**
@@ -297,6 +291,8 @@ public class World implements Screen {
 		if(me.getHealth() <= 0) {
 			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
 			me.setDead(true);
+			if(players.size() > 0)
+				players.get(0).incrementKillCount();
 			me.justSpawned(true);
 		}
 		else {
@@ -304,92 +300,91 @@ public class World implements Screen {
 		//System.out.println(p.frameRate);
 		p.background(220,220,220);  
 		p.textAlign(p.CENTER);
-
-	
+		
+		
 		tM.draw(p, me);
-		
-		
-	
 		
 		if(me.getWeapon().getAmmo() <= 0){
 
 			me.getWeapon().reload();
 		}
 	//	p.fill(220, 220, 220);
-
-	if (players.size() > 0) {
-		Player p2 = players.get(0);
-
-			
+		
+		surface.rect(scoreBoard.x, scoreBoard.y, scoreBoard.width, scoreBoard.height, 10, 10, 10, 10);
+		p.textSize(20);
+		p.textAlign(p.LEFT);
+		p.fill(0);
+		surface.text("" + me.getUsername() + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+2*scoreBoard.height/6);
+		p.fill(255);
+		
+		if (players.size() > 0) {
+			Player p2 = players.get(0);
 			if (p2.getDead()) {
 				p.textSize(80);
-				p.text("Other Player is Dead", me.getScreenX(), me.getScreenY() - 80); 
-				
-			}	
-			else {			
-				
-			float screenX = p2.getWorldX() - me.getWorldX() + me.getScreenX();
-			float screenY = p2.getWorldY() - me.getWorldY() + me.getScreenY();
-	//		p2.setImages(playerImage2);	
-			
-	
-			if (p2.getN()) {
-				p2.avatar.setDirection('w', true);
-				
+				p.textAlign(p.CENTER);
+				p.text("Other Player is Dead", me.getScreenX(), me.getScreenY() - 80);
+				if(increment)
+					me.incrementKillCount();
+				increment = false;
 			}
-			else if (p2.getS()) {
-				p2.avatar.setDirection('s', true);
-					
+			else {
+				increment = true;
+				float screenX = p2.getWorldX() - me.getWorldX() + me.getScreenX();
+				float screenY = p2.getWorldY() - me.getWorldY() + me.getScreenY();
+		//		p2.setImages(playerImage2);	
+				
+				if (p2.getN())
+					p2.avatar.setDirection('w', true);
+				else if (p2.getS())
+					p2.avatar.setDirection('s', true);
+				else if (p2.getW())
+					p2.avatar.setDirection('a', true);
+				else if (p2.getE())
+					p2.avatar.setDirection('d', true);
+				
+				cC.checkTile(p2);
+				
+				p2.setScreenX(screenX);
+				p2.setScreenY(screenY);
+				
+				if (p2.getEmote()) {
+					p2.emote();
+		//			heHeHaHa.play();
 				}
-			else if (p2.getW()) {
-				p2.avatar.setDirection('a', true);
-				
-			}
-			else if (p2.getE()) {
-				p2.avatar.setDirection('d', true);
-				
-			}
-			
-			cC.checkTile(p2);
-			
-			
-			p2.setScreenX(screenX);
-			p2.setScreenY(screenY);
-			
-			if (p2.getEmote()) {
-				p2.emote();
-	//			heHeHaHa.play();
-			}
-//			p2.incrementEmoteCounter;
-			myUserRef.setValueAsync(me.getDataObject());
-			p2.draw(p);	
-
-		
-			bulletsIn = p2.getOut();
-			me.setInc(bulletsIn);
-			
+	//			p2.incrementEmoteCounter;
+				myUserRef.setValueAsync(me.getDataObject());
+				p2.draw(p);	
 	
-			if (p2.getR1() > 0 && p2.getC1() > 0 ) {
-				tM.getMap()[p2.getC1()][p2.getR1()] = 22;
-
-			}
-			if (p2.getR2() > 0 && p2.getC2() > 0) {
-				tM.getMap()[p2.getC2()][p2.getR2()] = 22;
-
-			}
-			if (p2.getR3() > 0 && p2.getC3() > 0) {
-				tM.getMap()[p2.getC3()][p2.getR3()] = 22;
-
-			}
-			if (p2.getR4() > 0 && p2.getC4() > 0) {
-				tM.getMap()[p2.getC4()][p2.getR4()] = 22;
-
-			}
-			cC.checkTileCleanup(me);
 			
+				bulletsIn = p2.getOut();
+				me.setInc(bulletsIn);
+				
+		
+				if (p2.getR1() > 0 && p2.getC1() > 0 ) {
+					tM.getMap()[p2.getC1()][p2.getR1()] = 22;
+	
+				}
+				if (p2.getR2() > 0 && p2.getC2() > 0) {
+					tM.getMap()[p2.getC2()][p2.getR2()] = 22;
+	
+				}
+				if (p2.getR3() > 0 && p2.getC3() > 0) {
+					tM.getMap()[p2.getC3()][p2.getR3()] = 22;
+	
+				}
+				if (p2.getR4() > 0 && p2.getC4() > 0) {
+					tM.getMap()[p2.getC4()][p2.getR4()] = 22;
+	
+				}
+				cC.checkTileCleanup(me);
+			
+			}
+			p.fill(0);
+			p.textSize(20);
+			surface.text("" + p2.getUsername() + p2.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+4*scoreBoard.height/6);
+			p.fill(255);
 		}
-	}
-
+		
 		
 		me.setOut(bulletsOut);
 		myUserRef.setValueAsync(me.getDataObject());
