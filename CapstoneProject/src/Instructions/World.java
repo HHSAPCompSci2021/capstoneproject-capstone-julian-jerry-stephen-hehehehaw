@@ -316,7 +316,7 @@ public class World implements Screen {
 
 
 		System.out.println(gameTimer);
-		if(gameTimer >= 100)
+		if(gameTimer >= 10000)
 		{
 			gameActive = false;
 			gameTimer = 0;
