@@ -39,6 +39,7 @@ import Tiles.*;
 
 public class World implements Screen {
 	
+	private boolean killUp;
 	public final static String fileSeparator = System.getProperty("file.separator");
 	public final static String lineSeparator = System.getProperty("line.separator");
 	public final static String userDir = System.getProperty("user.dir");
@@ -318,7 +319,7 @@ public class World implements Screen {
 	if (players.size() > 0) {
 	Player p2 = players.get(0);
 	if (me.returnGameMode() == p2.returnGameMode() && me.returnGameMode() != 0) {
-		System.out.println("me choice: " + me.returnGameMode() + " p2 choice: " +  p2.returnGameMode());
+//		System.out.println("me choice: " + me.returnGameMode() + " p2 choice: " +  p2.returnGameMode());
 		gameActive = true;
 	}
 	else gameActive = false;
@@ -334,18 +335,15 @@ public class World implements Screen {
 		
 		if (me.getDead()) {
 			me.setDead(false);
-			spawn = false;			
-			p2.incrementKillCount(1);
-			
-		}
-		
-		// check if player has lost all its health
-		if(me.getHealth() <= 0) {
+			spawn = false;		
+			increment = false;
+		}else if(me.getHealth() <= 0) {
 			surface.switchScreen(ScreenSwitcher.DEATH_SCREEN);
 			me.setDead(true);
 			me.justSpawned(true);
 		}
 		else {
+			increment = true;
 		
 		while (me.getUsername().equals(p2.getUsername()) || me.getUsername() == "") {
 			me.changeUsername();
@@ -398,14 +396,17 @@ public class World implements Screen {
 			if (p2.getDead()) {
 				p.textSize(80);
 				p.textAlign(p.CENTER);
-				if(increment)
+		//		System.out.println(increment);
+				if(killUp) {
 					me.incrementKillCount(1);
+					killUp = false;
+				}
 				increment = false;
 				p.text("Other Player is Dead", me.getScreenX(), me.getScreenY() - 80); 
 				
-			}	
-			else {		
+			} else {		
 				increment = true;
+				killUp = true;
 				
 			float screenX = p2.getWorldX() - me.getWorldX() + me.getScreenX();
 			float screenY = p2.getWorldY() - me.getWorldY() + me.getScreenY();
@@ -667,7 +668,7 @@ public class World implements Screen {
 //		{
 //			
 //		}
-		System.out.println(angle);
+	//	System.out.println(angle);
 
 		
 		Line line = Line.constructLineFromAngle((float)(screenWidth/2+me.getWidth()/10), (float)(screenHeight/2 - 4*me.getHeight()/2), angle * 180 / Math.PI, 20);
@@ -693,7 +694,7 @@ public class World implements Screen {
 	}
 	me.setDataChanged(true);
 
-		if (me.isDataChanged()){// && !currentlySending) {
+	//	if (me.isDataChanged()){// && !currentlySending) {
 		//	currentlySending = true;
 			myUserRef.setValue(me.getDataObject(), new CompletionListener() {
 				//set value bullet object
@@ -703,7 +704,7 @@ public class World implements Screen {
 				}
 				
 			});	
-		}
+		
 		
 	}
 		
@@ -716,6 +717,10 @@ public class World implements Screen {
 	{
 		return gameActive;
 	
+	}
+	
+	public boolean getIncrement() {
+		return increment;
 	}
 	
 	public void incrementGameTimer()

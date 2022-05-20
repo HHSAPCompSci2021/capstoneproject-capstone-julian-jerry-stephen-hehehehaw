@@ -600,7 +600,7 @@ public class Player {
 		if(justSpawned == true)
 		{
 			spawnCounter++;
-			if(spawnCounter == 50) //adjust as necessary (spawn protect timer)
+			if(spawnCounter == 100) //adjust as necessary (spawn protect timer)
 			{
 				justSpawned = false;
 				spawnCounter = 0;
