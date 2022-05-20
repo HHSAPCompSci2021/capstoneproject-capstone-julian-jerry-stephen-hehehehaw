@@ -35,6 +35,10 @@ public class PlayerData {
 	public int slowCD, speedCD, dmgCD, magCD;
 	public int emoteCounter;
 	
+	public int killCount;
+	public int deathCount;
+	public int points;
+	
 	public boolean emote;
 	public int spriteCounter, spriteNum;
 	public float worldX, worldY, screenX, screenY;

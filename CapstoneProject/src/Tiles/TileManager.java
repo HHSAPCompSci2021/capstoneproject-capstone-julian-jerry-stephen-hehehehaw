@@ -142,28 +142,29 @@ public class TileManager {
 		return arr;
 	}
 	
-	public int tileInteract(int tileNum, Player p) {
+	public int tileInteract(int tileNum, Player p, boolean sound) {
 		switch (tileNum) {
 		case 16:
 			if(!p.getJustSpawned())
 			p.loseHealth(0.2);
-			
+			if (sound)
 			if(!World.loseHealth.isPlaying())
 			World.loseHealth.play();
 			p.setDataChanged(true);
 			break;
 		case 17:
 			p.setSpeedDown(p.getSpeed() * 0.5);
-			
+			if (sound)
 			if(!World.collectPowerUp.isPlaying())
 			World.collectPowerUp.play();
 			p.setDataChanged(true);
 			return 17;
 
 		case 18: 
-			p.heal(50);
-			if(!World.collectPowerUp.isPlaying())
-				World.collectPowerUp.play();
+			p.heal(70);
+			if (sound)
+				if(!World.collectPowerUp.isPlaying())
+					World.collectPowerUp.play();
 			p.setDataChanged(true);
 			break;
 		case 19: 
@@ -174,7 +175,7 @@ public class TileManager {
 			return 19;
 		case 20: 
 			p.getWeapon().setMagSize(p.getWeapon().getMagSize()*2);
-
+			if (sound)
 			if(!World.collectPowerUp.isPlaying())
 				World.collectPowerUp.play();
 		//	System.out.println("Ammo : " + p.getWeapon().getAmmo() + " magazineSize: " + p.getWeapon().magazineSize);
@@ -183,7 +184,7 @@ public class TileManager {
 			
 		case 21:
 			p.setSpeedUp(p.getRealDefaultSpeed() * 1.5);
-			
+			if (sound)
 			if(!World.collectPowerUp.isPlaying())
 				World.collectPowerUp.play();
 			p.setDataChanged(true);

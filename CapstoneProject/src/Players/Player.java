@@ -55,7 +55,7 @@ public class Player {
 	
 	private String uniqueID;
 	
-	//false = KOTH, true = deathmatch, default is KOTH
+	//1 = KOTH, 2 = deathmatch
 	private int gameDecision; 
 	private ArrayList<Integer> powerUpList;
 
@@ -168,6 +168,10 @@ public class Player {
 	 */
 	public Player(String uniqueID, PlayerData data, PApplet p, PImage[] images, Collider c, int tileSize, TileManager tM) {
 
+		killCount = data.killCount;
+		deathCount = data.deathCount;
+		points = data.points;
+		
 		gameDecision = data.gameDecision;
 		emoteCounter = data.emoteCounter;
 		slowed = data.slowed;
@@ -369,6 +373,10 @@ public class Player {
 	}
 	
 	public PlayerData getDataObject() {
+
+		data.killCount = killCount;
+		data.deathCount = deathCount;
+		data.points = points;
 		data.gameDecision = gameDecision;
 		data.emoteCounter = emoteCounter;
 		data.slowed = slowed;
@@ -466,6 +474,10 @@ public class Player {
 	}
 	
 	public void syncWithDataObject(PlayerData data, TileManager tM, Collider c) {
+
+		killCount = data.killCount;
+		deathCount = data.deathCount;
+		points = data.points;
 		gameDecision = data.gameDecision;
 		emoteCounter = data.emoteCounter;
 		username = data.username;
