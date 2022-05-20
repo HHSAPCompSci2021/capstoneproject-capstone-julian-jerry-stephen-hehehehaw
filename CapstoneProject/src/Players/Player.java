@@ -434,6 +434,11 @@ public class Player {
 		return west;
 	}
 	
+	public boolean returnGameMode()
+	{
+		return gameDecision;
+	}
+	
 	public void setCollisions(boolean t) {
 		collisionOn = t;
 	}

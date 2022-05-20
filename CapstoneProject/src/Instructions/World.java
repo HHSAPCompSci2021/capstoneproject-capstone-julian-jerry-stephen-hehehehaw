@@ -51,7 +51,8 @@ public class World implements Screen {
 	private SoundFile knifeSound;
 	private int soundCounter = 0;
 	
-	
+	private boolean gameActive;
+	private double gameTimer;
 
 
 	
@@ -126,7 +127,7 @@ public class World implements Screen {
 			e.printStackTrace();
 		}
 		
-		
+		gameActive = true;
 
 		
 		reader = new imageReaderToRGB();
@@ -227,7 +228,7 @@ public class World implements Screen {
 	      }
 	    });
 		
-
+		gameActive = true;
 
 		tileImage[0] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick1.png");
 		tileImage[1] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "redbrick2.png");
@@ -256,7 +257,7 @@ public class World implements Screen {
 		tileImage[21] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "speedPowerUp.png");
 		
 		
-		
+		gameTimer = 0;
 		
 		tM.setTiles(tileImage);
 		
@@ -271,6 +272,14 @@ public class World implements Screen {
 	* @post Changes PApplet's text alignment to Center
 	*/
 	public void draw() {
+		
+		System.out.println(gameTimer);
+		if(gameTimer >= 50)
+		{
+			gameActive = false;
+			gameTimer = 0;
+		}
+		
 		if(me != null)
 		System.out.println(me.getJustSpawned());
 		if (me.getDead()) {
@@ -533,6 +542,11 @@ public class World implements Screen {
 	public void setPlayerGameMode(boolean gameMode) {
 		me.setGameMode(gameMode);
 	}
+	
+	public boolean getPlayerGameMode()
+	{
+		return me.returnGameMode();
+	}
 			
 	/**
 	* Tracks the keys released
@@ -576,6 +590,21 @@ public class World implements Screen {
 		
 	}
 	
+	public boolean getGameStatus()
+	{
+		return gameActive;
+	
+	}
+	
+	public void incrementGameTimer()
+	{
+		gameTimer++;
+	}
+	
+	public void setGameStatus(boolean status)
+	{
+		gameActive = status;
+	}
 	/**
 	 * 
 	 * Handles all changes to the "users" database reference. This part of the database contains information about the players currently in this room.
@@ -676,6 +705,8 @@ public class World implements Screen {
 			});
 			
 		}
+		
+
 		
 	}
 }
