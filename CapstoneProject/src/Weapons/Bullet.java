@@ -79,7 +79,7 @@ public class Bullet {
 	
 	public boolean intersects(Player player)
 	{
-		Rectangle r = player.getDimensions();
+		Rectangle r = player.getBulletHitBox();
 		
 
 		int playerLeftWorldX = (int)(player.getWorldX() + r.x);

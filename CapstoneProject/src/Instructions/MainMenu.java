@@ -102,7 +102,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		
 		if (activeScreen != world)
 			scale(ratioX, ratioY);
-		
+		//add check for world
 		activeScreen.draw();
 		
 	

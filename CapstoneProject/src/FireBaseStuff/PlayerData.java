@@ -33,6 +33,7 @@ public class PlayerData {
 
 	public boolean slowed, speedBuffed, damageBuffed, magBuffed;
 	public int slowCD, speedCD, dmgCD, magCD;
+	public int emoteCounter;
 	
 	public boolean emote;
 	public int spriteCounter, spriteNum;

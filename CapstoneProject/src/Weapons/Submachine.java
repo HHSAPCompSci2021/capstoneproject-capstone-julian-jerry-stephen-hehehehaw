@@ -7,7 +7,7 @@ import Players.Player;
 public class Submachine extends Weapon{
 		
 	public Submachine() {
-		super(35, 55, 10, 1.3, 9, 1000);
+		super(35, 55, 10, 1.3, 6, 1000);
 		// TODO Auto-generated constructor stub
 	}
 

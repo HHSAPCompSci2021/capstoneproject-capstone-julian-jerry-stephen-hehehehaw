@@ -42,7 +42,7 @@ public class Collider {
 		player.setDataChanged(true);
 		int index = -1;
 		
-		Rectangle r = player.getDimensions();
+		Rectangle r = player.getTileHitBox();
 		int playerLeftWorldX = (int)(player.getWorldX() + r.x);
 		int playerRightWorldX = (int)(player.getWorldX() + r.x + r.width);
 		int playerTopWorldY = (int) (player.getWorldY() + r.y);
