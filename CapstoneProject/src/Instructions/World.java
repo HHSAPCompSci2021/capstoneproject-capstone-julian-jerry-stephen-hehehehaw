@@ -278,6 +278,12 @@ public class World implements Screen {
 		tileImage[20] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "ratePowerUp.png");
 		tileImage[21] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "speedPowerUp.png");
 		tileImage[22] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "powerUpLoader.png");
+
+//		tileImage[23] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "arenatile1.png");
+//		tileImage[24] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "arenatile1.png");
+//		tileImage[25] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "arenatile1.png");
+//		tileImage[26] = p.loadImage("Assets" + fileSeparator + "Tiles" + fileSeparator + "arenatile1.png");
+		
 		
 		gameTimer = 0;
 		
@@ -328,11 +334,26 @@ public class World implements Screen {
 	else gameActive = false;
 	if (gameActive) {
 
-		if(gameTimer >= 5000)
-		{
-			gameActive = false;
-			gameTimer = 0;
-		}
+		
+			if(gameTimer >= 5000)
+			{
+				gameActive = false;
+				gameTimer = 0;
+			}
+			
+			if (me.returnGameMode() == 1) {
+				if (gameTimer <= 1000)
+					hill = 0;
+				else if (gameTimer <= 2000)
+					hill = 1;
+				else if (gameTimer <= 3000)
+					hill = 2;
+				else if (gameTimer <= 4000)
+					hill = 3;
+				else if (gameTimer <= 5000)
+					hill = 4;
+			}
+		
 		
 		if (me.getDead()) {
 			me.setDead(false);
@@ -351,6 +372,7 @@ public class World implements Screen {
 		
 		int i = (int)(Math.random() * 4);
 		if (me.getUsername().compareTo(p2.getUsername()) > 0) {
+			if (me.returnGameMode() == 1) {
 			if (!spawn) {
 					
 			switch (i) {
@@ -398,12 +420,22 @@ public class World implements Screen {
 			}
 			
 		}
+		}else if (me.returnGameMode() == 2) {
+			//spawn
 			
-		//System.out.println(p.frameRate);
+			
+			
+			
+			
+		}
+			
+		System.out.println(p.frameRate);
 		p.background(220,220,220);  
 		p.textAlign(p.CENTER);
-	
-		tM.draw(p, me);
+		if (me.returnGameMode() == 2)
+			tM.draw(p, me, -1);
+		else if (me.returnGameMode() == 1)
+			tM.draw(p, me, hill);
 		
 		if(me.getWeapon().getAmmo() <= 0){
 			me.getWeapon().reload();
@@ -413,10 +445,38 @@ public class World implements Screen {
 		p.textSize(20);
 		p.textAlign(p.CENTER);
 		p.fill(0);
-		surface.text("" + me.getUsername() + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+2*scoreBoard.height/6);
+		if (me.returnGameMode() == 1)
+			surface.text("" + me.getUsername() + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+2*scoreBoard.height/6);
+		else if (me.returnGameMode() == 2)
+			surface.text("" + me.getUsername() + me.getPoints(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+2*scoreBoard.height/6);
+		
+			
 		p.textSize(40);
 		p.fill(0, 0, 255);
-		surface.text("Game Ends In: " + gameTimer + "/5000", p.width/3, 30);
+		if (me.returnGameMode() == 1)
+			surface.text("Game Ends In: fra" + gameTimer + "/5000", p.width/3, 30);
+		else if (me.returnGameMode() == 2) {
+			String hillDir = "";
+			switch (hill){
+			case 0:
+				hillDir = "NorthWest Hill";
+				break;
+			case 1:
+				hillDir = "NorthEast Hill";
+				break;
+			case 2: 
+				hillDir = "SouthEast Hill";
+				break;
+			case 3:
+				hillDir = "SouthWest Hill";
+				break;
+			case 4: 
+				hillDir = "Middle Hill";
+			}
+			surface.text("Go to " + hillDir + "| Game Ends In: fra" + gameTimer + "/5000", p.width/3, 30);
+			
+		}
+		
 		p.fill(255);
 	//	p.fill(220, 220, 220);
 

@@ -98,6 +98,7 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	}
 	
 	public void draw() {
+		this.frameRate(30);
 		ratioX = (float)width/DRAWING_WIDTH;
 		ratioY = (float)height/DRAWING_HEIGHT;
 		

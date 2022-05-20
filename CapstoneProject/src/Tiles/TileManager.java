@@ -22,7 +22,7 @@ public class TileManager {
 	private Tile redBrick1, redBrick2, redBrick3, redBrick4, redBrick5, 
 	redBrickWall1, stoneWall1, stoneWall2,
 	stoneBrick1, stoneBrick2, stoneBrick3, stoneBrick4, stoneBrick5, stoneBrick6,
-	spikeTile, tarPitTile, healthPowerUp, damagePowerUp, ammoPowerUp, speedPowerUp, arenaTile1, arenaTile2, powerUpLoader;
+	spikeTile, tarPitTile, healthPowerUp, damagePowerUp, ammoPowerUp, speedPowerUp, aT1, aTOn, aT2, aT3, aT4, aT5,powerUpLoader;
 	
 	private ArrayList<Tile> tilesList = new ArrayList<Tile>();
 	
@@ -67,7 +67,7 @@ public class TileManager {
 		damagePowerUp = new Tile();
 		ammoPowerUp = new Tile();
 		speedPowerUp = new Tile();
-		arenaTile2 = new Tile();
+		aTOn = new Tile();
 		redBrick1 = new Tile();
 		redBrick2 = new Tile();
 		redBrick3 = new Tile();
@@ -82,7 +82,11 @@ public class TileManager {
 		stoneBrick6 = new Tile();
 		stoneWall1 = new Tile();
 		stoneWall2 = new Tile();
-		arenaTile1 = new Tile();
+		aT1 = new Tile();
+		aT2 = new Tile();
+		aT3 = new Tile();
+		aT4 = new Tile();
+		aT5 = new Tile();
 		powerUpLoader = new Tile();
 		
 		tilesList.add(redBrick1);
@@ -99,8 +103,8 @@ public class TileManager {
 		tilesList.add(redBrickWall1);
 		tilesList.add(stoneWall1);
 		tilesList.add(stoneWall2);
-		tilesList.add(arenaTile1);
-		tilesList.add(arenaTile2);//tile [15]
+		tilesList.add(aT1);
+		tilesList.add(aTOn);//tile [15]
 		tilesList.add(spikeTile);//16
 		tilesList.add(tarPitTile);//17
 		tilesList.add(healthPowerUp);//18
@@ -108,6 +112,10 @@ public class TileManager {
 		tilesList.add(ammoPowerUp);//20
 		tilesList.add(speedPowerUp);//21
 		tilesList.add(powerUpLoader);//22
+		tilesList.add(aT2);//23
+		tilesList.add(aT3);//24
+		tilesList.add(aT4);//25
+		tilesList.add(aT5);//26
 		redBrick1.setImage(tiles[0]);
 		redBrick2.setImage(tiles[1]);
 		redBrick3.setImage(tiles[2]);
@@ -125,8 +133,8 @@ public class TileManager {
 		stoneBrick4.setImage(tiles[11]);
 		stoneBrick5.setImage(tiles[12]);
 		stoneBrick6.setImage(tiles[13]);
-		arenaTile1.setImage(tiles[14]);
-		arenaTile2.setImage(tiles[15]);
+		aT1.setImage(tiles[14]);
+		aTOn.setImage(tiles[15]);
 		spikeTile.setImage(tiles[16]);
 		spikeTile.trap();
 		tarPitTile.setImage(tiles[17]);
@@ -140,6 +148,11 @@ public class TileManager {
 		speedPowerUp.setImage(tiles[21]);
 		speedPowerUp.powerUp();
 		powerUpLoader.setImage(tiles[22]);
+//		aT2.setImage(tiles[23]);
+//		aT2.setImage(tiles[24]);
+//		aT2.setImage(tiles[25]);
+//		aT2.setImage(tiles[26]);
+		
 	}
 		
 	/**
@@ -176,6 +189,9 @@ public class TileManager {
 	*/
 	public int tileInteract(int tileNum, Player p, boolean sound) {
 		switch (tileNum) {
+		case 15:
+			p.incrementPoints(1);
+			break;
 		case 16:
 			if(!p.getJustSpawned())
 			p.loseHealth(0.2);
@@ -245,7 +261,7 @@ public class TileManager {
 	* @param p PApplet surface to draw on
 	* @param player The current player
 	*/
-	public void draw(PApplet p, Player player) {
+	public void draw(PApplet p, Player player, int hill) {
 		
 		if (spawnPowerUps) {
 			changePowerUpList(getPowerUpList());
@@ -289,6 +305,47 @@ public class TileManager {
 						&& worldX - tileSize < player.getWorldX() + player.getScreenX() 
 						&& worldY + tileSize > player.getWorldY() - player.getScreenY() 
 						&& worldY - tileSize < player.getWorldY() + player.getScreenY() ) {
+						
+						switch (hill) {
+						case 0:
+							if (worldX < tileSize * 25 && worldY < tileSize * 25) {
+							if (tileDesignator[worldCol][worldRow] == 14)
+								tileDesignator[worldCol][worldRow] = 15;
+							}else if (tileDesignator[worldCol][worldRow] == 15)
+							tileDesignator[worldCol][worldRow] = 14;
+							break;
+						case 1: 
+							if (worldX > tileSize * 75 && worldY < tileSize * 25) {
+							if (tileDesignator[worldCol][worldRow] == 14)
+								tileDesignator[worldCol][worldRow] = 15;
+							}else if (tileDesignator[worldCol][worldRow] == 15)
+								tileDesignator[worldCol][worldRow] = 14;
+							break;
+						case 2:
+							if (worldX > tileSize * 75 && worldY > tileSize * 75) {
+							if (tileDesignator[worldCol][worldRow] == 14)
+								tileDesignator[worldCol][worldRow] = 15;
+
+						}else if (tileDesignator[worldCol][worldRow] == 15)
+							tileDesignator[worldCol][worldRow] = 14;
+							break;
+						case 3:
+							if (worldX < tileSize * 25 && worldY > tileSize * 75)
+							if (tileDesignator[worldCol][worldRow] == 14) {
+								tileDesignator[worldCol][worldRow] = 15;
+
+							}else if (tileDesignator[worldCol][worldRow] == 15)
+								tileDesignator[worldCol][worldRow] = 14;
+							break;
+						case 4:
+							if (worldX > tileSize * 25 && worldY > tileSize * 50 && worldX < tileSize * 75 && worldY < tileSize*75)
+							if (tileDesignator[worldCol][worldRow] == 14) {
+								tileDesignator[worldCol][worldRow] = 15;
+
+							}else if (tileDesignator[worldCol][worldRow] == 15)
+								tileDesignator[worldCol][worldRow] = 14;
+							break;
+						}
 						p.image(tilesList.get(tileDesignator[worldCol][worldRow]).getImage(), screenX, screenY);
 						
 				
