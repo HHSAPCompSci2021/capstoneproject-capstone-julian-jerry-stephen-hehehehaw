@@ -58,7 +58,7 @@ public class Collider {
 	 */
 	public int checkTile(Player player) {
 		player.setDataChanged(true);
-		int index = -1;
+		int index = -1;                                             
 		
 		Rectangle r = player.getTileHitBox();
 		int playerLeftWorldX = (int)(player.getWorldX() + r.x);
@@ -130,11 +130,12 @@ public class Collider {
 				if (tL.get(ti).solidState())
 					player.setCollisions(true);
 				else if (tL.get(ti).isPowerUp() || tL.get(ti).isTrap()) {
-					 index =  tM.tileInteract(ti, player, sound);	
+					 index = tM.tileInteract(ti, player, sound);
+				//	 System.out.println(index);
 
 					}	
 				}
-			if (tL.get(map[playerLeftCol][playerTopRow]).isPowerUp()) {
+			if (tL.get(map[playerLeftCol][playerTopRow]).isPowerUp() ) {
 				map[playerLeftCol][playerTopRow] = 22;
 				player.setR1(playerTopRow);
 				player.setC1(playerLeftCol);
