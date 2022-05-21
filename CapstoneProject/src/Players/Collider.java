@@ -120,10 +120,6 @@ public class Collider {
 				t.set(1, map[playerRightCol][playerTopRow]);
 				t.set(2, map[playerLeftCol][playerBottomRow]);
 				t.set(3, map[playerRightCol][playerBottomRow]);
-				t.set(4, map[playerLeftCol][playerTopRow]);
-				t.set(5, map[playerLeftCol][playerTopRow]);
-				t.set(6, map[playerRightCol][playerTopRow]);
-				t.set(7, map[playerRightCol][playerTopRow]);
 			}
 			
 			
@@ -141,6 +137,12 @@ public class Collider {
 				map[playerLeftCol][playerBottomRow] == 15 ||
 				map[playerRightCol][playerBottomRow] == 15 || map[(int)(player.getWorldX()/tileSize)][(int)(player.getWorldY()/tileSize)] == 15)
 					arr.add(15);
+				
+				if (map[playerLeftCol][playerTopRow] == 16 ||
+						map[playerRightCol][playerTopRow] == 16 ||
+						map[playerLeftCol][playerBottomRow] == 16 ||
+						map[playerRightCol][playerBottomRow] == 16 || map[(int)(player.getWorldX()/tileSize)][(int)(player.getWorldY()/tileSize)] == 16)
+						arr.add(16);
 				
 			
 			if (notMoving)

@@ -8,6 +8,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import Instructions.*;
+import processing.core.PApplet;
 
 // "Start" option
 public class Instructions implements Screen {
@@ -43,15 +44,26 @@ public class Instructions implements Screen {
 		
 		surface.fill(0);
 		surface.text("", DRAWING_WIDTH, DRAWING_HEIGHT);
+	//	surface.textAlign(surface.CENTER);
 //		System.out.println("You are on the instructions Screen");
 		
-		String str = "Instructions: \nUse the WASD keys to move the sprite, \nand click to shoot. \nYou can set the screen to fullscreen mode if preferred.\nThere are traps on the map that slow you down and that deal damage.\nThere are powerups that provide buffs. ";
+		String str = "Instructions: \nUse the WASD keys to move the sprite, and click to shoot. \nYou can set the screen to fullscreen mode if preferred."
+				+ "\nThere are traps on the map that slow you down and that deal damage"
+				+ "\nThere are also powerups that provide buffs."
+				+ "\nA green arrow points you to direction of the other player for ease of access."
+				+ "\nOur game has two different gamemodes: deathmatch and king of the hill. \n\n"
+				+ "Deathmatch: Timed mode of two players 1v1 in an arena just battling it out raw. \n"
+				+ "Most kills in the amount of alloted time wins.\n"
+				+ "\nKing of the Hill (KOTH): Longer timed mode of two players. \nThe \"hill\" will rotate over time from northwest, northeast, southwest, southeast, then middle.\n"
+				+ "The text at the top of the screen indicates which hill to head to.\n When a hill is \"on\", the tiles will light up blue, and standing on the hill will give points.\n"
+				+ "Kill the other player while protecting the hill and preventing your opponent from gaining points."
+				+ "\nMost points at the end of the alloted time wins.";
 		float w = surface.textWidth(str);
-		surface.textSize(20);
+		surface.textAlign(PApplet.LEFT);
+		surface.textSize(22);
 		surface.fill(0);
 		surface.text(str, (int)(DRAWING_WIDTH*0.1), (int)(DRAWING_HEIGHT*0.2));
 		
-		surface.textAlign(surface.CENTER);
 		surface.textSize(20);
 		String str0 = "Back";
 		float w0 = surface.textWidth(str0);

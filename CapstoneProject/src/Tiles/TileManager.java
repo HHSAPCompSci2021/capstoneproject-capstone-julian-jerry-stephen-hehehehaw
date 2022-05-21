@@ -186,12 +186,12 @@ public class TileManager {
 			return 15;
 		case 16:
 			if(!p.getJustSpawned())
-			p.loseHealth(0.2);
+			p.loseHealth(0.35);
 			if (sound)
 				if(!World.loseHealth.isPlaying())
 					World.loseHealth.play();
 			p.setDataChanged(true);
-			break;
+			return 0;
 		case 17:
 			p.setSpeedDown(p.getSpeed() * 0.5);
 			if (sound)
