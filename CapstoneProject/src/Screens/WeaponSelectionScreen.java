@@ -16,7 +16,11 @@ import Instructions.*;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
-// "Start" option
+/**
+ * This class represents the screen where the player can select a weapon to begin the game with
+ * (shotgun, sniper, smg, or knife). 
+ * @author Stephen
+ */
 public class WeaponSelectionScreen implements Screen {
 	
 	private MainMenu surface;
@@ -36,8 +40,12 @@ public class WeaponSelectionScreen implements Screen {
 	private final float W_BUTTON_WIDTH = 1.5f*BUTTON_WIDTH;
 	private final float W_BUTTON_HEIGHT = 4.5f*BUTTON_HEIGHT;
 	
-	
-	
+	/**
+	 * Creates a new WeaponSelectionScreen object
+	 * @param surface - the MainMenu (extending PApplet) to draw the objects with
+	 * @param width - the width of the MenuScreen when it is displayed
+	 * @param height - the height of the MenuScreen when it is displayed
+	 */
 	public WeaponSelectionScreen(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
@@ -52,20 +60,24 @@ public class WeaponSelectionScreen implements Screen {
 		knife = new Rectangle((int)(11*DRAWING_WIDTH/15), (int)(DRAWING_HEIGHT*(1-4*BUTTON_HEIGHT)/2), (int)(width*W_BUTTON_WIDTH), (int)(height*W_BUTTON_HEIGHT));
 	}
 
+	/**
+	 * Returns the weapon selected from the screen
+	 * @return weaponChoice the chosen weapon represented by an int
+	 */
 	public int getWeaponChoice() {
 		return weaponChoice;
 	}
 	
-	// The statements in the setup() function 
-	// execute once when the program begins
+	/**
+	 * Initializes variables and performs tasks executing once when the program begins
+	 */
 	public void setup() {
 		
 	}
 
-	// The statements in draw() are executed until the 
-	// program is stopped. Each statement is executed in 
-	// sequence and after the last line is read, the first 
-	// line is executed again.
+	/** 
+	 * Draws this WeaponSelectionScreen using the MainMenu
+	 */
 	public void draw() {
 		surface.background(0,200,200);
 
@@ -122,6 +134,9 @@ public class WeaponSelectionScreen implements Screen {
 //		System.out.println("You are on the pre-gameplay Screen");
 	}
 
+	/**
+	 * The contents of this function is called every time the mouse button is pressed
+	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (backButton.contains(p)) {
@@ -161,15 +176,25 @@ public class WeaponSelectionScreen implements Screen {
 			shade = 0;
 		}
 	}
-	
+	/**
+	 * The contents of this function is called every time the mouse is moved
+	 */
 	public void mouseMoved() {}
-	
+	/**
+	 * The contents of this function is called every time the mouse button is dragged
+	 */
 	public void mouseDragged() {}
-	
+	/**
+	 * The contents of this function is called every time the mouse button is released
+	 */
 	public void mouseReleased() {}
-	
+	/**
+	 * The contents of this function is called every time a key is pressed
+	 */
 	public void keyReleased() {}
-	
+	/**
+	 * The contents of this function is called every time a key is released
+	 */
 	public void keyPressed() {}
 	
 }

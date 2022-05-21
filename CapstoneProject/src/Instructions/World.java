@@ -28,8 +28,8 @@ import Players.Avatar;
 import Players.Collider;
 import Players.Player;
 import Players.PlayerHUD;
-//import Players.PlayerHUD;
-import Screens.*;
+import Screens.Screen;
+import Screens.ScreenSwitcher;
 import Weapons.*;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -37,15 +37,23 @@ import processing.sound.Sound;
 import processing.sound.SoundFile;
 import Tiles.*;
 
+/** 
+ * Represents the screen of the actual game. Contains players, tiles and other relevant aspects of the game in the game screen. 
+ * @author Stephen, Julian, Jerry
+ */
 public class World implements Screen {
 	
 	private boolean killUp;
-	public final static String fileSeparator = System.getProperty("file.separator");
-	public final static String lineSeparator = System.getProperty("line.separator");
-	public final static String userDir = System.getProperty("user.dir");
+	private final static String fileSeparator = System.getProperty("file.separator");
+	private final static String lineSeparator = System.getProperty("line.separator");
+	private final static String userDir = System.getProperty("user.dir");
+	/** Represents the drawing surface used to draw the screen */
 	public PApplet p;
+	/** Represents the sound file used when a button is clicked */
 	public static SoundFile menuClick;
+	/** Represents the sound file used when this player loses health */
 	public static SoundFile loseHealth;
+	/** Represents the sound file used when a powerup is collected by this player */
 	public static SoundFile collectPowerUp;
 
 
@@ -96,7 +104,10 @@ public class World implements Screen {
 	private boolean increment;
 	
 	private ArrayList<Integer> keysDown;
+	
+	/** Represents this player (controlled by the user) */
 	public Player me;
+	/** Represents a list of all other players in the room */
 	public ArrayList<Player> players;
 	
 	private DatabaseReference roomRef;  // This is the database entry for the whole room
@@ -124,6 +135,11 @@ public class World implements Screen {
 	private ArrayList<Integer> powerUpList;
 
 	
+	/** 
+	 * Creates a new instance of a World object passing in a MainMenu and DatabaseReference objects
+	 * @param p - instance of MainMenu (which extends PApplet)
+	 * @param roomRef - a DatabaseReference that uses Firebase
+	 */
 	public World(MainMenu p, DatabaseReference roomRef) {
 
 		players = new ArrayList<Player>();
@@ -206,8 +222,9 @@ public class World implements Screen {
 		me.heal(999);
 	}
 	
-	// The statements in the setup() function 
-	// execute once when the program beginsas
+	/**
+	 * Initializes variables and performs tasks executing once when the program begins
+	 */
 	public void setup() {
 		
 		gameActive = false;
@@ -918,7 +935,11 @@ public class World implements Screen {
 		return gameActive;
 	
 	}
-	
+
+	/**
+	 * Returns a boolean representing whether the game timer should be incremented
+	 * @return boolean representing whether the game timer should be incremented
+	 */
 	public boolean getIncrement() {
 		return increment;
 	}

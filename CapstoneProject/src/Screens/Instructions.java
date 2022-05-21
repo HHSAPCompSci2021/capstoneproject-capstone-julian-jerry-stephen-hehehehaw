@@ -10,7 +10,10 @@ import java.util.List;
 import Instructions.*;
 import processing.core.PApplet;
 
-// "Start" option
+/**
+ * This class represents the Instructions screen that contains instructions on how to play the game. 
+ * @author Stephen
+ */
 public class Instructions implements Screen {
 	
 	private MainMenu surface;
@@ -19,6 +22,12 @@ public class Instructions implements Screen {
 	private final float BUTTON_WIDTH = 0.2f;
 	private final float BUTTON_HEIGHT = 0.1f;
 	
+	/**
+	 * Creates an Instructions object
+	 * @param surface - the MainMenu (extending PApplet) to draw the objects with
+	 * @param width - the width of the Instructions screen
+	 * @param height - the height of the Instructions screen
+	 */
 	public Instructions(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
@@ -26,16 +35,16 @@ public class Instructions implements Screen {
 		backButton = new Rectangle((int)(DRAWING_WIDTH*0.015), (int)(DRAWING_HEIGHT*0.03), (int)(width*BUTTON_WIDTH/2), (int)(height*BUTTON_HEIGHT/2));
 	}
 
-	// The statements in the setup() function 
-	// execute once when the program begins
+	/**
+	 * Initializes variables and performs tasks executing once when the program begins
+	 */
 	public void setup() {
 		
 	}
 
-	// The statements in draw() are executed until the 
-	// program is stopped. Each statement is executed in 
-	// sequence and after the last line is read, the first 
-	// line is executed again.
+	/** 
+	 * Draws this Instructions screen using the MainMenu
+	 */
 	public void draw() {
 		surface.background(200,0,200);
 		
@@ -70,19 +79,32 @@ public class Instructions implements Screen {
 		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 	}
 	
+	/**
+	 * The contents of this function is called every time the mouse button is pressed
+	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (backButton.contains(p))
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 	}
-	
+	/**
+	 * The contents of this function is called every time the mouse is moved
+	 */
 	public void mouseMoved() {}
-	
+	/**
+	 * The contents of this function is called every time the mouse button is dragged
+	 */
 	public void mouseDragged() {}
-	
+	/**
+	 * The contents of this function is called every time the mouse button is released
+	 */
 	public void mouseReleased() {}
-	
+	/**
+	 * The contents of this function is called every time a key is pressed
+	 */
 	public void keyReleased() {}
-	
+	/**
+	 * The contents of this function is called every time a key is released
+	 */
 	public void keyPressed() {}
 }

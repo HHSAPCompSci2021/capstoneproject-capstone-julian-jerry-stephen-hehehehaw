@@ -17,9 +17,19 @@ import processing.sound.Sound;
 import processing.sound.SoundFile;
 import Screens.*;
 
+/**
+ * This class represents the main menu that manages all the screens and switches the screens 
+ * based on user input (buttons clicked). 
+ * @author Stephen
+ *
+ */
 public class MainMenu extends PApplet implements ScreenSwitcher {
 
-	public float ratioX, ratioY;
+	/** the ratio of the width of the screen */
+	public float ratioX;
+	
+	/** the ratio of the height of the screen */
+	public float ratioY;
 	
 	private ArrayList<Integer> keys;
 	
@@ -42,13 +52,17 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	private SoundFile inGameSound;
 
 	/**
-	 * Returns the world object represented by this class
-	 * @return world the object represented by this class
+	 * Returns the world screen of this MainMenu object
+	 * @return world the world object that the MainMenu has
 	 */
 	public World getWorld() {
 		return world;
 	}
-
+	
+	/**
+	 * Creates a MainMenu passing in a DatabaseReference
+	 * @param postsRef - a DatabaseReference that uses Firebase
+	 */
 	public MainMenu(DatabaseReference postsRef) {
 		
 		world = new World(this, postsRef);
@@ -82,7 +96,10 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		activeScreen = screens.get(0);
 		
 	}
-	
+
+	/**
+	 * Initializes variables and performs tasks executing once when the program begins
+	 */
 	public void setup() {
 		mainMenuSound = new SoundFile(this, "Assets/Music/Level1.wav");
 		mainMenuSound.amp(0.2f);
@@ -98,6 +115,9 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		mainMenuSound.play();
 	}
 	
+	/** 
+	 * Draws the screen using the PApplet
+	 */
 	public void draw() {
 		this.frameRate(30);
 		ratioX = (float)width/DRAWING_WIDTH;
@@ -133,6 +153,9 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 		pop();
 	}
 	
+	/**
+	 * The contents of this function is called every time a key is pressed
+	 */
 	public void keyPressed() {
 		activeScreen.keyPressed();
 		keys.add(keyCode);
@@ -140,40 +163,74 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 			key = 0;
 	}
 
+	/**
+	 * The contents of this function is called every time a key is released
+	 */
 	public void keyReleased() {
 		activeScreen.keyReleased();
 		while(keys.contains(keyCode))
 			keys.remove(new Integer(keyCode));
 	}
 
+	/**
+	 * Returns a boolean representing whether a specified key code was pressed or not
+	 * @param code - the key code represented by an Integer object
+	 * @return boolean representing whether the key code was pressed or not
+	 */
 	public boolean isPressed(Integer code) {
 		return keys.contains(code);
 	}
 	
+	/**
+	 * The contents of this function is called every time the mouse button is pressed
+	 */
 	public void mousePressed() {
 		activeScreen.mousePressed();
 	}
-	
+
+	/**
+	 * The contents of this function is called every time the mouse is moved
+	 */
 	public void mouseMoved() {
 		activeScreen.mouseMoved();
 	}
 	
+	/**
+	 * The contents of this function is called every time the mouse button is dragged
+	 */
 	public void mouseDragged() {
 		activeScreen.mouseDragged();
 	}
 	
+	/**
+	 * The contents of this function is called every time the mouse button is released
+	 */
 	public void mouseReleased() {
 		activeScreen.mouseReleased();
 	}
 	
+	/**
+	 * Converts the assumed coordinates of a Point to an actual Point
+	 * @param assumed - assumed coordinates of the Point
+	 * @return Point that was converted from assumed
+	 */
 	public Point assumedCoordinatesToActual(Point assumed) {
 		return new Point((int)(assumed.getX()*ratioX), (int)(assumed.getY()*ratioY));
 	}
-
+	
+	/**
+	 * Converts the actual coordinates of a Point to an assumed Point
+	 * @param actual - actual coordinates of the Point
+	 * @return Point that was converted from actual
+	 */
 	public Point actualCoordinatesToAssumed(Point actual) {
 		return new Point((int)(actual.getX()/ratioX) , (int)(actual.getY()/ratioY));
 	}
 
+	/**
+	 * Switches the screen to the given screen (as specified in the ScreenSwitcher class)
+	 * @param i - the screen to switch to
+	 */
 	public void switchScreen(int i) {
 		
 		if(activeScreen == screen1)
@@ -189,7 +246,6 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 				
 			});
 		}
-		
 		
 		activeScreen = screens.get(i);
 		
@@ -208,8 +264,6 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 				}
 			}
 		}
-		
-		
 		
 		if(activeScreen instanceof World)
 		{

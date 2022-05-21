@@ -17,6 +17,11 @@ import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
 // "Start" option
+/**
+ * This class represents the screen that appears when the player loses all its health. Users can select a 
+ * new weapon from this screen. 
+ * @author Stephen
+ */
 public class DeathScreen implements Screen {
 	
 	private MainMenu surface;
@@ -38,6 +43,12 @@ public class DeathScreen implements Screen {
 	private long initTime;
 	private static int LIVES_LEFT = 5; // change to 5 with the addition of the second player, and add for each player a counter for numLives lost (number of times lives reaches 0)
 	
+	/**
+	 * Creates a new DeathScreen object
+	 * @param surface - the MainMenu (extending PApplet) to draw the objects with
+	 * @param width - the width of the MenuScreen when it is displayed
+	 * @param height - the height of the MenuScreen when it is displayed
+	 */
 	public DeathScreen(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
@@ -52,32 +63,34 @@ public class DeathScreen implements Screen {
 		knife = new Rectangle((int)(11*DRAWING_WIDTH/15), (int)(DRAWING_HEIGHT*(1-4*BUTTON_HEIGHT)/2), (int)(width*W_BUTTON_WIDTH), (int)(height*W_BUTTON_HEIGHT));
 	}
 
+	/**
+	 * Returns the weapon choice selected from the screen
+	 * @return weaponChoice the chosen weapon represented by an int
+	 */
 	public int getWeaponChoice() {
 		return weaponChoice;
 	}
 	
+	/**
+	 * Returns if the player is alive or not
+	 * @return boolean that represents whether the player is alive
+	 */
 	public boolean isAlive() {
 		return LIVES_LEFT > 0;
 	}
 	
-	// The statements in the setup() function 
-	// execute once when the program begins
+	/**
+	 * Initializes variables and performs tasks executing once when the program begins
+	 */
 	public void setup() {
 		Calendar c = Calendar.getInstance();
 		initTime = c.getTimeInMillis();
 	}
 
-	// The statements in draw() are executed until the 
-	// program is stopped. Each statement is executed in 
-	// sequence and after the last line is read, the first 
-	// line is executed again.
+	/** 
+	 * Draws this DeathScreen using the MainMenu
+	 */
 	public void draw() {
-//		Calendar c2 = Calendar.getInstance();
-//		if(c2.getTimeInMillis() - initTime > 10000) {
-//			weaponChoice = (int)(4*Math.random())+1;
-//			surface.switchScreen(ScreenSwitcher.GAME_SCREEN);
-//		}
-			
 		surface.background(255,0,0);
 		surface.textAlign(surface.CENTER);
 		
@@ -137,6 +150,9 @@ public class DeathScreen implements Screen {
 		}
 	}
 
+	/**
+	 * The contents of this function is called every time the mouse button is pressed
+	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (backButton.contains(p)) {
@@ -165,15 +181,25 @@ public class DeathScreen implements Screen {
 	//		LIVES_LEFT--;
 		}
 	}
-	
+	/**
+	 * The contents of this function is called every time the mouse is moved
+	 */
 	public void mouseMoved() {}
-	
+	/**
+	 * The contents of this function is called every time the mouse button is dragged
+	 */
 	public void mouseDragged() {}
-	
+	/**
+	 * The contents of this function is called every time the mouse button is released
+	 */
 	public void mouseReleased() {}
-	
+	/**
+	 * The contents of this function is called every time a key is pressed
+	 */
 	public void keyReleased() {}
-	
+	/**
+	 * The contents of this function is called every time a key is released
+	 */
 	public void keyPressed() {}
 	
 }

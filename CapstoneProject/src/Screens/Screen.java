@@ -1,5 +1,9 @@
 package Screens;
 
+/**
+ * 
+ * @author Stephen
+ */
 public interface Screen {
 
 //	public final int DRAWING_WIDTH, DRAWING_HEIGHT;

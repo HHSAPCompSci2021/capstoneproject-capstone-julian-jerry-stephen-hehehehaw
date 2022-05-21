@@ -6,10 +6,13 @@ import Instructions.*;
 import processing.core.PImage;
 import processing.sound.SoundFile;
 
-// 
+/**
+ * This class represents the first screen that shows up after joining a room. 
+ * @author Stephen
+ */
 public class MenuScreen implements Screen {
 
-	public final static String fileSeparator = System.getProperty("file.separator");
+	private final static String fileSeparator = System.getProperty("file.separator");
 	
 	private MainMenu surface;
 	private Rectangle startButton;
@@ -20,29 +23,37 @@ public class MenuScreen implements Screen {
 	private PImage bg; 
 //	private SoundFile menuClick;
 
+	/**
+	 * Creates a new MenuScreen object
+	 * @param surface - the MainMenu (extending PApplet) to draw the objects with
+	 * @param width - the width of the MenuScreen when it is displayed
+	 * @param height - the height of the MenuScreen when it is displayed
+	 */
 	public MenuScreen(MainMenu surface, int width, int height) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
 		this.surface = surface;
-//		button = new Rectangle(800/2-100,600/2-50,200,100);
 		startButton = new Rectangle((int)(DRAWING_WIDTH*(1-BUTTON_WIDTH*1.5)/2), (int)(DRAWING_HEIGHT*(1-2.5*BUTTON_HEIGHT)/2), (int)(width*BUTTON_WIDTH*1.5), (int)(height*BUTTON_HEIGHT*1.5));
 		instButton = new Rectangle((int)(DRAWING_WIDTH*(1-BUTTON_WIDTH*1.5)/2), (int)(DRAWING_HEIGHT*(1+2.5*BUTTON_HEIGHT)/2), (int)(width*BUTTON_WIDTH*1.5), (int)(height*BUTTON_HEIGHT*1.5));
 	}
 	
+	/**
+	 * Initializes variables and performs tasks executing once when the program begins
+	 */
 	public void setup() {
 //		menuClick = new SoundFile(surface, "Assets" + fileSeparator + "Music" + fileSeparator + "Menu Select.wav");
 		bg = surface.loadImage("Assets" + fileSeparator + "Background" + fileSeparator + "b6.png");
 
 	}
 	
-	// add one extra button for the Instructions screen
-	// connect the frame size to that in Main and the first button should lead to the World class
+	/** 
+	 * Draws this MenuScreen using the MainMenu
+	 */
 	public void draw() {
 //		System.out.println("You are on the 1st Screen");
 		
 		// start button
 		surface.image(bg, 0, 0, surface.width, surface.height*2);
-//		surface.background(0);
 		surface.rect(startButton.x, startButton.y, startButton.width, startButton.height, 10, 10, 10, 10);
 		String str = "Start!";
 		float w = surface.textWidth(str);
@@ -62,6 +73,9 @@ public class MenuScreen implements Screen {
 		surface.text(str3, (int)(DRAWING_WIDTH*0.33), (int)(DRAWING_HEIGHT*0.2));
 	}
 	
+	/**
+	 * The contents of this function is called every time the mouse button is pressed
+	 */
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (startButton.contains(p))
@@ -76,15 +90,25 @@ public class MenuScreen implements Screen {
 		}
 			
 	}
-	
+	/**
+	 * The contents of this function is called every time the mouse is moved
+	 */
 	public void mouseMoved() {}
-	
+	/**
+	 * The contents of this function is called every time the mouse button is dragged
+	 */
 	public void mouseDragged() {}
-	
+	/**
+	 * The contents of this function is called every time the mouse button is released
+	 */
 	public void mouseReleased() {}
-	
+	/**
+	 * The contents of this function is called every time a key is pressed
+	 */
 	public void keyReleased() {}
-	
+	/**
+	 * The contents of this function is called every time a key is released
+	 */
 	public void keyPressed() {}
 
 }

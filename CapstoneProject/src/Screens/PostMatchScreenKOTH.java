@@ -10,7 +10,10 @@ import java.util.List;
 import Instructions.*;
 import Players.Player;
 
-// "Start" option
+/**
+ * 
+ * @author Stephen
+ */
 public class PostMatchScreenKOTH implements Screen {
 	
 	private MainMenu surface;
