@@ -167,11 +167,11 @@ public class World implements Screen {
 		
 		SPAWN1X = tM.getTileSize() * 50;
 		SPAWN1Y = tM.getTileSize() * 2;
-		SPAWN2X = tM.getTileSize() * 97;
+		SPAWN2X = tM.getTileSize() * 95;
 		SPAWN2Y = tM.getTileSize() * 50;
 		SPAWN3X = tM.getTileSize() * 50;
-		SPAWN3Y = tM.getTileSize() * 97;
-		SPAWN4X = tM.getTileSize() * 3;
+		SPAWN3Y = tM.getTileSize() * 95;
+		SPAWN4X = tM.getTileSize() * 4;
 		SPAWN4Y = tM.getTileSize() * 50;
 	}
 	
@@ -332,6 +332,11 @@ public class World implements Screen {
 	Player p2 = players.get(0);
 	
 	
+	while (me.getUsername() == null || me.getUsername().equals(p2.getUsername()))  {
+		me.changeUsername();
+	}
+	
+	
 	if (me.returnGameMode() == p2.returnGameMode() && me.returnGameMode() != 0) {
 //		System.out.println("me choice: " + me.returnGameMode() + " p2 choice: " +  p2.returnGameMode());
 		gameActive = true;
@@ -339,23 +344,30 @@ public class World implements Screen {
 	else gameActive = false;
 	if (gameActive) {
 
-		
+		if (me.returnGameMode() == 2) {
 			if(gameTimer >= 5000)
 			{
 				gameActive = false;
 				gameTimer = 0;
 			}
+		}else if (me.returnGameMode() == 1) {
+			if(gameTimer >= 10000)//0)
+			{
+				gameActive = false;
+				gameTimer = 0;
+			}
+		}
 			
 			if (me.returnGameMode() == 1) {
-				if (gameTimer <= 1000)
+				if (gameTimer <= 2000)//0)
 					hill = 0;
-				else if (gameTimer <= 2000)
+				else if (gameTimer <= 4000)//0)
 					hill = 1;
-				else if (gameTimer <= 3000)
+				else if (gameTimer <= 6000)//0)
 					hill = 2;
-				else if (gameTimer <= 4000)
+				else if (gameTimer <= 8000)//0)
 					hill = 3;
-				else if (gameTimer <= 5000)
+				else if (gameTimer <= 10000)//0)
 					hill = 4;
 			}
 	
@@ -369,71 +381,133 @@ public class World implements Screen {
 		}
 		else {
 			increment = true;
-		
-		while (me.getUsername().equals(p2.getUsername()) || me.getUsername() == "") {
-			me.changeUsername();
-		}
+
 		
 		int i = (int)(Math.random() * 4);
-		if (me.getUsername().compareTo(p2.getUsername()) > 0) {
-			if (me.returnGameMode() == 1) {
+		if (me.returnGameMode() == 2) {
 			if (!spawn) {
 					
 			switch (i) {
 			case 0:
-				me.setWorldX(SPAWN1X);
-				me.setWorldY(SPAWN1Y);
+				if (me.getUsername().compareTo(p2.getUsername()) > 0) {
+					me.setWorldX(SPAWN1X);
+					me.setWorldY(SPAWN1Y);
+				}
+				else {
+					me.setWorldX(SPAWN4X);
+					me.setWorldY(SPAWN4Y);
+				}
 				break;
 			case 1:
-				me.setWorldX(SPAWN2X);
-				me.setWorldY(SPAWN2Y);
-				break;
+				if (me.getUsername().compareTo(p2.getUsername()) > 0) {
+					if (!spawn) {
+						me.setWorldX(SPAWN2X);
+						me.setWorldY(SPAWN2Y);
+					}
+					spawn = true;
+					
+				} else {
+						me.setWorldX(SPAWN1X);
+						me.setWorldY(SPAWN1Y);				
+						spawn = true;
+				}
+				
 			case 2:				
-				me.setWorldX(SPAWN3X);
-				me.setWorldY(SPAWN3Y);
-				break;
+				if (me.getUsername().compareTo(p2.getUsername()) > 0) {
+					if (!spawn) {
+						me.setWorldX(SPAWN3X);
+						me.setWorldY(SPAWN3Y);
+					}
+					spawn = true;
+					
+				} else {
+						me.setWorldX(SPAWN2X);
+						me.setWorldY(SPAWN2Y);				
+						spawn = true;
+				}
 			case 3:
-				me.setWorldX(SPAWN4X);
-				me.setWorldY(SPAWN4Y);
-				break;
+				if (me.getUsername().compareTo(p2.getUsername()) > 0) {
+					if (!spawn) {
+						me.setWorldX(SPAWN4X);
+						me.setWorldY(SPAWN4Y);
+					}
+					spawn = true;
+					
+				} else {
+						me.setWorldX(SPAWN1X);
+						me.setWorldY(SPAWN1Y);				
+						spawn = true;
+				}
 			}
 
 			spawn = true;
 			}
-		} else {
+		}else if (me.returnGameMode() == 1) {
 			if (!spawn) {
-				switch (i) {
-				case 1:
-					me.setWorldX(SPAWN1X);
-					me.setWorldY(SPAWN1Y);
-					break;
-				case 2:
-					me.setWorldX(SPAWN2X);
-					me.setWorldY(SPAWN2Y);
-					break;
-				case 3:				
-					me.setWorldX(SPAWN3X);
-					me.setWorldY(SPAWN3Y);
-					break;
-				case 0:
-					me.setWorldX(SPAWN4X);
-					me.setWorldY(SPAWN4Y);
-					break;
+			switch (hill) {
+			
+			case 0: 	
+				if (me.getUsername().compareTo(p2.getUsername()) > 0) {
+						me.setWorldX(SPAWN1X);
+						me.setWorldY(SPAWN1Y);
+					
+				} else {
+						me.setWorldX(SPAWN4X);
+						me.setWorldY(SPAWN4Y);
 				}
-				spawn = true;
+				break;
+			case 1: 
+				if (me.getUsername().compareTo(p2.getUsername()) > 0) {
+						me.setWorldX(SPAWN1X);
+						me.setWorldY(SPAWN1Y);
+					
+				} else {
+						me.setWorldX(SPAWN2X);
+						me.setWorldY(SPAWN2Y);				
+				}
+				
+				break;
+			case 2:
+				if (me.getUsername().compareTo(p2.getUsername()) > 0) {
+						me.setWorldX(SPAWN3X);
+						me.setWorldY(SPAWN3Y);
+
+					
+				} else {
+						me.setWorldX(SPAWN2X);
+						me.setWorldY(SPAWN2Y);				
+
+				}
+				
+				break;	
+			case 3:
+				if (me.getUsername().compareTo(p2.getUsername()) > 0) {
+						me.setWorldX(SPAWN3X);
+						me.setWorldY(SPAWN3Y);
+			
+
+					
+				} else {
+		
+						me.setWorldX(SPAWN2X);
+						me.setWorldY(SPAWN2Y);				
+					
+				}
+					
+					break;
 			}
 			
-		}
-		}else if (me.returnGameMode() == 2) {
-			//spawn
-			
-			
-			
-			
+			spawn = true;
+			}
+		
 			
 		}
+		
+
 			
-		System.out.println(p.frameRate);
+		
+		
+//		System.out.println(p.frameRate);
 		p.background(220,220,220);  
 		p.textAlign(p.CENTER);
 		if (me.returnGameMode() == 2)
@@ -445,29 +519,40 @@ public class World implements Screen {
 			me.getWeapon().reload();
 		}
 		
-		surface.rect(scoreBoard.x, scoreBoard.y, scoreBoard.width, scoreBoard.height, 10, 10, 10, 10);
-		p.textSize(20);
-		p.fill(0);
-		
-		if (me.returnGameMode() == 1)
-			surface.text("" + me.getUsername() + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+2*scoreBoard.height/6);
-		else if (me.returnGameMode() == 2)
-			surface.text("" + me.getUsername() + me.getPoints(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+2*scoreBoard.height/6);
-		
-			
-		p.textSize(40);
-		p.fill(0, 0, 255);
+		cC1.checkTile(me);
 
+		me.syncWithDataObject(me.getDataObject(), tM, cC1);
+		cC2.checkTile(p2);
+
+		p2.syncWithDataObject(p2.getDataObject(), tM, cC2);
+		
+		surface.rect(scoreBoard.x, scoreBoard.y, scoreBoard.width, scoreBoard.height, 10, 10, 10, 10);
+			
+		p.textSize(20);
 		p.textAlign(p.LEFT);
 		surface.text("Scoreboard ", scoreBoard.x+scoreBoard.width/6, scoreBoard.y+scoreBoard.height/6);
-		surface.text("" + me.getUsername() + ": " + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+3*scoreBoard.height/6);
+		if (me.returnGameMode() == 2) {
+			p.fill(0, 0, 255);
+			surface.text("" + me.getUsername() + ": " + me.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+3*scoreBoard.height/6);
+			p.fill(0);
+			surface.text("" + p2.getUsername() + ": " + p2.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+5*scoreBoard.height/6);
+			p.fill(255);
+		}	else if (me.returnGameMode() == 1) {
+			p.fill(0, 0, 255);
+			surface.text("" + me.getUsername() + ": " + me.getPoints(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+3*scoreBoard.height/6);
+		
+			p.fill(0);
+			surface.text("" + p2.getUsername() + ": " + p2.getPoints(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+5*scoreBoard.height/6);
+			p.fill(255);
+		}
+		
 		p.textSize(40);
 		p.fill(0, 0, 255);
 		p.textAlign(p.CENTER);
 		
-		if (me.returnGameMode() == 1)
+		if (me.returnGameMode() == 2)
 			surface.text("Game Ends In: " + gameTimer + "/5000", p.width/3, 30);
-		else if (me.returnGameMode() == 2) {
+		else if (me.returnGameMode() == 1) {
 			String hillDir = "";
 			switch (hill){
 			case 0:
@@ -485,29 +570,25 @@ public class World implements Screen {
 			case 4: 
 				hillDir = "Middle Hill";
 			}
-			surface.text("Go to " + hillDir + "| Game Ends In: " + gameTimer + "/5000", p.width/3, 30);
+			surface.text("Go to " + hillDir + "| Game Ends In: " + gameTimer + "/10000", p.width/3, 30);
 			
 		}
 		
 
 		p.fill(255);
-	//	p.fill(220, 220, 220);
 
+		
+		if (cC1.checkTile(me) == 15)
+			me.incrementPoints(0.1);
+		if (cC2.checkTile(p2) == 15)
+			p2.incrementPoints(0.1);
+		
 		bulletsIn = p2.getOut();
 		me.setInc(bulletsIn);
-
-		myUserRef.setValue(me.getDataObject(), new CompletionListener() {
-			//set value bullet object
-			@Override
-			public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
-			//	currentlySending = false;
-			}
 			
-		});		
 		
 			if (p2.getDead()) {
 				p.textSize(80);
-		//		System.out.println(increment);
 				if(killUp) {
 					me.incrementKillCount(1);
 					killUp = false;
@@ -541,8 +622,7 @@ public class World implements Screen {
 			}
 			
 
-			cC1.checkTile(me);
-			cC2.checkTile(p2);
+		
 			
 			
 			p2.setScreenX(screenX);
@@ -586,25 +666,15 @@ public class World implements Screen {
 
 			}
 			
-			cC2.checkTileCleanup(me);
+//			cC1.checkTileCleanup(me);
+//			cC2.checkTileCleanup(me);
 			
 		}
-			p.fill(0);
-		p.textSize(20);
-		p.textAlign(p.LEFT);
+			
 		
-		surface.text("" + p2.getUsername() + ": " + p2.getKillCount(), scoreBoard.x+scoreBoard.width/6, scoreBoard.y+5*scoreBoard.height/6);
-		p.fill(255);
+	
 
 	
-		myUserRef.setValue(me.getDataObject(), new CompletionListener() {
-			//set value bullet object
-			@Override
-			public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
-			//	currentlySending = false;
-			}
-			
-		});	
 
 		
 		me.setOut(bulletsOut);
@@ -651,14 +721,6 @@ public class World implements Screen {
 				j--;
 			}
 		}
-		
-		myUserRef.setValue(me.getDataObject(), new CompletionListener() {
-			//set value bullet object
-			@Override
-			public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
-			//	currentlySending = false;
-			}
-		});	
 		
 		hud.draw(p, screenWidth, screenHeight, me, new Player(un, screenWidth-screenWidth/10 - tM.getTileSize()/2, 2*screenHeight/3 - tM.getTileSize()/2, 0, tM.getTileSize() * 20, p, playerImage, tM.getTileSize()));
 
@@ -760,14 +822,6 @@ public class World implements Screen {
 		}
 
 	}
-		myUserRef.setValue(me.getDataObject(), new CompletionListener() {
-			//set value bullet object
-			@Override
-			public void onComplete(DatabaseError arg0, DatabaseReference arg1) {
-			//	currentlySending = false;
-			}
-			
-		});	
 		
 		
 		p.push();
@@ -1013,7 +1067,7 @@ public class World implements Screen {
 						Player player = players.get(i);
 						if (player.idMatch(arg0.getKey())) {
 							PlayerData data = arg0.getValue(PlayerData.class);
-							player.syncWithDataObject(data, tM, cC1);
+							player.syncWithDataObject(data, tM, cC2);
 						}
 					}
 				}

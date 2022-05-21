@@ -37,7 +37,7 @@ public class PlayerData {
 	
 	public int killCount;
 	public int deathCount;
-	public int points;
+	public double points;
 	
 	public boolean emote;
 	public int spriteCounter, spriteNum;

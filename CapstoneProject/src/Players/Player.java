@@ -44,7 +44,7 @@ public class Player {
 	
 	private boolean collisionOn = false;
 	private boolean slowed, speedBuffed, damageBuffed, magBuffed;
-	private int slowCD = 0, speedCD = 0, dmgCD = 0, magCD = 0;
+	private int slowCD, speedCD, dmgCD, magCD;
 
 //	private int cd = 0;
 	private Collider collide;
@@ -70,7 +70,7 @@ public class Player {
 	
 	private int killCount;
 	private int deathCount;
-	private int points;
+	private double points;
 
 	private ArrayList<Bullet> incoming = new ArrayList<Bullet>();
 	private ArrayList<Bullet> outgoing = new ArrayList<Bullet>();
@@ -151,6 +151,8 @@ public class Player {
 		killCount = 0;
 		deathCount = 0;
 		points = 0;
+		slowCD = 0;
+		speedCD = 0;
 		
 		justSpawned = true;
 	}
@@ -835,41 +837,49 @@ public class Player {
 
 			int whichOne = collide.checkTile(this);
 			if (whichOne != -1)
-			//	System.out.println(whichOne);
+				System.out.println(whichOne);
 			
 				switch (whichOne) {
+				case 15:
+					break;
 				case 17:
+					System.out.println("slowed");
 					slowed = true;
 					break;
 				case 19:
+					System.out.println("dmgupped");
 					damageBuffed = true;
 					break;
 					
 				case 20:
+					System.out.println("magUpped");
 					magBuffed = true;
 					break;
 
 				case 21:
-		//			System.out.println("speed buffed");
+					System.out.println("speedBuffed");
 					speedBuffed = true;
 					break;
-					
-				case -1:
-					break;
+				
 				}
 				
 				if (slowed) {
+
+					System.out.println("slow buffed, CD left: " + slowCD);
 					slowCD++;
 
 					if (slowCD >= 30) {
 						slowed = false;
 						slowCD = 0;
-						speed = defaultSpeed;					}
+						speed = defaultSpeed;					
+						}
 					
 				}
 				
 
 				if (speedBuffed) {
+					
+					System.out.println("speed buffed, CD left: " + speedCD);
 					speedCD++;
 					
 					if (speedCD >= 450) {
@@ -880,6 +890,8 @@ public class Player {
 					}
 				}
 				if (damageBuffed) {
+
+					System.out.println("dmg buffed, CD left: " + dmgCD);
 					dmgCD++;
 					
 					if (dmgCD >= 400) {
@@ -891,6 +903,7 @@ public class Player {
 					
 				}
 				if (magBuffed){
+					System.out.println("mag buffed, CD left: " + magCD);
 					magCD++;
 					
 					if (magCD >= 400) {
@@ -906,6 +919,7 @@ public class Player {
 				moveObject();
 			
 			dataUpdated = true;
+			
 			
 		} 
 		
@@ -1334,7 +1348,7 @@ public class Player {
 	* @return Points
 	*/
 	public int getPoints() {
-		return points;
+		return (int) points;
 	}
 	
 	/**
@@ -1357,7 +1371,7 @@ public class Player {
 	* Increments the points of the player in KOTH game mode
 	* @param x The amount of points to increment by 
 	*/
-	public void incrementPoints(int x) {
+	public void incrementPoints(double x) {
 		points += x;
 	}
 
@@ -1393,6 +1407,9 @@ public class Player {
 	* Changes username of the Player 
 	*/
 	public void changeUsername() {
-		username += 1;
+		if (username == null)
+			username = "";
+		username += "1";
+		
 	}
 }

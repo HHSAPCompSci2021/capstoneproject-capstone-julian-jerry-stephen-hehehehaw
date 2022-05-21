@@ -22,7 +22,7 @@ public class TileManager {
 	private Tile redBrick1, redBrick2, redBrick3, redBrick4, redBrick5, 
 	redBrickWall1, stoneWall1, stoneWall2,
 	stoneBrick1, stoneBrick2, stoneBrick3, stoneBrick4, stoneBrick5, stoneBrick6,
-	spikeTile, tarPitTile, healthPowerUp, damagePowerUp, ammoPowerUp, speedPowerUp, aT1, aTOn, aT2, aT3, aT4, aT5,powerUpLoader;
+	spikeTile, tarPitTile, healthPowerUp, damagePowerUp, ammoPowerUp, speedPowerUp, aT1, aTOn, powerUpLoader;
 	
 	private ArrayList<Tile> tilesList = new ArrayList<Tile>();
 	
@@ -83,10 +83,6 @@ public class TileManager {
 		stoneWall1 = new Tile();
 		stoneWall2 = new Tile();
 		aT1 = new Tile();
-		aT2 = new Tile();
-		aT3 = new Tile();
-		aT4 = new Tile();
-		aT5 = new Tile();
 		powerUpLoader = new Tile();
 		
 		tilesList.add(redBrick1);
@@ -112,10 +108,6 @@ public class TileManager {
 		tilesList.add(ammoPowerUp);//20
 		tilesList.add(speedPowerUp);//21
 		tilesList.add(powerUpLoader);//22
-		tilesList.add(aT2);//23
-		tilesList.add(aT3);//24
-		tilesList.add(aT4);//25
-		tilesList.add(aT5);//26
 		redBrick1.setImage(tiles[0]);
 		redBrick2.setImage(tiles[1]);
 		redBrick3.setImage(tiles[2]);
@@ -148,6 +140,7 @@ public class TileManager {
 		speedPowerUp.setImage(tiles[21]);
 		speedPowerUp.powerUp();
 		powerUpLoader.setImage(tiles[22]);
+		aTOn.trap();
 //		aT2.setImage(tiles[23]);
 //		aT2.setImage(tiles[24]);
 //		aT2.setImage(tiles[25]);
@@ -190,24 +183,22 @@ public class TileManager {
 	public int tileInteract(int tileNum, Player p, boolean sound) {
 		switch (tileNum) {
 		case 15:
-			p.incrementPoints(1);
-			break;
+			return 15;
 		case 16:
 			if(!p.getJustSpawned())
 			p.loseHealth(0.2);
 			if (sound)
-			if(!World.loseHealth.isPlaying())
-			World.loseHealth.play();
+				if(!World.loseHealth.isPlaying())
+					World.loseHealth.play();
 			p.setDataChanged(true);
 			break;
 		case 17:
 			p.setSpeedDown(p.getSpeed() * 0.5);
 			if (sound)
 			if(!World.collectPowerUp.isPlaying())
-			World.collectPowerUp.play();
-			p.setDataChanged(true);
+				World.collectPowerUp.play();
+				p.setDataChanged(true);
 			return 17;
-
 		case 18: 
 			p.heal(70);
 			if (sound)
@@ -217,15 +208,16 @@ public class TileManager {
 			break;
 		case 19: 
 			p.getWeapon().setDamage((int)(p.getWeapon().getDamage()*1.3));
-			if(!World.collectPowerUp.isPlaying())
-				World.collectPowerUp.play();
+			if (sound)
+				if(!World.collectPowerUp.isPlaying())
+					World.collectPowerUp.play();
 			p.setDataChanged(true);
 			return 19;
 		case 20: 
 			p.getWeapon().setMagSize(p.getWeapon().getMagSize()*2);
 			if (sound)
-			if(!World.collectPowerUp.isPlaying())
-				World.collectPowerUp.play();
+				if(!World.collectPowerUp.isPlaying())
+					World.collectPowerUp.play();
 		//	System.out.println("Ammo : " + p.getWeapon().getAmmo() + " magazineSize: " + p.getWeapon().magazineSize);
 			p.setDataChanged(true);
 			return 20;
@@ -238,7 +230,7 @@ public class TileManager {
 			p.setDataChanged(true);
 			return 21;
 		}
-		return -1;
+		return tileNum;
 		
 	}
 	
@@ -308,29 +300,28 @@ public class TileManager {
 						
 						switch (hill) {
 						case 0:
-							if (worldX < tileSize * 25 && worldY < tileSize * 25) {
+							if (worldX < tileSize * 30 && worldY < tileSize * 30) {
 							if (tileDesignator[worldCol][worldRow] == 14)
 								tileDesignator[worldCol][worldRow] = 15;
 							}else if (tileDesignator[worldCol][worldRow] == 15)
 							tileDesignator[worldCol][worldRow] = 14;
 							break;
 						case 1: 
-							if (worldX > tileSize * 75 && worldY < tileSize * 25) {
+							if (worldX > tileSize * 70 && worldY < tileSize * 30) {
 							if (tileDesignator[worldCol][worldRow] == 14)
 								tileDesignator[worldCol][worldRow] = 15;
 							}else if (tileDesignator[worldCol][worldRow] == 15)
 								tileDesignator[worldCol][worldRow] = 14;
 							break;
 						case 2:
-							if (worldX > tileSize * 75 && worldY > tileSize * 75) {
+							if (worldX > tileSize * 70 && worldY > tileSize * 70) {
 							if (tileDesignator[worldCol][worldRow] == 14)
 								tileDesignator[worldCol][worldRow] = 15;
-
-						}else if (tileDesignator[worldCol][worldRow] == 15)
-							tileDesignator[worldCol][worldRow] = 14;
+							}else if (tileDesignator[worldCol][worldRow] == 15)
+								tileDesignator[worldCol][worldRow] = 14;
 							break;
 						case 3:
-							if (worldX < tileSize * 25 && worldY > tileSize * 75)
+							if (worldX < tileSize * 30  && worldY > tileSize * 70)
 							if (tileDesignator[worldCol][worldRow] == 14) {
 								tileDesignator[worldCol][worldRow] = 15;
 
@@ -338,7 +329,7 @@ public class TileManager {
 								tileDesignator[worldCol][worldRow] = 14;
 							break;
 						case 4:
-							if (worldX > tileSize * 25 && worldY > tileSize * 50 && worldX < tileSize * 75 && worldY < tileSize*75)
+							if (worldX > tileSize * 30 && worldY > tileSize * 30 && worldX < tileSize *  70 && worldY < tileSize* 70)
 							if (tileDesignator[worldCol][worldRow] == 14) {
 								tileDesignator[worldCol][worldRow] = 15;
 
