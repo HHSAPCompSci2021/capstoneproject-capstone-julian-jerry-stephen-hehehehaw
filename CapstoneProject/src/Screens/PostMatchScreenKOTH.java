@@ -50,7 +50,7 @@ public class PostMatchScreenKOTH implements Screen {
 		surface.text("", DRAWING_WIDTH, DRAWING_HEIGHT);
 //		System.out.println("You are on the instructions Screen");
 		
-		
+		if (p1 != null && p2 != null) {
 		double pointsP1 = p1.getPoints();
 		double pointsP2 = p2.getPoints();
 		String winner = "";
@@ -80,7 +80,7 @@ public class PostMatchScreenKOTH implements Screen {
 		surface.textSize(50);
 		surface.fill(0);
 		surface.text(str, (int)(DRAWING_WIDTH*0.1), (int)(DRAWING_HEIGHT*0.2));
-		
+		}
 		surface.textAlign(surface.CENTER);
 		surface.textSize(20);
 		String str0 = "Back";

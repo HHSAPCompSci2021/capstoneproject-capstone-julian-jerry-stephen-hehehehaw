@@ -49,7 +49,7 @@ public class PostMatchScreenDeathMatch implements Screen {
 		surface.fill(0);
 		surface.text("", DRAWING_WIDTH, DRAWING_HEIGHT);
 //		System.out.println("You are on the instructions Screen");
-		
+		if (p1 != null && p2 != null) {
 		
 		double killsP1 = p1.getKillCount();
 		double killsP2 = p2.getKillCount();
@@ -80,12 +80,13 @@ public class PostMatchScreenDeathMatch implements Screen {
 		surface.textSize(50);
 		surface.fill(0);
 		surface.text(str, (int)(DRAWING_WIDTH*0.1), (int)(DRAWING_HEIGHT*0.2));
-		
+		}
 		surface.textAlign(surface.CENTER);
 		surface.textSize(20);
 		String str0 = "Back";
 		float w0 = surface.textWidth(str0);
 		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
+		
 	}
 	
 	public void mousePressed() {

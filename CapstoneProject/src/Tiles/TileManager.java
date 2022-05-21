@@ -140,7 +140,7 @@ public class TileManager {
 		speedPowerUp.setImage(tiles[21]);
 		speedPowerUp.powerUp();
 		powerUpLoader.setImage(tiles[22]);
-		aTOn.trap();
+	//	aTOn.trap();
 //		aT2.setImage(tiles[23]);
 //		aT2.setImage(tiles[24]);
 //		aT2.setImage(tiles[25]);

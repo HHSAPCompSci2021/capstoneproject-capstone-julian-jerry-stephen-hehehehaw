@@ -136,12 +136,12 @@ public class Collider {
 			//		 System.out.println(asdf);
 					}	
 				}
-			if (map[(int)(player.getWorldX() + r.x/2)][(int)(player.getWorldY() + r.y/2)] == 15) {
-				arr.add(15);
-			}
-			if (map[(int)(player.getWorldX() + r.x/2)][(int)(player.getWorldY() + r.y/2)] == 16) {
-				arr.add(16);
-			}
+				if (map[playerLeftCol][playerTopRow] == 15 ||
+				map[playerRightCol][playerTopRow] == 15 ||
+				map[playerLeftCol][playerBottomRow] == 15 ||
+				map[playerRightCol][playerBottomRow] == 15 || map[(int)(player.getWorldX()/tileSize)][(int)(player.getWorldY()/tileSize)] == 15)
+					arr.add(15);
+				
 			
 			if (notMoving)
 				player.setCollisions(false);
@@ -174,9 +174,12 @@ public class Collider {
 			}
 
 			
-			return arr;
 			
+			
+			return arr;
 	}
+		
+	
 	
 	/** 
 	 * Checks tile-bullet collisions
