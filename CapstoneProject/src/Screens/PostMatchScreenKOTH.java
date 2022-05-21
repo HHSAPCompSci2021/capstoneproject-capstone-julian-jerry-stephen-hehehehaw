@@ -11,8 +11,9 @@ import Instructions.*;
 import Players.Player;
 
 /**
- * 
- * @author Stephen
+ * This class represents the screen that shows up after a King of the Hill game ends, displaying the scores of each player, as well as who won. 
+ * @author Stephen, Jerry
+ * @version 5/21
  */
 public class PostMatchScreenKOTH implements Screen {
 	
@@ -23,6 +24,14 @@ public class PostMatchScreenKOTH implements Screen {
 	private final float BUTTON_HEIGHT = 0.1f;
 	private Player p1, p2, winnerPlayer;
 	
+	/**
+	 * Creates a new PostMatchScreenKOTH object
+	 * @param surface - the MainMenu (extending PApplet) to draw the objects with
+	 * @param width - the width of the MenuScreen when it is displayed
+	 * @param height - the height of the MenuScreen when it is displayed
+	 * @param p1 - the first Player
+	 * @param p2 - the second Player
+	 */
 	public PostMatchScreenKOTH(MainMenu surface, int width, int height, Player p1, Player p2) {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
@@ -30,19 +39,18 @@ public class PostMatchScreenKOTH implements Screen {
 		backButton = new Rectangle((int)(DRAWING_WIDTH*0.015), (int)(DRAWING_HEIGHT*0.03), (int)(width*BUTTON_WIDTH/2), (int)(height*BUTTON_HEIGHT/2));
 		this.p1 = p1;
 		this.p2 = p2;
-		
 	}
 
-	// The statements in the setup() function 
-	// execute once when the program begins
+	/**
+	 * Initializes variables and performs tasks executing once when the program begins
+	 */
 	public void setup() {
 		
 	}
 
-	// The statements in draw() are executed until the 
-	// program is stopped. Each statement is executed in 
-	// sequence and after the last line is read, the first 
-	// line is executed again.
+	/** 
+	 * Draws this PostMatchScreenKOTH screen using the MainMenu
+	 */
 	public void draw() {
 		surface.background(200,0,200);
 		
@@ -90,20 +98,32 @@ public class PostMatchScreenKOTH implements Screen {
 		float w0 = surface.textWidth(str0);
 		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 	}
-	
+	/**
+	* Tracks when the mouse is pressed and updates the screen selection based on the buttons pressed
+	*/
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (backButton.contains(p))
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 	}
-	
+	/**
+	* Tracks when the mouse is moved
+	*/
 	public void mouseMoved() {}
-	
+	/**
+	* Tracks when the mouse is dragged
+	*/
 	public void mouseDragged() {}
-	
+	/**
+	 * Tracks when the mouse is released
+	 */
 	public void mouseReleased() {}
-	
+	/**
+	* Tracks the keys released
+	*/
 	public void keyReleased() {}
-	
+	/**
+	* Tracks the keys pressed
+	*/
 	public void keyPressed() {}
 }

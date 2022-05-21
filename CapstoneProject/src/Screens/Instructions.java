@@ -13,6 +13,7 @@ import processing.core.PApplet;
 /**
  * This class represents the Instructions screen that contains instructions on how to play the game. 
  * @author Stephen
+ * @version 5/21
  */
 public class Instructions implements Screen {
 	
@@ -80,31 +81,31 @@ public class Instructions implements Screen {
 	}
 	
 	/**
-	 * The contents of this function is called every time the mouse button is pressed
-	 */
+	* Tracks when the mouse is pressed and updates the screen selection based on the buttons pressed
+	*/
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
 		if (backButton.contains(p))
 			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 	}
 	/**
-	 * The contents of this function is called every time the mouse is moved
-	 */
+	* Tracks when the mouse is moved
+	*/
 	public void mouseMoved() {}
 	/**
-	 * The contents of this function is called every time the mouse button is dragged
-	 */
+	* Tracks when the mouse is dragged
+	*/
 	public void mouseDragged() {}
 	/**
-	 * The contents of this function is called every time the mouse button is released
+	 * Tracks when the mouse is released
 	 */
 	public void mouseReleased() {}
 	/**
-	 * The contents of this function is called every time a key is pressed
-	 */
+	* Tracks the keys released
+	*/
 	public void keyReleased() {}
 	/**
-	 * The contents of this function is called every time a key is released
-	 */
+	* Tracks the keys pressed
+	*/
 	public void keyPressed() {}
 }

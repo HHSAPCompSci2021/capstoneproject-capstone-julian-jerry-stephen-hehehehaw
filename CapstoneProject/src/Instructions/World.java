@@ -109,9 +109,10 @@ public class World implements Screen {
 	public Player me;
 	/** Represents a list of all other players in the room */
 	public ArrayList<Player> players;
-	
-	private DatabaseReference roomRef;  // This is the database entry for the whole room
-	public DatabaseReference myUserRef;  // This is the database entry for just our user's data. This allows us to more easily update ourselves.
+	// This is the database entry for the whole room
+	private DatabaseReference roomRef;
+	/** This is the database entry for just our user's data. This allows us to more easily update ourselves. */
+	public DatabaseReference myUserRef;
 //	private boolean currentlySending;
 	
 	private MainMenu surface;

@@ -1,8 +1,9 @@
 package Screens;
 
 /**
- * Represents the ability to switch screens
+ * This interface represents the ability to switch screens. 
  * @author Stephen
+ * @version 5/21
  */
 public interface ScreenSwitcher {
 	/** Integer representing a MenuScreen */

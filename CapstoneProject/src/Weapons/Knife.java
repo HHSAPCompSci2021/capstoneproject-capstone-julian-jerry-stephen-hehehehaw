@@ -11,7 +11,9 @@ import Players.Player;
  */
 public class Knife extends Weapon{
 	
-	
+	/**
+	 * Creates a new Knife object
+	 */
 	public Knife() {
 		super(1000000, 0, 20, 1.6, 100, 120);
 	}

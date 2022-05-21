@@ -154,8 +154,8 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	}
 	
 	/**
-	 * The contents of this function is called every time a key is pressed
-	 */
+	* Tracks the keys pressed
+	*/
 	public void keyPressed() {
 		activeScreen.keyPressed();
 		keys.add(keyCode);
@@ -164,8 +164,8 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	}
 
 	/**
-	 * The contents of this function is called every time a key is released
-	 */
+	* Tracks the keys released
+	*/
 	public void keyReleased() {
 		activeScreen.keyReleased();
 		while(keys.contains(keyCode))
@@ -182,28 +182,28 @@ public class MainMenu extends PApplet implements ScreenSwitcher {
 	}
 	
 	/**
-	 * The contents of this function is called every time the mouse button is pressed
-	 */
+	* Tracks when the mouse is pressed
+	*/
 	public void mousePressed() {
 		activeScreen.mousePressed();
 	}
 
 	/**
-	 * The contents of this function is called every time the mouse is moved
-	 */
+	* Tracks when the mouse is moved
+	*/
 	public void mouseMoved() {
 		activeScreen.mouseMoved();
 	}
 	
 	/**
-	 * The contents of this function is called every time the mouse button is dragged
-	 */
+	* Tracks when the mouse is dragged
+	*/
 	public void mouseDragged() {
 		activeScreen.mouseDragged();
 	}
 	
 	/**
-	 * The contents of this function is called every time the mouse button is released
+	 * Tracks when the mouse is released
 	 */
 	public void mouseReleased() {
 		activeScreen.mouseReleased();
