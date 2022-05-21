@@ -835,9 +835,15 @@ public class Player {
 		collisionOn = false;
 		if (collide != null) {
 
+			
+			
 			int whichOne = collide.checkTile(this);
-			if (whichOne != -1)
-				System.out.println(whichOne);
+//			System.out.println(speedBuffed);
+//			
+//			System.out.println(magBuffed);
+
+//			if (whichOne != -1)
+//				System.out.println(whichOne);
 			
 				switch (whichOne) {
 				case 15:

@@ -13,11 +13,11 @@ import Weapons.Bullet;
  * @author Jerry
  */
 public class Collider {
-	 int tileSize;
-	 TileManager tM;
-	 ArrayList<Tile> tL;
-	 int[][]map;
-	 boolean sound;
+	 private int tileSize;
+	 private TileManager tM;
+	 private ArrayList<Tile> tL;
+	 private int[][]map;
+	 private boolean sound;
 	
 	/** 
 	 * Creates a new instance of a Collider object 
