@@ -846,6 +846,7 @@ public class Player {
 			for (int i = 0; i < whichOne.size(); i++) {
 //			if (whichOne.get(i) != -1)
 //				System.out.println(whichOne.get(i));
+
 			
 				switch (whichOne.get(i)) {
 				case 15:

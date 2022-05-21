@@ -227,7 +227,8 @@ public class TileManager {
 			if (sound)
 			if(!World.collectPowerUp.isPlaying())
 				World.collectPowerUp.play();
-			p.setDataChanged(true);
+			
+						p.setDataChanged(true);
 			return 21;
 		}
 		return tileNum;

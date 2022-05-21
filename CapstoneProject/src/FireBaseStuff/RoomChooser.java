@@ -206,7 +206,9 @@ public class RoomChooser extends JPanel
 	 * @author john_shelby
 	 *
 	 */
-	class DatabaseChangeListener implements ChildEventListener {
+
+
+	public class DatabaseChangeListener implements ChildEventListener {
 
 
 		@Override
