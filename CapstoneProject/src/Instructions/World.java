@@ -372,6 +372,21 @@ public class World implements Screen {
 			}
 	
 		if (me.getDead()) {
+
+			me.speedBuffed = false;
+			me.speedCD = 0;
+			me.setSpeedUp(me.getRealDefaultSpeed());
+			
+
+			me.dmgCD = 0;
+			me.damageBuffed = false;
+			me.getWeapon().setDamage((int)(me.getWeapon().getDamage()));
+			
+
+			me.magCD = 0;
+			me.magBuffed = false;
+			me.getWeapon().setMagSize(me.getWeapon().getMagSize());
+			
 			me.setDead(false);
 			spawn = false;		
 		}else if(me.getHealth() <= 0) {
@@ -411,6 +426,7 @@ public class World implements Screen {
 						me.setWorldY(SPAWN1Y);				
 						spawn = true;
 				}
+				break;
 				
 			case 2:				
 				if (me.getUsername().compareTo(p2.getUsername()) > 0) {
@@ -425,6 +441,7 @@ public class World implements Screen {
 						me.setWorldY(SPAWN2Y);				
 						spawn = true;
 				}
+				break;
 			case 3:
 				if (me.getUsername().compareTo(p2.getUsername()) > 0) {
 					if (!spawn) {
@@ -438,6 +455,7 @@ public class World implements Screen {
 						me.setWorldY(SPAWN1Y);				
 						spawn = true;
 				}
+				break;
 			}
 
 			spawn = true;
@@ -518,14 +536,7 @@ public class World implements Screen {
 		if(me.getWeapon().getAmmo() <= 0){
 			me.getWeapon().reload();
 		}
-		
-		cC1.checkTile(me);
 
-		me.syncWithDataObject(me.getDataObject(), tM, cC1);
-		cC2.checkTile(p2);
-
-		p2.syncWithDataObject(p2.getDataObject(), tM, cC2);
-		
 		surface.rect(scoreBoard.x, scoreBoard.y, scoreBoard.width, scoreBoard.height, 10, 10, 10, 10);
 			
 		p.textSize(20);
@@ -569,6 +580,7 @@ public class World implements Screen {
 				break;
 			case 4: 
 				hillDir = "Middle Hill";
+				break;
 			}
 			surface.text("Go to " + hillDir + "| Game Ends In: " + gameTimer + "/10000", p.width/3, 30);
 			
@@ -578,10 +590,10 @@ public class World implements Screen {
 		p.fill(255);
 
 		
-		if (cC1.checkTile(me) == 15)
-			me.incrementPoints(0.1);
-		if (cC2.checkTile(p2) == 15)
+		if (cC2.checkTile(p2).contains(15))
 			p2.incrementPoints(0.1);
+			
+			
 		
 		bulletsIn = p2.getOut();
 		me.setInc(bulletsIn);
@@ -598,6 +610,8 @@ public class World implements Screen {
 			} else {		
 				increment = true;
 				killUp = true;
+				
+				
 				
 			float screenX = p2.getWorldX() - me.getWorldX() + me.getScreenX();
 			float screenY = p2.getWorldY() - me.getWorldY() + me.getScreenY();
@@ -621,7 +635,8 @@ public class World implements Screen {
 				
 			}
 			
-
+//			cC1.checkTile(me);
+//			cC2.checkTile(p2);
 		
 			
 			
@@ -667,7 +682,7 @@ public class World implements Screen {
 			}
 			
 //			cC1.checkTileCleanup(me);
-//			cC2.checkTileCleanup(me);
+			cC2.checkTileCleanup(me);
 			
 		}
 			
@@ -869,7 +884,9 @@ public class World implements Screen {
 		}
 	}
 
-
+//	cC1.checkTile(me);
+//	cC2.checkTile(p2);
+	
 			myUserRef.setValue(me.getDataObject(), new CompletionListener() {
 				//set value bullet object
 				@Override
@@ -1067,7 +1084,7 @@ public class World implements Screen {
 						Player player = players.get(i);
 						if (player.idMatch(arg0.getKey())) {
 							PlayerData data = arg0.getValue(PlayerData.class);
-							player.syncWithDataObject(data, tM, cC2);
+							player.syncWithDataObject(data, tM, cC1);
 						}
 					}
 				}

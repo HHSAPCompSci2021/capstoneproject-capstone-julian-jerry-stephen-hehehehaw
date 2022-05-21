@@ -43,8 +43,11 @@ public class Player {
 	private boolean east;
 	
 	private boolean collisionOn = false;
-	private boolean slowed, speedBuffed, damageBuffed, magBuffed;
-	private int slowCD, speedCD, dmgCD, magCD;
+	/**
+	 * booleans representing whether powerups are active, as well as their cooldowns
+	 */
+	public boolean slowed, speedBuffed, damageBuffed, magBuffed;
+	public int slowCD, speedCD, dmgCD, magCD;
 
 //	private int cd = 0;
 	private Collider collide;
@@ -66,6 +69,8 @@ public class Player {
 	 * The type of powerup in each of the row and columns
 	 */
 	public int powerUpRow1, powerUpColumn1, powerUpRow2, powerUpColumn2, powerUpRow3, powerUpColumn3, powerUpRow4, powerUpColumn4;
+	
+	
 	private int tileSize;
 	
 	private int killCount;
@@ -835,37 +840,44 @@ public class Player {
 		collisionOn = false;
 		if (collide != null) {
 
-			int whichOne = collide.checkTile(this);
-			if (whichOne != -1)
-				System.out.println(whichOne);
+			ArrayList<Integer> whichOne = collide.checkTile(this);
+//			if (whichOne.size() != 0)
+//				System.out.println("whichOne size:" + whichOne.size());
+			for (int i = 0; i < whichOne.size(); i++) {
+//			if (whichOne.get(i) != -1)
+//				System.out.println(whichOne.get(i));
 			
-				switch (whichOne) {
+				switch (whichOne.get(i)) {
 				case 15:
+					incrementPoints(0.1);
 					break;
 				case 17:
-					System.out.println("slowed");
+			//		System.out.println("slowed");
 					slowed = true;
 					break;
 				case 19:
-					System.out.println("dmgupped");
+		//			System.out.println("dmgupped");
 					damageBuffed = true;
 					break;
 					
 				case 20:
-					System.out.println("magUpped");
+//					System.out.println("magUpped");
 					magBuffed = true;
 					break;
 
 				case 21:
-					System.out.println("speedBuffed");
+//					System.out.println("speedBuffed");
 					speedBuffed = true;
 					break;
-				
+					
+				case -1:
+					break;
 				}
+			}
 				
 				if (slowed) {
 
-					System.out.println("slow buffed, CD left: " + slowCD);
+//					System.out.println("slow buffed, CD left: " + slowCD);
 					slowCD++;
 
 					if (slowCD >= 30) {
@@ -879,7 +891,7 @@ public class Player {
 
 				if (speedBuffed) {
 					
-					System.out.println("speed buffed, CD left: " + speedCD);
+//					System.out.println("speed buffed, CD left: " + speedCD);
 					speedCD++;
 					
 					if (speedCD >= 450) {
@@ -891,7 +903,7 @@ public class Player {
 				}
 				if (damageBuffed) {
 
-					System.out.println("dmg buffed, CD left: " + dmgCD);
+//					System.out.println("dmg buffed, CD left: " + dmgCD);
 					dmgCD++;
 					
 					if (dmgCD >= 400) {
@@ -903,7 +915,7 @@ public class Player {
 					
 				}
 				if (magBuffed){
-					System.out.println("mag buffed, CD left: " + magCD);
+//					System.out.println("mag buffed, CD left: " + magCD);
 					magCD++;
 					
 					if (magCD >= 400) {

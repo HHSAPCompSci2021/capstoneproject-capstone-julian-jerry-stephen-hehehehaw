@@ -54,11 +54,11 @@ public class Collider {
 	/** 
 	 * Checks tile-player collisions
 	 * @param Player the player to test collisoins with
-	 * @return Whether or not player collides with tile
+	 * @return Which tile player collides with
 	 */
-	public int checkTile(Player player) {
+	public ArrayList<Integer> checkTile(Player player) {
 		player.setDataChanged(true);
-		int index = -1;                                             
+		ArrayList<Integer> arr = new ArrayList<Integer>();                                         
 		
 		Rectangle r = player.getTileHitBox();
 		int playerLeftWorldX = (int)(player.getWorldX() + r.x);
@@ -126,15 +126,26 @@ public class Collider {
 				t.set(7, map[playerRightCol][playerTopRow]);
 			}
 			
+			
 			for (int ti: t) {
 				if (tL.get(ti).solidState())
 					player.setCollisions(true);
-				else if (tL.get(ti).isPowerUp() || tL.get(ti).isTrap()) {
-					 index = tM.tileInteract(ti, player, sound);
-				//	 System.out.println(index);
-
+				if (tL.get(ti).isPowerUp() || tL.get(ti).isTrap()) {
+					int asdf = tM.tileInteract(ti, player, sound);
+					 arr.add(asdf);
+			//		 System.out.println(asdf);
 					}	
 				}
+			if (map[(int)(player.getWorldX() + r.x/2)][(int)(player.getWorldY() + r.y/2)] == 15) {
+				arr.add(15);
+			}
+			if (map[(int)(player.getWorldX() + r.x/2)][(int)(player.getWorldY() + r.y/2)] == 16) {
+				arr.add(16);
+			}
+			
+			if (notMoving)
+				player.setCollisions(false);
+			
 			if (tL.get(map[playerLeftCol][playerTopRow]).isPowerUp() ) {
 				map[playerLeftCol][playerTopRow] = 22;
 				player.setR1(playerTopRow);
@@ -163,7 +174,7 @@ public class Collider {
 			}
 
 			
-			return index;
+			return arr;
 			
 	}
 	
