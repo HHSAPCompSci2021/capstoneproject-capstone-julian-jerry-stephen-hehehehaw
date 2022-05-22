@@ -77,12 +77,14 @@ public class PostMatchScreenDeathMatch implements Screen {
 		}
 		else {
 			winner = "None! It's A Tie!";
-			winnerPlayer = null;
+			winnerPlayer = p1;
 		}
+		
+		
 		
 		String str = "Game Summary: "
 				+ "Winner: " + winner + "\n"
-				+ "Kills: " + (winnerPlayer == null ? "" + winnerPlayer.getKillCount():"" + p1.getKillCount()) + "\n"
+				+ "Kills: " + (winnerPlayer == null ? ("" + p1.getKillCount()): ("" + winnerPlayer.getKillCount())) + "\n"
 				+ "Deaths Player 1: " + p2.getKillCount() + "\n"
 				+ "Deaths Player 2: " + p1.getKillCount();
 		
