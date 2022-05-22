@@ -116,7 +116,7 @@ public class World implements Screen {
 //	private boolean currentlySending;
 	
 	private MainMenu surface;
-	private Rectangle backButton;
+//	private Rectangle backButton;
 	private Rectangle instructions;
 	private Rectangle scoreBoard;
 	private String un;
@@ -175,7 +175,7 @@ public class World implements Screen {
 		screenHeight = maxScreenRow * tM.getTileSize();
 		this.p = p;
 		
-		backButton = new Rectangle((int)(screenWidth*0.015), (int)(screenHeight*0.03), (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
+//		backButton = new Rectangle((int)(screenWidth*0.015), (int)(screenHeight*0.03), (int)(screenWidth*BUTTON_WIDTH), (int)(screenHeight*BUTTON_HEIGHT/2));
 		scoreBoard = new Rectangle((int)(screenWidth*0.8), 0, (int)(screenWidth*4*BUTTON_WIDTH), (int)(screenHeight*2*BUTTON_HEIGHT));
 		
 		cC1 = new Collider(tM.getTileSize(), tM, true);
@@ -763,12 +763,12 @@ public class World implements Screen {
 
 		surface.textAlign(surface.CENTER);
 		surface.fill(255);
-		surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
+//		surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
 		surface.fill(0);
 		surface.textSize(20);
-		String str0 = "Quit";
-		float w0 = surface.textWidth(str0);
-		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
+//		String str0 = "Quit";
+//		float w0 = surface.textWidth(str0);
+//		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 
 		for(int w = 0; w < bulletsIn.size(); w++)
 		{
@@ -1018,8 +1018,8 @@ public class World implements Screen {
 	*/
 	public void mousePressed() {
 		Point point = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		if (backButton.contains(point))
-			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
+//		if (backButton.contains(point))
+//			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 		
 
 		
