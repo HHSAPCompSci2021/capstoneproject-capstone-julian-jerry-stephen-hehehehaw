@@ -81,7 +81,7 @@ public class PostMatchScreenKOTH implements Screen {
 		
 		String str = "Game Summary: " + "\n"
 				+ "Winner: " + winner + "\n"
-				+ "Winner's Points: " + (winnerPlayer == null ? "" + winnerPlayer.getPoints():"" + p1.getPoints()) + "\n"
+				+ "Winner's Points: " + (winnerPlayer == null ? ("" + p1.getPoints()): ("" + winnerPlayer.getPoints())) + "\n"
 				+ "Points Player 1: " + p1.getPoints() + "\n"
 				+ "Points Player 2: " + p2.getPoints();
 		
