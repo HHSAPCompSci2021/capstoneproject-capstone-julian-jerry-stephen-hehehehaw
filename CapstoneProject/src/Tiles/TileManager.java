@@ -322,16 +322,16 @@ public class TileManager {
 								tileDesignator[worldCol][worldRow] = 14;
 							break;
 						case 3:
-							if (worldX < tileSize * 30  && worldY > tileSize * 70)
-							if (tileDesignator[worldCol][worldRow] == 14) {
+							if (worldX < tileSize * 30  && worldY > tileSize * 70) {
+							if (tileDesignator[worldCol][worldRow] == 14) 
 								tileDesignator[worldCol][worldRow] = 15;
 
 							}else if (tileDesignator[worldCol][worldRow] == 15)
 								tileDesignator[worldCol][worldRow] = 14;
 							break;
 						case 4:
-							if (worldX > tileSize * 30 && worldY > tileSize * 30 && worldX < tileSize *  70 && worldY < tileSize* 70)
-							if (tileDesignator[worldCol][worldRow] == 14) {
+							if (worldX > tileSize * 30 && worldY > tileSize * 30 && worldX < tileSize *  70 && worldY < tileSize* 70) {
+							if (tileDesignator[worldCol][worldRow] == 14) 
 								tileDesignator[worldCol][worldRow] = 15;
 
 							}else if (tileDesignator[worldCol][worldRow] == 15)

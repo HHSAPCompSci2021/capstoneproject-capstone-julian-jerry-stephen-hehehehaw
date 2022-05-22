@@ -80,6 +80,8 @@ public class PostMatchScreenDeathMatch implements Screen {
 			winnerPlayer = null;
 		}
 		
+		
+		
 		String str = "Game Summary: "
 				+ "Winner: " + winner + "\n"
 				+ "Kills: " + (winnerPlayer == null ? "" + winnerPlayer.getKillCount():"" + p1.getKillCount()) + "\n"
