@@ -18,7 +18,7 @@ public class Avatar {
 	
 	/** 
 	 * Creates a new instance of an Avatar object 
-	 * @param direciton The direction of the avatar
+	 * @param direction The direction of the avatar
 	 * @param up1 Up1 image
 	 * @param down1 down1 image
 	 * @param up2 up2 image
@@ -65,6 +65,8 @@ public class Avatar {
 	
 	/**
 	* Tracks when the mouse is dragged
+	* @param k the direction
+	* @param decision boolean representing the decision
 	*/
 	public void setDirection(int k, boolean decision) {
 	 if      (k == 'w'    || k == 'W')   {

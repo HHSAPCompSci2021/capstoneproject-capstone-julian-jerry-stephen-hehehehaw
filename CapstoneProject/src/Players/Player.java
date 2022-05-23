@@ -336,7 +336,7 @@ public class Player {
 
 	/**
 	* Sets the incoming bullets
-	* @param o the ArrayList of bullets that are incoming
+	* @param i the ArrayList of bullets that are incoming
 	*/
 	public void setInc(ArrayList<Bullet> i) {
 		incoming = i;
@@ -368,7 +368,7 @@ public class Player {
 	
 	/**
 	* Sets the powerup at this row
-	* @param int The type of power up
+	* @param r The type of power up
 	*/
 	public void setR1(int r) {
 		powerUpRow1 = r;
@@ -376,7 +376,7 @@ public class Player {
 	
 	/**
 	* Sets the powerup at this column
-	* @param int The type of power up
+	* @param c The type of power up
 	*/
 	public void setC1(int c) {
 		
@@ -385,7 +385,7 @@ public class Player {
 	
 	/**
 	* Gets the avatar of the player
-	* @return Avatar the avatar of the player
+	* @return the avatar of the player
 	*/
 	public Avatar getAvatar()
 	{
@@ -394,7 +394,7 @@ public class Player {
 	
 	/**
 	* Sets the powerup at this row
-	* @param int The type of power up
+	* @param r The type of power up
 	*/
 	public void setR2(int r) {
 		powerUpRow2 = r;
@@ -402,7 +402,7 @@ public class Player {
 	
 	/**
 	* Sets the powerup at this column
-	* @param int The type of power up
+	* @param c The type of power up
 	*/
 	public void setC2(int c) {
 		
@@ -411,7 +411,7 @@ public class Player {
 	
 	/**
 	* Sets the powerup at this row
-	* @param int The type of power up
+	* @param r The type of power up
 	*/
 	public void setR3(int r) {
 		powerUpRow3 = r;
@@ -419,7 +419,7 @@ public class Player {
 	
 	/**
 	* Sets the powerup at this column
-	* @param int The type of power up
+	* @param c The type of power up
 	*/
 	public void setC3(int c) {
 		
@@ -428,7 +428,7 @@ public class Player {
 	
 	/**
 	* Sets the powerup at this row
-	* @param int The type of power up
+	* @param r The type of power up
 	*/
 	public void setR4(int r) {
 		powerUpRow4 = r;
@@ -436,7 +436,7 @@ public class Player {
 	
 	/**
 	* Sets the powerup at this column
-	* @param int The type of power up
+	* @param c The type of power up
 	*/
 	public void setC4(int c) {
 		
@@ -533,7 +533,7 @@ public class Player {
 	
 	/**
 	* Sets the player to dead
-	* @return d THe boolean of whether or not the player is dead
+	* @param d THe boolean of whether or not the player is dead
 	*/
 	public void setDead(boolean d) {
 		dead = d;
@@ -655,8 +655,8 @@ public class Player {
 	
 	/**
 	* Syncs the data with the other user 
-	* @param dataThe data of the other player
-	* @param tm The tile manager of the other player
+	* @param data The data of the other player
+	* @param tM The tile manager of the other player
 	* @param c Collider to check collisions with the other player's bullets
 	*/
 	public void syncWithDataObject(PlayerData data, TileManager tM, Collider c) {
@@ -745,7 +745,7 @@ public class Player {
 	
 	/**
 	* Sets the game mode of the player
-	* @param int The decision of the player: 
+	* @param gameMode The decision of the player: 
 	*/
 	public void setGameMode(int gameMode)
 	{
@@ -1167,7 +1167,7 @@ public class Player {
 	
 	/**
 	* Shoots the current weapon the player is holding
-	* @return ArrayList<Bullet> Bullets of the weapon that was shot
+	* @return ArrayList of Bullets representing Bullets of the weapon that was shot
 	* @post Changes dataUpdated to true
 	*/
 	public ArrayList<Bullet> shoot(int x, int y) {

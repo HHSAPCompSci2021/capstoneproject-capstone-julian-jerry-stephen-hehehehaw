@@ -19,8 +19,8 @@ public class PlayerHUD {
 	 * @param p PAPplet surface to draw on
 	 * @param width Width of the window
 	 * @param height Height of the window
-	 * @param Player Current player
-	 * @param Avatar Avatar to draw
+	 * @param player Current player
+	 * @param avatar Avatar to draw
 	 * @pre Properties affecting the World are set on p
 	 */
 	public void draw(PApplet p, int width, int height, Player player, Player avatar)

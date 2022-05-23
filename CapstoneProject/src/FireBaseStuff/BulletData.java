@@ -14,6 +14,9 @@ public class BulletData {
 	 * Bullet Velocity x, Bullet velocity y, Bulet damage, Bullets location x on the world, Bullets location y on the world, bullet health
 	 */
 	public double vx, vy, damage, worldX, worldY, health;
+	/**
+	 * The width and the height of the bullet (determines size of bullet)
+	 */
 	public int width, height;
 	
 	//dimensions = new Rectangle((int)worldX, (int)worldY, 5, 5);

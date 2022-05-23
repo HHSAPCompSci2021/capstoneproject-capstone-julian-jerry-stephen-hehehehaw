@@ -37,7 +37,7 @@ public class Collider {
 	
 	/** 
 	 * Cleans the tiles within the game
-	 * @param plaer the Player of the tiles to clean
+	 * @param player the Player of the tiles to clean
 	 */
 	public void checkTileCleanup(Player player) {
 
@@ -53,7 +53,7 @@ public class Collider {
 	
 	/** 
 	 * Checks tile-player collisions
-	 * @param Player the player to test collisoins with
+	 * @param player the player to test collisoins with
 	 * @return Which tile player collides with
 	 */
 	public ArrayList<Integer> checkTile(Player player) {

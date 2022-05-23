@@ -9,8 +9,16 @@ import Instructions.World;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
+/**
+ * Runs the program
+ * @author Jerry
+ *
+ */
 public class Main {
-
+	/**
+	 * Runs the program using Firebase
+	 * @param args
+	 */
 	public static void main(String args[]) {
 
 		// Firebase uses a special logger to control what gets printed to the command line.

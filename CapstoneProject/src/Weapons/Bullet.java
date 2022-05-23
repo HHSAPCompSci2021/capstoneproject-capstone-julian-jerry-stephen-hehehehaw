@@ -20,8 +20,8 @@ public class Bullet {
 	
 	/** 
 	 * Creates a new instance of a Bullet object with initial point at (x,y)
-	 * @param x1 To set first point's x coordinate
-	 * @param y1 To set first point's x coordinate
+	 * @param x To set first point's x coordinate
+	 * @param y To set first point's x coordinate
 	 * @param vx Velocity X of bullet
 	 * @param vy Velocity Y of bullet
 	 * @param damage Damage of bullet
@@ -106,7 +106,7 @@ public class Bullet {
 	}
 	
 	/** 
-	 * @return Moves the bullet by vx and vy
+	 * Moves the bullet by vx and vy
 	 */
 	public void move()
 	{
@@ -117,7 +117,7 @@ public class Bullet {
 	}
 	
 	/** 
-	 * @return Draws the bullet on the PApplet p
+	 * Draws the bullet on the PApplet p
 	 * @param p PApplet surface to draw on
 	 * @param player Player within the program
 	 */

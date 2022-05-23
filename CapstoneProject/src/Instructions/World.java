@@ -959,7 +959,7 @@ public class World implements Screen {
 	
 	/**
 	 * Sets the game status of tis player in the game
-	 * @boolean status the to-be game status of the player
+	 * @param status the to-be game status of the player
 	 */
 	public void setGameStatus(boolean status)
 	{
@@ -968,6 +968,7 @@ public class World implements Screen {
 	
 	/**
 	 * Resets the game timer for this user
+	 * @param timer a timer represented by a double
 	 */
 	public void setGameTimer(double timer)
 	{
