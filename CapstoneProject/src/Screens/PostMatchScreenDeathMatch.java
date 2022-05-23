@@ -18,7 +18,7 @@ import Players.Player;
 public class PostMatchScreenDeathMatch implements Screen {
 	
 	private MainMenu surface;
-	private Rectangle backButton;
+//	private Rectangle backButton;
 	private final int DRAWING_WIDTH, DRAWING_HEIGHT;
 	private final float BUTTON_WIDTH = 0.2f;
 	private final float BUTTON_HEIGHT = 0.1f;
@@ -36,7 +36,7 @@ public class PostMatchScreenDeathMatch implements Screen {
 		this.DRAWING_WIDTH = width;
 		this.DRAWING_HEIGHT = height;
 		this.surface = surface;
-		backButton = new Rectangle((int)(DRAWING_WIDTH*0.015), (int)(DRAWING_HEIGHT*0.03), (int)(width*BUTTON_WIDTH/2), (int)(height*BUTTON_HEIGHT/2));
+//		backButton = new Rectangle((int)(DRAWING_WIDTH*0.015), (int)(DRAWING_HEIGHT*0.03), (int)(width*BUTTON_WIDTH/2), (int)(height*BUTTON_HEIGHT/2));
 		this.p1 = p1;
 		this.p2 = p2;
 		
@@ -56,7 +56,7 @@ public class PostMatchScreenDeathMatch implements Screen {
 		surface.background(200,0,200);
 		
 		surface.fill(255);
-		surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
+//		surface.rect(backButton.x, backButton.y, backButton.width, backButton.height, 10, 10, 10, 10);
 		
 		surface.fill(0);
 		surface.text("", DRAWING_WIDTH, DRAWING_HEIGHT);
@@ -99,7 +99,7 @@ public class PostMatchScreenDeathMatch implements Screen {
 		surface.textSize(20);
 		String str0 = "Back";
 		float w0 = surface.textWidth(str0);
-		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
+//		surface.text(str0, backButton.x+backButton.width/2, backButton.y+backButton.height/2);
 		
 	}
 	/**
@@ -107,8 +107,8 @@ public class PostMatchScreenDeathMatch implements Screen {
 	*/
 	public void mousePressed() {
 		Point p = surface.actualCoordinatesToAssumed(new Point(surface.mouseX,surface.mouseY));
-		if (backButton.contains(p))
-			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
+//		if (backButton.contains(p))
+//			surface.switchScreen(ScreenSwitcher.MENU_SCREEN);
 	}
 	/**
 	* Tracks when the mouse is moved
