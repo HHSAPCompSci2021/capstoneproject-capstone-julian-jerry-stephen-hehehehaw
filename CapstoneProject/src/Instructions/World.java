@@ -522,11 +522,9 @@ public class World implements Screen {
 				break;	
 			case 3:
 				if (me.getUsername().compareTo(p2.getUsername()) > 0) {
+					
 						me.setWorldX(SPAWN3X);
 						me.setWorldY(SPAWN3Y);
-			
-
-					
 				} else {
 		
 						me.setWorldX(SPAWN4X);
@@ -534,12 +532,25 @@ public class World implements Screen {
 					
 				}
 					
-					break;
+				break;
+				
+			case 4: 
+				if (me.getUsername().compareTo(p2.getUsername()) > 0) {
+					
+					me.setWorldX(SPAWN1X);
+					me.setWorldY(SPAWN1Y);
+			} else {
+	
+					me.setWorldX(SPAWN4X);
+					me.setWorldY(SPAWN4Y);				
+				
 			}
+				break;
 			
+			
+			}
 			spawn = true;
 			}
-		
 			
 		}
 		
