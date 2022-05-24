@@ -246,7 +246,7 @@ public class World implements Screen {
 
 	
 		
-		p.frameRate(30);
+		p.frameRate(20);
 		
 		playerImage2[0] = p.loadImage("Assets" + fileSeparator + "RedAvatar" + fileSeparator + "Forward1.png");
 		playerImage2[1] = p.loadImage("Assets"  + fileSeparator + "RedAvatar" + fileSeparator + "Backward1.png");
